@@ -7,15 +7,19 @@ import Layout from "./componets/layout";
 
 // style 
 import './App.css';
+import { ThemeProvider, Typography } from '@mui/material';
+import theme from "./themes/theme"
 
 function App() {
 
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<h2>home</h2>} />
-      </Routes>
-    </Layout>
+    <div>
+      <ThemeProvider theme={theme}>
+        <Typography>
+          
+        </Typography>
+      </ThemeProvider>
+    </div>
   );
 }
 
