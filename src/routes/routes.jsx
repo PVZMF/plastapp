@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 
 const DashboardRoutes = createBrowserRouter([
