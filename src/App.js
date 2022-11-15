@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Routes, Route } from "react-router-dom";
+// import {RouterProvider, Routes, Route } from "react-router-dom";
 
 // componenets
 import Layout from "./componets/layout";
@@ -9,15 +9,16 @@ import Layout from "./componets/layout";
 import './App.css';
 import { ThemeProvider, Typography } from '@mui/material';
 import theme from "./themes/theme"
+import Router from './routes/routes';
 
 function App() {
 
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <Typography>
-          
-        </Typography>
+        <Layout>
+
+        </Layout>
       </ThemeProvider>
     </div>
   );
