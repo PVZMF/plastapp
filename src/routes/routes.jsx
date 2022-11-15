@@ -1,43 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../componets/layout";
 
-const DashboardRoutes = createBrowserRouter([
+const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          index: true,
-          element: (
-            <Suspense fallback={<div>Loading...</div>}>
-              <Dashboard />
-            </Suspense>
-          ),
-        },
-        {
-          path: "/table",
-          element: (
-            <Suspense fallback={<div>Loading...</div>}>
-              <Table />
-            </Suspense>
-          ),
-        },
-      ],
-    },
-    {
-      path: "/",
-      children: [
-        {
-          path: "/login",
-          element: (
-            <Suspense fallback={<div>Loading...</div>}>
-              <Login />
-            </Suspense>
-          ),
-        },
-      ],
-    },
-  ]);
-  
-  export default DashboardRoutes;
-  
+        path: "/",
+        element: <Layout/>,
+    }
+]);
+
+export default router

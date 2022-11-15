@@ -1,15 +1,21 @@
 import React from 'react'
+import CssBaseline from "@mui/material/CssBaseline";
+import { Outlet } from "react-router-dom";
 import Footer from './footer'
 import Header from './header'
+import Box from "@mui/material/Box";
 
-const Layout = ({ children }) => {
+const Layout = () => {
 
   return (
-    <div>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-    </div>
+    <Box>
+      <Header />
+      <CssBaseline />
+      <Box>
+        <Outlet />
+      </Box>
+      <Footer />
+    </Box>
   )
 }
 

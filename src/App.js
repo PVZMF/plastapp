@@ -1,25 +1,17 @@
 import React from 'react';
-
-import { Routes, Route } from "react-router-dom";
-
-// componenets
-import Layout from "./componets/layout";
-
-// style 
-import './App.css';
-import { ThemeProvider, Typography } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import theme from "./themes/theme"
+import router from "./routes/routes"
+import {RouterProvider} from "react-router-dom";
 
 function App() {
 
   return (
-    <div>
+    <React.StrictMode>
       <ThemeProvider theme={theme}>
-        <Typography>
-          
-        </Typography>
+        <RouterProvider router={router}/>
       </ThemeProvider>
-    </div>
+    </React.StrictMode>
   );
 }
 
