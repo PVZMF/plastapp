@@ -1,17 +1,24 @@
 import React from 'react';
+
+import { RouterProvider } from "react-router-dom";
+
+// componenets
+import Layout from "./componets/layout";
+
+// style 
+import './App.css';
 import { ThemeProvider } from '@mui/material';
 import theme from "./themes/theme"
-import router from "./routes/routes"
-import {RouterProvider} from "react-router-dom";
+import Router from './routes/routes';
 
 function App() {
 
   return (
-    <React.StrictMode>
+    <div>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router}/>
+        <RouterProvider router={Router} />
       </ThemeProvider>
-    </React.StrictMode>
+    </div>
   );
 }
 

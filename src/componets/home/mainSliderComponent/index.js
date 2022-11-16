@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 
 // Hooks
+import { useDispatch, useSelector } from "react-redux";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,10 +14,20 @@ import { Navigation, Pagination, Autoplay } from "swiper";
 
 import { MainSliderContainer } from "./styledMainSlider";
 
+import { getAllSliderImgs, mainSliderImgs } from "./mainSliderSlice";
+import { MAIN_SLIDER_IMGS } from "../../../../service/homeService";
 
 import img_2 from "../../../assets/imgs/mainSlider_2.webp";
 
 const MainSliderComponent = () => {
+  const dispatch = useDispatch();
+  const state = useSelector(mainSliderImgs);
+
+  useEffect(() => {
+    if (state.length <= 0) {
+      dispatch(getAllSliderImgs(MAIN_SLIDER_IMGS));
+    }
+  }, [state.length, dispatch]);
 
   return (
     <MainSliderContainer>
@@ -35,7 +46,7 @@ const MainSliderComponent = () => {
         navigation={true}
         modules={[Pagination, Navigation, Autoplay]}
       >
-        {/* {state.length > 0 ? (
+        {state.length > 0 ? (
           state.map((item, i) => {
             return (
               <SwiperSlide className="slide" key={i}>
@@ -43,11 +54,11 @@ const MainSliderComponent = () => {
               </SwiperSlide>
             );
           })
-        ) : ( */}
+        ) : (
           <SwiperSlide className="slide">
-            <img src={img_2} alt="slider" />
+            <img src={img_2} alt="" />
           </SwiperSlide>
-         {/* )} */}
+        )}
       </Swiper>
     </MainSliderContainer>
   );
