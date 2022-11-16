@@ -10,7 +10,7 @@ const Layout = () => {
     const [isOpenDrawer, setOpenDrawer] = useState(false);
   return (
     <React.Fragment>
-      <Header setOpenDrawer={setOpenDrawer} />
+      <Header isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer}/>
       <Sidebar isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer} />
       <main>
         <Outlet/>

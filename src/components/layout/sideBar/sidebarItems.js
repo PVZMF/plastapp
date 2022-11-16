@@ -8,18 +8,18 @@ import InfoIcon from "@mui/icons-material/Info";
 import WebIcon from "@mui/icons-material/Web";
 
 const sidebarMenue = [
-  { title: "صفحه اصلی", icon: <HomeIcon fontSize="medium" />, link: "/" },
+  { title: "صفحه اصلی", icon: <HomeIcon fontSize="large" />, link: "/" },
   {
     title: "دسته بندی‌ها",
-    icon: <CategoryIcon fontSize="medium" />,
+    icon: <CategoryIcon fontSize="large" />,
     child: true,
   },
-  { title: "ورود به حساب کاربری", icon: <AccountBoxIcon fontSize="medium" /> },
-  { title: "پشتیبانی", icon: <HeadsetMicIcon fontSize="medium" /> },
-  { title: "فرصت های شغلی", icon: <BusinessCenterIcon fontSize="medium" /> },
-  { title: "باشگاه مشتریان ", icon: <GroupsIcon fontSize="medium" /> },
-  { title: "درباره ما ", icon: <InfoIcon fontSize="medium" /> },
-  { title: " وبگاه ", icon: <WebIcon fontSize="medium" /> },
+  { title: "ورود به حساب کاربری", icon: <AccountBoxIcon fontSize="large" /> },
+  { title: "پشتیبانی", icon: <HeadsetMicIcon fontSize="large" /> },
+  { title: "فرصت های شغلی", icon: <BusinessCenterIcon fontSize="large" /> },
+  { title: "باشگاه مشتریان ", icon: <GroupsIcon fontSize="large" /> },
+  { title: "درباره ما ", icon: <InfoIcon fontSize="large" /> },
+  { title: " وبگاه ", icon: <WebIcon fontSize="large" /> },
 ];
 
 export default sidebarMenue

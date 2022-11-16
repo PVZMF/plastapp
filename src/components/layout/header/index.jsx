@@ -7,8 +7,8 @@ import { IconButton } from "@mui/material";
 import { styled } from "@mui/material";
 //mui icons--------------------------
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import CloseIcon from '@mui/icons-material/Close';
 
 import {
   FlexNavContainer,
@@ -31,7 +31,7 @@ const MainMenuButton = styled(IconButton)({
 });
 
 
-const Header = ({ setOpenDrawer }) => {
+const Header = ({ isOpenDrawer, setOpenDrawer }) => {
 
   return (
     <StyledNav>
@@ -39,9 +39,11 @@ const Header = ({ setOpenDrawer }) => {
         <FlexNavContainer>
           <MainMenuButton
             onClick={() => setOpenDrawer((old) => !old)}
-            // onBlur={() => setOpenDrawer(false)}
-            >
-            <MenuIcon fontSize="inherit" />
+            onBlur={() => setOpenDrawer(false)}>
+            {isOpenDrawer?
+            <CloseIcon fontSize="inherit"/>:<MenuIcon fontSize="inherit" />
+            }
+
           </MainMenuButton>
           <StyledNavLogo>
             <Link to="/">

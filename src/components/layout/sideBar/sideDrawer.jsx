@@ -15,6 +15,8 @@ const Sidebar = ({ isOpenDrawer }) => {
             sx={{
                 width: isOpenDrawer ? 200 : 0,
                 flexShrink: 0,
+                position: "absolute",
+                zIndex:5 
             }}
         >
             <List
@@ -22,7 +24,7 @@ const Sidebar = ({ isOpenDrawer }) => {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
             >
-                <Box height={"120px"} />
+                <Box height={"80px"} />
                 {sidebarItems.map((item, index) => (
                     <SideBarListItem
                         key={index}
