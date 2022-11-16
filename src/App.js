@@ -3,7 +3,6 @@ import React from 'react';
 import { RouterProvider } from "react-router-dom";
 
 // componenets
-import Layout from "./componets/layout";
 
 // style 
 import './App.css';
