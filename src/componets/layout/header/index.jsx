@@ -31,7 +31,6 @@ const MainMenuButton = styled(IconButton)({
 });
 
 
-
 const Header = ( {isOpen, btnHandler} ) => {
 
   return (
