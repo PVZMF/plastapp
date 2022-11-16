@@ -49,7 +49,6 @@ const Layout = ({ children }) => {
       role="presentation"
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <Divider />
       <List>
         {sidebarMenue.map((item) => (
           <Sidebar key={item.title}>

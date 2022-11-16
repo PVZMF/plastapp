@@ -9,7 +9,9 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
 
-const contentDrawer = () => {
+const contentDrawer = ({anchor}) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenCat, setIsOpenCat] = useState(false);
   return (
     <Box
       sx={{
@@ -18,7 +20,6 @@ const contentDrawer = () => {
       role="presentation"
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <Divider />
       <List>
         {sidebarMenue.map((item) => (
           <Sidebar key={item.title}>
