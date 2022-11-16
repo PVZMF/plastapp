@@ -38,11 +38,11 @@ const SideBarListItem = (props) => {
         </Collapse>
       </>
     );
-  else
+else
     return (
       <ListItemButton>
         <ListItemIcon sx={{color:"#69a8ff", minWidth:"auto",flexGrow:"0", ml:2 }}>{props.icon}</ListItemIcon>
-        <ListItemText sx={{flexGrow:"0",'& span':{fontSize:"1.1rem"}}}>{props.label}</ListItemText>
+        <ListItemText sx={{flexGrow:"0",'& span':{fontSize:"1.3rem"}}}>{props.label}</ListItemText>
       </ListItemButton>
     );
 };

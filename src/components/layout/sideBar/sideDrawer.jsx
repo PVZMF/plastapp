@@ -18,11 +18,11 @@ const Sidebar = ({ isOpenDrawer }) => {
             }}
         >
             <List
-                sx={{ width: 200, bgcolor: "background.paper" }}
+                sx={{ width: 240, bgcolor: "background.paper" }}
                 component="nav"
                 aria-labelledby="nested-list-subheader"
             >
-                <Box height={"65px"} />
+                <Box height={"120px"} />
                 {sidebarItems.map((item, index) => (
                     <SideBarListItem
                         key={index}
