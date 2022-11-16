@@ -22,6 +22,7 @@ const theme = createTheme({
           }
         `,
     },
+    
     MuiLink: {
       styleOverrides: `
         color: inherit;

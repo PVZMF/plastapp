@@ -19,7 +19,6 @@ import {
 
 // images------------------------
 import imgLogo from "../../../assets/imgs/plastAppLogo.png";
-
 import { navLan } from "../../../json/language/fa";
 import { GlobalButton } from "../../../global/styles/GlobalButton";
 import { globalCssVar } from "../../../global/styles/globalStyles";
@@ -39,7 +38,6 @@ const Header = ( {isOpen, btnHandler} ) => {
     <StyledNav>
       <GlobalContainer>
         <FlexNavContainer>
-
           <MainMenuButton onClick={btnHandler}>
             { isOpen ?
             <CloseOutlinedIcon fontSize="inherit" /> :
