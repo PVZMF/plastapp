@@ -3,7 +3,7 @@ import React from 'react';
 import { RouterProvider } from "react-router-dom";
 
 // componenets
-import Layout from "./componets/layout";
+import Layout from "./components/layout";
 
 // style 
 import './App.css';

@@ -31,26 +31,23 @@ const MainMenuButton = styled(IconButton)({
 });
 
 
-const Header = ( {isOpen, btnHandler} ) => {
+const Header = ({ setOpenDrawer }) => {
 
   return (
     <StyledNav>
       <GlobalContainer>
         <FlexNavContainer>
-          <MainMenuButton onClick={btnHandler}>
-            { isOpen ?
-            <CloseOutlinedIcon fontSize="inherit" /> :
+          <MainMenuButton
+            onClick={() => setOpenDrawer((old) => !old)}
+            // onBlur={() => setOpenDrawer(false)}
+            >
             <MenuIcon fontSize="inherit" />
-            }
           </MainMenuButton>
-
           <StyledNavLogo>
             <Link to="/">
               <img src={imgLogo} alt="logo" />
             </Link>
           </StyledNavLogo>
-
-
           <StyledNavLeftBar>
             <GlobalButton color={globalCssVar.light_blue}>
               {navLan.login_button}

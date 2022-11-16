@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
 // Components
-import MainSliderComponent from '../../componets/home/mainSliderComponent'
+import MainSliderComponent from '../../components/home/mainSliderComponent'
 
 const Home = () => {
   return (

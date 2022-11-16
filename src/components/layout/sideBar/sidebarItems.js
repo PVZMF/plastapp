@@ -7,7 +7,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import InfoIcon from "@mui/icons-material/Info";
 import WebIcon from "@mui/icons-material/Web";
 
-export const sidebarMenue = [
+const sidebarMenue = [
   { title: "صفحه اصلی", icon: <HomeIcon fontSize="inherit" />, link: "/" },
   {
     title: "دسته بندی‌ها",
@@ -21,3 +21,5 @@ export const sidebarMenue = [
   { title: "درباره ما ", icon: <InfoIcon fontSize="inherit" /> },
   { title: " وبگاه ", icon: <WebIcon fontSize="inherit" /> },
 ];
+
+export default sidebarMenue

@@ -6,6 +6,15 @@ const theme = createTheme({
   },
 
   components: {
+        // Name of the component
+        MuiListItemText: {
+          
+          styleOverrides: {
+            span: {
+              fontSize: '1.2rem',
+            },
+          },
+        },
     MuiCssBaseline: {
       styleOverrides: `
           @font-face {
