@@ -22,7 +22,14 @@ const theme = createTheme({
           }
         `,
     },
-
+    
+    MuiLink: {
+      styleOverrides: `
+        color: inherit;
+        text-decoration: none;
+        outline: none;
+      `
+    }
   },
 });
 
