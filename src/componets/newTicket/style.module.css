@@ -61,7 +61,7 @@ form {
 }
 
 .box_input input {
-    width: 100%;
+    width: 99%;
     border: 1px solid #e5e5e5;
     margin: 1rem 0;
     padding: clamp(.5rem, .7vw, .7rem) .5rem;

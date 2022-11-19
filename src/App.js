@@ -1,21 +1,25 @@
 import React from 'react';
 
 import { RouterProvider } from "react-router-dom";
+import { ThemeProvider } from '@mui/material';
+import { Provider } from 'react-redux';
 
 // componenets
+import Router from './routes/routes';
+import store from './toolkit/store';
 
 // style 
-import './App.css';
-import { ThemeProvider } from '@mui/material';
 import theme from "./themes/theme"
-import Router from './routes/routes';
+import './App.css';
 
 function App() {
 
   return (
     <div>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={Router} />
+        <Provider store={store}>
+          <RouterProvider router={Router} />
+        </Provider>
       </ThemeProvider>
     </div>
   );

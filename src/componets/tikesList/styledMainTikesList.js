@@ -9,6 +9,7 @@ export const FlexMainTikesList = styled.div`
   padding: clamp(1rem, 2vw, 2rem);
   background: #f1f3fa;
   min-height: 70vh;
+  overflow: hidden;
 
   .box-ticket {
     width: 100%;
@@ -42,10 +43,23 @@ export const FlexMainTikesList = styled.div`
     justify-content: space-between;
     padding: clamp(1rem, 2vw, 2rem) 0;
 
+    @media (max-width: 600px) {
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column !important;
+      gap: 1rem;
+    }
+
     input {
+      color: #333;
       width: clamp(20rem, 40vw, 40rem);
       border: 1px solid #e2dfdf;
       padding: clamp(.5rem, 1vw, 1rem);
+      font-size: clamp(1rem, 1.4vw, 1.4rem);
+
+      &::placeholder {
+        font-size: clamp(1rem, 1.4vw, 1.4rem);
+      }
     }
 
     button {
@@ -56,13 +70,40 @@ export const FlexMainTikesList = styled.div`
     }
   }
 
+  .box-list-ticket {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: clamp(1rem, 2vw, 2rem) 0;
+    overflow: auto;
+  }
+
   .list-ticket {
     width: 100%;
+    min-width: 500px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    padding: clamp(1rem, 2vw, 2rem) 0;
+    padding: clamp(1rem, 2vw, 2rem) .5rem;
+
+    .notFound {
+      width: 100%;
+      margin: 2rem 0;
+      padding: 1.3rem;
+      border: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      h3 {
+        color: orange;
+        font-weight: 300;
+        font-size: clamp(1.3rem, 1.8vw, 1.8rem);
+      }
+    }
 
     .ticket {
       width: 100%;
@@ -71,7 +112,6 @@ export const FlexMainTikesList = styled.div`
       justify-content: center;
       padding: clamp(1rem, 1.3vw, 1.3rem);
       border: 1px solid #e2dfdf;
-      border-radius: .6rem;
       margin: 0 0 1rem 0;
 
       &:hover {
@@ -85,6 +125,9 @@ export const FlexMainTikesList = styled.div`
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
 
         &:nth-child(1) {
           width: 100%;
@@ -126,6 +169,9 @@ export const FlexMainTikesList = styled.div`
         color: #8e8e8e;
         font-weight: 300;
         font-size: clamp(1rem, 1.4vw, 1.4rem);
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 
@@ -149,9 +195,10 @@ export const FlexMainTikesList = styled.div`
         h5 {
           color: #333;
           font-weight: 300;
-          font-size: clamp(1rem, 1.4vw, 1.4rem);
+          font-size: clamp(.8rem, 1.4vw, 1.4rem);
         }
     }
+
   }
 
 

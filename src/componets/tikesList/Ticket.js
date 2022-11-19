@@ -2,7 +2,9 @@ import React from 'react'
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 
-const Ticket = ({ title, number, date, update, status }) => {
+const Ticket = ({ item }) => {
+
+    const { title, number, date, update, status } = item;
   return (
     <div className='ticket'>
             <div>

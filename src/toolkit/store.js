@@ -3,6 +3,8 @@ import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
+import cartSlice from "./slices/cart.slice";
+import cartReducer from "./cart/cartReducer";
 
 const persistConfig = {
   key: "myApp",
@@ -11,6 +13,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     // myreducerName: reducer;
+    cartReducer: cartSlice,
+    cartState: cartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

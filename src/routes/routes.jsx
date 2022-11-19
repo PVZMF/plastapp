@@ -7,6 +7,8 @@ import Layout from "../componets/layout";
 import Home from "../pages/home";
 import TicketsList from "../pages/ticketsList";
 import NewTicket from "../pages/newTicket";
+import SupportPage from "../pages/support";
+import Cart from "../pages/cart";
 
 const Router = createBrowserRouter([
     {
@@ -36,6 +38,26 @@ const Router = createBrowserRouter([
           {
             index: true,
             element: <NewTicket />,
+          },
+        ]
+    },
+    {
+        path: "/support",
+        element: <Layout />,
+        children :[
+          {
+            index: true,
+            element: <SupportPage />,
+          },
+        ]
+    },
+    {
+        path: "/cart",
+        element: <Layout />,
+        children :[
+          {
+            index: true,
+            element: <Cart />,
           },
         ]
     },

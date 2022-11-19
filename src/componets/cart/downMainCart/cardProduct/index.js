@@ -1,0 +1,50 @@
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { BsPlusLg, BsCartCheck } from 'react-icons/bs';
+import { AiTwotoneShop } from 'react-icons/ai';
+import { FlexCardProduct } from './styledCardProduct'
+// import { addItemToCart } from '../../../../toolkit/slices/cart.slice';
+import { addItem } from '../../../../toolkit/cart/cartAction';
+
+
+const CardProduct = ({ item }) => {
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.cartState);
+    const price = item.price * (item.offer / 100);
+    const totalprice = item.price - price;
+
+  return (
+    <FlexCardProduct>
+        <div className='image'>
+            <img src={item.image} alt={item.title} />
+        </div>
+
+        <div className='product-data'>
+            <h3>{item.title}</h3>
+            <div className='location'>
+                <AiTwotoneShop />
+                <p>{item.location}</p>
+            </div>
+
+            <div className='down-items'>
+                {state.selectedItems.find(pro => pro.id === item.id) ?
+                    <button className='added'><BsCartCheck /></button>
+                    :
+                    <button onClick={() => dispatch(addItem(item))}><BsPlusLg /></button>
+                }
+                <div className='price-box'>
+                    {item.offer > 0 && 
+                        <div className='offer'>
+                            <span>{item.offer.toLocaleString('fa-IR')}%</span>
+                            <del>{item.price.toLocaleString('fa-IR')}</del>
+                        </div>
+                    }
+                    <h5>{totalprice.toLocaleString('fa-IR')} <span>تومان</span></h5>
+                </div>
+            </div>
+        </div>
+    </FlexCardProduct>
+  )
+}
+
+export default CardProduct

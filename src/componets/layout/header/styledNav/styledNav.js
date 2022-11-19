@@ -10,6 +10,7 @@ export const FlexNavContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 2em;
+
 `;
 
 export const StyledNavLogo = styled.div`
@@ -20,4 +21,8 @@ export const StyledNavLogo = styled.div`
 export const StyledNavLeftBar = styled.div`
   display: flex;
   gap: 2rem;
+  
+  .badge span {
+    font-size: 1.3rem;
+  }
 `;

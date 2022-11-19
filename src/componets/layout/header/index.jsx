@@ -2,8 +2,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+// Redux
+import { useSelector } from 'react-redux';
+
 //mui components---------------------
-import { IconButton } from "@mui/material";
+import { Badge, IconButton } from "@mui/material";
 import { styled } from "@mui/material";
 //mui icons--------------------------
 import MenuIcon from "@mui/icons-material/Menu";
@@ -33,6 +36,8 @@ const MainMenuButton = styled(IconButton)({
 
 const Header = ( {isOpen, btnHandler} ) => {
 
+  const state = useSelector(state => state.cartState);
+
   return (
     <StyledNav>
       <GlobalContainer>
@@ -58,6 +63,7 @@ const Header = ( {isOpen, btnHandler} ) => {
 
             <Link to="/cart">
               <MainMenuButton>
+                <Badge badgeContent={state.itemsCounter} color="primary" className="badge"></Badge>
                 <ShoppingBagOutlinedIcon fontSize="inherit" />
               </MainMenuButton>
             </Link>
