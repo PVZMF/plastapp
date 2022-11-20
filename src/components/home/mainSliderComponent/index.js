@@ -15,6 +15,7 @@ import { Navigation, Pagination, Autoplay } from "swiper";
 import { MainSliderContainer } from "./styledMainSlider";
 
 // import { getAllSliderImgs, mainSliderImgs } from "./mainSliderSlice";
+
 // import { MAIN_SLIDER_IMGS } from "../../../../service/homeService";
 
 import img_2 from "../../../assets/imgs/mainSlider_2.webp";

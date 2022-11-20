@@ -1,18 +1,20 @@
 import React, { Fragment } from 'react'
 
 // Components
-import MainSliderComponent from '../../componets/home/mainSliderComponent'
-import MainSearchComponent from '../../componets/home/mainSearch/MainSearchComponent'
-import MainCategoryComponent from '../../componets/home/mainCategoy/MainCategoryComponent'
-import MainSuggestedComponent from '../../componets/home/mainSuggested/MainSuggestedComponent'
-import MainNoticeBannerComponent from '../../componets/home/mainNoticeBanner/MainNoticeBannerComponent'
-import MainShopsComponent from '../../componets/home/mainShops/MainShopsComponent'
-import MainBannerComponent from '../../componets/home/mainBanner/MainBannerComponnet'
-import MainProductsComponent from '../../componets/home/mainProducts/MainProductsComponent'
-import MainFeatureBannerComponent from '../../componets/home/mainFeatureBanner/MainFeatureBannerComponent'
-import MainWonderfullyComponent from '../../componets/home/mainWonderfully/MainWonderfullyComponent'
-import MainPopularProducts from '../../componets/home/mainPopularProducts/MainPopularProducts'
-import MainLastBannerComponent from '../../componets/home/mainLastBanner/MainLastBannerComponent'
+
+import MainSliderComponent from '../../components/home/mainSliderComponent'
+import MainSearchComponent from '../../components/home/mainSearch/MainSearchComponent'
+import MainCategoryComponent from '../../components/home/mainCategoy/MainCategoryComponent'
+import MainSuggestedComponent from '../../components/home/mainSuggested/MainSuggestedComponent'
+import MainNoticeBannerComponent from '../../components/home/mainNoticeBanner/MainNoticeBannerComponent'
+import MainShopsComponent from '../../components/home/mainShops/MainShopsComponent'
+import MainBannerComponent from '../../components/home/mainBanner/MainBannerComponnet'
+import MainProductsComponent from '../../components/home/mainProducts/MainProductsComponent'
+import MainFeatureBannerComponent from '../../components/home/mainFeatureBanner/MainFeatureBannerComponent'
+import MainWonderfullyComponent from '../../components/home/mainWonderfully/MainWonderfullyComponent'
+import MainPopularProducts from '../../components/home/mainPopularProducts/MainPopularProducts'
+import MainLastBannerComponent from '../../components/home/mainLastBanner/MainLastBannerComponent'
+
 
 import { HomeLan } from "../../json/language/fa";
 
