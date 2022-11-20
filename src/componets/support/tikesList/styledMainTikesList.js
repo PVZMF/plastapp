@@ -105,6 +105,10 @@ export const FlexMainTikesList = styled.div`
       }
     }
 
+    .link-ticket {
+      width: 100%;
+    }
+
     .ticket {
       width: 100%;
       display: flex;

@@ -1,0 +1,187 @@
+.sidebar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    border-left: 1px solid rgb(128, 128, 128);
+    box-sizing: border-box;
+}
+
+.sidebar .details {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-bottom: 3px solid #999;
+}
+
+.sidebar .details .boxProfile,
+.sidebar .details .boxwallet {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 2rem 0;
+}
+
+.sidebar .details .boxProfile {
+    margin: 0 0 4rem 0;
+}
+
+.sidebar .details .profile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.sidebar .details .profile img {
+    width: clamp(4rem, 7vw, 7rem);
+    height: clamp(4rem, 7vw, 7rem);
+    object-fit: cover;
+    margin: 0 0 0 .6rem;
+}
+
+.sidebar .details .profile .name {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.sidebar .details .profile .name h2 {
+    color: #111;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    margin: 0 0 1rem 0;
+}
+.sidebar .details .profile .name h3 {
+    color: #333;
+    font-size: clamp(.9rem, 1.1vw, 1.1rem);
+}
+
+.sidebar .details .wallet {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar .details .wallet h4 {
+    display: flex;
+    align-items: center;
+    color: #222;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+}
+
+.sidebar .details .wallet h4 svg {
+    color: rgb(12, 12, 92);
+    margin: 0 0 0 1rem;
+    font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+}
+
+.sidebar .details .wallet h5 {
+    display: flex;
+    align-items: center;
+    color: rgb(12, 12, 92);
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+}
+
+.sidebar .details .wallet h5 span {
+    color: #444;
+    font-size: clamp(.8rem, 1vw, 1rem);
+    margin: 0 1rem;
+}
+
+.sidebar .items {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    border-bottom: 3px solid #999;
+    padding: 2rem 0;
+}
+
+.sidebar .items h5 {
+    display: flex;
+    align-items: center;
+    color: #333;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    margin: .5rem 0;
+}
+
+.sidebar .items h5 svg {
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+    margin: 0 0 0 1rem;
+}
+
+
+.sidebar .items .active {
+    display: flex;
+    align-items: center;
+    color: rgb(187, 59, 59);
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    margin: .5rem 0;
+}
+
+.sidebar .items .active svg {
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+    margin: 0 0 0 1rem;
+}
+
+.sidebar .items h5:hover,
+.sidebar .items .active:hover {
+    cursor: pointer;
+}
+
+.sidebar .finish {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;;
+    padding: 1rem .5rem;
+}
+
+.sidebar .finish .itemFinish {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem .5rem;
+}
+
+.sidebar .finish .itemFinish:hover {
+    cursor: pointer;
+    background: #b9b9b9;
+}
+
+.sidebar .finish .itemFinish svg {
+    color: rgb(12, 12, 92);
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    margin: 0 0 0 1rem;
+}
+
+.sidebar .finish .itemFinish .data {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sidebar .finish .itemFinish .data h3 {
+    color: #222;
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+}
+
+.sidebar .finish .itemFinish .data h4 {
+    color: #555;
+    font-size: clamp(.7rem, 1vw, 1rem);
+}

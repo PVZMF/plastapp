@@ -24,7 +24,7 @@ const TikesListComponent = ({ list }) => {
 
         <div className='search-ticket'>
           <input type={'text'} placeholder='جستجو در عنوان...' onChange={(e) => setSearch(e.target.value)} />
-          <button><Link to={'/newticket'}>ثبت درخواست جدید</Link></button>
+          <button><Link to={'/support/newticket'}>ثبت درخواست جدید</Link></button>
         </div>
 
         <div className='box-list-ticket'>
@@ -47,7 +47,7 @@ const TikesListComponent = ({ list }) => {
               }
             }).map(item => {
               newitems.push(item)
-              return <Ticket key={item.id} item={item} />
+              return <Link to={`/support/ticketsList/${item.id}`} key={item.id} className='link-ticket'><Ticket item={item} /></Link>
             })}
 
             {/* {newitems.length === 0 && <div className='notFound'><h3>چیزی یافت نشد</h3></div>} */}

@@ -5,10 +5,14 @@ import Layout from "../componets/layout";
 
 // Pages
 import Home from "../pages/home";
-import TicketsList from "../pages/ticketsList";
-import NewTicket from "../pages/newTicket";
 import SupportPage from "../pages/support";
 import Cart from "../pages/cart";
+import ProfilePage from "../pages/profile";
+import AddProductPage from "../pages/profile/addProduct";
+import AboutUsPage from "../pages/aboutus";
+import TicketsList from "../pages/support/ticketsList";
+import NewTicket from "../pages/support/newTicket";
+import TicketPage from "../pages/support/ticketsList/TicketPage";
 
 const Router = createBrowserRouter([
     {
@@ -19,47 +23,45 @@ const Router = createBrowserRouter([
             index: true,
             element: <Home />,
           },
-        ]
-    },
-    {
-        path: "/ticketsList",
-        element: <Layout />,
-        children :[
           {
-            index: true,
+            path: "/support/ticketsList",
             element: <TicketsList />,
           },
-        ]
-    },
-    {
-        path: "/newticket",
-        element: <Layout />,
-        children :[
           {
-            index: true,
+            path: "/support/ticketsList/:id",
+            element: <TicketPage />,
+          },
+          {
+            path: "/support/newticket",
             element: <NewTicket />,
           },
-        ]
-    },
-    {
-        path: "/support",
-        element: <Layout />,
-        children :[
           {
-            index: true,
+            path: "/support",
             element: <SupportPage />,
           },
+          {
+            path: "/cart",
+            element: <Cart />,
+          },
+          {
+            path: "/aboutus",
+            element: <AboutUsPage />
+          },
+          {
+            path: "/profile",
+            element: <ProfilePage />,
+            children: [
+              {
+                path: "/profile/addproduct",
+                  index: true,
+                  element: <AddProductPage />,
+              },
+            ]
+          },
         ]
     },
     {
-        path: "/cart",
-        element: <Layout />,
-        children :[
-          {
-            index: true,
-            element: <Cart />,
-          },
-        ]
+       
     },
 ]);
 

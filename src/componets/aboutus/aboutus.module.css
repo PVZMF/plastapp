@@ -1,0 +1,78 @@
+.aboutus {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: rgb(105, 169, 255);
+    padding: 2rem clamp(1rem, 2vw, 2rem);
+    border-bottom: 2px solid #fff;
+}
+
+.aboutus .box_data {
+    max-width: clamp(50rem, 100vw, 100rem);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background: #fff;
+}
+
+.aboutus .box_data .map {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.aboutus .box_data .map img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.aboutus .box_data .data {
+    width: 100%;
+    height: 100%;
+    max-height: 70vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: clamp(1rem, 2vw, 2rem);
+    min-height: 400px;
+    overflow: auto;
+}
+
+.aboutus .box_data .data .topو
+.aboutus .box_data .data .down {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.aboutus .box_data .data h2 {
+    color: rgb(0, 80, 120);
+    font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+    margin: 0 0 1.3rem 0;
+}
+
+.aboutus .box_data .data p {
+    color: #444;
+    font-weight: 300;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    margin: 0 0 1.3rem 0;
+    text-align: justify;
+}
+
+@media (max-width: 700px) {
+    .aboutus .box_data {
+        flex-direction: column;
+    }
+    .aboutus .box_data .map {
+        height: 200px;
+    }
+}

@@ -1,0 +1,45 @@
+.profile {
+    position: relative;
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: clamp(.5rem ,2vw, 2rem);
+    background: #f2f2f2;
+}
+.profile .open {
+    width: 0!important;
+    color: #333;
+    font-size: clamp(2rem, 4vw, 4rem);
+    overflow: hidden;
+    padding: 2rem 0;
+}
+.profile .sidebarSection {
+    position: relative;
+    width: 300px;
+    height: 80vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.profile .bodyProfile {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+@media (max-width: 700px) {
+    .profile .sidebarSection {
+        width: 0 !important;
+        overflow: hidden;
+    }
+    .profile .open {
+        width: 3rem!important;
+        overflow: hidden;
+    }
+}
