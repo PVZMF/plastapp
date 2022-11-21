@@ -14,7 +14,7 @@ const Layout = () => {
     <React.Fragment>
       <Header isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer}/>
       <Sidebar isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer} />
-        <Grid paddingX={1} zIndex={-100} position={"relative"} marginTop="150px">
+        <Grid paddingX={1} zIndex={0} position={"relative"} marginTop="150px">
           <Outlet />
         </Grid>
       <Footer />
