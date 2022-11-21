@@ -12,6 +12,7 @@ import TicketsList from "../pages/support/ticketsList";
 import NewTicket from "../pages/support/newTicket";
 import TicketPage from "../pages/support/ticketsList/TicketPage";
 import MyProductsPage from "../pages/profile/myProducts";
+import StoreRegisterPage from "../pages/profile/storeRegister";
 
 // import login from "../pages/login/loginForm";
 import StoreRegistration from "../pages/StoreRegistration";
@@ -65,6 +66,16 @@ const Router = createBrowserRouter([
                 path: "/profile/myproducts",
                   index: true,
                   element: <MyProductsPage />,
+              },
+              {
+                path: "/profile/orders",
+                  index: true,
+                  element: <h2>OrdersPage</h2>,
+              },
+              {
+                path: "/profile/storregiser",
+                  index: true,
+                  element: <StoreRegisterPage />,
               },
             ]
           },

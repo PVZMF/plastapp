@@ -46,6 +46,7 @@ const MyProducts = ({ list }) => {
                         ))
                         }
                     </tbody>
+                    
                     <tfoot></tfoot>
                 </table>
             </div>
