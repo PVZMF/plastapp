@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 // Icons
 import { BsChevronLeft, BsBox } from 'react-icons/bs';
-import { BiCategory, BiUserPin } from 'react-icons/bi';
+import { BiCategory, BiUserPin, BiStore } from 'react-icons/bi';
 import { IoWallet, IoReceiptOutline } from 'react-icons/io5';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { TbTruckDelivery } from 'react-icons/tb';
@@ -18,8 +18,6 @@ import style from './sidebar.module.css';
 const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
     const pathName = useLocation().pathname;
 
-  const [active, setActive] = useState(1);
-  const Selected = (id) => setActive(id);
   return (
     <div className={style.sidebar}>
         <div className={style.details}>
@@ -44,26 +42,18 @@ const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
 
 
         <div className={style.items}>
-            <h5 
-                onClick={() => Selected(1)}
-                className={pathName === '/profile/addproduct' ? style.active : null}
-            >
-                <Link to='/profile/addproduct'>
-                    <BiCategory /> افزودن محصول
-                </Link>
+            <h5 className={pathName === '/profile/addproduct' ? style.active : null}>
+                <Link to='/profile/addproduct'><BiCategory /> افزودن محصول</Link>
             </h5>
-            <h5 
-                onClick={() => Selected(2)}
-                className={pathName === '/profile/myproducts' ? style.active : null}
-            >
-                <Link to='/profile/myproducts'>
-                    <BsBox /> محصولات
-                </Link>
+            <h5 className={pathName === '/profile/myproducts' ? style.active : null}>
+                <Link to='/profile/myproducts'><BsBox /> محصولات</Link>
             </h5>
-            <h5 
-                onClick={() => Selected(3)}
-                className={pathName === 3 ? style.active : null}
-            ><HiOutlineClipboardList /> سفارشات</h5>
+            <h5 className={pathName === '/profile/orders' ? style.active : null}>
+                <Link to="/profile/orders"><HiOutlineClipboardList /> سفارشات</Link>
+            </h5>
+            <h5 className={pathName === '/profile/storregiser' ? style.active : null}>
+                <Link to="/profile/storregiser"><BiStore /> ثبت فروشگاه</Link>
+            </h5>
         </div>
 
 
