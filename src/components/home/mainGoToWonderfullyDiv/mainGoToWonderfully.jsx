@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { FlexWonderfullyContainer } from "./styledMainGoToWonderfully";
 
 import { FlexWonderfullyImage } from "./styledMainGoToWonderfullyImgs";
 
@@ -12,6 +11,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { HomeLan } from "../../../json/language/fa";
 import img1 from "../../../assets/imgs/adImgs/ad1.webp";
 import img2 from "../../../assets/imgs/adImgs/ad2.webp";
+import { Grid, styled, Typography } from "@mui/material";
 // import {
 //   getAllSuggested,
 //   mainSuggestedProducts,
@@ -29,28 +29,36 @@ const MainGoToWonderfully = () => {
   //     }
   //   }, [state.length, dispatch]);
   const state = [img1, img2];
+  const ImageTag = styled('img')(({ theme }) => ({
+    borderRadius: "50px",
+    width: "40%",
+    [theme.breakpoints.up('md')]: {
+      borderRadius: "50px",
+      width: "100px"
+    },
+  }));
   return (
-    <FlexWonderfullyContainer>
+    <Grid container gap={1} justifyContent={"space-around"} alignItems={"center"}>
       {state.map((item, i) => {
         return (
-          <FlexWonderfullyImage key={i}>
-            <NavLink to={`/product/productid`}>
-              <img className="img" src={item} alt="product" />
-            </NavLink>
-          </FlexWonderfullyImage>
+          <NavLink to={`/product/productid`}>
+            <Grid container justifyContent={"center"} key={i} >
+              <ImageTag src={item} alt="product" />
+            </Grid>
+          </NavLink>
         );
       })}
-      <FlexWonderfullyDiv>
+      <Grid Item bgcolor={"white"} padding={1} borderRadius={"10px"} sx={{marginTop:{xs:2,md:0}}} color="#3ead07">
         <NavLink to={`/product`}>
-          <p>
+          <Typography sx={{fontSize:{xs:"15px",md:"15px"}}} textAlign={"center"}>
             {HomeLan.mainWonderfullyDiscountProducts_title}
             <br />
             {HomeLan.mainWonderfullyDiscountProducts_title_continue}
             <ArrowBackIcon className="arrow" />
-          </p>
+          </Typography>
         </NavLink>
-      </FlexWonderfullyDiv>
-    </FlexWonderfullyContainer>
+      </Grid>
+    </Grid>
   );
 };
 

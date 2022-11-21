@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,useEffect,useState } from 'react'
 
 // Components
-
-import MainSliderComponent from '../../components/home/mainSliderComponent'
+import MainSliderComponent from '../../components/home/mainSliderComponent_banner'
 import MainSearchComponent from '../../components/home/mainSearch/MainSearchComponent'
 import MainCategoryComponent from '../../components/home/mainCategoy/MainCategoryComponent'
-import MainSuggestedComponent from '../../components/home/mainSuggested/MainSuggestedComponent'
+import MainSuggestedComponent from '../../components/home/mainSuggested_Products/MainSuggestedComponent'
 import MainNoticeBannerComponent from '../../components/home/mainNoticeBanner/MainNoticeBannerComponent'
 import MainShopsComponent from '../../components/home/mainShops/MainShopsComponent'
 import MainBannerComponent from '../../components/home/mainBanner/MainBannerComponnet'
@@ -14,11 +13,69 @@ import MainFeatureBannerComponent from '../../components/home/mainFeatureBanner/
 import MainWonderfullyComponent from '../../components/home/mainWonderfully/MainWonderfullyComponent'
 import MainPopularProducts from '../../components/home/mainPopularProducts/MainPopularProducts'
 import MainLastBannerComponent from '../../components/home/mainLastBanner/MainLastBannerComponent'
-
+import {getTwoelvBanners} from "../../api/api"
 
 import { HomeLan } from "../../json/language/fa";
+import ListBannerImages from '../../components/home/ListBannerImages/ListBannerImages'
+import {baseUrl} from "../../api/axios"
+import ad1 from '../../assets/imgs/adImgs/ad1.webp'
+import ad2 from '../../assets/imgs/adImgs/ad2.webp'
+import ad3 from '../../assets/imgs/adImgs/ad3.webp'
 
 const Home = () => {
+  
+  const [banners, setBanners] = useState([]);
+
+  useEffect(() => {
+    // setLoading(true);
+    Promise.all([getTwoelvBanners()])
+      .then((results) => {
+        setBanners(results[0].data);
+      })
+      .finally(() => {
+        // setLoading(false);
+      });
+  }, []);
+  // const imgList1 = [{
+  //   src:ad1,link:"#"},
+  //   {src:ad2,link:"#"},
+  //   {src:ad3,link:"#"},
+  //   {src:ad3,link:"#"}
+  // ]
+  // const imgList2 = [{
+  //   src:ad1,link:"#"},
+  //   {src:ad2,link:"#"},
+  //   {src:ad3,link:"#"},
+  //   {src:ad3,link:"#"}
+  // ]
+  // const imgList3 = [{
+  //   src:ad1,link:"#"},
+  //   {src:ad2,link:"#"},
+  //   {src:ad3,link:"#"},
+  //   {src:ad3,link:"#"}
+  // ]
+
+  
+  const imgList1 = [{
+    src:baseUrl+banners.first_row_first?.image,link:banners.first_row_first?.url},
+    {src:baseUrl+banners.first_row_second?.image,link:banners.first_row_second?.url},
+    {src:baseUrl+banners.first_row_third?.image,link:banners.first_row_third?.url},
+    {src:baseUrl+banners.first_row_fourth?.image,link:banners.first_row_fourth?.url}
+  ]
+  const imgList2 = [{
+    src:baseUrl+banners.second_row_first?.image,link:banners.second_row_first?.url},
+    {src:baseUrl+banners.second_row_second?.image,link:banners.second_row_second?.url},
+    {src:baseUrl+banners.second_row_third?.image,link:banners.second_row_third?.url},
+    {src:baseUrl+banners.second_row_fourth?.image,link:banners.second_row_fourth?.url}
+  ]
+  const imgList3 = [{
+    src:baseUrl+banners.third_row_first?.image,link:banners.third_row_first?.url},
+    {src:baseUrl+banners.third_row_second?.image,link:banners.third_row_second?.url},
+    {src:baseUrl+banners.third_row_third?.image,link:banners.third_row_third?.url},
+    {src:baseUrl+banners.third_row_fourth?.image,link:banners.third_row_fourth?.url}
+  ]
+
+
   return (
     <Fragment>
       <MainSliderComponent />
@@ -27,13 +84,16 @@ const Home = () => {
       <MainSuggestedComponent title={HomeLan.mainSuggested_title} />
       <MainNoticeBannerComponent row={"first"} />
       <MainShopsComponent title={HomeLan.mainTopShops_title} />
+      <ListBannerImages ListImg={imgList1}/>
       <MainBannerComponent start={0} end={4} />
       <MainShopsComponent title={HomeLan.mainPopularShops_title} />
+      <ListBannerImages ListImg={imgList2}/>
       <MainBannerComponent start={4} end={8} />
       <MainProductsComponent title={HomeLan.mainAllProducts_title} />
       <MainFeatureBannerComponent />
       <MainWonderfullyComponent />
       <MainBannerComponent start={8} end={12} />
+      <ListBannerImages ListImg={imgList3}/>
       <MainPopularProducts />
       <MainNoticeBannerComponent row={"second"} />
       <MainLastBannerComponent />

@@ -1,0 +1,19 @@
+.description-layout-container {
+  padding: 10px 15px;
+  background: #fff;
+  margin-bottom: 10px;
+
+  .description-layout-title {
+    display: flex;
+    justify-content: space-between;
+
+    .description-layout-arrow {
+      transition: 0.3s;
+      cursor: pointer;
+
+      &.disactive {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+}

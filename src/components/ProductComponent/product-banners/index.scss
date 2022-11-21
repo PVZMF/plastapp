@@ -1,0 +1,38 @@
+.product-banner-container {
+  display: flex;
+  background-color: #fff;
+  margin-bottom: 10px;
+
+  > div {
+    width: 50%;
+  }
+
+  .product-banner-content {
+    padding: 10px;
+    direction: rtl;
+
+    .product-banner-title {
+      font-size: 1.2em;
+    }
+  }
+
+  .product-banner-banners {
+    .product-banner-banner {
+      width: 100%;
+    }
+
+    .product-banner-banners-list {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+
+      > img {
+        margin-right: 7px;
+        margin-bottom: 5px;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+      }
+    }
+  }
+}

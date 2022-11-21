@@ -7,7 +7,6 @@ import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import { useState } from "react";
 import React from "react";
-import {Styles } from "@mui/material";
 
 
 
@@ -22,16 +21,16 @@ const SideBarListItem = (props) => {
     return (
       <>
         <ListItemButton onClick={handleClick}>
-          <ListItemIcon>{props.icon}</ListItemIcon>
-          <ListItemText primary={props.label} />
+          <ListItemIcon sx={{color:"#69a8ff", minWidth:"auto",flexGrow:"0", ml:2 }}>{props.icon}</ListItemIcon>
+          <ListItemText sx={{flexGrow:"0",'& span':{fontSize:"2.2rem"}}} primary={props.label} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {props.childrenItems.map((item, index) => (
-              <ListItemButton key={index} sx={{display: "flex", flexDirection:"row", margin:"20px"} }>
-                <ListItemIcon> {item.icon}</ListItemIcon>
-                <ListItemText primary={item.label} />
+              <ListItemButton key={index}>
+                {/* <ListItemIcon sx={{color:"rgb(119, 119, 119)", minWidth:"auto",flexGrow:"0" }}> {item.icon}</ListItemIcon> */}
+                <ListItemText sx={{flexGrow:"0",'& span':{fontSize:"1.3rem"}, marginX:"40px",marginY:0, color:"rgb(119, 119, 119)"}} primary={item.label} />
               </ListItemButton>
             ))}
           </List>

@@ -2,19 +2,23 @@ import { createTheme } from "@mui/material";
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'IranSans, Arial',
+    fontFamily: 'IranSans',
+    fontStyle: "normal",
+    fontWeight: "normal",
+    src: "./assets/font/iranSans/IRANSans-Medium-web.woff2"
+
   },
 
   components: {
-        // Name of the component
-        MuiListItemText: {
-          
-          styleOverrides: {
-            span: {
-              fontSize: '1.2rem',
-            },
-          },
+    // Name of the component
+    MuiListItemText: {
+
+      styleOverrides: {
+        span: {
+          fontSize: '1.2rem',
         },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: `
           @font-face {
@@ -31,7 +35,7 @@ const theme = createTheme({
           }
         `,
     },
-    
+
     MuiLink: {
       styleOverrides: `
         color: inherit;

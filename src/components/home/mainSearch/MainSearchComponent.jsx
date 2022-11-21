@@ -30,7 +30,7 @@ const MainSearchComponent = () => {
                 {HomeLan.search_input_button}
               </GlobalButton>
 
-              <input className="search_box--input" type="text" />
+              <input className="search_box--input" type="text" placeholder={HomeLan.search_placeHolder}/>
             </div>
 
             <GlobalButton
