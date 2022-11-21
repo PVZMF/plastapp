@@ -10,8 +10,8 @@ import { Badge, IconButton } from "@mui/material";
 import { styled } from "@mui/material";
 //mui icons--------------------------
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import CloseIcon from '@mui/icons-material/Close';
 
 import {
   FlexNavContainer,
@@ -34,7 +34,7 @@ const MainMenuButton = styled(IconButton)({
 });
 
 
-const Header = ( {isOpen, btnHandler} ) => {
+const Header = ({ isOpenDrawer, setOpenDrawer }) => {
 
   const state = useSelector(state => state.cartState);
 
@@ -42,20 +42,19 @@ const Header = ( {isOpen, btnHandler} ) => {
     <StyledNav>
       <GlobalContainer>
         <FlexNavContainer>
-          <MainMenuButton onClick={btnHandler}>
-            { isOpen ?
-            <CloseOutlinedIcon fontSize="inherit" /> :
-            <MenuIcon fontSize="inherit" />
+          <MainMenuButton
+            onClick={() => setOpenDrawer((old) => !old)}
+            onBlur={() => setOpenDrawer(false)}>
+            {isOpenDrawer?
+            <CloseIcon fontSize="inherit"/>:<MenuIcon fontSize="inherit" />
             }
-          </MainMenuButton>
 
+          </MainMenuButton>
           <StyledNavLogo>
             <Link to="/">
               <img src={imgLogo} alt="logo" />
             </Link>
           </StyledNavLogo>
-
-
           <StyledNavLeftBar>
             <GlobalButton color={globalCssVar.light_blue}>
               {navLan.login_button}

@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 // componenets
 import Router from './routes/routes';
 import store from './toolkit/store';
+import Layout from "./components/layout";
 
 // style 
 import theme from "./themes/theme"
