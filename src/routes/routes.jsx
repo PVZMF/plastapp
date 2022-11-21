@@ -19,6 +19,7 @@ import StoreRegistration from "../pages/StoreRegistration";
 import CreditPurches from '../pages/CreditPurches';
 import OrderPlace from "../pages/OrderPlace";
 import RulesConditon from "../pages/rule"
+import Detail_Product from "../pages/products/detail-product";
 
 const Router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const Router = createBrowserRouter([
           {
             index: true,
             element: <Home />,
+          },
+          {
+            path: "/product/:id",
+            element: <Detail_Product />,
           },
           {
             path: "/support/ticketsList",
