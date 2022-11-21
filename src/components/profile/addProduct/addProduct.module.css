@@ -1,0 +1,386 @@
+.addProduct {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 2rem clamp(.5rem, 2vw, 2rem);
+}
+
+.addProduct .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.addProduct .header h5 {
+    color: #888;
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+}
+.addProduct .header span {
+    color: #888;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    margin: 0 1rem;
+}
+
+.addProduct .footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.addProduct .footer button {
+    color: #fff;
+    background: rgb(25, 118, 210);
+    border: none;
+    border-radius: 2rem;
+    padding: clamp(.9rem, 1.3vw, 1.3rem);
+    width: clamp(8rem, 12vw, 12rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+}
+.addProduct .footer button:hover {
+    cursor: pointer;
+    background: rgb(10, 92, 62);
+}
+
+.addProduct .name_grouping,
+.addProduct .images,
+.addProduct .weight,
+.addProduct .send,
+.addProduct .attributes {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 2rem 0;
+}
+
+
+.addProduct .name_grouping .icon,
+.addProduct .images .icon,
+.addProduct .weight .icon,
+.addProduct .send .icon,
+.addProduct .attributes .icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: 1px solid #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 0 0 1rem;
+    padding: 0 .1rem .1rem 0;
+}
+
+.addProduct .name_grouping .box,
+.addProduct .images .box,
+.addProduct .weight .box,
+.addProduct .send .box,
+.addProduct .attributes .box {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid #888;
+    border-radius: 1rem;
+}
+
+.addProduct .name_grouping .box .title,
+.addProduct .images .box .title,
+.addProduct .weight .box .title,
+.addProduct .send .box .title,
+.addProduct .attributes .box .title {
+    color: #333;
+    font-size: clamp(1.2rem, 1.4vw, 1.4rem);
+    margin: 0 0 1.5rem 0;
+}
+
+.addProduct .name_grouping .box h4,
+.addProduct .images .box h4 {
+    color: #555;
+    font-weight: 300;
+    font-size: clamp(.9rem, 1.1vw, 1.1rem);
+    margin: 1.5rem 0;
+}
+
+.addProduct .name_grouping .box .boxinput,
+.addProduct .weight .box .boxinput,
+.addProduct .send .box .boxinput,
+.addProduct .send .box .boxradio,
+.addProduct .attributes .box .boxinput {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1.5rem 0;
+}
+
+.addProduct .weight .box .boxinput p {
+    color: #555;
+    font-size: clmap(.7rem, 1vw, 1rem);
+    margin: 1rem 0 0 0;
+}
+
+.addProduct .name_grouping .box .boxinput label,
+.addProduct .weight .box .boxinput label,
+.addProduct .send .box .boxinput label,
+.addProduct .send .box .boxradio label,
+.addProduct .attributes .box .boxinput label {
+    color: #333;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+}
+
+.addProduct .name_grouping .box .boxinput input {
+    width: 98.8%;
+    padding: .6rem .5rem;
+    border: 1px solid #999;
+    border-radius: .5rem;
+    margin: 1rem 0;
+    background: #fff;
+}
+.addProduct .name_grouping .box .boxinput input::placeholder,
+.addProduct .weight .box .boxinput input::placeholder,
+.addProduct .attributes .box .boxattribute input:nth-child(1),
+.addProduct .attributes .box .boxattribute input:nth-child(2) {
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+}
+
+.addProduct .name_grouping .box select {
+    width: 100%;
+    padding: .6rem .5rem;
+    border: 1px solid #999;
+    border-radius: .5rem;
+    outline: none;
+    color: #333;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    background: #fff;
+}
+
+
+
+/* ----------- Images ------------ */
+
+.addProduct .images .addImg {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.addProduct .images .boximage {
+    position: relative;
+    border: 1px dashed #888;
+    border-radius: .7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: clamp(6rem, 8vw, 8rem);
+    height: clamp(6rem, 8vw, 8rem);
+    margin: 0 0 0 clamp(1rem, 5vw, 5rem);
+}
+
+.addProduct .images .boximage input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+}
+
+.addProduct .images .boximage input:hover {
+    cursor: pointer;
+}
+
+.addProduct .images .boximage svg {
+    color: #777;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+.addProduct .images .boximage p {
+    color: #777;
+    font-size: clamp(.7rem, 1vw, 1rem);
+}
+
+.addProduct .images .addImg .listImage {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.addProduct .images .addImg .listImage .img {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: .3rem 1rem;
+    border: 1px solid #888;
+    border-radius: .7rem;
+    margin: .5rem 0;
+}
+
+.addProduct .images .addImg .listImage .img button {
+    color: rgb(210, 25, 25);
+    font-size: clamp(2rem, 2.5vw, 2.5rem);
+    margin: 0 0 0 1rem;
+}
+
+
+/* ----------- Weight ------------ */
+
+.addProduct .weight .box .boxadd {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .8rem 1rem;
+    border: 1px solid #999;
+    border-radius: .5rem;
+    background: #fff;
+    margin: 1rem 0 0 0;
+}
+
+.addProduct .weight .box .boxadd button,
+.addProduct .weight .box .boxadd span {
+    color: #555;
+    font-size: clamp(1rem, 2vw, 2rem);
+}
+
+.addProduct .weight .box .boxadd button:hover {
+    cursor: pointer;
+}
+
+.addProduct .weight .box .boxinput .input input {
+    width: 100%;
+    background: transparent;
+}
+
+.addProduct .weight .box .boxinput .input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .6rem .5rem;
+    border: 1px solid #999;
+    border-radius: .5rem;
+    background: #fff;
+    margin: 1rem 0 0 0;
+}
+
+
+/* ----------- Send ------------ */
+
+.addProduct .send .box .boxradio .input {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.addProduct .send .box .boxradio .input input {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    all: revert;
+}
+
+.addProduct .send .box .boxradio .input input:hover {
+    cursor: pointer;
+}
+
+.addProduct .send .box .boxinput select {
+    width: 100%;
+    padding: .6rem .5rem;
+    border: 1px solid #999;
+    border-radius: .5rem;
+    outline: none;
+    color: #333;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    background: #fff;
+    margin: 1rem 0 0 0;
+}
+
+
+/* ----------- Attributes ------------ */
+
+.addProduct .attributes .box .header {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 2rem 0;
+}
+
+.addProduct .attributes .box .header h4 {
+    color: #555;
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+}
+
+.addProduct .attributes .box .header button {
+    color: rgb(25, 118, 210);
+    font-size: clamp(2rem, 2.5vw, 2.5rem);
+}
+.addProduct .attributes .box .header button:hover {
+    cursor: pointer;
+}
+
+.addProduct .attributes .box .boxattribute {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: .5rem 0;
+}
+
+.addProduct .attributes .box .boxattribute input:nth-child(1) {
+    width: 40%;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: .7rem;
+    padding: .5rem;
+}
+
+.addProduct .attributes .box .boxattribute input:nth-child(2) {
+    width: 25%;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: .7rem;
+    padding: .5rem;
+}
+
+.addProduct .attributes .box .boxattribute button {
+    color: rgb(210, 25, 25);
+    font-size: clamp(2rem, 2.5vw, 2.5rem);
+}
+
+.addProduct .attributes .box .boxattribute button:hover {
+    cursor: pointer;
+}
+
+.addProduct .attributes .box .boxinput textarea {
+    width: 90%;
+    min-width: 90%;
+    max-width: 90%;
+    height: clamp(15vh, 20vh, 20vh);
+    max-height: clamp(15vh, 20vh, 20vh);
+    min-height: clamp(15vh, 20vh, 20vh);
+    border: 1px solid #888;
+    border-radius: .7rem;
+    outline: none;
+    margin: 2rem 0 0 0;
+}
+
+@media (max-width: 600px) {
+    .addProduct .attributes .box .boxattribute {
+        width: 95%;
+    }
+
+}

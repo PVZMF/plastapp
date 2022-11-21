@@ -1,0 +1,98 @@
+.myproducts {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 2rem clamp(.5rem, 4vw, 4rem);
+}
+
+.myproducts .products {
+    width: 100%;
+    min-height: 70vh;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background: #fff;
+    padding: 2rem;
+}
+
+.myproducts .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 1.5rem 0;
+}
+
+.myproducts .header h4 {
+    color: #444;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+}
+
+.myproducts .header button svg {
+    color: rgb(25, 118, 210);
+    font-size: clamp(2.5rem, 3.3vw, 3.3rem);
+}
+.myproducts .header button svg:hover {
+    cursor: pointer;
+}
+
+.myproducts .boxtable {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.myproducts .boxtable table {
+    width: 100%;
+    min-width: 600px;
+    border-spacing: 0;
+}
+
+.myproducts .boxtable table thead th {
+    border-bottom: 1px solid #888;
+    background-color: rgb(214, 214, 214);
+    padding: 0 1rem;
+}
+.myproducts .boxtable table thead th h4 {
+    font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+    color: #000;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.myproducts .boxtable table thead th:first-child h4,
+.myproducts .boxtable table tbody tr td:first-child h3 {
+    text-align: start;
+}
+
+.myproducts .boxtable table tbody tr td {
+    padding: 0 1rem;
+    border-bottom: 1px solid #888;
+}
+
+.myproducts .boxtable table tbody tr td h3 {
+    padding: clamp(.8rem, 1.5vw, 1.5rem) 0;
+    color: #222;
+    font-weight: 100;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    text-align: center;
+}
+
+.myproducts .boxtable table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.myproducts .boxtable table tbody tr td .itis {
+    color: rgb(25, 118, 210);
+}
+
+.myproducts .boxtable table tbody tr td .noting {
+    color: rgb(244, 33, 33);
+}

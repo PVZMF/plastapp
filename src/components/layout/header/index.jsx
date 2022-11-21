@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+// Redux
+import { useSelector } from 'react-redux';
+
 //mui components---------------------
-import { IconButton } from "@mui/material";
+import { Badge, IconButton } from "@mui/material";
 import { styled } from "@mui/material";
 import { Box } from '@mui/material';
 //mui icons--------------------------
@@ -43,6 +46,8 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
       });
   }, []);
 
+  const state = useSelector(state => state.cartState);
+
   return (
     <Box position={"fixed"} top="0" zIndex={50}>
       <Box position={"relative"} display={"block"} zIndex={"100"} top={0}>
@@ -65,6 +70,14 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
               {isOpenDrawer ?
                 <CloseIcon fontSize="inherit" /> : <MenuIcon fontSize="inherit" />
               }
+
+            <Link to="/cart">
+              <MainMenuButton>
+                <Badge badgeContent={state.itemsCounter} color="primary" className="badge"></Badge>
+                <ShoppingBagOutlinedIcon fontSize="inherit" />
+              </MainMenuButton>
+            </Link>
+          </StyledNavLeftBar>
 
             </IconButton>
             <StyledNavLogo>

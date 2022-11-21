@@ -3,33 +3,19 @@ import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
-import isLoading from "./isLoading";
-import user from "./user";
-import products from "./products";
-import adBanners from "./adBanners";
-import mainPage from "./mainPage";
-import myProducts from "./myProducts";
-import product from "./product";
-import hasShop from "./hasShop";
+import cartSlice from "./slices/cart.slice";
+import cartReducer from "./cart/cartReducer";
 
 
 const persistConfig = {
   key: "myApp",
   storage,
 };
-
-const rootReducer = combineReducers(
-  {
-    isLoading,
-    products,
-    adBanners,
-    mainPage,
-    user,
-    myProducts,
-    product,
-    hasShop,
-  }
-);
+const rootReducer = combineReducers({
+    // myreducerName: reducer;
+    cartReducer: cartSlice,
+    cartState: cartReducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

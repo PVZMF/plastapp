@@ -19,11 +19,18 @@ export const FlexNavContainer = styled.div`
 export const StyledNavLogo = styled.div`
   width: 170px;
   margin-left: auto;
+  @media (max-width: 700px) {
+    width: 120px;
+  }
 `;
 
 export const StyledNavLeftBar = styled.div`
   display: flex;
   gap: 2rem;
+  
+  .badge span {
+    font-size: 1.3rem;
+  }
 `;
 
 export const GlobalContainer = styled.div`

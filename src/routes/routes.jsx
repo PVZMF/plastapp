@@ -2,11 +2,23 @@ import Support from "../pages/support"
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout";
 import Home from "../pages/home";
+
+import SupportPage from "../pages/support";
+import Cart from "../pages/cart";
+import ProfilePage from "../pages/profile";
+import AddProductPage from "../pages/profile/addProduct";
+import AboutUsPage from "../pages/aboutus";
+import TicketsList from "../pages/support/ticketsList";
+import NewTicket from "../pages/support/newTicket";
+import TicketPage from "../pages/support/ticketsList/TicketPage";
+import MyProductsPage from "../pages/profile/myProducts";
+
 // import login from "../pages/login/loginForm";
 import StoreRegistration from "../pages/StoreRegistration";
 import CreditPurches from '../pages/CreditPurches';
 import OrderPlace from "../pages/OrderPlace";
 import RulesConditon from "../pages/rule"
+
 const Router = createBrowserRouter([
     {
         path: "/",
@@ -17,6 +29,45 @@ const Router = createBrowserRouter([
             element: <Home />,
           },
           {
+            path: "/support/ticketsList",
+            element: <TicketsList />,
+          },
+          {
+            path: "/support/ticketsList/:id",
+            element: <TicketPage />,
+          },
+          {
+            path: "/support/newticket",
+            element: <NewTicket />,
+          },
+          {
+            path: "/support",
+            element: <SupportPage />,
+          },
+          {
+            path: "/cart",
+            element: <Cart />,
+          },
+          {
+            path: "/aboutus",
+            element: <AboutUsPage />
+          },
+          {
+            path: "/profile",
+            element: <ProfilePage />,
+            children: [
+              {
+                path: "/profile/addproduct",
+                  index: true,
+                  element: <AddProductPage />,
+              },
+              {
+                path: "/profile/myproducts",
+                  index: true,
+                  element: <MyProductsPage />,
+              },
+            ]
+          },
             path: "login",
             element: <div>d</div>
           },
@@ -29,23 +80,18 @@ const Router = createBrowserRouter([
             element: <CreditPurches/>
           },
           {
-            path: "about-us",
-            element: <Support/>
-          },
-          {
             path: "store-registration",
             element: <StoreRegistration/>
-          },
-          {
-            path: "Support",
-            element: <Support/>
           },
           {
             path: "rule",
             element: <RulesConditon/>
           }
         ]
-    }
+    },
+    {
+       
+    },
 ]);
 
 export default Router
