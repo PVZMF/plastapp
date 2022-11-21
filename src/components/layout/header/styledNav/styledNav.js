@@ -17,6 +17,9 @@ export const FlexNavContainer = styled.div`
 export const StyledNavLogo = styled.div`
   width: 170px;
   margin-left: auto;
+  @media (max-width: 700px) {
+    width: 120px;
+  }
 `;
 
 export const StyledNavLeftBar = styled.div`

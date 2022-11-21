@@ -1,5 +1,5 @@
 import React from 'react';
-import NewTicketComponent from '../../../componets/support/newTicket';
+import NewTicketComponent from '../../../components/support/newTicket';
 
 const NewTicket = () => {
   return (

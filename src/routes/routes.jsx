@@ -11,6 +11,7 @@ import AboutUsPage from "../pages/aboutus";
 import TicketsList from "../pages/support/ticketsList";
 import NewTicket from "../pages/support/newTicket";
 import TicketPage from "../pages/support/ticketsList/TicketPage";
+import MyProductsPage from "../pages/profile/myProducts";
 
 const Router = createBrowserRouter([
     {
@@ -53,6 +54,11 @@ const Router = createBrowserRouter([
                 path: "/profile/addproduct",
                   index: true,
                   element: <AddProductPage />,
+              },
+              {
+                path: "/profile/myproducts",
+                  index: true,
+                  element: <MyProductsPage />,
               },
             ]
           },

@@ -1,5 +1,5 @@
 import React from 'react'
-import TicketComponent from '../../../componets/support/tikesList/ticketComponent';
+import TicketComponent from '../../../components/support/tikesList/ticketComponent';
 
 const TicketPage = () => {
   return (

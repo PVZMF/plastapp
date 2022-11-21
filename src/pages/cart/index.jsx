@@ -1,6 +1,6 @@
 import React from 'react'
-import DownMainCart from '../../componets/cart/downMainCart'
-import TopMainCart from '../../componets/cart/topMainCart'
+import DownMainCart from '../../components/cart/downMainCart'
+import TopMainCart from '../../components/cart/topMainCart'
 import { CartContainer } from './styledCart'
 
 const Cart = () => {

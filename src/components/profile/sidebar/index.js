@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 // Icons
 import { BsChevronLeft, BsBox } from 'react-icons/bs';
@@ -13,9 +14,9 @@ import Shop from '../../../assets/imgs/adImage.png';
 
 // Style
 import style from './sidebar.module.css';
-import { Link } from 'react-router-dom';
 
 const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
+    const pathName = useLocation().pathname;
 
   const [active, setActive] = useState(1);
   const Selected = (id) => setActive(id);
@@ -45,7 +46,7 @@ const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
         <div className={style.items}>
             <h5 
                 onClick={() => Selected(1)}
-                className={active === 1 ? style.active : null}
+                className={pathName === '/profile/addproduct' ? style.active : null}
             >
                 <Link to='/profile/addproduct'>
                     <BiCategory /> افزودن محصول
@@ -53,11 +54,15 @@ const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
             </h5>
             <h5 
                 onClick={() => Selected(2)}
-                className={active === 2 ? style.active : null}
-            ><BsBox /> محصولات</h5>
+                className={pathName === '/profile/myproducts' ? style.active : null}
+            >
+                <Link to='/profile/myproducts'>
+                    <BsBox /> محصولات
+                </Link>
+            </h5>
             <h5 
                 onClick={() => Selected(3)}
-                className={active === 3 ? style.active : null}
+                className={pathName === 3 ? style.active : null}
             ><HiOutlineClipboardList /> سفارشات</h5>
         </div>
 

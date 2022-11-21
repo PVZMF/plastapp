@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import TikesListComponent from '../../../componets/support/tikesList'
+import TikesListComponent from '../../../components/support/tikesList'
 
 const TicketsList = () => {
   return (

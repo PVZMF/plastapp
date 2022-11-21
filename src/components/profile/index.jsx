@@ -9,6 +9,7 @@ import style from './profile.module.css'
 
 const Profile = () => {
   const [menu, setMenu] = useState(false)
+
   return (
     <div className={style.profile}>
         <div className={style.sidebarSection}>

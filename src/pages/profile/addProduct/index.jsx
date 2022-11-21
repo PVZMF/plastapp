@@ -1,5 +1,5 @@
 import React from 'react'
-import AddProduct from '../../../componets/profile/addProduct'
+import AddProduct from '../../../components/profile/addProduct'
 
 const AddProductPage = () => {
   return (
