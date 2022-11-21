@@ -3,8 +3,9 @@ import React from 'react';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import product from '../../../../assets/imgs/pesteh.jpg';
 import { FlexMainSlidSuggested } from './styledMainSlideSuggested';
+import { Link } from 'react-router-dom';
 
-const SlideSuggested = ({ offer, image, title, price, number, point }) => {
+const SlideSuggested = ({ offer, image, title, price, number, point, id }) => {
 
   const off = price * (offer / 100);
   return (
@@ -22,7 +23,9 @@ const SlideSuggested = ({ offer, image, title, price, number, point }) => {
             }
         </div>
         
-        <h2>{title}</h2>
+        <h2>
+            <Link to={`/product/${id}`}>{title}</Link>
+        </h2>
         
         {number > 0 ?
             <p className='true'>موجود در انبار پلاست اپ</p>
@@ -41,6 +44,7 @@ const SlideSuggested = ({ offer, image, title, price, number, point }) => {
 export default SlideSuggested;
 
 SlideSuggested.defaultProps = {
+    id: 1,
     title: 'دستکش یکبار مصرف',
     image: product,
     number: 10,
