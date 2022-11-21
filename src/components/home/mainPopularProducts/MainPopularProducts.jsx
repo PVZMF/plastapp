@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/css";
-import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Navigation } from "swiper";
 
-import { FlexMainSuggested } from "../mainSuggested/styledMainSuggested";
+import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested";
 
 import { Typography } from "@mui/material";
 
@@ -17,12 +18,14 @@ import { GlobalContainer } from "../../../global/styles/globalContainer";
 // import { getAllPopular, mainPopularProducts } from "./mainPopularSlice";
 
 import bannerImg from "../../../assets/imgs/box2.webp";
+import bannerImg1 from "../../../assets/imgs/offer-banner.jpg";
 
 // import { MAIN_SUGGESTED_PRODUCTS } from "../../../../service/homeService";
 
 import { HomeLan } from "../../../json/language/fa";
+import AllProductsSlide from "../AllProductCart/AllProductsSlide";
 
-const MainPopularComponent = ({}) => {
+const MainPopularComponent = ({ }) => {
   // const dispatch = useDispatch();
   // const state = useSelector(mainPopularProducts);
 
@@ -49,17 +52,19 @@ const MainPopularComponent = ({}) => {
             }
           }}
           spaceBetween={10}
+          navigation={true}
+          modules={[Navigation]}
           className="custom_swiper "
         >
-          <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg} alt=""/></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 2</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 3</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 4</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 5</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 6</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 7</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 8</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 9</SwiperSlide>
+          <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg1} alt=""/></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><AllProductsSlide /></SwiperSlide>
         </Swiper>
       </FlexMainSuggested>
     </GlobalContainer>

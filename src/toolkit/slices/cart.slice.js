@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const sumItems = (items) => {
   const itemsCounter = items.reduce((total, product) => total + product.quantity, 0);
   let total = items.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
   return {itemsCounter, total}
 }
+
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -79,6 +81,7 @@ export const cartSlice = createSlice({
     },
   },
 });
+
 
 export const {
   addItemToCart,

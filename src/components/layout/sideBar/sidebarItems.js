@@ -12,7 +12,17 @@ const sidebarMenue = [
   {
     title: "دسته بندی‌ها",
     icon: <CategoryIcon fontSize="large" />,
-    child: true,
+    children: [{ label: "محصولات نایلون و نایلکس", icon: ""},
+                { label: " محصولات سلولزی", icon: ""},
+                { label: "محصولات یک بار مصرف", icon: ""},
+                { label: "محصولات خانه و آشپزخانه", icon: ""},
+                { label: "محصولات بهداشت و حمام", icon: ""},
+                { label: "سفارشات چایی ", icon: ""},
+                { label: "مواد اولیه ", icon: ""},
+                { label: "تجهیزات و دستگاه خط تولید  ", icon: ""},
+
+  ]
+    
   },
   { title: "ورود به حساب کاربری", icon: <AccountBoxIcon fontSize="large" /> },
   { title: "پشتیبانی", icon: <HeadsetMicIcon fontSize="large" /> },

@@ -2,8 +2,6 @@ import styled from "@emotion/styled";
 
 export const FlexFooterContainer = styled.div`
   background-color: #69a8ff;
-  position: sticky;
-  z-Index:100
   .footer_menu {
     display: flex;
     align-items: center;

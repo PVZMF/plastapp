@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
 
-export const StyledNav = styled.nav`
-  position: sticky;
-  width: 100%;
-  padding: 15px 0;
-  z-Index:10 !important;
-`;
+export const StyledNav = styled.nav(
+  {
+  position: "sticky",
+  display: "block",
+  backgroundColor: "white",
+  zIndex:"100 !important",
+  }
+);
 
 export const FlexNavContainer = styled.div`
   display: flex;

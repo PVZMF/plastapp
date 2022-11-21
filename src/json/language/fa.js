@@ -5,6 +5,7 @@ export const navLan = {
 export const HomeLan = {
   search_input_button: "تهران",
   search_button: "ادامه",
+  search_placeHolder: "چی میتونم براتون پیدا کنم؟",
 
   mainCategory_Title: "گروه محصول خود را انتخاب کنید",
   mainSuggested_title: "پیشنهاد ویژه",

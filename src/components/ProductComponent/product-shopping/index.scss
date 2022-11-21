@@ -1,0 +1,19 @@
+.product-shopping-container {
+  padding: 20px;
+  width: 400px;
+  background-color: #fff;
+  direction: rtl;
+  @media screen and (max-width: 1120px) {
+    width: 800px;
+    max-width: 90vw;
+  }
+
+  .product-shopping-card {
+    display: flex;
+    justify-content: space-between;
+
+    .product-shopping-card-information {
+      display: flex;
+    }
+  }
+}

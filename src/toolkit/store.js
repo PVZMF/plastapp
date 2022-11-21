@@ -6,11 +6,11 @@ import { combineReducers } from "redux";
 import cartSlice from "./slices/cart.slice";
 import cartReducer from "./cart/cartReducer";
 
+
 const persistConfig = {
   key: "myApp",
   storage,
 };
-
 const rootReducer = combineReducers({
     // myreducerName: reducer;
     cartReducer: cartSlice,
@@ -27,3 +27,6 @@ const store = configureStore({
 export const persistor = persistStore(store);
 
 export default store;
+
+
+

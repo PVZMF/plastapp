@@ -9,6 +9,7 @@ import Router from './routes/routes';
 import store from './toolkit/store';
 import Layout from "./components/layout";
 
+
 // style 
 import theme from "./themes/theme"
 import './App.css';
@@ -16,13 +17,11 @@ import './App.css';
 function App() {
 
   return (
-    <div>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <RouterProvider router={Router} />
         </Provider>
       </ThemeProvider>
-    </div>
   );
 }
 

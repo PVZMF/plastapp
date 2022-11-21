@@ -6,21 +6,23 @@ import { Typography } from "@mui/material";
 
 // Styling
 import "swiper/css";
-import "swiper/css/pagination";
+import "swiper/css/navigation";
 import './styles.css'
 
 // Components
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 import { FlexMainSuggested } from "./styledMainSuggested";
+import AllProductsSlide from "../AllProductCart/AllProductsSlide"
 // import { getAllSuggested, mainSuggestedProducts } from "./mainSuggestedSlice";
 
 // Assets
 import bannerImg from "../../../assets/imgs/offer-banner.jpg";
 import SlideSuggested from "./slideSuggested";
-
+import { Navigation } from "swiper";
 
 // import { MAIN_SUGGESTED_PRODUCTS } from "../../../../service/homeService";
 // import { HomeLan } from "../../../../json/language/fa";
+import AllProducts from '../AllProductCart/AllProductsSlide';
 
 
 
@@ -54,9 +56,13 @@ const MainSuggestedComponent = ({ title }) => {
           }}
           spaceBetween={10}
           className="custom_swiper"
+
+          navigation={true}
+          modules={[Navigation]}
         >
+          <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg} alt=""/></SwiperSlide>
           <SwiperSlide className="slide custom-slide">
-          <img className="slide-banner" src={bannerImg} alt=""/>
+            <img className="slide-banner" src={bannerImg} alt="" />
           </SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">
             <SlideSuggested />
@@ -84,6 +90,9 @@ const MainSuggestedComponent = ({ title }) => {
           </SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">
             <SlideSuggested />
+          </SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide">
+            <AllProductsSlide />
           </SwiperSlide>
         </Swiper>
       </FlexMainSuggested>

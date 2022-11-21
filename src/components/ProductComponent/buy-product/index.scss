@@ -1,0 +1,49 @@
+.buy-product-container {
+  margin-top: 20px;
+  padding: 20px;
+  width: 400px;
+  background-color: #fff;
+  @media screen and (max-width: 1120px) {
+    width: 800px;
+    max-width: 90vw;
+  }
+
+  .buy-product-information {
+    display: flex;
+    border-bottom: 2px solid #9999999a;
+
+    div {
+      margin-bottom: 10px;
+      width: calc(100% / 3);
+      border-right: 2px solid #9999999a;
+    }
+
+    h3 {
+      color: #444;
+    }
+
+    h3,
+    p {
+      margin-bottom: 3px;
+      direction: rtl;
+      font-size: 17px;
+      text-align: center;
+    }
+  }
+
+  .buy-product-price {
+    padding: 9px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    direction: rtl;
+  }
+
+  .buy-product-buy-button {
+    button {
+      font-size: 17px;
+      background-color: #69a9ff;
+      color: #fff;
+    }
+  }
+}
