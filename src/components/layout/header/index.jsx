@@ -1,10 +1,11 @@
 // Modules
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 //mui components---------------------
 import { IconButton } from "@mui/material";
 import { styled } from "@mui/material";
+import { Box } from '@mui/material';
 //mui icons--------------------------
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
@@ -23,48 +24,72 @@ import { navLan } from "../../../json/language/fa";
 import { GlobalButton } from "../../../global/styles/GlobalButton";
 import { globalCssVar } from "../../../global/styles/globalStyles";
 import { GlobalContainer } from "../../../global/styles/globalContainer";
-
-const MainMenuButton = styled(IconButton)({
-  fontSize: "2.5rem",
-  backgroundColor: "var(--light-blue)",
-  color: "#121212",
-});
+import bannerImg from "../../../assets/imgs/header_1.jpg"
+// api
+import { getAllBanners } from "../../../api/api"
 
 
 const Header = ({ isOpenDrawer, setOpenDrawer }) => {
+  const [banners, setBanners] = useState([]);
+
+  useEffect(() => {
+    // setLoading(true);
+    Promise.all([getAllBanners()])
+      .then((results) => {
+        setBanners(results[0].data);
+      })
+      .finally(() => {
+        // setLoading(false);
+      });
+  }, []);
 
   return (
-    <StyledNav>
-      <GlobalContainer>
-        <FlexNavContainer>
-          <MainMenuButton
-            onClick={() => setOpenDrawer((old) => !old)}
-            onBlur={() => setOpenDrawer(false)}>
-            {isOpenDrawer?
-            <CloseIcon fontSize="inherit"/>:<MenuIcon fontSize="inherit" />
-            }
+    <Box position={"fixed"} top="0" zIndex={50}>
+      <Box position={"relative"} display={"block"} zIndex={"100"} top={0}>
+        {/* banners.header_banner */}
+        <img src={bannerImg} alt="" sx={{ Object: "cover" }} />
+      </Box>
+      <StyledNav>
+          <FlexNavContainer>
+            <IconButton
+              sx={{
+                fontSize: "2.5rem",
+                backgroundColor: "var(--light-blue)",
+                color: "#121212",
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpenDrawer((old) => !old)
+              }}>
 
-          </MainMenuButton>
-          <StyledNavLogo>
-            <Link to="/">
-              <img src={imgLogo} alt="logo" />
-            </Link>
-          </StyledNavLogo>
-          <StyledNavLeftBar>
-            <GlobalButton color={globalCssVar.light_blue}>
-              {navLan.login_button}
-            </GlobalButton>
+              {isOpenDrawer ?
+                <CloseIcon fontSize="inherit" /> : <MenuIcon fontSize="inherit" />
+              }
 
-            <Link to="/cart">
-              <MainMenuButton>
-                <ShoppingBagOutlinedIcon fontSize="inherit" />
-              </MainMenuButton>
-            </Link>
-          </StyledNavLeftBar>
+            </IconButton>
+            <StyledNavLogo>
+              <Link to="/">
+                <img src={imgLogo} alt="logo" />
+              </Link>
+            </StyledNavLogo>
+            <StyledNavLeftBar>
+              <GlobalButton color={globalCssVar.light_blue}>
+                {navLan.login_button}
+              </GlobalButton>
 
-        </FlexNavContainer>
-      </GlobalContainer>
-    </StyledNav>
+              <Link to="/cart">
+                <IconButton sx={{
+                  fontSize: "2.5rem",
+                  backgroundColor: "var(--light-blue)",
+                  color: "#121212",
+                }}>
+                  <ShoppingBagOutlinedIcon fontSize="inherit" />
+                </IconButton>
+              </Link>
+            </StyledNavLeftBar>
+          </FlexNavContainer>
+      </StyledNav>
+    </Box>
   );
 };
 

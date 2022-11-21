@@ -2,8 +2,6 @@ import React from 'react';
 
 import { RouterProvider } from "react-router-dom";
 
-// componenets
-import Layout from "./components/layout";
 
 // style 
 import './App.css';
@@ -14,11 +12,9 @@ import Router from './routes/routes';
 function App() {
 
   return (
-    <div>
       <ThemeProvider theme={theme}>
         <RouterProvider router={Router} />
       </ThemeProvider>
-    </div>
   );
 }
 

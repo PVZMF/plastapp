@@ -2,13 +2,13 @@ import axios from "axios";
 import { handleError } from "../global/funcs/handleError";
 
 export const BASE_URL = "https://plastapp.iran.liara.run";
-
+export const base_api_url = "https://loving-mclean-ge7ettxvd.iran.liara.run";
 export const ALL_PRODUCTS = { url: "products", method: "get" };
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-const callApi = (service, query = "") => {
+const callApi = async(service, query = "") => {
   const promise = new Promise((resolve, reject) => {
     axios[service.method](`${service.url}/${query}`, {})
       .then((res) => {

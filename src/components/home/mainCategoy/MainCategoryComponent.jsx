@@ -1,5 +1,5 @@
 // Modules
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ import { Typography } from "@mui/material";
 //   getAllCategories,
 //   mainCategories,
 // } from "./mainCategorySlice";
-
+import {getCategories} from "../../../api/api"
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 import { HomeLan } from "../../../json/language/fa";
 // import { MAIN_CATEGORIES } from "../../../service/homeService";
@@ -37,37 +37,33 @@ const MainCategoryComponent = () => {
   //   }
   // }, [state.length, dispatch]);
 
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    Promise.all([getCategories()])
+      .then((results) => {
+        setCategories(results[0]);
+      })
+      .finally(() => {
+      });
+  }, []);
+
   return (
     <GlobalContainer style={{ padding: "30px 0px" }}>
       <Typography component="h2" variant="h2" textAlign="center" marginY={4}>
         {HomeLan.mainCategory_Title}
       </Typography>
       <FlexMainCateogry>
-        {/* {status === "loading" ? <SkeltonLoader /> : null} */}
-        {/* {state.map((item) => {
-          return ( */}
+        {categories.map((item) => {
+          return (
             <div className="category_box">
               <Link to={`/category/item.id`} className="category_box--link">
-                <img src={Logo1} alt="" className="category_box--img" />
+                <img src={item.logo} alt="" className="category_box--img" />
               </Link>
             </div>
-            <div className="category_box">
-              <Link to={`/category/item.id`} className="category_box--link">
-                <img src={Logo2} alt="" className="category_box--img" />
-              </Link>
-            </div>
-            <div className="category_box">
-              <Link to={`/category/item.id`} className="category_box--link">
-                <img src={Logo3} alt="" className="category_box--img" />
-              </Link>
-            </div>
-            <div className="category_box">
-              <Link to={`/category/item.id`} className="category_box--link">
-                <img src={Logo4} alt="" className="category_box--img" />
-              </Link>
-            </div>
-          {/* );
-        })} */}
+          )
+        })
+      }
       </FlexMainCateogry>
     </GlobalContainer>
   );
