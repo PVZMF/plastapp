@@ -15,13 +15,13 @@ const SideBarListItem = (props) => {
 
   const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setOpen((old) => !old);
   };
   if (props.childrenItems)
     return (
       <>
-        <ListItemButton onClick={handleClick}>
+        <ListItemButton onClick={(e) => handleClick(e)}>
           <ListItemIcon sx={{ color: "#69a8ff", minWidth: "auto", flexGrow: "0", ml: 2 }}>{props.icon}</ListItemIcon>
           <ListItemText sx={{ flexGrow: "0", '& span': { fontSize: "1.7rem" } }} primary={props.label} />
           {open ? <ExpandLess /> : <ExpandMore />}

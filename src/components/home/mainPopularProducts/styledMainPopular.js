@@ -8,6 +8,7 @@ export const FlexMainPopular = styled.div`
   background-color: rgb(105, 168, 255);
 
   .custom_swiper {
+    font-family: swiper-icons;
     flex-basis: 80%;
     height: 100%;
     .swiper-pagination-bullet {

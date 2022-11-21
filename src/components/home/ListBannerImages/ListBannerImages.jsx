@@ -7,7 +7,7 @@ import { GlobalBannerContainer } from '../../../global/styles/GlobalBannerContai
 const ListBannerImages = ({ ListImg }) => {
     return (
         <GlobalBannerContainer>
-            <Grid container sx={{flexDirection:{sx:"column", md:"row"}}} flexWrap="nowrap" gap={1}  width="100%" margin={"15px auto"} >
+            <Grid container sx={{flexDirection:{xs:"column", md:"row"}}} flexWrap="nowrap" gap={1}  width="100%" margin={"15px auto"} >
                 {ListImg.map(item => {
                     return (
                         <Grid item md={3} xs={12}>

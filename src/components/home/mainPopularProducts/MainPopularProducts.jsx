@@ -53,8 +53,8 @@ const MainPopularComponent = ({ }) => {
           }}
           spaceBetween={10}
           navigation={true}
-          modules={[Navigation]}
-          className="custom_swiper "
+          modules={Navigation}
+          className="custom_swiper"
         >
           <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg1} alt=""/></SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>

@@ -7,6 +7,7 @@ import { ClickAwayListener } from '@mui/base';
 
 function handleOutSide(e, setOpenDrawer) {
     setOpenDrawer(false);
+    e.stopPropagation();
 }
 const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
     return (
