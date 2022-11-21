@@ -7,6 +7,7 @@ import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
 import { useState } from "react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 
@@ -21,28 +22,33 @@ const SideBarListItem = (props) => {
     return (
       <>
         <ListItemButton onClick={handleClick}>
-          <ListItemIcon sx={{color:"#69a8ff", minWidth:"auto",flexGrow:"0", ml:2 }}>{props.icon}</ListItemIcon>
-          <ListItemText sx={{flexGrow:"0",'& span':{fontSize:"2.2rem"}}} primary={props.label} />
+          <ListItemIcon sx={{ color: "#69a8ff", minWidth: "auto", flexGrow: "0", ml: 2 }}>{props.icon}</ListItemIcon>
+          <ListItemText sx={{ flexGrow: "0", '& span': { fontSize: "1.7rem" } }} primary={props.label} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {props.childrenItems.map((item, index) => (
-              <ListItemButton key={index}>
-                {/* <ListItemIcon sx={{color:"rgb(119, 119, 119)", minWidth:"auto",flexGrow:"0" }}> {item.icon}</ListItemIcon> */}
-                <ListItemText sx={{flexGrow:"0",'& span':{fontSize:"1.3rem"}, marginX:"40px",marginY:0, color:"rgb(119, 119, 119)"}} primary={item.label} />
-              </ListItemButton>
+              <Link to={item.link}>
+                <ListItemButton key={index}>
+                  {/* <ListItemIcon sx={{color:"rgb(119, 119, 119)", minWidth:"auto",flexGrow:"0" }}> {item.icon}</ListItemIcon> */}
+                  <ListItemText sx={{ flexGrow: "0", '& span': { fontSize: "1.2rem" }, marginX: "40px", marginY: 0, color: "rgb(119, 119, 119)" }} primary={item.label} />
+                </ListItemButton>
+              </Link>
             ))}
           </List>
         </Collapse>
       </>
     );
-else
+  else
     return (
-      <ListItemButton>
-        <ListItemIcon sx={{color:"#69a8ff", minWidth:"auto",flexGrow:"0", ml:2 }}>{props.icon}</ListItemIcon>
-        <ListItemText sx={{flexGrow:"0",'& span':{fontSize:"2.2rem"}}}>{props.label}</ListItemText>
-      </ListItemButton>
+      <Link to={props.link}>
+        {console.log(props.link)}
+        <ListItemButton>
+          <ListItemIcon sx={{ color: "#69a8ff", minWidth: "auto", flexGrow: "0", ml: 2 }}>{props.icon}</ListItemIcon>
+          <ListItemText sx={{ flexGrow: "0", '& span': { fontSize: "1.7rem" } }}>{props.label}</ListItemText>
+        </ListItemButton>
+      </Link>
     );
 };
 

@@ -30,7 +30,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
                 }}
             >
                 <List
-                    sx={{ width: 240, bgcolor: "background.paper" }}
+                    sx={{ width: 270, bgcolor: "background.paper" }}
                     component="nav"
                     aria-labelledby="nested-list-subheader"
                 >
@@ -39,6 +39,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
                             key={index}
                             label={item.title}
                             icon={item.icon}
+                            link= {item.link}
                             childrenItems={item.children ? item.children : ""}
                         />
                     ))}

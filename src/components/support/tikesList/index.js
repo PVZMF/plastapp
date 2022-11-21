@@ -47,7 +47,8 @@ const TikesListComponent = ({ list }) => {
               }
             }).map(item => {
               newitems.push(item)
-              return <Link to={`/support/ticketsList/${item.id}`} key={item.id} className='link-ticket'><Ticket item={item} /></Link>
+              {console.log(`/support/ticketsList/`+item.id)}
+              return <Link to={`/support/ticketsList/`+item.id} key={item.id} className='link-ticket'><Ticket item={item} /></Link>
             })}
 
             {/* {newitems.length === 0 && <div className='notFound'><h3>چیزی یافت نشد</h3></div>} */}

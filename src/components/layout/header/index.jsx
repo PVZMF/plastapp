@@ -55,52 +55,45 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
         <img src={bannerImg} alt="" sx={{ Object: "cover" }} />
       </Box>
       <StyledNav>
-          <FlexNavContainer>
-            <IconButton
-              sx={{
+        <FlexNavContainer>
+          <IconButton
+            sx={{
+              fontSize: "2.5rem",
+              backgroundColor: "var(--light-blue)",
+              color: "#121212",
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpenDrawer((old) => !old)
+            }}>
+
+            {isOpenDrawer ?
+              <CloseIcon fontSize="inherit" /> : <MenuIcon fontSize="inherit" />
+            }
+          </IconButton>
+
+          <StyledNavLogo>
+            <Link to="/">
+              <img src={imgLogo} alt="logo" />
+            </Link>
+          </StyledNavLogo>
+          <StyledNavLeftBar>
+            <GlobalButton color={globalCssVar.light_blue}>
+              {navLan.login_button}
+            </GlobalButton>
+
+            <Link to="/cart">
+              <IconButton sx={{
                 fontSize: "2.5rem",
                 backgroundColor: "var(--light-blue)",
                 color: "#121212",
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                setOpenDrawer((old) => !old)
               }}>
-
-              {isOpenDrawer ?
-                <CloseIcon fontSize="inherit" /> : <MenuIcon fontSize="inherit" />
-              }
-
-            <Link to="/cart">
-              <MainMenuButton>
                 <Badge badgeContent={state.itemsCounter} color="primary" className="badge"></Badge>
                 <ShoppingBagOutlinedIcon fontSize="inherit" />
-              </MainMenuButton>
+              </IconButton>
             </Link>
           </StyledNavLeftBar>
-
-            </IconButton>
-            <StyledNavLogo>
-              <Link to="/">
-                <img src={imgLogo} alt="logo" />
-              </Link>
-            </StyledNavLogo>
-            <StyledNavLeftBar>
-              <GlobalButton color={globalCssVar.light_blue}>
-                {navLan.login_button}
-              </GlobalButton>
-
-              <Link to="/cart">
-                <IconButton sx={{
-                  fontSize: "2.5rem",
-                  backgroundColor: "var(--light-blue)",
-                  color: "#121212",
-                }}>
-                  <ShoppingBagOutlinedIcon fontSize="inherit" />
-                </IconButton>
-              </Link>
-            </StyledNavLeftBar>
-          </FlexNavContainer>
+        </FlexNavContainer>
       </StyledNav>
     </Box>
   );
