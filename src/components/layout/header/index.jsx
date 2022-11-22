@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 //mui components---------------------
-import { Badge, IconButton } from "@mui/material";
+import { Badge, IconButton} from "@mui/material";
 import { styled } from "@mui/material";
 import { Box } from '@mui/material';
 //mui icons--------------------------
@@ -32,6 +32,14 @@ import bannerImg from "../../../assets/imgs/header_1.jpg"
 import { getAllBanners } from "../../../api/api"
 
 
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 5,
+    border: `1px solid ${theme.palette.background.paper}`,
+  },
+}));
+
 const Header = ({ isOpenDrawer, setOpenDrawer }) => {
   const [banners, setBanners] = useState([]);
 
@@ -51,14 +59,12 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
   return (
     <Box position={"fixed"} top="0" zIndex={50}>
       <Box position={"relative"} display={"block"} zIndex={"100"} top={0}>
-        {/* banners.header_banner */}
         <img src={bannerImg} alt="" sx={{ Object: "cover" }} />
       </Box>
       <StyledNav>
         <FlexNavContainer>
           <IconButton
             sx={{
-              fontSize: "2.5rem",
               backgroundColor: "var(--light-blue)",
               color: "#121212",
             }}
@@ -68,28 +74,34 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
             }}>
 
             {isOpenDrawer ?
-              <CloseIcon fontSize="inherit" /> : <MenuIcon fontSize="inherit" />
+              <CloseIcon sx={{ fontSize: { xs: "small", sm: "medium", md: "medium", lg: "large" } }} /> : <MenuIcon sx={{ fontSize: { xs: "small", md: "mediume", lg: "large" } }} />
             }
           </IconButton>
 
           <StyledNavLogo>
-            <Link to="/">
-              <img src={imgLogo} alt="logo" />
-            </Link>
+            <Box sx={{ width: { xs: "70px", sm: "100px", md: "120px", lg: "150px" } }}>
+              <Link to="/">
+                <img src={imgLogo} width="100%" alt="logo" />
+              </Link>
+            </Box>
           </StyledNavLogo>
           <StyledNavLeftBar>
-            <GlobalButton color={globalCssVar.light_blue}>
-              {navLan.login_button}
-            </GlobalButton>
-
+            <Box color={globalCssVar.light_blue} >
+              <IconButton width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
+                {navLan.login_button}
+              </IconButton>
+            </Box>
             <Link to="/cart">
               <IconButton sx={{
-                fontSize: "2.5rem",
                 backgroundColor: "var(--light-blue)",
                 color: "#121212",
+                fontSize: "10rem"
               }}>
-                <Badge badgeContent={state.itemsCounter} color="primary" className="badge"></Badge>
-                <ShoppingBagOutlinedIcon fontSize="inherit" />
+                <StyledBadge badgeContent={state.itemsCounter} color="secondary">
+                  <Badge color="primary" className="badge">
+                  </Badge>
+                </StyledBadge>
+                <ShoppingBagOutlinedIcon sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }} />
               </IconButton>
             </Link>
           </StyledNavLeftBar>

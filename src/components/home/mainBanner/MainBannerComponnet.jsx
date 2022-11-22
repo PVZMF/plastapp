@@ -16,21 +16,6 @@ import { GlobalBannerContainer } from "../../../global/styles/GlobalBannerContai
 const MainBannerComponnet = ({ start, end }) => {
   const [images, setImages] = useState([]);
 
-  // const getData = async () => {
-  //   const { data } = await callApi(MAIN_ADV_BANNERS);
-
-  //   let imagesArr = [];
-  //   for (let image in data) {
-  //     imagesArr.push(data[image]);
-  //   }
-
-  //   setImages(imagesArr);
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
   return (
     <GlobalBannerContainer className="bannerContainer">
       <FlexMainBanner>

@@ -50,7 +50,7 @@ const MainCategoryComponent = () => {
 
   return (
     <GlobalContainer style={{ padding: "30px 0px" }}>
-      <Typography component="h2" variant="h2" textAlign="center" marginY={4}>
+      <Typography component="h2" variant="h2" textAlign="center" marginY={4} fontSize="clamp(1.8rem, 3vw, 3rem)">
         {HomeLan.mainCategory_Title}
       </Typography>
       <FlexMainCateogry>

@@ -14,9 +14,9 @@ const HomeDownloadApp = () => {
         <Grid
           container
           justifyContent="space-between"
-          flexDirection="row-reverse"
           flexWrap="wrap"
           alignItems="center"
+          sx={{flexDirection:{sx:"column-reverse",md:"row-reverse"}}}
           // sx={contentStyles}
         >
           <LeftSection />

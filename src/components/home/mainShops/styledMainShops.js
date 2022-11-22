@@ -8,7 +8,7 @@ export const FlexMainShops = styled.div`
 
   .shop_box {
     flex-direction: column;
-    width: 120px;
+    width: 100%;
     padding: 15px;
     border: 1px solid hsl(220 3% 15% / 10%);
 

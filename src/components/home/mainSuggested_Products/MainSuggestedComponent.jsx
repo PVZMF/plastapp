@@ -18,11 +18,12 @@ import AllProductsSlide from "../AllProductCart/AllProductsSlide"
 // Assets
 import bannerImg from "../../../assets/imgs/offer-banner.jpg";
 import SlideSuggested from "./slideSuggested";
-import { Navigation } from "swiper";
+import { Navigation} from "swiper";
 
 // import { MAIN_SUGGESTED_PRODUCTS } from "../../../../service/homeService";
 // import { HomeLan } from "../../../../json/language/fa";
 import AllProducts from '../AllProductCart/AllProductsSlide';
+import { Autoplay } from 'swiper';
 
 
 
@@ -40,7 +41,7 @@ const MainSuggestedComponent = ({ title }) => {
 
   return (
     <GlobalContainer>
-      <Typography component="h2" variant="h2" textAlign="center" marginY={4}>
+      <Typography component="h2" variant="h2" textAlign="center" marginY={4} fontSize="clamp(1.8rem, 3vw, 3rem)">
         {title}
       </Typography>
 
@@ -56,9 +57,12 @@ const MainSuggestedComponent = ({ title }) => {
           }}
           spaceBetween={10}
           className="custom_swiper"
-
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
           navigation={true}
-          modules={[Navigation]}
+          modules={[Navigation,Autoplay]}
         >
           <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg} alt=""/></SwiperSlide>
           <SwiperSlide className="slide custom-slide">
