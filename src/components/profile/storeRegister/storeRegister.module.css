@@ -4,18 +4,17 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
-    background: #fff;
+    /* background: #fff; */
     padding: 2rem clamp(.5rem, 4vw, 4rem);
-    margin: 1rem;
+    /* margin: 1rem; */
 }
 
 .store .boxstore {
     width: 100%;
-    min-height: rgb(184, 184, 184);
-    background: #fff;
+    /* background: #fff; */
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-wrap: wrap;
     padding: 2rem clamp(.5rem, 2vw, 2rem);
 }
@@ -25,7 +24,7 @@
 }
 
 .store .boxinput .input {
-    max-width: 280px;
+    max-width: 230px;
     background: #fff;
     display: flex;
     align-items: center;
@@ -65,9 +64,13 @@
     z-index: 3;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
     .store .boxstore .boxinput .input input[type='file'] {
         max-width: 162px;
+    }
+    .store .boxstore .boxinput .input select {
+        max-width: 100%;
+        min-width: 162px;
     }
 }
 
@@ -86,7 +89,8 @@
     z-index: 1;
 }
 
-.store .boxstore .boxinput .input input[type='file']:hover {
+.store .boxstore .boxinput .input input[type='file']:hover,
+.store .boxstore .boxinput .input select:hover {
     cursor: pointer;
 }
 
@@ -97,4 +101,61 @@
     display: flex;
     align-items: center;
     color: #666;
+}
+
+.store .box_btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.store .box_btn button {
+    color: #fff;
+    background: rgb(25, 118, 210);
+    padding: clamp(.7rem, 1.4vw, 1.4rem) clamp(3rem, 6vw, 6rem);
+    border-radius: .7rem;
+    margin: 0 3rem 0 0;
+}
+
+
+.store .rules {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 3rem clamp(1rem, 3vw, 3rem) 0 0;
+}
+
+.store .rules p {
+    color: #333;
+    margin: 0 0 1rem 0;
+    font-weight: 100;
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+}
+
+.store .rules ul {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 0 2rem 0 0;
+}
+
+.store .rules ul li {
+    color: #333;
+    margin: 0 0 1rem 0;
+    font-weight: 100;
+    list-style-type: disc;
+    font-size: clamp(.7rem, 1.2vw, 1.2rem);
+}
+
+.store .rules h5 {
+    margin: 1rem 0 1rem 0;
+    color: #333;
+    font-weight: 100;
+    list-style-type: disc;
+    font-size: clamp(.65rem, 1.2vw, 1.2rem);
 }

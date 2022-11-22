@@ -1,4 +1,3 @@
-import Support from "../pages/support"
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout";
 import Home from "../pages/home";
@@ -19,7 +18,9 @@ import StoreRegistration from "../pages/StoreRegistration";
 import CreditPurches from '../pages/CreditPurches';
 import OrderPlace from "../pages/OrderPlace";
 import RulesConditon from "../pages/rule"
-import Detail_Product from "../pages/products/detail-product";
+import DetailProduct from "../pages/products/detailProduct";
+import OrdersPage from "../pages/profile/ordersPage";
+import ChequePage from "../pages/cheque";
 
 const Router = createBrowserRouter([
     {
@@ -32,7 +33,7 @@ const Router = createBrowserRouter([
           },
           {
             path: "/product/:id",
-            element: <Detail_Product />,
+            element: <DetailProduct />,
           },
           {
             path: "/support/ticketsList",
@@ -75,7 +76,7 @@ const Router = createBrowserRouter([
               {
                 path: "/profile/orders",
                   index: true,
-                  element: <h2>OrdersPage</h2>,
+                  element: <OrdersPage />,
               },
               {
                 path: "/profile/storregiser",
@@ -102,6 +103,10 @@ const Router = createBrowserRouter([
           {
             path: "rule",
             element: <RulesConditon/>
+          },
+          {
+            path: "cheque",
+            element: <ChequePage/>
           }
         ]
     },

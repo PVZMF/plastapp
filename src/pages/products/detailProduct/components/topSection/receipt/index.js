@@ -10,11 +10,10 @@ const Receipt = ({ image_profile, name_profile, shop_profile, number_product }) 
     const off = 1000000;
 
     const total = price - off;
-    const number = 2;
   return (
     <FlexMainReceipt>
         <div className='top-receipt'>
-            <h5 className='title'>غرفه‌دار</h5>
+            <h5 className='title'>فروشگاه</h5>
             
             <div className='profile'>
                 <img src={image_profile} alt={name_profile} />
@@ -38,8 +37,8 @@ const Receipt = ({ image_profile, name_profile, shop_profile, number_product }) 
                     <h4>خراسان رضوی</h4>
                 </div>
                 <div className='send-box'>
-                    <h5>ارسال غرفه‌دار</h5>
-                    <h4>از 3 روز دیگر</h4>
+                    <h5>ارسال از فروشگاه</h5>
+                    <h4>3 روز دیگر</h4>
                 </div>
                 <div className='send-box'>
                     <h5>فروش محصول</h5>

@@ -7,7 +7,7 @@ const Select = ({ childern, classname, title, onChange, items }) => {
           <option>{title}</option>
 
           {items?.map((item, index) => (
-            <option key={index} value={item.id}>{item.name}</option>
+            <option key={index} value={item.name}>{item.name}</option>
         ))}
       </select>
         <span>{childern}</span>

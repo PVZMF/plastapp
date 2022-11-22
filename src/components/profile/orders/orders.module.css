@@ -1,0 +1,174 @@
+.orders {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 2rem clamp(.5rem, 4vw, 4rem);
+}
+
+.orders .boxOrder {
+    width: 100%;
+    min-height: 70vh;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background: #fff;
+    padding: 2rem;
+}
+
+.orders .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #f0f0f0;
+}
+
+@media (max-width: 900px) {
+    .orders .boxOrder {
+        max-width: 500px;
+    }
+}
+@media (max-width: 750px) {
+    .orders .header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .orders .searchbox {
+        margin: 0 0 1.5rem 0;
+    }
+}
+
+.orders .searchbox {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: .7rem;
+    height: clamp(1.5rem, 5vh, 5rem);
+    overflow: hidden;
+    padding: 0 .5rem;
+    width: 100%;
+    max-width: 200px;
+}
+
+.orders .searchbox span {
+    display: flex;
+    align-items: center;
+    font-size: clamp(1rem, 2vw, 2rem);
+    color: #555;
+}
+
+.orders .searchbox input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+}
+
+.orders .items {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.orders .items .item {
+    display: flex;
+    align-items: center;
+}
+
+.orders .items .item span {
+    color: #fff;
+    width: clamp(2rem, 4vw, 4rem);
+    height: clamp(2rem, 4vw, 4rem);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 1.6vw, 1.6rem);
+}
+
+.orders .items .item:nth-child(1) span {
+    background: #999;
+}
+.orders .items .item:nth-child(2) span {
+    background: rgb(223, 70, 70);
+}
+.orders .items .item:nth-child(3) span {
+    background: rgb(57, 235, 44);
+}
+.orders .items .item:nth-child(4) span {
+    background: rgb(67, 137, 221);
+}
+
+.orders .items .item h5 {
+    color: #333;
+    font-weight: 100;
+    font-size: clamp(.8rem, 1.2vw, 1.2rem);
+    margin: 0 .5rem;
+}
+
+
+.orders .boxtable {
+    margin: 2rem 0 0;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.orders .boxtable table {
+    width: 100%;
+    min-width: 600px;
+    border-spacing: 0;
+}
+
+.orders .boxtable table thead th {
+    border-bottom: 1px solid #888;
+    background-color: rgb(214, 214, 214);
+    padding: 0 1rem;
+}
+.orders .boxtable table thead th h4 {
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+    font-weight: 100;
+    color: #000;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.orders .boxtable table thead th:first-child h4,
+.orders .boxtable table tbody tr td:first-child h3 {
+    text-align: start;
+}
+
+.orders .boxtable table tbody tr td {
+    padding: 0 1rem;
+    border-bottom: 1px solid #888;
+}
+
+.orders .boxtable table tbody tr td h3 {
+    padding: clamp(.8rem, 1.5vw, 1.5rem) 0;
+    color: #222;
+    font-weight: 100;
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+    text-align: center;
+}
+
+.orders .boxtable table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.orders .boxtable table tbody tr td .itis {
+    color: rgb(25, 118, 210);
+}
+
+.orders .boxtable table tbody tr td .noting {
+    color: rgb(244, 33, 33);
+}

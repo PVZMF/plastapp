@@ -4,7 +4,7 @@ import { FlexDownCart } from './styledDownCart'
 import Product from '../../../../../assets/imgs/pesteh.jpg';
 import Product2 from '../../../../../assets/imgs/shalwar.jpg';
 
-const DownMainCart = ({ list }) => {
+const DownMainCart = ({ listProducts }) => {
     const ListSugg = [];
   return (
     <FlexDownCart>
@@ -18,7 +18,7 @@ const DownMainCart = ({ list }) => {
 
         <div className='list-suggestion'>
             <div className='box-list'>
-                {list.map(item => {
+                {listProducts?.map(item => {
                     ListSugg.push(item)
                     if(ListSugg.length <= 6) {
                         return (<CardProduct key={item.id + "plastapp"} item={item} />)
@@ -33,7 +33,7 @@ const DownMainCart = ({ list }) => {
 export default DownMainCart;
 
 DownMainCart.defaultProps = {
-    list: [
+    listProducts: [
       {
         id: 1,
         title: "مغز  پسته مناسب مصارف قنادی و ... با ارسال رایگان(500 گرمی)",

@@ -5,7 +5,7 @@ import DownSection from './components/downSection'
 
 import { FlexDetailProduct } from './styledDetail'
 
-const Detail_Product = () => {
+const DetailProduct = () => {
   return (
     <FlexDetailProduct>
         <TopSection />
@@ -15,4 +15,4 @@ const Detail_Product = () => {
   )
 }
 
-export default Detail_Product
+export default DetailProduct

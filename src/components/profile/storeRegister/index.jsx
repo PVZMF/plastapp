@@ -17,13 +17,12 @@ const StoreRegister = ({ states, citys }) => {
     const AllCity = (id) => {
         citys.map(item => {
             if(item.active === id){
-                console.log(item)
                 setCity(item.list)
             }
         })
     };
 
-    console.log(citys)
+    console.log(city)
 
   return (
     <div className={style.store}>
@@ -59,11 +58,26 @@ const StoreRegister = ({ states, citys }) => {
                 <Input classname={style.input} childern={<TbCertificate />} placeholder="* کد آیسیک پروانه کسب" />
             </div>
             <div className={style.boxinput}>
-                <Select classname={style.input} title="* استان" items={states} onChange={(event) => AllCity(event)} />
+                <Select classname={style.input} title="* استان" items={states} onChange={(e) => AllCity(e.target.value)} />
             </div>
             <div className={style.boxinput}>
                 <Select classname={style.input} title="* شهر" items={city} />
             </div>
+        </div>
+
+        <div className={style.box_btn}>
+            <button>تایید</button>
+        </div>
+
+        <div className={style.rules}>
+            <p>فروشنده محترم:</p>
+            <ul>
+                <li>پروانه کسب باید حتما به نام شخص ثبت نام کننده باشد.</li>
+                <li>شماره شبای بانکی باید حتما به نام شخص ثبت نام کننده باشد.</li>
+                <li>عکس های ارسالی حتما باید واضح و خوانا باشد.</li>
+            </ul>
+
+            <h5>درصورت عدم رعایت موارد فوق امکان تایید از سمت پلاست اپ وجود نخواهد داشت .</h5>
         </div>
     </div>
   )
@@ -92,7 +106,7 @@ StoreRegister.defaultProps = {
     citys: [
         {
             id: 11,
-            active: 1,
+            active: 'تهران',
             list: [
                 {
                     id: 21,
@@ -106,7 +120,7 @@ StoreRegister.defaultProps = {
         },
         {
             id: 12,
-            active: 2,
+            active: 'خراسان',
             list: [
                 {
                     id: 31,
@@ -120,7 +134,7 @@ StoreRegister.defaultProps = {
         },
         {
             id: 13,
-            active: 3,
+            active: 'اصفهان',
             list: [
                 {
                     id: 41,

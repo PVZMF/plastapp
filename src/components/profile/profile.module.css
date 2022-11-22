@@ -13,7 +13,7 @@
     color: #333;
     font-size: clamp(2rem, 4vw, 4rem);
     overflow: hidden;
-    padding: 2rem 0;
+    padding: 0;
 }
 .profile .sidebarSection {
     position: relative;
@@ -33,10 +33,15 @@
     flex-direction: column;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
+    .profile {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
     .profile .sidebarSection {
         width: 0 !important;
         overflow: hidden;
+        display: none;
     }
     .profile .open {
         width: 3rem!important;
