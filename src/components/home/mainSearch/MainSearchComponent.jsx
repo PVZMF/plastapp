@@ -10,6 +10,7 @@ import { GlobalContainer } from "../../../global/styles/globalContainer";
 import { GlobalButton } from "../../../global/styles/GlobalButton";
 
 import { globalCssVar } from "../../../global/styles/globalStyles";
+import { TextField } from "@mui/material";
 
 const MainSearchComponent = () => {
   return (
@@ -26,11 +27,12 @@ const MainSearchComponent = () => {
                 className="search_box--button d_flex--1"
                 color={globalCssVar.light_blue}
               >
-                <LocationOnOutlinedIcon fontSize="large" />
+                <LocationOnOutlinedIcon />
                 {HomeLan.search_input_button}
               </GlobalButton>
 
-              <input className="search_box--input" type="text" placeholder={HomeLan.search_placeHolder}/>
+              <input  className="search_box--input" type="text" placeholder={HomeLan.search_placeHolder} />
+          
             </div>
 
             <GlobalButton

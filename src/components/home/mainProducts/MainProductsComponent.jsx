@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
+import { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
@@ -34,7 +34,7 @@ const MainProductsComponent = ({ title }) => {
 
   return (
     <GlobalContainer>
-      <Typography component="h2" variant="h2" textAlign="center" marginY={4}>
+      <Typography component="h2" variant="h2" textAlign="center" marginY={4} fontSize="clamp(1.5rem, 3vw, 3rem)">
         {title}
       </Typography>
 
@@ -48,10 +48,14 @@ const MainProductsComponent = ({ title }) => {
               slidesPerView: 4
             }
           }}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
           slidesPerView={4}
           spaceBetween={25}
           navigation={true}
-          modules={[Navigation]}
+          modules={[Navigation,Autoplay]}
           className="custom_swiper "
         >
           <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg} alt=""/></SwiperSlide>

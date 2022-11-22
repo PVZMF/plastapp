@@ -33,21 +33,24 @@ export const FlexMainSearch = styled.div`
       width: 80%;
       border: 1px solid transparent;
       border-radius: var(--border-radius) 0 0 var(--border-radius);
+      font-size: clamp(0.5rem, 2vw, 1.5rem);
       &:focus {
         border-color: var(--primary-blue);
-      }
+      };
     }
 
+    .search_box--input::placeholder {
+      font-size: clamp(0.5rem, 2vw, 1.5rem);
+    } 
     .search_box--button {
-      font-size: 1.4rem;
       width: 20%;
+      padding: 7px 20px;
       gap: 5px;
       border-radius: 0px;
     }
 
     .search_box--submit {
       background-color: var(--primary-blue);
-      font-size: 1.6rem;
       color: var(--primary-white);
       width: 20%;
       border-radius: var(--border-radius);

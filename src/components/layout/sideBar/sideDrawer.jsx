@@ -4,12 +4,16 @@ import List from "@mui/material/List";
 import SideBarListItem from "./SideBarListItem";
 import sidebarItems from "./sidebarItems";
 import { ClickAwayListener } from '@mui/base';
+import { useEffect,useState } from 'react';
+
 
 function handleOutSide(e, setOpenDrawer) {
     setOpenDrawer(false);
     e.stopPropagation();
 }
 const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
+
+
     return (
 
         <ClickAwayListener onClickAway={(e) => handleOutSide(e, setOpenDrawer)} >
@@ -20,7 +24,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
                 marginTop="100px"
 
                 sx={{
-                    width: isOpenDrawer ? 200 : 0,
+                    width: isOpenDrawer ? 100 : 0,
                     flexShrink: 0,
                     [`& .MuiPaper-root`]: {
                         position: "fixed",
@@ -31,7 +35,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
                 }}
             >
                 <List
-                    sx={{ width: 270, bgcolor: "background.paper" }}
+                    sx={{ width:{xs:170,md:240,lg:270}, bgcolor: "background.paper" }}
                     component="nav"
                     aria-labelledby="nested-list-subheader"
                 >
@@ -42,6 +46,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
                             icon={item.icon}
                             link= {item.link}
                             childrenItems={item.children ? item.children : ""}
+                            isOpenDrawer={isOpenDrawer}
                         />
                     ))}
                 </List>

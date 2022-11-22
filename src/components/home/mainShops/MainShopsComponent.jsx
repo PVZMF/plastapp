@@ -19,7 +19,7 @@ import "swiper/css/pagination";
 const MainShopsComponent = ({ title, state }) => {
   return (
     <GlobalContainer>
-      <Typography component="h2" variant="h2" textAlign="center" marginY={4}>
+      <Typography component="h2" variant="h2" textAlign="center" marginY={4} fontSize="clamp(1.5rem, 3vw, 3rem)">
         {title}
       </Typography>
       <FlexMainShops>
