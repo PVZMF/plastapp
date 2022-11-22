@@ -73,18 +73,20 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
           </IconButton>
 
           <StyledNavLogo>
-            <Link to="/">
-              <img src={imgLogo} alt="logo" />
-            </Link>
+            <Box sx={{ width: { xs: "small", md: "medium", lg: "large" } }}>
+              <Link to="/">
+                <img src={imgLogo} alt="logo" fontSize="5px" />
+              </Link>
+            </Box>
           </StyledNavLogo>
           <StyledNavLeftBar>
-            <GlobalButton color={globalCssVar.light_blue}>
-              {navLan.login_button}
-            </GlobalButton>
-
+            <Box color={globalCssVar.light_blue} sx={{ fontSize: { xs: "3px", md: "15px", lg: "20px" } }}>
+              <IconButton>
+                {navLan.login_button}
+              </IconButton>
+            </Box>
             <Link to="/cart">
               <IconButton sx={{
-                fontSize: "2.5rem",
                 backgroundColor: "var(--light-blue)",
                 color: "#121212",
               }}>

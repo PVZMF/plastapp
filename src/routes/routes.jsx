@@ -1,4 +1,3 @@
-import Support from "../pages/support"
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/layout";
 import Home from "../pages/home";
@@ -20,6 +19,7 @@ import CreditPurches from '../pages/CreditPurches';
 import OrderPlace from "../pages/OrderPlace";
 import RulesConditon from "../pages/rule"
 import Detail_Product from "../pages/products/detail-product";
+import SideBar from "../components/sideBar/sideBar"
 
 const Router = createBrowserRouter([
     {
@@ -102,7 +102,12 @@ const Router = createBrowserRouter([
           {
             path: "rule",
             element: <RulesConditon/>
-          }
+          },
+          {
+            path: "AllProduct",
+            element: <SideBar/>
+          },
+          
         ]
     },
     {

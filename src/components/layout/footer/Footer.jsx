@@ -31,7 +31,7 @@ const Footer = () => {
           </Link>
         </li>
         <li className="footer_menu--item">
-          <Link to={`about-us`}>
+          <Link to={`support`}>
             {HomeLan.footerFirstRowThirdColumn_title}
           </Link>
         </li>
