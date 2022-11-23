@@ -12,12 +12,6 @@ import NewTicket from "../pages/support/newTicket";
 import TicketPage from "../pages/support/ticketsList/TicketPage";
 import MyProductsPage from "../pages/profile/myProducts";
 import StoreRegisterPage from "../pages/profile/storeRegister";
-
-// import login from "../pages/login/loginForm";
-import StoreRegistration from "../pages/StoreRegistration";
-import CreditPurches from '../pages/CreditPurches';
-import OrderPlace from "../pages/OrderPlace";
-import RulesConditon from "../pages/rule"
 import OrdersPage from "../pages/profile/ordersPage";
 import ChequePage from "../pages/cheque";
 import SideBar from "../components/sideBar/sideBar"
@@ -25,6 +19,13 @@ import ClubPage from "../pages/club";
 import DetailProductPage from "../pages/products/detailProduct";
 import BlogPage from "../pages/blog";
 import DetailBlogPage from "../pages/blog/detailBlog";
+import Career_Opportunity_Page from "../pages/career_Opportunity";
+
+// import login from "../pages/login/loginForm";
+import StoreRegistration from "../pages/StoreRegistration";
+import CreditPurches from '../pages/CreditPurches';
+import OrderPlace from "../pages/OrderPlace";
+import RulesConditon from "../pages/rule"
 
 const Router = createBrowserRouter([
     {
@@ -127,6 +128,10 @@ const Router = createBrowserRouter([
           {
             path: "blog/:id",
             element: <DetailBlogPage />
+          },
+          {
+            path: "career_opportunity",
+            element: <Career_Opportunity_Page />
           },
           
         ]

@@ -1,0 +1,184 @@
+.jobs {
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 3rem clamp(1rem, 3vw, 3rem);
+}
+
+.jobs .title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem 0;
+}
+
+.jobs .title h3 {
+    color: #333;
+    font-size: clamp(1.3rem, 2vw, 2rem);
+}
+
+.jobs .jobsBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.jobs .jobsBox .imageBox {
+    width: 50%;
+}
+
+.jobs .jobsBox .imageBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.jobs .jobsBox .formBox {
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 0 2rem;
+}
+
+.jobs .jobsBox .formBox p {
+    color: #444;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    text-align: justify;
+}
+
+.jobs .jobsBox .formBox hr {
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.jobs .jobsBox .formBox form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 2rem 0 0 0;
+}
+
+.jobs .jobsBox .formBox form .inputBox {
+    width: 100%;
+    max-width: 20rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.jobs .jobsBox .formBox form .inputBox label,
+.jobs .jobsBox .formBox form .selectbox label {
+    color: #444;
+    font-weight: 300;
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+}
+
+.jobs .jobsBox .formBox form .inputBox .input {
+    position: relative;
+    width: 100%;
+    height: clamp(3rem, 4vw, 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #888;
+    border-radius: .5rem;
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+
+.jobs .jobsBox .formBox form .inputBox .input input,
+.jobs .jobsBox .formBox form .selectbox select {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: #222;
+    font-weight: 300;
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+}
+.jobs .jobsBox .formBox form .selectbox select:hover {
+    cursor: pointer;
+}
+
+.jobs .jobsBox .formBox form .inputBox .input input[type='file'] {
+    opacity: 0;
+    z-index: 3;
+}
+
+.jobs .jobsBox .formBox form .inputBox .input input[type='file']:hover {
+    cursor: pointer;
+}
+
+.jobs .jobsBox .formBox form .inputBox .input span {
+    color: #444;
+    font-size: clamp(1.4rem, 1.7vw, 1.7rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 .5rem;
+}
+
+.jobs .jobsBox .formBox form .inputBox .input h5 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: .7rem;
+    z-index: 2;
+}
+
+.jobs .jobsBox .formBox form .selectbox {
+    width: 100%;
+    max-width: 20rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1.5rem 0;
+}
+
+.jobs .jobsBox .formBox form .selectbox select {
+    position: relative;
+    width: 100%;
+    height: clamp(3rem, 4vw, 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #888;
+    border-radius: .5rem;
+    overflow: hidden;
+    margin: .7rem 0;
+}
+
+.jobs .jobsBox .formBox form button {
+    width: 100%;
+    max-width: 200px;
+    color: #fff;
+    background: rgb(45, 96, 191);
+    padding: 1rem 0;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jobs .jobsBox .formBox form button:hover {
+    cursor: pointer;
+}
