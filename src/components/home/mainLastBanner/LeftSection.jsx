@@ -10,7 +10,7 @@ import baazar from "../../../assets/imgs/lastBannerImgs/get-from-baazar.webp";
 
 const LeftSection = () => {
   return (
-      <Grid container spacing={2} justifyContent={"center"} justifyItems={"center"}>
+      <Grid container spacing={1} justifyContent={"center"} justifyItems={"center"}>
         <Grid item xs={4} lg={2}>
           <img src={sibche} alt="get-from-googleplay" height="100%" />
         </Grid>

@@ -4,6 +4,8 @@ import List from "@mui/material/List";
 import SideBarListItem from "./SideBarListItem";
 import sidebarItems from "./sidebarItems";
 import { ClickAwayListener } from '@mui/base';
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 
 function handleOutSide(e,isOpenDrawer, setOpenDrawer) {
@@ -12,9 +14,12 @@ function handleOutSide(e,isOpenDrawer, setOpenDrawer) {
         e.preventDefault();
     }
 }
+
+
 const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
-
-
+    useEffect(() => {
+        setOpenDrawer(false);
+      }, [useLocation().pathname]);
     return (
 
         <ClickAwayListener onClickAway={(e) => handleOutSide(e, isOpenDrawer,setOpenDrawer)} >

@@ -8,7 +8,7 @@ import List from "@mui/material/List";
 import { useState,useEffect } from "react";
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 
 
 const SideBarListItem = (props) => {
@@ -19,7 +19,6 @@ const SideBarListItem = (props) => {
       useEffect(() => {
         if(props.isOpenDrawer)setOpen(false);
       }, [props.isOpenDrawer]);
-
 
   if (props.childrenItems)
     return (

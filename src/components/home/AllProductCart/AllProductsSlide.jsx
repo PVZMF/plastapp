@@ -7,7 +7,7 @@ const AllProductsSlide = ({link}) => {
   return (
     <Box display={"flex"} justifyContent={"center"} alignItems={"center"} height="100%" textAlign={"center"} >
       <Link to={link}>
-        <Typography variant='h3' color="blue" >
+        <Typography variant='h3' color="blue" fontSize={"clamp(0.5rem,3vw,2rem)"} >
           نمایش تمام محصولات
         </Typography>
       </Link>

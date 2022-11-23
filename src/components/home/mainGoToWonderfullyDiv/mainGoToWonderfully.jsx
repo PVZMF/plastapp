@@ -38,11 +38,17 @@ const MainGoToWonderfully = () => {
     },
   }));
   return (
-    <Grid display={"flex"} gap={1} justifyContent={"space-around"} alignItems={"center"}>
-      <Grid container flexDirection={"row"}>
+    <Grid 
+     display={"flex"}
+     gap={1} 
+     justifyContent={"space-around"} 
+     alignItems={"center"}
+     sx={{flexDirection:{xs:"column", md:"row"}}}
+     >
+      <Grid container flexDirection={"row"} alignItems={"center"}  justifyContent={"flex-start"}>
         {state.map((item, i) => {
           return (
-            <Grid display={"flex"} xs={6} alignSelf={"center"} justifyContent={"center"} key={i} >
+            <Grid display={"flex"} xs={4} md={6} key={i} >
               <NavLink to={`/product/productid`}>
                 <ImageTag src={item} alt="product" />
               </NavLink>
@@ -50,9 +56,9 @@ const MainGoToWonderfully = () => {
           );
         })}
       </Grid>
-      <Grid Item bgcolor={"white"} padding={1} borderRadius={"10px"} sx={{ marginTop: { xs: 2, md: 0 } }} color="#3ead07">
+      <Grid Item  bgcolor={"white"} padding={1} borderRadius={"10px"} sx={{ marginTop: { xs: 2, md: 0 } }} color="#3ead07">
         <NavLink to={`/product`}>
-          <Typography sx={{ fontSize: { xs: "15px", md: "15px" } }} textAlign={"center"}>
+          <Typography fontSize="clamp(0.5rem,3vw,1.5rem)" textAlign={"center"}>
             {HomeLan.mainWonderfullyDiscountProducts_title}
             <br />
             {HomeLan.mainWonderfullyDiscountProducts_title_continue}

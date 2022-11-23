@@ -10,10 +10,10 @@ const HomeDownloadApp = () => {
     <FlexMainDiv>
       <Grid className="container">
         <Grid container  >
-          <Grid item xs={6} >
+          <Grid item xs={8} md={6}>
             <LeftSection />
           </Grid>
-          <Grid item xs={6} >
+          <Grid item xs={4} md={6}>
             <RightSection />
           </Grid>
         </Grid>
