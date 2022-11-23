@@ -40,5 +40,9 @@ export async function getRulesConditon() {
   return res.data;
 }
 
+export async function loginUser(authData) {
+  const res = await api.post("account/login/", authData);
+  return res.data;
+}
 
 

@@ -57,7 +57,7 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
   const state = useSelector(state => state.cartState);
 
   return (
-    <Box position={"fixed"} top="0" zIndex={50}>
+    <Box position={"sticky"} top="0" zIndex={50}>
       <Box position={"relative"} display={"block"} zIndex={"100"} top={0}>
         <img src={bannerImg} alt="" sx={{ Object: "cover" }} />
       </Box>
@@ -88,7 +88,7 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
           </StyledNavLogo>
           <StyledNavLeftBar>
             <Box color={globalCssVar.light_blue} >
-              <IconButton width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
+              <IconButton href="/login" width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
                 {navLan.login_button}
               </IconButton>
             </Box>

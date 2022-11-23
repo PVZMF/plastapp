@@ -27,11 +27,17 @@ import CreditPurches from '../pages/CreditPurches';
 import OrderPlace from "../pages/OrderPlace";
 import RulesConditon from "../pages/rule"
 
+import Login from "../pages/login/Login"
+
 const Router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
         children :[
+          {
+            path:"/login",
+            element: <Login/>
+         },
           {
             index: true,
             element: <Home />,
@@ -90,9 +96,6 @@ const Router = createBrowserRouter([
               },
             ]
           },
-          {path: "login",
-            element: <div>d</div>
-          },
           {
             path: "OrderPlace",
             element: <OrderPlace/>
@@ -136,9 +139,7 @@ const Router = createBrowserRouter([
           
         ]
     },
-    {
-       
-    },
+    
 ]);
 
 export default Router
