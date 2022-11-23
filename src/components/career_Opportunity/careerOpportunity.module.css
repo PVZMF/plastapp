@@ -24,13 +24,16 @@
 .jobs .jobsBox {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     gap: 2rem;
 }
 
 .jobs .jobsBox .imageBox {
     width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .jobs .jobsBox .imageBox img {
@@ -181,4 +184,15 @@
 
 .jobs .jobsBox .formBox form button:hover {
     cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .jobs .jobsBox {
+        align-items: center;
+        flex-direction: column;
+    }
+    .jobs .jobsBox .imageBox,
+    .jobs .jobsBox .formBox {
+        width: 90%;
+    }
 }
