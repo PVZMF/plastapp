@@ -19,6 +19,7 @@ export const containerStyles = {
   downloadsContainerStyles = {
     margin: "0 15px",
     display: "flex",
+    flexWrap: "nowrap",
     alignItems: "center",
     "@media screen and (max-width: 426px)": {
       margin: "0 2px",

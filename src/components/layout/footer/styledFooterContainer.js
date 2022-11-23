@@ -12,7 +12,7 @@ export const FlexFooterContainer = styled.div`
       width: calc(100% / 5);
       text-align: center;
       color: #dedede;
-      font-size: 1.2rem;
+      font-size: clamp(0.5rem,2vw,1.2rem);
       &:last-child {
         border-left: none;
       }
@@ -48,17 +48,17 @@ export const FlexFooterContainer = styled.div`
     flex-direction: column;
     background-color: whitesmoke;
     border-radius: 20px;
-    padding: 9px;
-    height: 70%;
+    padding: 7px;
+    margin: 0 6px;
     text-align: center;
   }
 
   .second-row-support-title{
-    font-size: 1.4rem;
+    fontSize=clamp(0.5rem, 1.5vw, 2rem)
   }
 
   .second-row-support-number{
-    font-size: 1.3rem;
+    fontSize=clamp(0.5rem, 1.5vw, 1.5rem)
   }
   .second-row-icon-headphone {
     font-size: xx-large;

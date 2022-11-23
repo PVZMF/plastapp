@@ -14,6 +14,7 @@ export const FlexNavContainer = styled.div`
   justifyContent: space_between;
   align-items: center;
   gap: 1em;
+  padding: 0 12px;
 `;
 
 export const StyledNavLogo = styled.div`

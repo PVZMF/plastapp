@@ -1,20 +1,12 @@
 // Modules
 import React, { useEffect, useState } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Grid, Typography } from "@mui/material";
 
-import { Typography } from "@mui/material";
-
-// import {
-//   categoryStatus,
-//   getAllCategories,
-//   mainCategories,
-// } from "./mainCategorySlice";
 import {getCategories} from "../../../api/api"
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 import { HomeLan } from "../../../json/language/fa";
-// import { MAIN_CATEGORIES } from "../../../service/homeService";
+
 import { FlexMainCateogry } from "./styledMainCategory";
 // import SkeltonLoader from "../../../components/skeletonLoader/SkeltonLoader";
 
@@ -27,15 +19,6 @@ import Logo4 from '../../../assets/imgs/4.webp';
 // import SkeltonLoader from "../../../components/skeletonLoader/SkeltonLoader";
 
 const MainCategoryComponent = () => {
-  // const dispatch = useDispatch();
-  // const state = useSelector(mainCategories);
-  // const status = useSelector(categoryStatus);
-
-  // useEffect(() => {
-  //   if (state.length <= 0) {
-  //     dispatch(getAllCategories(MAIN_CATEGORIES));
-  //   }
-  // }, [state.length, dispatch]);
 
   const [categories, setCategories] = useState([]);
 
@@ -49,21 +32,23 @@ const MainCategoryComponent = () => {
   }, []);
 
   return (
-    <GlobalContainer style={{ padding: "30px 0px" }}>
+    <GlobalContainer>
       <Typography component="h2" variant="h2" textAlign="center" marginY={4} fontSize="clamp(1.8rem, 3vw, 3rem)">
         {HomeLan.mainCategory_Title}
       </Typography>
       <FlexMainCateogry>
+        <Grid container marginTop={1} >
         {categories.map((item) => {
           return (
-            <div className="category_box">
+            <Grid className="category_box" xs={3} marginBottom={4}>
               <Link to={`/category/item.id`} className="category_box--link">
                 <img src={item.logo} alt="" className="category_box--img" />
               </Link>
-            </div>
+            </Grid>
           )
         })
       }
+      </Grid>
       </FlexMainCateogry>
     </GlobalContainer>
   );

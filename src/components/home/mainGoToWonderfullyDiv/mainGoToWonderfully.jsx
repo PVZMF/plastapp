@@ -31,26 +31,28 @@ const MainGoToWonderfully = () => {
   const state = [img1, img2];
   const ImageTag = styled('img')(({ theme }) => ({
     borderRadius: "50px",
-    width: "40%",
+    width: "90%",
     [theme.breakpoints.up('md')]: {
       borderRadius: "50px",
       width: "100px"
     },
   }));
   return (
-    <Grid container gap={1} justifyContent={"space-around"} alignItems={"center"}>
-      {state.map((item, i) => {
-        return (
-          <NavLink to={`/product/productid`}>
-            <Grid container justifyContent={"center"} key={i} >
-              <ImageTag src={item} alt="product" />
+    <Grid display={"flex"} gap={1} justifyContent={"space-around"} alignItems={"center"}>
+      <Grid container flexDirection={"row"}>
+        {state.map((item, i) => {
+          return (
+            <Grid display={"flex"} xs={6} alignSelf={"center"} justifyContent={"center"} key={i} >
+              <NavLink to={`/product/productid`}>
+                <ImageTag src={item} alt="product" />
+              </NavLink>
             </Grid>
-          </NavLink>
-        );
-      })}
-      <Grid Item bgcolor={"white"} padding={1} borderRadius={"10px"} sx={{marginTop:{xs:2,md:0}}} color="#3ead07">
+          );
+        })}
+      </Grid>
+      <Grid Item bgcolor={"white"} padding={1} borderRadius={"10px"} sx={{ marginTop: { xs: 2, md: 0 } }} color="#3ead07">
         <NavLink to={`/product`}>
-          <Typography sx={{fontSize:{xs:"15px",md:"15px"}}} textAlign={"center"}>
+          <Typography sx={{ fontSize: { xs: "15px", md: "15px" } }} textAlign={"center"}>
             {HomeLan.mainWonderfullyDiscountProducts_title}
             <br />
             {HomeLan.mainWonderfullyDiscountProducts_title_continue}
@@ -58,7 +60,7 @@ const MainGoToWonderfully = () => {
           </Typography>
         </NavLink>
       </Grid>
-    </Grid>
+    </Grid >
   );
 };
 

@@ -29,23 +29,21 @@ const MainNoticeBannerComponent = ({ row }) => {
       <GlobalContainer>
         <FlexMainNoticeBanner>
           {
-            
             <React.Fragment>
-              {console.log(banners)}
               <div className="banner">
-                <NavLink to={images.first_row_first_url}>
+                <NavLink to={images?.first_row_first_url}>
                   <img
                     className="banner--img"
-                    src={banners.first_row_first}
+                    src={banners?.first_row_first}
                     alt="alternate text"
                   />
                 </NavLink>
               </div>
               <div className="banner">
-                <NavLink to={images.first_row_second_url}>
+                <NavLink to={images?.first_row_second_url}>
                   <img
                     className="banner--img"
-                    src={banners.first_row_second}
+                    src={banners?.first_row_second}
                     alt="alternate text"
                   />
                 </NavLink>
@@ -62,7 +60,7 @@ const MainNoticeBannerComponent = ({ row }) => {
         {
           <React.Fragment>
             <div className="banner">
-              <NavLink to={banners.second_row_first_url}>
+              <NavLink to={banners?.second_row_first_url}>
                 <img
                   className="banner--img"
                   src={banners?.second_row_first}
@@ -71,7 +69,7 @@ const MainNoticeBannerComponent = ({ row }) => {
               </NavLink>
             </div>
             <div className="banner">
-              <NavLink to={banners.second_row_second_url}>
+              <NavLink to={banners?.second_row_second_url}>
                 <img
                   className="banner--img"
                   src={banners?.second_row_second}

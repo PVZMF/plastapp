@@ -34,7 +34,7 @@ import { getAllBanners } from "../../../api/api"
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
-    right: -3,
+    right: -5,
     top: 5,
     border: `1px solid ${theme.palette.background.paper}`,
   },
@@ -68,13 +68,14 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
               backgroundColor: "var(--light-blue)",
               color: "#121212",
             }}
+            paddingLeft={2}
             onClick={(e) => {
               e.stopPropagation();
-              setOpenDrawer((old) => !old)
+              setOpenDrawer(old => !old);
             }}>
 
             {isOpenDrawer ?
-              <CloseIcon sx={{ fontSize: { xs: "small", sm: "medium", md: "medium", lg: "large" } }} /> : <MenuIcon sx={{ fontSize: { xs: "small", md: "mediume", lg: "large" } }} />
+              <CloseIcon sx={{ fontSize: { xs: "small", sm: "medium", md: "medium", lg: "large" } }} /> : <MenuIcon sx={{ fontSize: { xs: "small", sm: "medium", md: "medium", lg: "large" } }} />
             }
           </IconButton>
 
@@ -97,11 +98,10 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
                 color: "#121212",
                 fontSize: "10rem"
               }}>
-                <StyledBadge badgeContent={state.itemsCounter} color="secondary">
-                  <Badge color="primary" className="badge">
-                  </Badge>
+                <StyledBadge badgeContent={state.itemsCounter} color="primary">
+                  <Badge variant="p" vertical= 'top' overlap="circular" />
                 </StyledBadge>
-                <ShoppingBagOutlinedIcon sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }} />
+                <ShoppingBagOutlinedIcon sx={{ fontSize: { xs: "medium", sm: "medium", md: "large", lg: "large"} }} />
               </IconButton>
             </Link>
           </StyledNavLeftBar>
