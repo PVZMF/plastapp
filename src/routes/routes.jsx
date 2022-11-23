@@ -26,11 +26,17 @@ import DetailProductPage from "../pages/products/detailProduct";
 import BlogPage from "../pages/blog";
 import DetailBlogPage from "../pages/blog/detailBlog";
 
+import Login from "../pages/login/Login"
+
 const Router = createBrowserRouter([
     {
         path: "/",
         element: <Layout />,
         children :[
+          {
+            path:"/login",
+            element: <Login/>
+         },
           {
             index: true,
             element: <Home />,
@@ -89,9 +95,6 @@ const Router = createBrowserRouter([
               },
             ]
           },
-          {path: "login",
-            element: <div>d</div>
-          },
           {
             path: "OrderPlace",
             element: <OrderPlace/>
@@ -131,9 +134,7 @@ const Router = createBrowserRouter([
           
         ]
     },
-    {
-       
-    },
+    
 ]);
 
 export default Router
