@@ -23,7 +23,8 @@ padding:20px;
   width: "90%";
   background: "#69a9ff";
   borderRadius: "9px";
-
+  padding: "15px 5px";
+  width: "95%";
 
   "@media screen and (max-width: 892px)": {
     padding: "15px 5px",

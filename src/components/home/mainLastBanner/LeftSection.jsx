@@ -10,24 +10,22 @@ import baazar from "../../../assets/imgs/lastBannerImgs/get-from-baazar.webp";
 
 const LeftSection = () => {
   return (
-    <Grid item sx={containerStyles}>
-      <Grid container sx={downloadsContainerStyles}>
-        <Grid item>
+      <Grid container spacing={2} justifyContent={"center"} justifyItems={"center"}>
+        <Grid item xs={4} lg={2}>
           <img src={sibche} alt="get-from-googleplay" height="100%" />
         </Grid>
-        <Grid item>
+        <Grid item xs={4} lg={2}>
           <img src={anardooni} alt="get-from-appstore" height="100%" />
         </Grid>
-        <Grid item>
+        <Grid item xs={4} lg={2}>
           <img src={google_play} alt="get-from-bazaar" height="100%" />
         </Grid>
-        <Grid item>
+        <Grid item xs={4} lg={2}>
           <img src={sib_app} alt="get-from-mykey" height="100%" />
         </Grid>
-        <Grid item>
+        <Grid item xs={4} lg={2}>
           <img src={baazar} alt="get-from-sibche" height="100%" />
         </Grid>
-      </Grid>
     </Grid>
   );
 };

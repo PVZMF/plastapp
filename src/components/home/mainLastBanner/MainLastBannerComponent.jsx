@@ -5,24 +5,19 @@ import RightSection from "./RightSection";
 
 import { FlexMainDiv } from "./styledLastBanner";
 
-import { globalContainer } from "../../../global/styles/globalContainer";
-
 const HomeDownloadApp = () => {
   return (
     <FlexMainDiv>
-      <Box className="container">
-        <Grid
-          container
-          justifyContent="space-between"
-          flexWrap="wrap"
-          alignItems="center"
-          sx={{flexDirection:{sx:"column-reverse",md:"row-reverse"}}}
-          // sx={contentStyles}
-        >
-          <LeftSection />
-          <RightSection />
+      <Grid className="container">
+        <Grid container  >
+          <Grid item xs={6} >
+            <LeftSection />
+          </Grid>
+          <Grid item xs={6} >
+            <RightSection />
+          </Grid>
         </Grid>
-      </Box>
+      </Grid>
     </FlexMainDiv>
   );
 };

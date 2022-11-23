@@ -23,26 +23,28 @@ const MainWonderfullyComponent = ({ discount }) => {
 
   // const state = [img1, img2];
   return (
-    <Grid container justifyContent="center" marginTop={8} margin={1}>
-      <Grid container bgcolor="#EAEFE8" maxWidth="75%" justifyContent={"space-between"} alignItems={"center"}>
-        <Grid md={1} padding={1} sx={{ display: { xs: "none", md: "flex" } }} alignItems={"center"}>
-          <img src={basketImg} width="80%" height={"80%"}/>
-        </Grid>
-        <Grid Item md={4} xs={12} display="flex" marginRight={2}>
-          <Grid md={6} xs={2} textAlign="center" alignSelf={"center"}>
-            <Box width={"60%"} minWidth="80px" paddingY={1} bgcolor="#39ae00" borderRadius={2} >
-              <Typography sx={{fontSize:{xs:"10px",md:"15px"}}} color ="white">
-                تا %
-                <br />
-                <span> {discount} </span> تخفیف
-              </Typography>
-            </Box>
+    <Grid display={"flex"} justifyContent="center" marginTop={4}>
+      <Grid container flexDirection={"row"} bgcolor="#EAEFE8"  alignItems={"center"} >
+        <Grid item container md={6} justifyContent={"ceneter"} alignItems={"center"}>
+          <Grid md={1} padding={1} sx={{ display: { xs: "none", md: "flex" } }} alignItems={"center"}>
+            <img src={basketImg} width="80%" height={"80%"} />
           </Grid>
-          <Grid  md={6} xs={6}>
-            <img src={wonderImg} />
+          <Grid sx={{flexDirection:{xs:"column-reverse",md:"row"}}} Item md={5} xs={12} display="flex" marginLeft={2} width="100%">
+            <Grid md={4} xs={2} textAlign="center" alignSelf={"center"}>
+              <Box width={"60%"} minWidth="80px" paddingY={1} bgcolor="#39ae00" borderRadius={2} >
+                <Typography fontSize="clamp(0.5rem,3vw,1.5rem)" color="white">
+                  تا %
+                  <br />
+                  <span> {discount} </span> تخفیف
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid md={8} xs={4} alignSelf={"center"} width={"100%"}>
+              <img src={wonderImg} />
+            </Grid>
           </Grid>
         </Grid>
-        <Grid margin={2}>
+        <Grid item md={6} margin={2}>
           <MainGoToWonderfully />
         </Grid>
       </Grid>

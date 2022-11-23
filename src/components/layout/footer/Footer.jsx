@@ -85,7 +85,7 @@ const Footer = () => {
               <HeadphonesIcon fontSize="inherit" />
             </div>
             <div className="second-row-support">
-              <div className="second-row-support-title">
+              <div className="second-row-support-title" >
                 {HomeLan.footer24Support}
               </div>
 

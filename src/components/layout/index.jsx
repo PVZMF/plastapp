@@ -11,12 +11,15 @@ import ScrollToTop from './ScrollToTop';
 
 const Layout = () => {
   const [isOpenDrawer, setOpenDrawer] = useState(false);
+  
   return (
     <React.Fragment>
       <ScrollToTop />
       <Header isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer}/>
       <Sidebar isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer} />
-      <Grid paddingX={1} zIndex={0} display={"flex"} position={"sticky"} marginTop="100px" justifyContent={"center"} flexDirection="column">
+      <Grid paddingX={1} zIndex={0} display={"flex"} position={"sticky"} 
+      sx={{marginTop:{xs:"45px", sm:"60px",md:"80px" }}}
+      justifyContent={"center"} flexDirection="column">
 
         <Outlet />
       </Grid>

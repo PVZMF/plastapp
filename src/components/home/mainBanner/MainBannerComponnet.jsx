@@ -2,13 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-// Functions
-// import callApi from "../../../../api/apiClient";
-
-// Constants
-// import { MAIN_ADV_BANNERS } from "../../../../service/homeService";
-// import { BASE_URL } from "../../../../api/apiClient";
-
 // Components
 import { FlexMainBanner } from "./styledMainBanner";
 import { GlobalBannerContainer } from "../../../global/styles/GlobalBannerContainer";

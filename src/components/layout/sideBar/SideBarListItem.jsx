@@ -17,7 +17,6 @@ const SideBarListItem = (props) => {
     setOpen((old) => !old);
   };
       useEffect(() => {
-        console.log("sdsssadasdsadsa")
         if(props.isOpenDrawer)setOpen(false);
       }, [props.isOpenDrawer]);
 

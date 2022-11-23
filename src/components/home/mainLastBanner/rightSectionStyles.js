@@ -6,10 +6,12 @@ export const containerStyles = {
     "@media screen and (max-width: 892px)": {
       margin: "0 auto 5px auto",
     },
+    "@media screen and (max-width: 600px)": {
+      flexDirection: "column",
+    }
   },
   logoContainer = {
-    padding: "0 0 0 15px",
-    height: "30px",
+    height: "45px",
     display: "flex",
     alignItems: "center",
 
@@ -18,7 +20,8 @@ export const containerStyles = {
         fontSize: "1.3rem",
       },
     },
-    "@media screen and (max-width: 700px)": {
+    "@media screen and (max-width: 600px)": {
       padding: "0 0 0 5px",
+      height: "clamp(10px,5vw,60px)",
     },
   };
