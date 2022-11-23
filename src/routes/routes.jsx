@@ -21,8 +21,8 @@ import RulesConditon from "../pages/rule"
 import DetailProduct from "../pages/products/detailProduct";
 import OrdersPage from "../pages/profile/ordersPage";
 import ChequePage from "../pages/cheque";
-import Detail_Product from "../pages/products/detail-product";
 import SideBar from "../components/sideBar/sideBar"
+import ClubPage from "../pages/club";
 
 const Router = createBrowserRouter([
     {
@@ -109,9 +109,14 @@ const Router = createBrowserRouter([
           {
             path: "cheque",
             element: <ChequePage/>
-          },{
+          },
+          {
             path: "AllProduct",
-            element: <SideBar/>
+            element: <SideBar />
+          },
+          {
+            path: "club",
+            element: <ClubPage />
           },
           
         ]

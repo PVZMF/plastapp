@@ -1,0 +1,11 @@
+.club {
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    background: linear-gradient(to top, rgb(86, 163, 189), rgb(149, 197, 213));
+    padding: 7rem 0 4rem 0;
+    margin: 0;
+}

@@ -1,0 +1,27 @@
+.cards {
+    width: 600px;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 1.2rem;
+    padding: clamp(1rem, 3vw, 3rem);
+}
+
+.cards .row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 700px) {
+    .cards {
+        width: 300px;
+    }
+    .cards .row {
+        flex-direction: column;
+    }
+}

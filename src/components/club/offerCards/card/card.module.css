@@ -1,0 +1,125 @@
+.club_offer_card {
+    width: 200px;
+    margin: 2rem;
+}
+
+@media (max-width: 700px) {
+    .club_offer_card {
+        margin: 4rem 0 8rem 0;
+    }
+}
+
+.club_offer_card .club_offer_card_header {
+    position: relative;
+    width: 100%;
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+}
+.club_offer_card .club_offer_card_header .club_offer_card_min_amount {
+    position: absolute;
+    width: 300px;
+    top: -28px;
+    left: -38px;
+    width: 80px;
+    text-align: center;
+    direction: rtl;
+    transform: rotate(-45deg);
+    z-index: 3;
+}
+.club_offer_card .club_offer_card_header .club_offer_card_min_amount .club_offer_card_min_amount_title {
+    font-size: 8px;
+    margin-bottom: 2px !important;
+}
+
+.club_offer_card .club_offer_card_header .club_offer_card_min_amount .club_offer_card_min_amount_content {
+    padding: 1px 2px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    width: max-content;
+}
+
+.club_offer_card .club_offer_card_header .club_offer_card_off_ammount {
+    padding: 5px 0;
+    color: #fff;
+    font-size: 23px;
+    text-align: center;
+    direction: rtl;
+  }
+
+
+
+.club_offer_card .club_offer_card_content {
+    padding: 12px 6px;
+    position: relative;
+    width: 100%;
+    background: #e6b050;
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
+    z-index: 2;
+}
+
+.club_offer_card .club_offer_card_content .club_offer_card_required_prize {
+    font-size: 17px;
+    text-align: center;
+    direction: rtl;
+}
+
+.club_offer_card .club_offer_card_content .club_offer_card_code_container {
+    display: flex;
+    justify-content: space_around;
+    direction: ltr;
+}
+
+.club_offer_card .club_offer_card_content .club_offer_card_code_container * {
+    padding: 7px 0;
+    background: #fff;
+    text-align: center;
+    border-radius: 9px;
+}
+
+.club_offer_card .club_offer_card_content .club_offer_card_code_container .club_offer_card_copy_code {
+    width: 30%;
+    color: #444;
+    font-weight: bolder;
+    font-size: 1rem;
+    margin-right: 3%;
+    cursor: pointer;
+}
+
+.club_offer_card .club_offer_card_content .club_offer_card_code_container .club_offer_card_my_code {
+    width: 77%;
+}
+
+.club_offer_card .club_offer_card_content .club_offer_card_get_code {
+    padding: 5px 0;
+    width: 70%;
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #fff;
+    background: #717171;
+    text-align: center;
+    border-radius: 9px;
+    direction: rtl;
+    cursor: pointer;
+}
+
+
+@media screen and (max_width: 540px) {
+    .club_offer_card {
+        width: 70%;
+        margin-bottom: 60px;
+    }
+    .club_offer_card:last_child {
+      margin-bottom: 0;
+    }
+}
+
+@media screen and (max_width: 430px) {
+    .club_offer_card {
+        width: 80%;
+    }
+}
