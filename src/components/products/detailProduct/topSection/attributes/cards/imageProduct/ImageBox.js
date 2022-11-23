@@ -10,8 +10,8 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 import { FlexImageBox } from './styledImageBox';
 
-import Product from '../../../../../../../../assets/imgs/pesteh.jpg';
-import Product2 from '../../../../../../../../assets/imgs/shalwar.jpg';
+import Product from '../../../../../../../assets/imgs/pesteh.jpg';
+import Product2 from '../../../../../../../assets/imgs/shalwar.jpg';
 
 const ImageBox = ({ title, image, image_list }) => {
 
@@ -69,6 +69,7 @@ const ImageBox = ({ title, image, image_list }) => {
 
         <div className='footer-detail'>
           <h4><RiSecurePaymentLine /> ازدرگاه امن بانک پرداخت کن</h4>
+          <h4><RiSecurePaymentLine /> امکان خرید اعتباری</h4>
         </div>
       </div>
     </FlexImageBox>

@@ -75,7 +75,6 @@ const Home = () => {
     {src:baseUrl+banners.third_row_fourth?.image,link:banners.third_row_fourth?.url}
   ]
 
-
   return (
     <Fragment>
       <MainSliderComponent />

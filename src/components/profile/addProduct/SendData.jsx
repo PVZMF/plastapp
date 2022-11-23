@@ -4,7 +4,7 @@ import style from './addProduct.module.css';
 
 const SendData = ({ citys }) => {
     
-    const [active, setActive] = useState(1);
+  const [active, setActive] = useState(1);
 
   return (
     <div className={style.send}>

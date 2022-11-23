@@ -18,11 +18,13 @@ import StoreRegistration from "../pages/StoreRegistration";
 import CreditPurches from '../pages/CreditPurches';
 import OrderPlace from "../pages/OrderPlace";
 import RulesConditon from "../pages/rule"
-import DetailProduct from "../pages/products/detailProduct";
 import OrdersPage from "../pages/profile/ordersPage";
 import ChequePage from "../pages/cheque";
 import SideBar from "../components/sideBar/sideBar"
 import ClubPage from "../pages/club";
+import DetailProductPage from "../pages/products/detailProduct";
+import BlogPage from "../pages/blog";
+import DetailBlogPage from "../pages/blog/detailBlog";
 
 const Router = createBrowserRouter([
     {
@@ -35,7 +37,7 @@ const Router = createBrowserRouter([
           },
           {
             path: "/product/:id",
-            element: <DetailProduct />,
+            element: <DetailProductPage />,
           },
           {
             path: "/support/ticketsList",
@@ -117,6 +119,14 @@ const Router = createBrowserRouter([
           {
             path: "club",
             element: <ClubPage />
+          },
+          {
+            path: "blog",
+            element: <BlogPage />
+          },
+          {
+            path: "blog/:id",
+            element: <DetailBlogPage />
           },
           
         ]

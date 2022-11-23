@@ -82,6 +82,12 @@ export const FlexMainSlidSuggested = styled.div`
         font-size: clamp(.9rem, 1.1vw, 1.2rem);
       }
     }
+    del {
+      color: #777;
+      font-weight: 300;
+      font-size: clamp(1rem, 1.5vw, 1.5rem);
+      margin: 0 1rem;
+    }
   }
 
   @media (max-width: 600px) {

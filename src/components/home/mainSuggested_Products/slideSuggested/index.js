@@ -5,7 +5,7 @@ import product from '../../../../assets/imgs/pesteh.jpg';
 import { FlexMainSlidSuggested } from './styledMainSlideSuggested';
 import { Link } from 'react-router-dom';
 
-const SlideSuggested = ({ offer, image, title, price, number, point, id }) => {
+const SlideSuggested = ({ offer, image, title, price, number, point, id, credit_shoping }) => {
 
   const off = price * (offer / 100);
   return (
@@ -33,9 +33,11 @@ const SlideSuggested = ({ offer, image, title, price, number, point, id }) => {
             <p className='noting'>ناموجود</p>
         }
 
+        {credit_shoping ? <p className='noting'>امکان خرید اعتباری</p> : null}
+
         <div className='price-box'>
-            {offer && <h5>{off} <span>تومان - </span></h5>}
-            <h5>{price} <span>تومان</span></h5>
+            {offer && <del>{price} <span>تومان - </span></del>}
+            <h5>{off} <span>تومان</span></h5>
         </div>
     </FlexMainSlidSuggested>
   )
@@ -51,4 +53,5 @@ SlideSuggested.defaultProps = {
     price: 160000,
     offer: 20,
     point: 3,
+    credit_shoping: true,
 }

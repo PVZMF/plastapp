@@ -1,7 +1,7 @@
 import React from 'react'
 import { BsPlusLg } from 'react-icons/bs';
 import { BiMessageDetail } from 'react-icons/bi';
-import Profile from '../../../../../../assets/imgs/shop_1.jpg';
+import Profile from '../../../../../assets/imgs/shop_1.jpg';
 
 import { FlexMainReceipt } from './styleReceipt'
 

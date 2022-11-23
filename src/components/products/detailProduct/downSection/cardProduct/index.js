@@ -1,10 +1,19 @@
 import React from 'react'
-import { BsPlusLg } from 'react-icons/bs';
-import { AiTwotoneShop } from 'react-icons/ai';
-import { FlexCardProduct } from './styledCardProduct'
 import { Link } from 'react-router-dom';
 
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from '../../../../../toolkit/cart/cartAction';
+
+// Icons
+import { BsPlusLg, BsCartCheck } from 'react-icons/bs';
+import { AiTwotoneShop } from 'react-icons/ai';
+import { FlexCardProduct } from './styledCardProduct'
+
 const CardProduct = ({ item }) => {
+    
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.cartState);
     const price = item.price * (item.offer / 100);
     const totalprice = item.price - price;
 
@@ -24,7 +33,11 @@ const CardProduct = ({ item }) => {
             </div>
 
             <div className='down-items'>
-                <button><BsPlusLg /></button>
+                {state.selectedItems.find(pro => pro.id === item.id) ?
+                    <button className='added'><BsCartCheck /></button>
+                    :
+                    <button onClick={() => dispatch(addItem(item))}><BsPlusLg /></button>
+                }
                 <div className='price-box'>
                     {item.offer > 0 && 
                         <div className='offer'>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 // Icons
 import { BsChevronLeft, BsBox } from 'react-icons/bs';
-import { BiCategory, BiUserPin } from 'react-icons/bi';
+import { BiCategory, BiUserPin, BiStore, BiSupport } from 'react-icons/bi';
 import { IoWallet, IoReceiptOutline, IoCloseSharp } from 'react-icons/io5';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { TbTruckDelivery } from 'react-icons/tb';
@@ -12,12 +13,10 @@ import Shop from '../../../assets/imgs/adImage.png';
 
 // Style
 import style from './sidebar.module.css';
-import { Link } from 'react-router-dom';
 
 const MobileMenu = ({ ProfileImage, shopName, userName, cash, setMenu }) => {
 
-  const [active, setActive] = useState(1);
-  const Selected = (id) => setActive(id);
+    const pathName = useLocation().pathname;
   return (
     <div className={style.sidebar}>
         <div className={style.header}>
@@ -45,22 +44,21 @@ const MobileMenu = ({ ProfileImage, shopName, userName, cash, setMenu }) => {
 
 
         <div className={style.items}>
-            <h5 
-                onClick={() => Selected(1)}
-                className={active === 1 ? style.active : null}
-            >
-                <Link to='/profile/addproduct'>
-                    <BiCategory /> افزودن محصول
-                </Link>
+            <h5 className={pathName === '/profile/addproduct' ? style.active : null}>
+                <Link to='/profile/addproduct'><BiCategory /> افزودن محصول</Link>
             </h5>
-            <h5 
-                onClick={() => Selected(2)}
-                className={active === 2 ? style.active : null}
-            ><BsBox /> محصولات</h5>
-            <h5 
-                onClick={() => Selected(3)}
-                className={active === 3 ? style.active : null}
-            ><HiOutlineClipboardList /> سفارشات</h5>
+            <h5 className={pathName === '/profile/myproducts' ? style.active : null}>
+                <Link to='/profile/myproducts'><BsBox /> محصولات</Link>
+            </h5>
+            <h5 className={pathName === '/profile/orders' ? style.active : null}>
+                <Link to="/profile/orders"><HiOutlineClipboardList /> سفارشات</Link>
+            </h5>
+            <h5 className={pathName === '/profile/storregiser' ? style.active : null}>
+                <Link to="/profile/storregiser"><BiStore /> ثبت فروشگاه</Link>
+            </h5>
+            <h5>
+                <Link to="/support"><BiSupport /> پشتیبانی</Link>
+            </h5>
         </div>
 
 

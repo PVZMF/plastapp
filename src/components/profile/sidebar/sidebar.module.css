@@ -185,3 +185,46 @@
     color: #555;
     font-size: clamp(.7rem, 1vw, 1rem);
 }
+
+.sidebar .items .submenu {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.sidebar .items .submenu .h5box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar .items .submenu .span {
+    transform: rotate(180deg);
+}
+
+.sidebar .items .submenu ul {
+    padding: 0 1.5rem 0 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all .3s;
+}
+
+.sidebar .items .submenu ul li,
+.sidebar .items .submenu .down li {
+    color: #444;
+    font-size: clamp(.9rem, 1.2vw, 1.2rem);
+    padding: .5rem 0;
+}
+
+.sidebar .items .submenu ul li:hover,
+.sidebar .items .submenu .down li:hover {
+    color: rgb(187, 59, 59);
+}
+
+.sidebar .items .submenu .down {
+    max-height: 100vh;
+    transition: all .6s;
+}

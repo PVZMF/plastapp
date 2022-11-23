@@ -2,7 +2,7 @@ import React from 'react';
 
 import { BsStarFill } from 'react-icons/bs';
 import CardComment from './cardComment';
-import Profile from '../../../../../../../../assets/imgs/shop_1.jpg';
+import Profile from '../../../../../../../assets/imgs/shop_1.jpg';
 
 import { FlexMainComments } from './styledComments';
 

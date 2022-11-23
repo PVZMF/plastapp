@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 // Icons
-import { BsChevronLeft, BsBox } from 'react-icons/bs';
-import { BiCategory, BiUserPin, BiStore } from 'react-icons/bi';
+import { BsChevronLeft, BsBox, BsChevronDown } from 'react-icons/bs';
+import { BiCategory, BiUserPin, BiStore, BiSupport } from 'react-icons/bi';
 import { IoWallet, IoReceiptOutline } from 'react-icons/io5';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { TbTruckDelivery } from 'react-icons/tb';
@@ -17,6 +17,8 @@ import style from './sidebar.module.css';
 
 const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
     const pathName = useLocation().pathname;
+
+    const [active, setActive] = useState(false);
 
   return (
     <div className={style.sidebar}>
@@ -54,6 +56,23 @@ const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
             <h5 className={pathName === '/profile/storregiser' ? style.active : null}>
                 <Link to="/profile/storregiser"><BiStore /> ثبت فروشگاه</Link>
             </h5>
+            <div className={style.submenu}>
+                <div className={style.h5box} onClick={() => setActive(!active)}>
+                    <h5><BiSupport /> پشتیبانی</h5>
+                    <span style={{transform: active ? 'rotate(180deg)' : 'rotate(0)'}}><BsChevronDown /></span>
+                </div>
+                <ul className={active ? style.down : null}>
+                    <li>
+                        <Link to="/support"><BiSupport /> تماس با پشتیبانی</Link>
+                    </li>
+                    <li>
+                        <Link to="/support/newticket"><BiSupport /> ارسال تیکت</Link>
+                    </li>
+                    <li>
+                        <Link to="/support/ticketslist"><BiSupport /> تیکت های من</Link>
+                    </li>
+                </ul>
+            </div>
         </div>
 
 

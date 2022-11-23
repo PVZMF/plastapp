@@ -2,7 +2,7 @@
     position: fixed;
     width: 250px;
     right: 0;
-    top: 0;
+    top: clamp(3rem, 8vw, 8rem);
     height: 100vh;
     display: flex;
     align-items: flex-start;

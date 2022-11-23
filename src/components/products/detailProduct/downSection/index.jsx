@@ -1,8 +1,8 @@
 import React from 'react'
 import CardProduct from './cardProduct';
 import { FlexDownCart } from './styledDownCart'
-import Product from '../../../../../assets/imgs/pesteh.jpg';
-import Product2 from '../../../../../assets/imgs/shalwar.jpg';
+import Product from '../../../../assets/imgs/pesteh.jpg';
+import Product2 from '../../../../assets/imgs/shalwar.jpg';
 
 const DownMainCart = ({ listProducts }) => {
     const ListSugg = [];

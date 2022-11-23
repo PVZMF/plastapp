@@ -7,11 +7,9 @@ import { FlexTopCart } from './styledTopCart'
 const TopMainCart = () => {
   return (
     <FlexTopCart>
-
       <div className='attributes'>
         <Attributes />
       </div>
-
       <div className='receipt'>
         <Receipt />
       </div>

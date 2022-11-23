@@ -1,18 +1,10 @@
 import React from 'react'
+import DetailProduct from '../../../components/products/detailProduct'
 
-import TopSection from './components/topSection'
-import DownSection from './components/downSection'
-
-import { FlexDetailProduct } from './styledDetail'
-
-const DetailProduct = () => {
+const DetailProductPage = () => {
   return (
-    <FlexDetailProduct>
-        <TopSection />
-        <hr />
-        <DownSection />
-    </FlexDetailProduct>
+    <><DetailProduct /></>
   )
 }
 
-export default DetailProduct
+export default DetailProductPage

@@ -16,13 +16,11 @@ const AddProduct = () => {
         <div className={style.header}>
             <h5>خانه</h5><span>{'>'}</span><h5>افزودن محصول</h5>
         </div>
-
         <NameAndGrouping />
         <Images />
         <WeightAndPrice />
         <SendData />
         <Attributes />
-
         <div className={style.footer}>
             <button>انتشار محصول</button>
         </div>

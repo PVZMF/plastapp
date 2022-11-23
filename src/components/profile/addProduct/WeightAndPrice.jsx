@@ -9,14 +9,21 @@ const WeightAndPrice = () => {
         <div className={style.box}>
             <h5 className={style.title}>- وزن،قیمت و موجودی</h5>
             <div className={style.boxinput}>
-                <label>وزن خالص محصول</label>
+                <label>واحد محصول</label>
                 <div className={style.input}>
                     <input type="text" />
-                    <span>گرم</span>
+                    {/* <span>گرم</span> */}
+                    <select defaultValue="کیلوگرم">
+                        <option value="گرم">گرم</option>
+                        <option value="کیلوگرم">کیلوگرم</option>
+                        <option value="رول">رول</option>
+                        <option value="بسته">بسته</option>
+                        <option value="کارتن">کارتن</option>
+                    </select>
                 </div>
             </div>
 
-            <div className={style.boxinput}>
+            {/* <div className={style.boxinput}>
                 <label>وزن با دسته بندی</label>
                 <div className={style.input}>
                     <input type="text" />
@@ -24,7 +31,7 @@ const WeightAndPrice = () => {
                 </div>
                 <p>- وزن خالص محصول به اضافه وزن کارتن بسته بندی را اینجا ثبت کنید.</p>
                 <p>- این وزن در محاسبه هزینه ارسال اهمیت دارد.</p>
-            </div>
+            </div> */}
             
             <div className={style.boxinput}>
                 <label>قیمت محصول</label>

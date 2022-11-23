@@ -264,6 +264,21 @@
     background: transparent;
 }
 
+.addProduct .weight .box .boxinput .input select {
+    width: 20%;
+    min-width: 100px;
+    height: 100%;
+    background: rgba(192, 197, 195, 0.444);
+    border: none;
+    outline: none;
+    border-right: 1px solid #999;
+    padding: .6rem;
+}
+
+.addProduct .weight .box .boxinput .input select:hover {
+    cursor: pointer;
+}
+
 .addProduct .weight .box .boxinput .input {
     width: 100%;
     display: flex;
@@ -274,6 +289,10 @@
     border-radius: .5rem;
     background: #fff;
     margin: 1rem 0 0 0;
+}
+
+.addProduct .weight .box .boxinput:nth-child(2) .input {
+    padding: 0 .5rem 0 0;
 }
 
 

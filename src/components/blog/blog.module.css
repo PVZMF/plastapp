@@ -1,0 +1,84 @@
+.blog {
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.blog .title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem clamp(1rem, 3.5vw, 3.5rem) 1rem 1rem;
+}
+
+.blog .title h3 {
+    color: #333;
+    font-size: clamp(1.4rem, 1.9vw, 1.9rem);
+}
+
+.blog .listBlog {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 0 clamp(1rem, 3vw, 3rem);
+}
+
+.card {
+    width: 320px;
+    margin: 1.2rem;
+}
+
+.card .cardBlog {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
+    border-radius: .7rem;
+    overflow: hidden;
+    border: 1px solid #999;
+}
+
+.card .cardBlog .imgbox {
+    width: 100%;
+    height: clamp(20rem, 30vh, 30rem);
+    overflow: hidden;
+}
+
+.card .cardBlog .imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .cardBlog .data {
+    width: 100%;
+    min-height: clamp(5rem, 8vw, 8rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 1rem .5rem;
+}
+
+.card .cardBlog .data h3 {
+    width: 100%;
+    text-align: start;
+    color: #444;
+    font-size: clamp(1.2rem, 1.4vw, 1.4rem);
+}
+
+.card .cardBlog .data p {
+    width: 100%;
+    text-align: end;
+    color: #444;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+}
