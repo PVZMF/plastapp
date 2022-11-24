@@ -94,7 +94,7 @@ export const FlexFooterContainer = styled.div`
       width:calc(100%/2)
     }
     .second-row-title {
-      width: 50px;
+      width: 80px;
     }
     .second-row-icon{
       font-size: medium;

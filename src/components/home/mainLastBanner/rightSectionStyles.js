@@ -22,6 +22,6 @@ export const containerStyles = {
     },
     "@media screen and (max-width: 600px)": {
       padding: "0 0 0 5px",
-      height: "clamp(10px,5vw,60px)",
+      height: "clamp(30px,5vw,60px)",
     },
   };

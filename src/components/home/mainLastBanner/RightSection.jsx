@@ -6,7 +6,6 @@ const RightSection = () => {
   return (
     <Grid
       item display={"flex"}
-      alignSelf="center"
       justifyContent={"center"}
       alignItems={"center"}
       height={"100%"}
@@ -17,7 +16,7 @@ const RightSection = () => {
           <img src={logo} alt="logo" height="100%" />
         </Box>
         <Box margin={1} textAlign="center">
-          <Typography variant="h3" color="#fff" fontSize="clamp(0.8rem, 1vw, 2rem)">
+          <Typography variant="h3" color="#fff" fontSize="clamp(0.9rem, 1vw, 2rem)">
             دانلود اپلیکیشن
           </Typography>
         </Box>
