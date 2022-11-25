@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -9,38 +9,46 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserAsync } from "../../toolkit/slices/auth";
+import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
 
 export default function SignIn() {
+  const [error, setError] = useState(false);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const loading = useSelector((state) => state.auth.loading);
-  const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const st = Storage();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
-    console.log(data);
     Promise.all([dispatch(loginUserAsync(data))]).then((res) => {
-      console.log(res[0]);
-      st.setLogin(res.data.refresh, res.data.access);
-      navigate("/");
-
+      const data = res[0].payload;
+      if (!data.message) {
+        st.setLogin(data.refresh, data.accsess);
+        console.log(data);
+        dispatch(login());
+        navigate("/");
+      } else {
+        new Error("Login Failed!");
+        setError(true);
+      }
     })
       .catch((e) => {
         console.log(e);
+        console.log("Error")
+        setError(true);
       })
   };
   if (isLogin) {
     return <Navigate to={"/"} />;
   }
 
-
+  console.log(error);
   const CustomTextField = styled(TextField)({
     '& label': {
       transformOrigin: "right !important",
@@ -105,6 +113,14 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
+            <Grid container display={error ? "flex" : "none"}>
+              <Grid item xs margin={1}>
+                <Typography variant="body2" color={"red"}>
+                  نام کاربری یا کلمه عبور اشتباه است
+                </Typography>
+              </Grid>
+            </Grid>
+
             <Grid container>
               <Grid item xs margin={1}>
                 <Link href="#" variant="body2">
@@ -122,11 +138,11 @@ export default function SignIn() {
               ورود
             </Button>
             <Button
-              type="submit"
-
+              // href="/register"
               fullWidth
               variant="contained"
               sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)" }}
+              onClick={() => navigate("/register")}
             >
               ثبت نام
             </Button>
