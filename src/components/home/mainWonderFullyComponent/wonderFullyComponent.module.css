@@ -1,0 +1,109 @@
+.wonderfully {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    margin: 5rem 0;
+}
+
+.wonderfully .wonderfully_box {
+    min-width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #eaefe9;
+    border-radius: 1rem;
+    min-height: 20vh;
+    padding: 1rem;
+}
+
+.wonderfully .title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.wonderfully .title .boxOff {
+    width: clamp(5rem, 8vw, 8rem);
+    height: clamp(6rem, 9vh, 9rem);
+}
+.wonderfully .title .textOff {
+    width: clamp(12rem, 17vw, 17rem);
+}
+
+.wonderfully .title h4 {
+    text-align: center;
+    color: #fff;
+    background: #3ead06;
+    border-radius: .7rem;
+    padding: .3rem 1rem;
+    font-weight: 200;
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+}
+
+.wonderfully .productsList {
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem, 1rem;
+    margin: 1.5rem 0;
+}
+
+.wonderfully .productsList .product_box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(5.5rem, 9vw, 9rem);
+    height: clamp(5.5rem, 9vw, 9rem);
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 clamp(.6rem, 1vw, 1rem);
+    z-index: 1;
+}
+
+.wonderfully .productsList .product_box img {
+    width: clamp(4rem, 7vw, 7rem);
+    height: clamp(4rem, 7vw, 7rem);
+    border-radius: 50%;
+}
+
+.wonderfully .productsList .product_box p {
+    position: absolute;
+    color: #fff;
+    background: rgb(220, 56, 56);
+    font-weight: 100;
+    font-size: clamp(.9rem, 1.1vw, 1.1rem);
+    padding: .3rem clamp(.8rem, 1.1vw, 1.1rem);
+    border-radius: 1rem;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+}
+
+.wonderfully .more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3ead06;
+    background: #fff;
+    padding: clamp(.9rem, 2vw, 2rem) 1rem;
+    font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+    border-radius: .7rem;
+}
+
+.wonderfully .more svg {
+    margin: 0 .5rem 0 0;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+@media (max-width: 900px) {
+    .wonderfully .wonderfully_box {
+        flex-direction: column;
+    }
+    .wonderfully .more {
+        margin: 1.5rem 0 0 0;
+    }
+}

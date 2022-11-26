@@ -24,6 +24,7 @@ import { Navigation} from "swiper";
 // import { HomeLan } from "../../../../json/language/fa";
 import AllProducts from '../AllProductCart/AllProductsSlide';
 import { Autoplay } from 'swiper';
+import { Link } from "react-router-dom";
 
 
 
@@ -48,53 +49,38 @@ const MainSuggestedComponent = ({ title }) => {
       <FlexMainSuggested className="rounded-1 hidden p10">
         <Swiper
           breakpoints={{
-            200: {
+            500: {
               slidesPerView: 2
             },
             768: {
+              slidesPerView: 3
+            },
+            868: {
               slidesPerView: 4
             }
           }}
           spaceBetween={10}
           className="custom_swiper"
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
+          // autoplay={{
+          //   delay: 3000,
+          //   disableOnInteraction: false,
+          // }}
           navigation={true}
           modules={[Navigation,Autoplay]}
         >
-          <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg} alt=""/></SwiperSlide>
           <SwiperSlide className="slide custom-slide">
-            <img className="slide-banner" src={bannerImg} alt="" />
+            <img className="slide-banner" src={bannerImg} alt="پیشنهاد ویژه"/>
           </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
+          <SwiperSlide className="slide custom-slide">
+            <img className="slide-banner" src={bannerImg} alt="پیشنهاد ویژه" />
           </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested />
-          </SwiperSlide>
+          {[...Array(9)].map((item, index) => (
+            <SwiperSlide className="slide p10 custom-slide" key={index}>
+              <Link to={`product/${index + 1}`}>
+                <SlideSuggested />
+              </Link>
+            </SwiperSlide>
+          ))}
           <SwiperSlide className="slide p10 custom-slide">
             <AllProductsSlide />
           </SwiperSlide>

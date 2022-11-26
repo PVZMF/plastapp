@@ -10,11 +10,12 @@ import MainShopsComponent from '../../components/home/mainShops/MainShopsCompone
 import MainBannerComponent from '../../components/home/mainBanner/MainBannerComponnet'
 import MainProductsComponent from '../../components/home/mainProducts/MainProductsComponent'
 import MainFeatureBannerComponent from '../../components/home/mainFeatureBanner/MainFeatureBannerComponent'
-import MainWonderfullyComponent from '../../components/home/mainWonderfully/MainWonderfullyComponent'
+// import MainWonderfullyComponent from '../../components/home/mainWonderfully/MainWonderfullyComponent'
 import MainPopularProducts from '../../components/home/mainPopularProducts/MainPopularProducts'
 import MainLastBannerComponent from '../../components/home/mainLastBanner/MainLastBannerComponent'
-import {getTwoelvBanners} from "../../api/api"
+import WonderFullyComponent from '../../components/home/mainWonderFullyComponent'
 
+import {getTwoelvBanners} from "../../api/api"
 import { HomeLan } from "../../json/language/fa";
 import ListBannerImages from '../../components/home/ListBannerImages/ListBannerImages'
 import {baseUrl} from "../../api/axios"
@@ -90,7 +91,8 @@ const Home = () => {
       <MainBannerComponent start={4} end={8} />
       <MainProductsComponent title={HomeLan.mainAllProducts_title} />
       <MainFeatureBannerComponent />
-      <MainWonderfullyComponent />
+      {/* <MainWonderfullyComponent /> */}
+      <WonderFullyComponent />
       <MainBannerComponent start={8} end={12} />
       <ListBannerImages ListImg={imgList3}/>
       <MainPopularProducts />

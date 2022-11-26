@@ -8,10 +8,20 @@
 
     background-color: none !important;
     overflow: hidden;
+    max-width: 331px !important;
 }
 
 .slide-banner {
     object-fit: cover;
     background-color: transparent;
     height: 100%;
+}
+
+@media (max-width: 600px) {
+    .css-1g8j8j5 {
+        height: 280px !important;
+    }
+    /* .custom-slide {
+        max-width: 320px !important;
+    } */
 }
