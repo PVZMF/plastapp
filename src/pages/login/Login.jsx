@@ -12,9 +12,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export default function SignIn() {
   const [error, setError] = useState(false);
+  const [enter, setEnter] = useState(false);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const loading = useSelector((state) => state.auth.loading);
   const dispatch = useDispatch();
@@ -26,21 +28,15 @@ export default function SignIn() {
     e.preventDefault();
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
+    setEnter(true);
     Promise.all([dispatch(loginUserAsync(data))]).then((res) => {
       const data = res[0].payload;
-      if (!data.message) {
-        st.setLogin(data.refresh, data.accsess);
-        console.log(data);
-        dispatch(login());
-        navigate("/");
-      } else {
-        new Error("Login Failed!");
-        setError(true);
-      }
+      st.setLogin(data.refresh, data.accsess);
+      console.log(data);
+      dispatch(login());
+      navigate("/");
     })
       .catch((e) => {
-        console.log(e);
-        console.log("Error")
         setError(true);
       })
   };
@@ -64,8 +60,8 @@ export default function SignIn() {
   });
 
   return (
-    <Grid container justifyContent={"center"} alignItems="center" bgcolor={"rgb(105, 169, 255)"} margin={2} width="auto">
-      <Grid Item bgcolor={"white"} sx={{width:{xs:"100%",sm:"80%",md:"50%"}}} height="60%" margin={6} padding={6}>
+    <Grid container justifyContent={"center"} alignItems="center" bgcolor={"rgb(105, 169, 255)"} sx={{ margin: { xs: 1, md: 2 } }} width="auto">
+      <Grid Item bgcolor={"white"} sx={{ width: { xs: "100%", sm: "80%", md: "50%" }, margin: { xs: 3, md: 6 }, padding: { xs: 3, md: 6 } }} height="60%">
         <CssBaseline />
         <Box
           sx={{
@@ -75,11 +71,11 @@ export default function SignIn() {
           }}
         >
           {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
-          <Box width={"clamp(10px,5vw,60px"} height={"clamp(10px,5vw,60px"}>
+          <Box sx={{ width: { xs: 30, md: 60, lg: 90 }, height: { xs: 30, md: 60, lg: 90 } }}>
             <img
-              width= "100%"
+              width="100%"
               height="100%"
-              style={{margin: "auto" }}
+              style={{ margin: "auto" }}
               src={logo}
             />
           </Box>
@@ -124,7 +120,7 @@ export default function SignIn() {
             />
             <Grid container display={error ? "flex" : "none"}>
               <Grid item xs margin={1}>
-                <Typography variant="body2" color={"red"}>
+                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
                   نام کاربری یا کلمه عبور اشتباه است
                 </Typography>
               </Grid>
@@ -137,24 +133,25 @@ export default function SignIn() {
                 </Link>
               </Grid>
             </Grid>
-            <Button
+            <LoadingButton
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)",fontSize:"clamp(1rem,2vw,1.2rem)" }}
+              loading={loading && enter}
+              sx={{ margin: { xs: 1, md: 2 }, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
             >
               ورود
-            </Button>
-            <Button
+            </LoadingButton>
+            <LoadingButton
               // href="/register"
               fullWidth
               variant="contained"
-              sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)" ,fontSize:"clamp(1rem,2vw,1.2rem)"}}
+              loading={loading && !enter}
+              sx={{ margin: { xs: 1, md: 2 }, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
               onClick={() => navigate("/register")}
-
             >
-                ثبت نام
-            </Button>
+              ثبت نام
+            </LoadingButton>
 
           </Box>
         </Box>

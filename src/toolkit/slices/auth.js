@@ -81,6 +81,45 @@ export const authSlice = createSlice({
     });
     builder.addCase(loginUserAsync.rejected, (state, action) => {
       state.loading = false;
+      state.error = action;
+    });
+
+    //SendOtp
+    builder.addCase(sendOtpUserAsync.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(sendOtpUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(sendOtpUserAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    //RegisterVerify
+    builder.addCase(registerVerifyUserAsync.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(registerVerifyUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(registerVerifyUserAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    //Register
+    builder.addCase(registerUserAsync.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(registerUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(registerUserAsync.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.error.message;
     });
   },

@@ -8,10 +8,11 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUserAsync,registerVerifyUserAsync, sendOtpUserAsync } from "../../toolkit/slices/auth";
+import { registerUserAsync, registerVerifyUserAsync, sendOtpUserAsync } from "../../toolkit/slices/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
 import { IconButton } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const Register = () => {
     const [error, setError] = useState({
@@ -26,6 +27,9 @@ const Register = () => {
     const st = Storage();
     const navigate = useNavigate();
     const [tel, setTel] = useState("");
+    const errorApi = useSelector((state) => state.auth.error);
+    const loading = useSelector((state) => state.auth.loading);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const form_data = new FormData(e.target);
@@ -37,14 +41,12 @@ const Register = () => {
                 if (data.message === "message sent") {
                     setError({ num: false, send: false, error: false, check: true, notVerify: false });
                     navigate("/register");
-                } else {
-                    new Error("send failed!")
-                    setError({ ...error, send: true, error: true });
                 }
             })
                 .catch((e) => {
-                    new Error("Number wrong!")
-                    setError({ ...error, num: true, error: true });
+                    console.log(errorApi);
+                    setError({ num: false, send: true, error: true, check: false, notVerify: false });
+                    setTel("");
                 })
         } else if (!error.verify) {
             Promise.all([dispatch(registerVerifyUserAsync({ ...data, phone_number: tel }))]).then((res) => {
@@ -82,6 +84,11 @@ const Register = () => {
         }
     };
     const CustomTextField = styled(TextField)({
+        root: {
+            '& .MuiFormHelperText-root': {
+                color: "red"
+            }
+        },
         '& label': {
             transformOrigin: "right !important",
             left: "inherit !important",
@@ -94,8 +101,8 @@ const Register = () => {
     });
 
     return (
-        <Grid container justifyContent={"center"} alignItems="center" bgcolor={"rgb(105, 169, 255)"} margin={2} width="auto">
-            <Grid Item bgcolor={"white"} width="50%" height="60%" margin={6} padding={6}>
+        <Grid container justifyContent={"center"} alignItems="center" bgcolor={"rgb(105, 169, 255)"} sx={{ margin: { xs: 1, md: 2 } }} width="auto">
+            <Grid Item bgcolor={"white"} sx={{ width: { xs: "100%", sm: "80%", md: "50%" }, margin: { xs: 3, md: 6 }, padding: { xs: 3, md: 6 } }} height="60%">
                 <CssBaseline />
                 <Box
                     sx={{
@@ -122,6 +129,8 @@ const Register = () => {
                         sx={{ mt: 1 }}
                     >
                         <CustomTextField
+                            inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                            InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             variant="standard"
                             value={tel ? tel : undefined}
                             disabled={error.check || error.verify}
@@ -136,6 +145,8 @@ const Register = () => {
                             autoFocus
                         />
                         <CustomTextField
+                            inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                            InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             sx={error.check ? { display: "block" } : { display: "none" }}
                             variant="standard"
                             margin="normal"
@@ -148,6 +159,8 @@ const Register = () => {
                             autoFocus
                         />
                         <CustomTextField
+                            inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                            InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             sx={error.verify ? { display: "block" } : { display: "none" }}
                             variant="standard"
                             margin="normal"
@@ -160,8 +173,18 @@ const Register = () => {
                             autoComplete="*******"
                             autoFocus
                         />
+                        <Grid container sx={error.verify ? { display: "block" } : { display: "none" }}>
+                            <Grid item xs margin={1}>
+                                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                                    حداقل شامل ۸ کاراکتر
+                                </Typography>
+                            </Grid>
+                        </Grid>
                         <CustomTextField
+                            inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                            InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             sx={error.verify ? { display: "block" } : { display: "none" }}
+                            helperText="شامل حداقل ۸ کاراکتر"
                             variant="standard"
                             margin="normal"
                             required
@@ -173,9 +196,16 @@ const Register = () => {
                             autoComplete="09XXXXXXXX"
                             autoFocus
                         />
+                        <Grid container sx={error.verify ? { display: "block" } : { display: "none" }}>
+                            <Grid item xs margin={1}>
+                                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                                    حداقل شامل ۸ کاراکتر
+                                </Typography>
+                            </Grid>
+                        </Grid>
                         <Grid container display={error.error ? "flex" : "none"}>
                             <Grid item xs margin={1}>
-                                <Typography variant="body2" color={"red"}>
+                                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
                                     {error.send ? "مشکلی پیش آمده، مجددا امتحان کنید!" : "شماره تلفن وارد شده صحیح نمی باشد!"}
                                 </Typography>
                             </Grid>
@@ -184,8 +214,9 @@ const Register = () => {
                         <Grid container display={error.notVerify ? "flex" : "none"}>
                             <Grid item xs margin={1}>
                                 <Typography variant="body2" color={"red"}>
-                                    {error.send?
+                                    {error.send ?
                                         <Button
+                                            sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
                                             onClick={() => { setTel(""); setError({ ...error, error: false, check: false, notVerify: false, send: false }) }}>
                                             "مشکلی پیش آمده، مجددا امتحان کنید!"
                                         </Button>
@@ -194,14 +225,15 @@ const Register = () => {
                             </Grid>
                         </Grid>
 
-                        <Button
+                        <LoadingButton
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)" }}
+                            loading={loading}
+                            sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
                         >
-                            {error.check || error.verify?"تایید":"ثبت نام"}
-                        </Button>
+                            {error.check || error.verify ? "تایید" : "ثبت نام"}
+                        </LoadingButton>
 
                         <Grid container>
                             <Grid item xs margin={1}>
