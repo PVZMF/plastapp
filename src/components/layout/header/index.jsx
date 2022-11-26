@@ -13,6 +13,7 @@ import { Box } from '@mui/material';
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import CloseIcon from '@mui/icons-material/Close';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import {
   FlexNavContainer,
@@ -54,6 +55,8 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
       });
   }, []);
 
+  const isLogin = useSelector(state => state.auth.isLogin);
+  console.log(isLogin);
   const state = useSelector(state => state.cartState);
 
   return (
@@ -89,7 +92,7 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
           <StyledNavLeftBar>
             <Box color={globalCssVar.light_blue} >
               <IconButton href="/login" width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
-                {navLan.login_button}
+                {isLogin? <AccountCircleIcon fontSize="large"/> :navLan.login_button}
               </IconButton>
             </Box>
             <Link to="/cart">

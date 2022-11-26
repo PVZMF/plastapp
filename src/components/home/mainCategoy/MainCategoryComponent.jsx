@@ -11,10 +11,10 @@ import { FlexMainCateogry } from "./styledMainCategory";
 // import SkeltonLoader from "../../../components/skeletonLoader/SkeltonLoader";
 
 // images 
-import Logo1 from '../../../assets/imgs/1.webp';
-import Logo2 from '../../../assets/imgs/2.webp';
-import Logo3 from '../../../assets/imgs/3.webp';
-import Logo4 from '../../../assets/imgs/4.webp';
+// import Logo1 from '../../../assets/imgs/1.webp';
+// import Logo2 from '../../../assets/imgs/2.webp';
+// import Logo3 from '../../../assets/imgs/3.webp';
+// import Logo4 from '../../../assets/imgs/4.webp';
 
 // import SkeltonLoader from "../../../components/skeletonLoader/SkeltonLoader";
 

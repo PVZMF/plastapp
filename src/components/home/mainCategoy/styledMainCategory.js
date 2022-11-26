@@ -25,7 +25,7 @@ export const FlexMainCateogry = styled.div`
     }
 
     .category_box--img {
-      width: clamp(40px,40%,80px);
+      width: clamp(40px,80%,150px);
     }
   }
 `;

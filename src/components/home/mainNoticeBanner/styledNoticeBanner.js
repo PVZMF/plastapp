@@ -9,7 +9,7 @@ export const FlexMainNoticeBanner = styled.div`
   align-items: center;
 
   .banner {
-    flex-basis: 50%;
+    flex-basis: 40%;
     overflow: hidden;
     margin-bottom: 3.5rem;
     &--img {

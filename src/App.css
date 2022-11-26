@@ -1,0 +1,3 @@
+html:root{
+    --swiper-navigation-size:clamp(18px,3vw,44px);
+}

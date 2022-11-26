@@ -25,6 +25,9 @@ export const FlexMainSuggested = styled.div`
     .slide {
       background-color: var(--primary-white);
     }
+    .swiper-wrapper{
+      box-sizing : border-box;
+    }
   }
 
   &.blue {

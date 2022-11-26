@@ -34,7 +34,7 @@ const MainProductsComponent = ({ title }) => {
 
   return (
     <GlobalContainer>
-      <Typography component="h2" variant="h2" textAlign="center" marginY={4} fontSize="clamp(1.5rem, 3vw, 3rem)">
+      <Typography component="h2" variant="h2" textAlign="center" marginTop={5} marginBottom={1} fontSize="clamp(1.5rem, 3vw, 3rem)">
         {title}
       </Typography>
 

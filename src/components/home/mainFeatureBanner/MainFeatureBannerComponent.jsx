@@ -13,13 +13,13 @@ import img4 from "../../../assets/imgs/featuresImgs/support.webp";
 export const MainFeatureBannerComponent = () => {
   const state = [img1, img2, img3, img4];
   return (
-    <GlobalBannerContainer className="bannerContainer">
+    <GlobalBannerContainer>
       <FlexMainBanner>
         {state.map((item, i) => {
           return (
             <div key={i}>
               <NavLink to={`/ad`}>
-                <img className="img" src={item} alt="" />
+                <img src={item} alt="" width={"100%"} height={"100%"}/>
               </NavLink>
             </div>
           );

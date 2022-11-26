@@ -4,6 +4,7 @@ export const MainSearchContainer = styled.div`
   widht: 100%;
   background: var(--primary-light);
   padding: 25px 0;
+  margin: 10px 0;
 `;
 
 export const FlexMainSearch = styled.div`

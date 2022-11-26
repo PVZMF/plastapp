@@ -85,10 +85,8 @@ const Home = () => {
       <MainNoticeBannerComponent row={"first"} />
       <MainShopsComponent title={HomeLan.mainTopShops_title} />
       <ListBannerImages ListImg={imgList1}/>
-      <MainBannerComponent start={0} end={4} />
       <MainShopsComponent title={HomeLan.mainPopularShops_title} />
       <ListBannerImages ListImg={imgList2}/>
-      <MainBannerComponent start={4} end={8} />
       <MainProductsComponent title={HomeLan.mainAllProducts_title} />
       <MainFeatureBannerComponent />
       {/* <MainWonderfullyComponent /> */}

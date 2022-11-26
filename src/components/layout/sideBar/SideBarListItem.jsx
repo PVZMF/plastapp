@@ -10,7 +10,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
-
 const SideBarListItem = (props) => {
   const [open, setOpen] = useState(false);
   const handleClick = (e) => {
@@ -19,7 +18,6 @@ const SideBarListItem = (props) => {
       useEffect(() => {
         if(props.isOpenDrawer)setOpen(false);
       }, [props.isOpenDrawer]);
-
 
   if (props.childrenItems)
     return (
@@ -47,7 +45,7 @@ const SideBarListItem = (props) => {
     return (
       <Link to={props.link}>
         {console.log(props.link)}
-        <ListItemButton>
+        <ListItemButton onClick={props.onClick}>
           <ListItemIcon sx={{ color: "#69a8ff", minWidth: "auto", flexGrow: "0", ml: 2 }}>{props.icon}</ListItemIcon>
           <ListItemText sx={{ flexGrow: "0", '& span': { fontSize:{xs:"1rem",md:"1.4rem",lg:"1.7rem"} } }}>{props.label}</ListItemText>
         </ListItemButton>

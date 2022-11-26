@@ -9,13 +9,14 @@ const HomeDownloadApp = () => {
   return (
     <FlexMainDiv>
       <Grid className="container">
-        <Grid container  >
-          <Grid item xs={6} >
-            <LeftSection />
-          </Grid>
-          <Grid item xs={6} >
+        <Grid container alignItems={"center"} justifyContent={"center"} >
+          <Grid item xs={12} md={2}>
             <RightSection />
           </Grid>
+          <Grid item xs={10} md={10}>
+            <LeftSection />
+          </Grid>
+
         </Grid>
       </Grid>
     </FlexMainDiv>
