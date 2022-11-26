@@ -49,6 +49,9 @@ export default function SignIn() {
   }
 
   const CustomTextField = styled(TextField)({
+    resize: {
+      fontSize: "50px !important"
+    },
     '& label': {
       transformOrigin: "right !important",
       left: "inherit !important",
@@ -62,7 +65,7 @@ export default function SignIn() {
 
   return (
     <Grid container justifyContent={"center"} alignItems="center" bgcolor={"rgb(105, 169, 255)"} margin={2} width="auto">
-      <Grid Item bgcolor={"white"} width="50%" height="60%" margin={6} padding={6}>
+      <Grid Item bgcolor={"white"} sx={{width:{xs:"100%",sm:"80%",md:"50%"}}} height="60%" margin={6} padding={6}>
         <CssBaseline />
         <Box
           sx={{
@@ -72,9 +75,11 @@ export default function SignIn() {
           }}
         >
           {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
-          <Box>
+          <Box width={"clamp(10px,5vw,60px"} height={"clamp(10px,5vw,60px"}>
             <img
-              style={{ width: "80px", height: "80px", margin: "auto" }}
+              width= "100%"
+              height="100%"
+              style={{margin: "auto" }}
               src={logo}
             />
           </Box>
@@ -89,6 +94,8 @@ export default function SignIn() {
             sx={{ mt: 1 }}
           >
             <CustomTextField
+              inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
               variant="standard"
               margin="normal"
               required
@@ -101,6 +108,9 @@ export default function SignIn() {
               autoFocus
             />
             <CustomTextField
+              inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              size="large"
               variant="standard"
               component="h1"
               margin="normal"
@@ -122,7 +132,7 @@ export default function SignIn() {
 
             <Grid container>
               <Grid item xs margin={1}>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" fontSize={"clamp(0.5rem,3vw,1rem)"}>
                   بازیابی رمز عبور
                 </Link>
               </Grid>
@@ -131,8 +141,7 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-
-              sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)" }}
+              sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)",fontSize:"clamp(1rem,2vw,1.2rem)" }}
             >
               ورود
             </Button>
@@ -140,16 +149,17 @@ export default function SignIn() {
               // href="/register"
               fullWidth
               variant="contained"
-              sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)" }}
+              sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)" ,fontSize:"clamp(1rem,2vw,1.2rem)"}}
               onClick={() => navigate("/register")}
+
             >
-              ثبت نام
+                ثبت نام
             </Button>
 
           </Box>
         </Box>
       </Grid>
-    </Grid>
+    </Grid >
   );
 }
 
