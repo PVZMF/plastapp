@@ -52,6 +52,7 @@ export const authSlice = createSlice({
     username: "",
     isLogin: false,
     error: "",
+    onToasted: false
   },
   reducers: {
     login: (state) => {
@@ -66,6 +67,9 @@ export const authSlice = createSlice({
       state.username = "";
       state.isLogin = false;
     },
+    setToasted: (state,action) => {
+      state.onToasted = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(loginUserAsync.pending, (state) => {

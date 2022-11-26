@@ -13,6 +13,8 @@ import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
 import LoadingButton from '@mui/lab/LoadingButton';
+import setToasted from '../../toolkit/slices/auth'
+import { Alert } from "@mui/material";
 
 export default function SignIn() {
   const [error, setError] = useState(false);
@@ -30,13 +32,15 @@ export default function SignIn() {
     const data = Object.fromEntries(form_data.entries());
     setEnter(true);
     Promise.all([dispatch(loginUserAsync(data))]).then((res) => {
-      const data = res[0].payload;
-      st.setLogin(data.refresh, data.accsess);
-      console.log(data);
+      const dataLogin = res[0].payload;
+      console.log(dataLogin);
+      st.setLogin(dataLogin.refresh, dataLogin.accsess);
       dispatch(login());
-      navigate("/");
+      dispatch(setToasted(true));
+      // navigate("/");
     })
       .catch((e) => {
+        dispatch("login()");
         setError(true);
       })
   };
