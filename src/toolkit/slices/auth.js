@@ -10,8 +10,8 @@ export const loginUserAsync = createAsyncThunk(
   }
 );
 
-export const registerUserAsync = createAsyncThunk(
-  "auth/registerUserAsync",
+export const sendOtpUserAsync = createAsyncThunk(
+  "auth/sendOtpUserAsync",
   async (verifyTel, thunkAPI) => {
     const res = await api.post("account/send_otp/", verifyTel);
     return res.data;
@@ -22,6 +22,14 @@ export const registerVerifyUserAsync = createAsyncThunk(
   "auth/registerVerifyUserAsync",
   async (verifyCode) => {
     const res = await api.post("account/verify_register/", verifyCode);
+    return res.data;
+  }
+)
+
+export const registerUserAsync = createAsyncThunk(
+  "auth/registerUserAsync",
+  async (verifyCode) => {
+    const res = await api.post("account/register/", verifyCode);
     return res.data;
   }
 )

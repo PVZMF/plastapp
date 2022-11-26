@@ -48,7 +48,6 @@ export default function SignIn() {
     return <Navigate to={"/"} />;
   }
 
-  console.log(error);
   const CustomTextField = styled(TextField)({
     '& label': {
       transformOrigin: "right !important",

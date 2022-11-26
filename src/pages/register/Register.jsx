@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { registerVerifyUserAsync, registerUserAsync } from "../../toolkit/slices/auth";
+import { registerUserAsync,registerVerifyUserAsync, sendOtpUserAsync } from "../../toolkit/slices/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
 import { IconButton } from "@mui/material";
@@ -19,21 +19,24 @@ const Register = () => {
         send: false,
         error: false,
         check: false,
+        notVerify: false,
         verify: false
     });
     const dispatch = useDispatch();
     const st = Storage();
     const navigate = useNavigate();
+    const [tel, setTel] = useState("");
     const handleSubmit = (e) => {
         e.preventDefault();
         const form_data = new FormData(e.target);
         const data = Object.fromEntries(form_data.entries());
-        if (!error.check) {
-            Promise.all([dispatch(registerUserAsync(data))]).then((res) => {
+        if (!error.check && !error.verify) {
+            setTel(data.phone_number);
+            Promise.all([dispatch(sendOtpUserAsync(data))]).then((res) => {
                 const data = res[0].payload;
                 if (data.message === "message sent") {
+                    setError({ num: false, send: false, error: false, check: true, notVerify: false });
                     navigate("/register");
-                    setError({ num: false, send: false, error: false, check: true, verify: false });
                 } else {
                     new Error("send failed!")
                     setError({ ...error, send: true, error: true });
@@ -43,26 +46,41 @@ const Register = () => {
                     new Error("Number wrong!")
                     setError({ ...error, num: true, error: true });
                 })
-        } else {
-            Promise.all([dispatch(registerVerifyUserAsync(data))]).then((res) => {
-                const data = res;
-                console.log(data)
+        } else if (!error.verify) {
+            Promise.all([dispatch(registerVerifyUserAsync({ ...data, phone_number: tel }))]).then((res) => {
+                const data = res[0].payload;
                 if (data.message === "account confirmed") {
-                    navigate("/");
+                    setError({ ...error, check: false, notVerify: false, verify: true })
                 } else if (data.non_field_errors[0] === "code expired") {
                     new Error("code failed!")
-                    setError({ ...error, error: false, check: true, verify: true, send: false });
+                    setError({ ...error, error: false, check: true, notVerify: true, send: false });
                 }
             })
                 .catch((e) => {
                     console.log(e);
                     new Error("send failed!")
-                    setError({ ...error, error: false, check: true, verify: true, send: true });
+                    setError({ ...error, error: false, check: true, notVerify: true, send: true });
 
                 })
+        } else {
+            Promise.all([dispatch(registerUserAsync({ ...data, phone_number: tel }))]).then((res) => {
+                const data = res[0].payload;
+                if (data.message === "account confirmed") {
+                    setError({ ...error, check: false, notVerify: false, verify: true })
+                } else if (data.non_field_errors[0] === "code expired") {
+                    new Error("code failed!")
+                    setError({ ...error, error: false, check: true, notVerify: true, send: false });
+                }
+            })
+                .catch((e) => {
+                    console.log(e);
+                    new Error("send failed!")
+                    setError({ ...error, error: false, check: true, notVerify: true, send: true });
+
+                })
+
         }
     };
-
     const CustomTextField = styled(TextField)({
         '& label': {
             transformOrigin: "right !important",
@@ -105,13 +123,15 @@ const Register = () => {
                     >
                         <CustomTextField
                             variant="standard"
+                            value={tel ? tel : undefined}
+                            disabled={error.check || error.verify}
                             margin="normal"
                             required
                             fullWidth
                             id="tel"
                             label="شماره موبایل"
                             name="phone_number"
-                            type={"tel"}
+                            type={"text"}
                             autoComplete="09XXXXXXXX"
                             autoFocus
                         />
@@ -127,6 +147,32 @@ const Register = () => {
                             type={"text"}
                             autoFocus
                         />
+                        <CustomTextField
+                            sx={error.verify ? { display: "block" } : { display: "none" }}
+                            variant="standard"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="tel"
+                            label="پسورد"
+                            name="password"
+                            type={"password"}
+                            autoComplete="*******"
+                            autoFocus
+                        />
+                        <CustomTextField
+                            sx={error.verify ? { display: "block" } : { display: "none" }}
+                            variant="standard"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="tel"
+                            label="تایید پسورد"
+                            name="password_confirm"
+                            type={"text"}
+                            autoComplete="09XXXXXXXX"
+                            autoFocus
+                        />
                         <Grid container display={error.error ? "flex" : "none"}>
                             <Grid item xs margin={1}>
                                 <Typography variant="body2" color={"red"}>
@@ -135,10 +181,15 @@ const Register = () => {
                             </Grid>
                         </Grid>
 
-                        <Grid container display={error.verify ? "flex" : "none"}>
+                        <Grid container display={error.notVerify ? "flex" : "none"}>
                             <Grid item xs margin={1}>
                                 <Typography variant="body2" color={"red"}>
-                                    {error.send ? <Button onClick={() => setError({ ...error, error: false, check: false, verify: false, send: false })}> "مشکلی پیش آمده، مجددا امتحان کنید!" </Button> : "کد صحیح نمی باشد!"}
+                                    {error.send?
+                                        <Button
+                                            onClick={() => { setTel(""); setError({ ...error, error: false, check: false, notVerify: false, send: false }) }}>
+                                            "مشکلی پیش آمده، مجددا امتحان کنید!"
+                                        </Button>
+                                        : "کد صحیح نمی باشد!"}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -149,7 +200,7 @@ const Register = () => {
                             variant="contained"
                             sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)" }}
                         >
-                            ثبت نام
+                            {error.check || error.verify?"تایید":"ثبت نام"}
                         </Button>
 
                         <Grid container>
