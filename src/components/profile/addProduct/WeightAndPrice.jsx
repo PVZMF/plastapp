@@ -7,7 +7,7 @@ const WeightAndPrice = () => {
     <div className={style.weight}>
         <span className={style.icon}><TbTag /></span>
         <div className={style.box}>
-            <h5 className={style.title}>- وزن،قیمت و موجودی</h5>
+            <h5 className={style.title}>- وزن، تعداد، قیمت و موجودی</h5>
             <div className={style.boxinput}>
                 <label>واحد محصول</label>
                 <div className={style.input}>
@@ -19,6 +19,8 @@ const WeightAndPrice = () => {
                         <option value="رول">رول</option>
                         <option value="بسته">بسته</option>
                         <option value="کارتن">کارتن</option>
+                        <option value="تعداد">تعداد</option>
+                        <option value="دستگاه">دستگاه</option>
                     </select>
                 </div>
             </div>

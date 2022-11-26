@@ -21,7 +21,7 @@ const Profile = () => {
           :
           <MobileMenu menu={menu} setMenu={setMenu} />
         }
-        <div className={style.bodyProfile}>
+        <div className={style.bodyProfile} onClick={() => setMenu(false)}>
             <Outlet />
         </div>
     </div>

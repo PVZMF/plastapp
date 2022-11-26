@@ -11,7 +11,7 @@ const NameAndGrouping = ({ categorys }) => {
         <h4>قوانین محصولات ممنوعه در پلاست اپ</h4>
         <div className={style.boxinput}>
           <label>عنوان محصول</label>
-          <input type="text" placeholder='مثلا عسل آویشن سبلان' />
+          <input type="text" placeholder='مثلا کیسه زباله' />
         </div>
         <select>
           <option>انتخاب دسته بندی</option>
