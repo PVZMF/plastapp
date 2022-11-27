@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/axios";
+import apiLogin from "../../api/axiosLogin"
 import Storage from "../../service/Storage";
 
 export const loginUserAsync = createAsyncThunk(
@@ -37,7 +38,7 @@ export const registerUserAsync = createAsyncThunk(
 export const logoutUserAsync = createAsyncThunk(
   "auth/logoutUserAsync",
   async () => {
-    const res = await api.post("account/logout/");
+    const res = await apiLogin.post("account/logout/");
     return res?.data;
   }
 );

@@ -1,4 +1,5 @@
 import api from "./axios";
+import apiLogin from "./axiosLogin"
 
 export async function getAllBanners() {
   const res = await api.get("advertise/notice_banner/");

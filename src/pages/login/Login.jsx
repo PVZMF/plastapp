@@ -13,6 +13,8 @@ import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
 import LoadingButton from '@mui/lab/LoadingButton';
+import ForgetPassword from "../../components/forgetPassword";
+import Modal from '@mui/material/Modal';
 
 export default function SignIn() {
   const [error, setError] = useState(false);
@@ -93,6 +95,19 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             ورود
           </Typography>
+
+          {/* بازیابی رمز عبور*/}
+          {/* <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="parent-modal-title"
+            aria-describedby="parent-modal-description"
+          >
+            <ForgetPassword />
+          </Modal> */}
+
+          
+
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -138,9 +153,9 @@ export default function SignIn() {
 
             <Grid container>
               <Grid item xs margin={1}>
-                <Link href="#" variant="body2" fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                <Button onClick={() => { }} color="blue" variant="body2" fontSize={"clamp(0.5rem,3vw,1rem)"}>
                   بازیابی رمز عبور
-                </Link>
+                </Button>
               </Grid>
             </Grid>
             <LoadingButton
