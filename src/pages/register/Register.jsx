@@ -209,7 +209,6 @@ const Register = () => {
                             autoFocus
                         />
                         {state.sendOtp.done && counter ? <Counter count={60} /> : <></>}
-                        {console.log(counter)}
 
                         <Grid container sx={state.register.error ? { display: "block" } : { display: "none" }}>
                             <Grid item xs margin={1}>

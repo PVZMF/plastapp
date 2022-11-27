@@ -33,6 +33,8 @@ api.interceptors.response.use(
   function (error) {
         const originalRequest = error.config;
         if (error.response.status === 401 && !originalRequest._retry) {
+
+            console.log(error.response.status);
             originalRequest._retry = true;
             return api('api/token/refresh/',
                 {

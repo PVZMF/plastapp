@@ -12,13 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
-import LoadingButton from "@mui/lab/LoadingButton";
-import setToasted from "../../toolkit/slices/auth";
-import { Alert } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
+import ForgetPassword from "../../components/forgetPassword";
+
 
 export default function SignIn() {
   const [error, setError] = useState(false);
   const [enter, setEnter] = useState(false);
+  const [forgetpass, setForgetpass] = useState(false);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const loading = useSelector((state) => state.auth.loading);
   const dispatch = useDispatch();
@@ -62,6 +63,10 @@ export default function SignIn() {
       overflow: "unset",
     },
   });
+  const handleForgotpassword = () => {
+    setForgetpass(true);
+
+  }
 
   return (
     <Grid
@@ -110,14 +115,9 @@ export default function SignIn() {
           </Typography>
 
           {/* بازیابی رمز عبور*/}
-          {/* <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="parent-modal-title"
-            aria-describedby="parent-modal-description"
-          >
-            <ForgetPassword />
-          </Modal> */}
+          <Box component={"div"} marginTop={"100px"} >
+            <ForgetPassword open={forgetpass} setOpen={setForgetpass}/>
+          </Box>
 
           <Box
             component="form"
@@ -165,16 +165,11 @@ export default function SignIn() {
                 </Typography>
               </Grid>
             </Grid>
-
+  
             <Grid container>
               <Grid item xs margin={1}>
-                <Button
-                  onClick={() => {}}
-                  color="blue"
-                  variant="body2"
-                  fontSize={"clamp(0.5rem,3vw,1rem)"}
-                >
-                  45b9f9b6d7fa786fafe718da5200ee75068777 بازیابی رمز عبور
+                <Button onClick={()=> setForgetpass((old)=> !old)} color="blue" variant="body2" fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                  بازیابی رمز عبور
                 </Button>
               </Grid>
             </Grid>

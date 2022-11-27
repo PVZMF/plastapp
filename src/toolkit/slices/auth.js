@@ -11,6 +11,22 @@ export const loginUserAsync = createAsyncThunk(
   }
 );
 
+export const registerVerifyForgetPasswordUserAsync = createAsyncThunk(
+  "auth/registerVerifyUserAsync",
+  async (verifyCode) => {
+    const res = await api.post("account/forget_password_verify/", verifyCode);
+    return res?.data;
+  }
+)
+
+export const sendOtpForgetPasswordUserAsync = createAsyncThunk(
+  "auth/sendOtpUserAsync",
+  async (verifyTel, thunkAPI) => {
+    const res = await api.post("account/forget_password_send_otp/", verifyTel);
+    return res?.data;
+  }
+);
+
 export const sendOtpUserAsync = createAsyncThunk(
   "auth/sendOtpUserAsync",
   async (verifyTel, thunkAPI) => {
