@@ -5,8 +5,8 @@ import Storage from "../../service/Storage";
 export const loginUserAsync = createAsyncThunk(
   "auth/loginUserAsync",
   async (authData, thunkAPI) => {
-    const res = await api.post("account/login/", authData);
-    return res.data;
+    const res = await api.post("account/login/", authData)
+    return res?.data;
   }
 );
 
@@ -14,7 +14,7 @@ export const sendOtpUserAsync = createAsyncThunk(
   "auth/sendOtpUserAsync",
   async (verifyTel, thunkAPI) => {
     const res = await api.post("account/send_otp/", verifyTel);
-    return res.data;
+    return res?.data;
   }
 );
 
@@ -22,7 +22,7 @@ export const registerVerifyUserAsync = createAsyncThunk(
   "auth/registerVerifyUserAsync",
   async (verifyCode) => {
     const res = await api.post("account/verify_register/", verifyCode);
-    return res.data;
+    return res?.data;
   }
 )
 
@@ -30,7 +30,7 @@ export const registerUserAsync = createAsyncThunk(
   "auth/registerUserAsync",
   async (verifyCode) => {
     const res = await api.post("account/register/", verifyCode);
-    return res.data;
+    return res?.data;
   }
 )
 
@@ -38,7 +38,7 @@ export const logoutUserAsync = createAsyncThunk(
   "auth/logoutUserAsync",
   async () => {
     const res = await api.post("account/logout/");
-    return res.data;
+    return res?.data;
   }
 );
 
@@ -52,11 +52,13 @@ export const authSlice = createSlice({
     username: "",
     isLogin: false,
     error: "",
-    onToasted: false
+    onToasted: false,
+    counter: false
   },
   reducers: {
     login: (state) => {
       state.isLogin = true;
+      state.onToasted = true
     },
     logout: (state) => {
       const st = Storage();
@@ -66,9 +68,13 @@ export const authSlice = createSlice({
       state.token = "";
       state.username = "";
       state.isLogin = false;
+      state.onToasted = true
     },
-    setToasted: (state,action) => {
-      state.onToasted = action.payload;
+    offToasted: (state) => {
+      state.onToasted = false;
+    },
+    onCounter: (state,action) => {
+      state.counter = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -95,10 +101,12 @@ export const authSlice = createSlice({
     });
     builder.addCase(sendOtpUserAsync.fulfilled, (state, action) => {
       state.loading = false;
+      state.error = action;
     });
     builder.addCase(sendOtpUserAsync.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action;
+
     });
 
     //RegisterVerify
@@ -111,7 +119,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(registerVerifyUserAsync.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action.payload;
     });
 
     //Register
@@ -124,11 +132,11 @@ export const authSlice = createSlice({
     });
     builder.addCase(registerUserAsync.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
+      state.error = action;
     });
   },
 });
 
-export const { logout, login } = authSlice.actions;
+export const { logout, login, offToasted, onCounter} = authSlice.actions;
 
 export default authSlice.reducer;

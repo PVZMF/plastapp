@@ -26,6 +26,15 @@ api.interceptors.response.use(
     return response;
   },
   function (error) {
+    if (error.response.status === 400) {
+      // try to get new access token with refresh token
+      // try the request again
+      // logout user and redirect to login page if error
+      // return error.response.data;
+      return error.response;
+    }
+
+    return Promise.reject(error);
   }
 );
 

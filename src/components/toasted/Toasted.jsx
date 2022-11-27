@@ -3,21 +3,22 @@ import { Alert, Snackbar } from '@mui/material'
 import {Typography} from '@mui/material'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import setToasted from '../../toolkit/slices/auth'
+import {offToasted} from '../../toolkit/slices/auth'
 
 const Toasted = ({ title, open, severity}) => {
     const dispatch = useDispatch();
-    const close = useSelector((state) => state.auth.onToasted);
-    console.log(close);
+    const toaste = useSelector((state) => state.auth.onToasted);
+    console.log("Toast");
+    console.log(toaste);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        dispatch(setToasted(false));
+        dispatch(offToasted());
     }
     return (
-        <Snackbar  open={open && close} onClose={handleClose} autoHideDuration={3000}>
+        <Snackbar  open={open && toaste} onClose={handleClose} autoHideDuration={3000}>
             <Alert variant="filled" severity={severity}>
                 <Typography fontSize={14}>
                     {title}

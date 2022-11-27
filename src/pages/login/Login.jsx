@@ -6,15 +6,13 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import logo from "../../assets/imgs/logo.svg";
+import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
-import LoadingButton from "@mui/lab/LoadingButton";
-import setToasted from "../../toolkit/slices/auth";
-import { Alert } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export default function SignIn() {
   const [error, setError] = useState(false);
@@ -25,24 +23,32 @@ export default function SignIn() {
   const navigate = useNavigate();
   const st = Storage();
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
     setEnter(true);
-    Promise.all([dispatch(loginUserAsync(data))])
-      .then((res) => {
-        const dataLogin = res[0].payload;
-        console.log(dataLogin);
-        st.setLogin(dataLogin.refresh, dataLogin.access);
+    Promise.all([dispatch(loginUserAsync(data))]).then((res) => {
+      const dataLogin = res[0].payload;
+      if (dataLogin.message) {
+        setError(true);
+        console.log(dataLogin.message);
+
+      }
+      else if (dataLogin.accsess || dataLogin.refresh) {
+        st.setLogin(dataLogin.refresh, dataLogin.accsess);
         dispatch(login());
-        dispatch(setToasted(true));
-        // navigate("/");
-      })
+      }
+      else {
+        new Error("Server Failed");
+        setError(true);
+      }
+    })
       .catch((e) => {
         dispatch("login()");
         setError(true);
-      });
+      })
   };
   if (isLogin) {
     return <Navigate to={"/"} />;
@@ -50,9 +56,9 @@ export default function SignIn() {
 
   const CustomTextField = styled(TextField)({
     resize: {
-      fontSize: "50px !important",
+      fontSize: "50px !important"
     },
-    "& label": {
+    '& label': {
       transformOrigin: "right !important",
       left: "inherit !important",
       right: "1.75rem !important",
@@ -60,43 +66,22 @@ export default function SignIn() {
       color: "#807D7B",
       fontWeight: 400,
       overflow: "unset",
-    },
+    }
   });
 
   return (
-    <Grid
-      container
-      justifyContent={"center"}
-      alignItems="center"
-      bgcolor={"rgb(105, 169, 255)"}
-      sx={{ margin: { xs: 1, md: 2 } }}
-      width="auto"
-    >
-      <Grid
-        Item
-        bgcolor={"white"}
-        sx={{
-          width: { xs: "100%", sm: "80%", md: "50%" },
-          margin: { xs: 3, md: 6 },
-          padding: { xs: 3, md: 6 },
-        }}
-        height="60%"
-      >
+    <Grid container justifyContent={"center"} alignItems="center" bgcolor={"rgb(105, 169, 255)"} sx={{ margin: { xs: 1, md: 2 } }} width="auto">
+      <Grid Item bgcolor={"white"} sx={{ width: { xs: "100%", sm: "80%", md: "50%" }, margin: { xs: 3, md: 6 }, padding: { xs: 3, md: 6 } }} height="60%">
         <CssBaseline />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
+            alignItems: "center"
           }}
         >
           {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
-          <Box
-            sx={{
-              width: { xs: 30, md: 60, lg: 90 },
-              height: { xs: 30, md: 60, lg: 90 },
-            }}
-          >
+          <Box sx={{ width: { xs: 30, md: 60, lg: 90 }, height: { xs: 30, md: 60, lg: 90 } }}>
             <img
               width="100%"
               height="100%"
@@ -145,11 +130,7 @@ export default function SignIn() {
             />
             <Grid container display={error ? "flex" : "none"}>
               <Grid item xs margin={1}>
-                <Typography
-                  variant="body2"
-                  color={"red"}
-                  fontSize={"clamp(0.5rem,3vw,1rem)"}
-                >
+                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
                   نام کاربری یا کلمه عبور اشتباه است
                 </Typography>
               </Grid>
@@ -157,11 +138,7 @@ export default function SignIn() {
 
             <Grid container>
               <Grid item xs margin={1}>
-                <Link
-                  href="#"
-                  variant="body2"
-                  fontSize={"clamp(0.5rem,3vw,1rem)"}
-                >
+                <Link href="#" variant="body2" fontSize={"clamp(0.5rem,3vw,1rem)"}>
                   بازیابی رمز عبور
                 </Link>
               </Grid>
@@ -171,13 +148,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               loading={loading && enter}
-              sx={{
-                margin: { xs: 1, md: 2 },
-                padding: 2,
-                borderRadius: 4,
-                bgcolor: "rgb(105, 169, 255)",
-                fontSize: "clamp(1rem,2vw,1.2rem)",
-              }}
+              sx={{ margin: { xs: 1, md: 2 }, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
             >
               ورود
             </LoadingButton>
@@ -186,20 +157,16 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               loading={loading && !enter}
-              sx={{
-                margin: { xs: 1, md: 2 },
-                padding: 2,
-                borderRadius: 4,
-                bgcolor: "rgb(105, 169, 255)",
-                fontSize: "clamp(1rem,2vw,1.2rem)",
-              }}
+              sx={{ margin: { xs: 1, md: 2 }, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
               onClick={() => navigate("/register")}
             >
               ثبت نام
             </LoadingButton>
+
           </Box>
         </Box>
       </Grid>
-    </Grid>
+    </Grid >
   );
 }
+
