@@ -6,16 +6,20 @@ import { combineReducers } from "redux";
 import cartSlice from "./slices/cart.slice";
 import cartReducer from "./cart/cartReducer";
 import authSlice from "./slices/auth";
+import ticketSlice from "./slices/ticketSlice";
+
+
 
 const persistConfig = {
   key: "myApp",
   storage,
 };
 const rootReducer = combineReducers({
-    // myreducerName: reducer;
-    cartReducer: cartSlice,
-    cartState: cartReducer,
-    auth: authSlice,
+  // myreducerName: reducer;
+  cartReducer: cartSlice,
+  cartState: cartReducer,
+  auth: authSlice,
+  ticket: ticketSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,6 +32,3 @@ const store = configureStore({
 export const persistor = persistStore(store);
 
 export default store;
-
-
-

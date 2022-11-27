@@ -1,137 +1,140 @@
 .newticket {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: clamp(1rem, 2vw, 2rem);
-    background: #f1f3fa;
-    min-height: 70vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: clamp(1rem, 2vw, 2rem);
+  background: #f1f3fa;
+  min-height: 70vh;
 }
 
 .box_ticket {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: clamp(1rem, 2vw, 2rem) clamp(2rem, 4vw, 4rem);
-    background: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: clamp(1rem, 2vw, 2rem) clamp(2rem, 4vw, 4rem);
+  background: #fff;
 }
 
 .header_tikes {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 1rem 0;
-    border-bottom: 1px solid #e5e5e5;
-    padding: clamp(1rem, 2vw, 2rem) 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e5e5;
+  padding: clamp(1rem, 2vw, 2rem) 0;
 }
 
 .header_tikes h4 {
-    color: #578ebe;
-    font-size: clamp(1rem, 1.6vw, 1.6rem);
+  color: #578ebe;
+  font-size: clamp(1rem, 1.6vw, 1.6rem);
 }
 
 form {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: 2rem 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 2rem 0;
 }
 
 .box_input {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .box_input label {
-    color: #333;
-    font-size: clamp(1rem, 1.3vw, 1.3rem);
+  color: #333;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
 }
 
 .box_input label span {
-    color: red;
+  color: red;
 }
 
 .box_input input {
-    width: 99%;
-    border: 1px solid #e5e5e5;
-    margin: 1rem 0;
-    padding: clamp(.5rem, .7vw, .7rem) .5rem;
-    outline: none;
+  width: 99%;
+  border: 1px solid #e5e5e5;
+  margin: 1rem 0;
+  padding: clamp(0.5rem, 0.7vw, 0.7rem) 0.5rem;
+  outline: none;
 }
 
 .box_input textarea {
-    width: 100%;
-    height: clamp(20vh, 40vh, 40vh);
-    border: 1px solid #e5e5e5;
-    padding: clamp(.5rem, .7vw, .7rem) .5rem;
-    outline: none;
-    margin: 1rem 0;
+  width: 100%;
+  height: clamp(20vh, 40vh, 40vh);
+  border: 1px solid #e5e5e5;
+  padding: clamp(0.5rem, 0.7vw, 0.7rem) 0.5rem;
+  outline: none;
+  margin: 1rem 0;
 }
 
 .footer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .footer button {
-    width: clamp(7rem, 10vw, 10rem);
-    color: #fff;
-    background: #428bca;
-    padding: .7rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: clamp(1rem, 1.4vw, 1.4rem);
+  width: clamp(7rem, 10vw, 10rem);
+  color: #fff;
+  background: #428bca;
+  padding: 0.7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
 }
 .footer button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .footer .import {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: clamp(1rem, 1.4vw, 1.4rem);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
 }
 
 .footer .import label {
-    position: relative;
-    height: 100%;
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: clamp(1rem, 1.4vw, 1.4rem);
-    border: 1px solid #e5e5e5;
-    padding: 1rem;
+  position: relative;
+  height: 100%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: clamp(1rem, 1.4vw, 1.4rem);
+  border: 1px solid #e5e5e5;
+  padding: 1rem;
 }
 
 .footer .import label input:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .footer .import label input {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }
 
 .footer .import p {
-    color: #428bca;
-    font-size: clamp(.6rem, .9vw, .9rem);
-    margin: 0 1rem 0 0;
+  color: #428bca;
+  font-size: clamp(0.6rem, 0.9vw, 0.9rem);
+  margin: 0 1rem 0 0;
+}
+.inputTitle {
+  width: 70% !important;
 }

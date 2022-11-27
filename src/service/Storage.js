@@ -15,7 +15,6 @@ function Storage() {
         isLogin: false,
       };
       localStorage.setItem("auth", JSON.stringify(data));
-
     },
     get refreshToken() {
       const key = localStorage.getItem("auth");
