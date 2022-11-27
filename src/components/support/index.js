@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsTelegram, BsTwitter ,BsInstagram , BsFacebook } from 'react-icons/bs';
 
-import Map from '../../assets/imgs/location-map.svg';
+// import Map from '../../assets/imgs/location-map.svg';
 // Style
 import style from './support.module.css';
 
@@ -10,7 +10,7 @@ const Support = ({ numbers, email }) => {
     <div className={style.support}>
         <div className={style.box_data}>
             <div className={style.map}>
-                <img src={Map} alt='map' />
+                {/* <img src={Map} alt='map' /> */}
             </div>
 
             <div className={style.data}>
