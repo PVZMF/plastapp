@@ -108,6 +108,17 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             ورود
           </Typography>
+
+          {/* بازیابی رمز عبور*/}
+          {/* <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="parent-modal-title"
+            aria-describedby="parent-modal-description"
+          >
+            <ForgetPassword />
+          </Modal> */}
+
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -157,13 +168,14 @@ export default function SignIn() {
 
             <Grid container>
               <Grid item xs margin={1}>
-                <Link
-                  href="#"
+                <Button
+                  onClick={() => {}}
+                  color="blue"
                   variant="body2"
                   fontSize={"clamp(0.5rem,3vw,1rem)"}
                 >
-                  بازیابی رمز عبور
-                </Link>
+                  45b9f9b6d7fa786fafe718da5200ee75068777 بازیابی رمز عبور
+                </Button>
               </Grid>
             </Grid>
             <LoadingButton

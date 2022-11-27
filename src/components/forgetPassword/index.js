@@ -73,7 +73,7 @@ const ForgetPassword = () => {
         sx={{
           width: "400px",
           height: "600px",
-          display: "flex",
+          display: "absolute",
           flexDirection: "column",
           alignItems: "center",
         }}

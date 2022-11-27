@@ -1,11 +1,19 @@
 import axios from "axios";
+import Storage from "../service/Storage";
+
 export const baseUrl = "https://plastapp.iran.liara.run/";
 
-
+const st = Storage();
 const api = axios.create({
+    headers: {
+        Authorization : `Bearer ${st.accessToken}`
+        },
   baseURL: baseUrl,
-  timeout: 5000
+  timeout: "5000"
 });
+
+// api.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(st.accessToken())}`;
+// axios.defaults.headers.post['Authorization'] = `Bearer ${st.accessToken()}`;
 
 api.interceptors.request.use(
   function (config) {
