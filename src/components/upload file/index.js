@@ -6,7 +6,7 @@ const UploadFile = ({ index }) => {
     <>
       <label>بارگزاری فایل {index + 2}</label>
       <AttachFileRoundedIcon />
-      <input type="file" name={`document`} accept="image/*" />
+      <input type="file" name={`document1`} accept="image/*" />
     </>
   );
 };

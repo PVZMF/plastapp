@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./style.module.css";
 import { MenuItem, Select, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,8 +14,11 @@ import axios from "axios";
 import UploadFile from "../../upload file";
 import Storage from "../../../service/Storage";
 const NewTicketComponent = () => {
+  const [image, setImage] = useState("");
   const st = Storage();
-
+  useEffect(() => {
+    console.log("image = ", image);
+  }, [image]);
   console.log(st);
 
   const [file, setFile] = useState([]);
@@ -31,24 +34,24 @@ const NewTicketComponent = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    const { title, document, message, priority } = data;
-    console.log("data", data);
+    console.log("data is ===", data);
+    const { title, document1, message, priority } = data;
+    console.log("data", document1);
     axios
       .post(
         "https://plastapp.iran.liara.run/ticket/crate/",
 
         {
-          user: 0,
+          user: 1,
           title,
-          document,
           message,
           priority,
-          document: [document],
+          document: [{ file: [document1, document1] }],
           status: "unread",
         },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": `multipart/form-data;`,
             Authorization: `Bearer ${st.accessToken}`,
           },
         }
@@ -56,24 +59,10 @@ const NewTicketComponent = () => {
       .then((res) => {
         console.log(res);
       })
-      .catch((err) => {
-        console.log({
-          user: 9108462478,
-          title,
-          document,
-          message,
-          priority,
-          document: [document],
-          status: "unread",
-        });
-      });
+      .catch((err) => console.log(err));
   };
   const dispatch = useDispatch();
-  const title = useSelector((state) => state.ticket.title);
-  const user = useSelector((state) => state.ticket.user);
-  const status = useSelector((state) => state.ticket.status);
   const priority = useSelector((state) => state.ticket.priority);
-  const document = useSelector((state) => state.ticket.document);
 
   return (
     <div className={style.newticket}>
@@ -133,12 +122,18 @@ const NewTicketComponent = () => {
           </div>
           <div className={style.footer}>
             <div className={style.import}>
-              <UploadFile index={-1} name="document" />
-              {file
+              <UploadFile
+                index={-1}
+                name="document1"
+                onChange={(e) => {
+                  setImage(e.target.value);
+                }}
+              />
+              {/* {file
                 ? file.map((items, index) => {
                     return <UploadFile key={`${index}`} index={index} />;
                   })
-                : ""}
+                : ""} */}
               <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
             </div>
 
