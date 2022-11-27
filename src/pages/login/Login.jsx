@@ -15,13 +15,13 @@ import Storage from "../../service/Storage";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
 
-
 export default function SignIn() {
   const [error, setError] = useState(false);
   const [enter, setEnter] = useState(false);
   const [forgetpass, setForgetpass] = useState(false);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const loading = useSelector((state) => state.auth.loading);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const st = Storage();
@@ -37,7 +37,7 @@ export default function SignIn() {
         console.log(dataLogin);
         st.setLogin(dataLogin.refresh, dataLogin.access);
         dispatch(login());
-        dispatch(setToasted(true));
+        
         // navigate("/");
       })
       .catch((e) => {
