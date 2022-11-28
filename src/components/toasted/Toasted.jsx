@@ -8,8 +8,6 @@ import {offToasted} from '../../toolkit/slices/auth'
 const Toasted = ({ title, open, severity}) => {
     const dispatch = useDispatch();
     const toaste = useSelector((state) => state.auth.onToasted);
-    console.log("Toast");
-    console.log(toaste);
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {

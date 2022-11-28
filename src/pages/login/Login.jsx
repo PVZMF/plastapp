@@ -1,50 +1,75 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import FormControl from '@mui/material/FormControl';
 import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg";
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
-import Storage from "../../service/Storage";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
+import {IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function SignIn() {
+
   const [error, setError] = useState(false);
-  const [enter, setEnter] = useState(false);
-  const [forgetpass, setForgetpass] = useState(false);
+  const [textError, setTextError] = useState("");
+  const [onSpinerButton, setonSpinerButton] = useState(false);
+  const [showForgetpass, setShowForgetpass] = useState(false);
+  const [showPass, SetShowPass] = useState(false);
+  const [formData, setFormData] = useState({ phone_number: "", password: "" });
+  const [focus, setFocus] = useState("");
   const isLogin = useSelector((state) => state.auth.isLogin);
   const loading = useSelector((state) => state.auth.loading);
+  const errorApi = useSelector((state) => state.auth.error);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const st = Storage();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
-    setEnter(true);
-    Promise.all([dispatch(loginUserAsync(data))])
+    setonSpinerButton(true);
+    (dispatch(loginUserAsync(data))).unwrap()
       .then((res) => {
-        const dataLogin = res[0].payload;
-        console.log(dataLogin);
-        st.setLogin(dataLogin.refresh, dataLogin.access);
-        dispatch(login());
-        
-        // navigate("/");
+        // console.log(res.access);
+        if (res?.message === "no user with this credential   exists ") {
+          setTextError("کاربری با این مشخصات وجود ندارد!");
+          setError(true);
+        }
+        else if (res?.access) {
+          console.log(res.access);
+          console.log(res.refresh);
+          dispatch(login(res.access, res.refresh));
+          setError(false);
+          console.log("Login")
+        }
+        else if (res?.phone_number[0] === "این مقدار نباید خالی باشد.") {
+          setTextError("شمازه تلفن الزامی است!")
+          setError(true);
+        }
+        else if (res?.phone_number[0] === "unvalid phonenumber") {
+          setTextError("شمازه تلفن اشتباه است!")
+          setError(true);
+        }
+        else if (res?.password) {
+          setTextError("پسورد الزامی است!")
+          setError(true);
+        }
       })
       .catch((e) => {
-        dispatch("login()");
-        setError(true);
+        console.log(e)
+        setError(e);
       });
   };
+
   if (isLogin) {
     return <Navigate to={"/"} />;
   }
@@ -63,10 +88,15 @@ export default function SignIn() {
       overflow: "unset",
     },
   });
-  const handleForgotpassword = () => {
-    setForgetpass(true);
 
+  const onChangehandle = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFocus(e.target.name);
   }
+  const handleClickShowPassword = () => {
+    SetShowPass(old => !old);
+  };
 
   return (
     <Grid
@@ -113,12 +143,10 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             ورود
           </Typography>
-
           {/* بازیابی رمز عبور*/}
           <Box component={"div"} marginTop={"100px"} >
-            <ForgetPassword open={forgetpass} setOpen={setForgetpass}/>
+            <ForgetPassword open={showForgetpass} setOpen={setShowForgetpass} />
           </Box>
-
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -136,12 +164,27 @@ export default function SignIn() {
               label="شماره موبایل"
               name="phone_number"
               type={"tel"}
+              value={formData.phone_number}
               autoComplete="09XXXXXXXX"
-              autoFocus
+              onChange={onChangehandle}
+              autoFocus={focus === "phone_number" ? true : false}
             />
             <CustomTextField
               inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
               InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              autoSave
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                  // onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPass ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                ),
+              }}
+              onChange={onChangehandle}
               size="large"
               variant="standard"
               component="h1"
@@ -150,10 +193,13 @@ export default function SignIn() {
               fullWidth
               name="password"
               label="پسورد"
-              type="password"
+              value={formData.password}
+              type={showPass ? "text" : "password"}
               id="password"
               autoComplete="current-password"
+              autoFocus={focus === "password" ? true : false}
             />
+
             <Grid container display={error ? "flex" : "none"}>
               <Grid item xs margin={1}>
                 <Typography
@@ -161,14 +207,14 @@ export default function SignIn() {
                   color={"red"}
                   fontSize={"clamp(0.5rem,3vw,1rem)"}
                 >
-                  نام کاربری یا کلمه عبور اشتباه است
+                  {textError}
                 </Typography>
               </Grid>
             </Grid>
-  
+
             <Grid container>
               <Grid item xs margin={1}>
-                <Button onClick={()=> setForgetpass((old)=> !old)} color="blue" variant="body2" fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                <Button onClick={() => setShowForgetpass((old) => !old)} color="blue" variant="body2" fontSize={"clamp(0.5rem,3vw,1rem)"}>
                   بازیابی رمز عبور
                 </Button>
               </Grid>
@@ -177,7 +223,7 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              loading={loading && enter}
+              loading={loading && onSpinerButton}
               sx={{
                 margin: { xs: 1, md: 2 },
                 padding: 2,
@@ -192,7 +238,7 @@ export default function SignIn() {
               // href="/register"
               fullWidth
               variant="contained"
-              loading={loading && !enter}
+              loading={loading && !onSpinerButton}
               sx={{
                 margin: { xs: 1, md: 2 },
                 padding: 2,
