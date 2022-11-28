@@ -1,76 +1,92 @@
-import React from 'react';
-import Input from './Input';
-import JobImg from '../../assets/imgs/shop_1.jpg'
+import React, { useEffect, useState } from "react";
+import Input from "./Input";
+import JobImg from "../../assets/imgs/shop_1.jpg";
 // Icons
-import { ImUserTie } from 'react-icons/im';
-import { BsTelephoneFill } from 'react-icons/bs';
-import { MdEmail } from 'react-icons/md';
-import { TbCertificate } from 'react-icons/tb';
-
+import { ImUserTie } from "react-icons/im";
+import { BsTelephoneFill } from "react-icons/bs";
+import { MdEmail } from "react-icons/md";
+import { TbCertificate } from "react-icons/tb";
+import Spinner from "../../components/Spinner/Spinner";
 // Style
-import style from './careerOpportunity.module.css'
+import style from "./careerOpportunity.module.css";
+import axios from "axios";
 
-const Career_Opportunity = ({ description, jobs }) => {
+const Career_Opportunity = () => {
+  const data = "";
+  const [jobs, setJobs] = useState("");
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    var config = {
+      method: "get",
+      url: "https://plastapp.iran.liara.run/job/list/",
+      headers: {},
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        setLoading(false);
+        console.log(response.data);
+        setJobs(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  const handleSubmit = () => {};
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div className={style.jobs}>
-        <div className={style.title}>
-            <h3>فرصت های شغلی</h3>
+      <div className={style.title}>
+        <h3>فرصت های شغلی</h3>
+      </div>
+
+      <div className={style.jobsBox}>
+        <div className={style.imageBox}>
+          <img src={JobImg} alt="career opportunity" />
         </div>
 
-        <div className={style.jobsBox}>
-            <div className={style.imageBox}>
-                <img src={JobImg} alt="career opportunity" />
+        <div className={style.formBox}>
+          <p>lorem5</p>
+          <hr />
+
+          <form onSubmit={handleSubmit}>
+            <Input
+              name="first_name"
+              title="نام و نام خانوادگی"
+              icon={<ImUserTie />}
+            />
+            <Input name="last_name" title="نام خانوادگی" icon={<ImUserTie />} />
+            <Input
+              name="phone_number"
+              title="شماره تماس"
+              icon={<BsTelephoneFill />}
+              type="tel"
+            />
+            <Input name="email" title="ایمیل" icon={<MdEmail />} type="email" />
+            <Input
+              name="description"
+              title="توضیحات"
+              icon={<TbCertificate />}
+            />
+            <div className={style.selectbox}>
+              <label>انتخاب فرصت شغلی</label>
+              <select name="job">
+                {jobs.map((item) => (
+                  <option value={item.id}>{item.title}</option>
+                ))}
+              </select>
             </div>
 
-            <div className={style.formBox}>
-                <p>{description}</p>
-                <hr />
-                
-                <form>
-                    <Input title='نام و نام خانوادگی' icon={<ImUserTie />} />
-                    <Input title='شماره تماس' icon={<BsTelephoneFill />} type='tel' />
-                    <Input title='ایمیل' icon={<MdEmail />} type='email' />
-                    <Input title='مدرک تحصیلی' icon={<TbCertificate />} />
-                    <Input title='ارسال رزومه' icon={<TbCertificate />} type='file' placeholder='ارسال فایل رزومه' />
-                    <div className={style.selectbox}>
-                        <label>انتخاب فرصت شغلی</label>
-                        <select>
-                            {jobs.map(item => (<option value={item.value}>{item.name}</option>))}
-                        </select>
-                    </div>
-
-                    <button>ارسال</button>
-                </form>
-            </div>
+            <button>ارسال</button>
+          </form>
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Career_Opportunity
-
-Career_Opportunity.defaultProps = {
-    jobs: [
-        {
-            id: 1,
-            value: '1',
-            name: 'مدیرفنی',
-        },
-        {
-            id: 2,
-            value: '2',
-            name: 'آبدارچی',
-        },
-        {
-            id: 3,
-            value: '3',
-            name: 'برنامه نویس Front-End',
-        },
-        {
-            id: 4,
-            value: '4',
-            name: 'منشی',
-        },
-    ],
-    description: "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.",
-}
+export default Career_Opportunity;
