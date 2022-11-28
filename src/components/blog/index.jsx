@@ -1,10 +1,29 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import CardBlog from './cardBlog'
-import imgBlog from '../../assets/imgs/shop_1.jpg'
-import style from './blog.module.css'
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import CardBlog from "./cardBlog";
+import imgBlog from "../../assets/imgs/shop_1.jpg";
+import style from "./blog.module.css";
+import axios from "axios";
+import Spinner from "../Spinner/Spinner";
+const Blog = () => {
+  const [blogList, setBlogList] = useState("");
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    axios
+      .get("https://plastapp.iran.liara.run/blog/list/")
+      .then((res) => {
+        console.log(res);
+        setBlogList(res.data);
+        setLoading(false);
+      })
 
-const Blog = ({ blogList }) => {
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <div className={style.blog}>
       <div className={style.title}>
@@ -12,50 +31,16 @@ const Blog = ({ blogList }) => {
       </div>
 
       <div className={style.listBlog}>
-        {blogList.map(item => (
+        {blogList.map((item) => (
           <div className={style.card} key={item.id}>
-            <Link to={`/blog/${item.id}`}><CardBlog item={item} /></Link>
-          </div>  
-        ))
-        }
+            <Link to={`/blog/${item.id}`}>
+              <CardBlog item={item} />
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Blog;
-
-Blog.defaultProps = {
-  blogList: [
-    {
-      id: 1,
-      title: 'متن تستی 1',
-      image: imgBlog,
-      date: '8 روز پیش'
-    },
-    {
-      id: 2,
-      title: 'متن تستی 2',
-      image: imgBlog,
-      date: '8 روز پیش'
-    },
-    {
-      id: 3,
-      title: 'متن تستی 3',
-      image: imgBlog,
-      date: '8 روز پیش'
-    },
-    {
-      id: 4,
-      title: 'متن تستی 4',
-      image: imgBlog,
-      date: '8 روز پیش'
-    },
-    {
-      id: 5,
-      title: 'متن تستی 5',
-      image: imgBlog,
-      date: '8 روز پیش'
-    },
-  ]
-}
