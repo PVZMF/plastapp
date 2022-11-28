@@ -5,6 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import IconButton from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
@@ -12,9 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { ForgetPasswordUserAsync, registerVerifyForgetPasswordUserAsync, sendOtpForgetPasswordUserAsync, toggleIsCreateAccount } from "../../toolkit/slices/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
-// import LoadingButton from '@mui/lab/LoadingButton';
+import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
+import { Visibility,VisibilityOff } from '@mui/icons-material';
 
 const ForgetPassword = ({ open, setOpen }) => {
   // State Register
@@ -36,7 +38,7 @@ const ForgetPassword = ({ open, setOpen }) => {
   const [textErrorSendOtp, setTextErrorSendOtp] = useState("");
   const [textErrorVerifyTel, setTextErrorVerifyTel] = useState("");
   const [textErrorRegister, setTextErrorRegister] = useState("");
-
+  const [showPass, SetShowPass] = useState(false);
 
   const onChangehandle = (e) => {
     e.preventDefault();
@@ -130,6 +132,10 @@ const ForgetPassword = ({ open, setOpen }) => {
     setOpen(false);
   };
 
+  const handleClickShowPassword = () => {
+    SetShowPass(old => !old);
+  };
+
   const CustomTextField = styled(TextField)({
     root: {
       '& .MuiFormHelperText-root': {
@@ -157,10 +163,10 @@ const ForgetPassword = ({ open, setOpen }) => {
         <Grid
          bgcolor={"white"}
           sx={{
-          marginRight: { xs: "40px", sm: "150px", md: "200px", lg: "300px" },
-          marginTop: { xs: "50px", sm: "150px", md: "150px" },
+          marginRight: { xs: "40px", sm: "150px", md: "200px", lg: "450px" },
+          marginTop: { xs: "50px", sm: "80px", md: "120px", lg:"150px" },
           width: { xs: "250px", sm: "400px", md: "550px" },
-          height: { xs: "350px", sm: "400px", md: "auto" },
+          height: "auto",
           alignItems: "center",
           bgcolor: "white",
           padding: "40px"}} height="60%">
@@ -222,6 +228,17 @@ const ForgetPassword = ({ open, setOpen }) => {
                 inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                 InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                 sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                    // onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPass ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  ),
+                }}
                 variant="standard"
                 margin="normal"
                 required
@@ -229,7 +246,7 @@ const ForgetPassword = ({ open, setOpen }) => {
                 id="tel"
                 label="پسورد"
                 name="password"
-                type={"password"}
+                type={showPass ? "text" : "password"}
                 autoComplete="*******"
                 autoFocus={focus === "password" ? true : false}
                 onChange={onChangehandle}
@@ -239,6 +256,17 @@ const ForgetPassword = ({ open, setOpen }) => {
                 inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                 InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                 sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                    // onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPass ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  ),
+                }}
                 helperText="شامل حداقل ۸ کاراکتر"
                 variant="standard"
                 margin="normal"
@@ -247,7 +275,7 @@ const ForgetPassword = ({ open, setOpen }) => {
                 id="tel"
                 label="تایید پسورد"
                 name="password_confirm"
-                type={"text"}
+                type={showPass ? "text" : "password"}
                 autoComplete="09XXXXXXXX"
                 autoFocus={focus === "password_confirm" ? true : false}
                 onChange={onChangehandle}

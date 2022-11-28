@@ -13,7 +13,7 @@ import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
-import { Icon, IconButton } from "@mui/material";
+import {IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function SignIn() {

@@ -15,6 +15,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
 import { RssFeed } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const Register = () => {
     // State Register
@@ -36,7 +38,7 @@ const Register = () => {
     const [textErrorSendOtp, setTextErrorSendOtp] = useState("");
     const [textErrorVerifyTel, setTextErrorVerifyTel] = useState("");
     const [textErrorRegister, setTextErrorRegister] = useState("");
-
+    const [showPass, SetShowPass] = useState(false);
 
     const onChangehandle = (e) => {
         e.preventDefault();
@@ -109,6 +111,7 @@ const Register = () => {
                 if (res.message === "user created") {
                     setState({ ...state, register: { done: true, error: true } });
                     dispatch(toggleIsCreateAccount());
+                    navigate("/RoleSelectPage")
                 } else if (res.password[0] === "این مقدار نباید خالی باشد.") {
                     setState({ ...state, register: { done: false, error: true } });
                     setTextErrorRegister("وارد کردن پسورد الزامی است!")
@@ -125,6 +128,9 @@ const Register = () => {
 
         }
     };
+    const handleClickShowPassword = () => {
+        SetShowPass(old => !old);
+      };
 
     const CustomTextField = styled(TextField)({
         root: {
@@ -205,6 +211,17 @@ const Register = () => {
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                            InputProps={{
+                                endAdornment: (
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                  // onMouseDown={handleMouseDownPassword}
+                                  >
+                                    {showPass ? <Visibility /> : <VisibilityOff />}
+                                  </IconButton>
+                                ),
+                              }}
                             variant="standard"
                             margin="normal"
                             required
@@ -212,7 +229,7 @@ const Register = () => {
                             id="tel"
                             label="پسورد"
                             name="password"
-                            type={"password"}
+                            type={showPass ? "text" : "password"}
                             autoComplete="*******"
                             autoFocus={focus === "password" ? true : false}
                             onChange={onChangehandle}
@@ -222,6 +239,17 @@ const Register = () => {
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                            InputProps={{
+                                endAdornment: (
+                                  <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                  // onMouseDown={handleMouseDownPassword}
+                                  >
+                                    {showPass ? <Visibility /> : <VisibilityOff />}
+                                  </IconButton>
+                                ),
+                              }}
                             helperText="شامل حداقل ۸ کاراکتر"
                             variant="standard"
                             margin="normal"
@@ -230,7 +258,7 @@ const Register = () => {
                             id="tel"
                             label="تایید پسورد"
                             name="password_confirm"
-                            type={"text"}
+                            type={showPass ? "text" : "password"}
                             autoComplete="09XXXXXXXX"
                             autoFocus={focus === "password_confirm" ? true : false}
                             onChange={onChangehandle}
