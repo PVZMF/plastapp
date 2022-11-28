@@ -106,20 +106,46 @@ const Register = () => {
                     setState({ ...state, verifyTel: { done: false, error: true, exist: false } });
                 })
         } else if (!state.register.done) {
-            dispatch(registerUserAsync(data)).unwrap().then((res) => {
+            dispatch(registerUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
                 console.log(res);
                 if (res.message === "user created") {
                     setState({ ...state, register: { done: true, error: true } });
                     dispatch(toggleIsCreateAccount());
-                    navigate("/RoleSelectPage")
-                } else if (res.password[0] === "این مقدار نباید خالی باشد.") {
-                    setState({ ...state, register: { done: false, error: true } });
-                    setTextErrorRegister("وارد کردن پسورد الزامی است!")
+                    navigate("/roleselect")
                 }
                 else if (data.phone_number) {
                     setState({ ...state, register: { done: false, error: true } });
                     setTextErrorRegister("کاربر با این شماره تلفن از قبل موجود است");
                 }
+                else if ("password" in res) {
+                    if (res.password[0] === "این مقدار نباید خالی باشد.") {
+                        setState({ ...state, register: { done: false, error: true } });
+                        setTextErrorRegister("وارد کردن پسورد الزامی است!")
+                    }
+                }
+                else if ("password_confirm" in res) {
+                    if (res.password_confirm[0] === "این مقدار نباید خالی باشد.") {
+                        setState({ ...state, register: { done: false, error: true } });
+                        setTextErrorRegister("وارد کردن تایید پسورد الزامی است!")
+                    }
+                }
+                else if ("non_field_errors" in res) {
+                    if (res.non_field_errors[0] === 'new password char must be in range 6 and 9') {
+                        setState({ ...state, register: { done: false, error: true } });
+                        setTextErrorRegister("پسورد باید بین ۶ تا ۹ کاراکتر باشد!")
+                    }
+                    else if (res.non_field_errors[0] === "{'this phone_number not confirmed'}"){
+                        setState({ ...state, register: { done: false, error: true } });
+                        setTextErrorRegister("شماره موبایل شما مجددا نیاز به تایید دارد!")
+                    }
+                    else if (data.password !== data.confirmpass){
+                        setState({ ...state, register: { done: false, error: true } });
+                        setTextErrorRegister("عدم مطابقت پسورد! از درست بودن پسورد خود مطمين شوید.")
+                    }
+                    
+                    
+                }
+
             })
                 .catch((e) => {
                     console.log(e);
@@ -130,7 +156,7 @@ const Register = () => {
     };
     const handleClickShowPassword = () => {
         SetShowPass(old => !old);
-      };
+    };
 
     const CustomTextField = styled(TextField)({
         root: {
@@ -213,15 +239,15 @@ const Register = () => {
                             sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
                             InputProps={{
                                 endAdornment: (
-                                  <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                  // onMouseDown={handleMouseDownPassword}
-                                  >
-                                    {showPass ? <Visibility /> : <VisibilityOff />}
-                                  </IconButton>
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                    // onMouseDown={handleMouseDownPassword}
+                                    >
+                                        {showPass ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
                                 ),
-                              }}
+                            }}
                             variant="standard"
                             margin="normal"
                             required
@@ -241,15 +267,15 @@ const Register = () => {
                             sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
                             InputProps={{
                                 endAdornment: (
-                                  <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                  // onMouseDown={handleMouseDownPassword}
-                                  >
-                                    {showPass ? <Visibility /> : <VisibilityOff />}
-                                  </IconButton>
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                    // onMouseDown={handleMouseDownPassword}
+                                    >
+                                        {showPass ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
                                 ),
-                              }}
+                            }}
                             helperText="شامل حداقل ۸ کاراکتر"
                             variant="standard"
                             margin="normal"
@@ -287,7 +313,6 @@ const Register = () => {
                                     sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
                                     onClick={() => { setState(initialState) }}>
                                     <Typography variant="body2" color={"red"}>
-
                                         {textErrorVerifyTel}
                                     </Typography>
                                 </Button>

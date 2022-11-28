@@ -16,14 +16,14 @@ import Storage from "../../service/Storage";
 import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
-import { Visibility,VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const ForgetPassword = ({ open, setOpen }) => {
   // State Register
   const initialState = {
-    sendOtp: { done: false, error: false, exist: false, trylater: false },
-    verifyTel: { done: false, error: false, match: false },
-    register: { done: false, error: false, exist: false, confirmpass: false }
+    sendOtp: { done: false, error: false},
+    verifyTel: { done: false, error: false},
+    register: { done: false, error: false }
   };
   const [state, setState] = useState(initialState);
 
@@ -78,8 +78,7 @@ const ForgetPassword = ({ open, setOpen }) => {
 
       })
         .catch(error => {
-
-          setState({ ...state, sendOtp: { done: false, error: true, exist: false, trylater: false } });
+          console.log(error);
         })
     } else if (!state.verifyTel.done) {
       dispatch(registerVerifyForgetPasswordUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
@@ -106,18 +105,42 @@ const ForgetPassword = ({ open, setOpen }) => {
           setState({ ...state, verifyTel: { done: false, error: true, exist: false } });
         })
     } else if (!state.register.done) {
-      dispatch(ForgetPasswordUserAsync({...data,phone_number:formData.phone_number})).unwrap().then((res) => {
+      dispatch(ForgetPasswordUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
         console.log(res);
         if (res.message === "user created") {
           setState({ ...state, register: { done: true, error: true } });
           dispatch(toggleIsCreateAccount());
-        } else if (res.password[0] === "این مقدار نباید خالی باشد.") {
-          setState({ ...state, register: { done: false, error: true } });
-          setTextErrorRegister("وارد کردن پسورد الزامی است!")
+          navigate("/roleselect")
         }
         else if (data.phone_number) {
           setState({ ...state, register: { done: false, error: true } });
           setTextErrorRegister("کاربر با این شماره تلفن از قبل موجود است");
+        }
+        else if ("password" in res) {
+          if (res.password[0] === "این مقدار نباید خالی باشد.") {
+            setState({ ...state, register: { done: false, error: true } });
+            setTextErrorRegister("وارد کردن پسورد الزامی است!")
+          }
+        }
+        else if ("password_confirm" in res) {
+          if (res.password_confirm[0] === "این مقدار نباید خالی باشد.") {
+            setState({ ...state, register: { done: false, error: true } });
+            setTextErrorRegister("وارد کردن تایید پسورد الزامی است!")
+          }
+        }
+        else if ("non_field_errors" in res) {
+          if (res.non_field_errors[0] === 'new password char must be in range 6 and 9') {
+            setState({ ...state, register: { done: false, error: true } });
+            setTextErrorRegister("پسورد باید بین ۶ تا ۹ کاراکتر باشد!")
+          }
+          else if (res.non_field_errors[0] === "{'this phone_number not confirmed'}") {
+            setState({ ...state, register: { done: false, error: true } });
+            setTextErrorRegister("شماره موبایل شما مجددا نیاز به تایید دارد!")
+          }
+          else if (data.password !== data.confirmpass) {
+            setState({ ...state, register: { done: false, error: true } });
+            setTextErrorRegister("عدم مطابقت پسورد! از درست بودن پسورد خود مطمين شوید.")
+          }
         }
       })
         .catch((e) => {
@@ -129,6 +152,7 @@ const ForgetPassword = ({ open, setOpen }) => {
 
   // Modal
   const handleClose = () => {
+    setState(initialState);
     setOpen(false);
   };
 
@@ -160,171 +184,172 @@ const ForgetPassword = ({ open, setOpen }) => {
       aria-labelledby="parent-modal-title"
       aria-describedby="parent-modal-description"
     >
-        <Grid
-         bgcolor={"white"}
-          sx={{
+      <Grid
+        bgcolor={"white"}
+        sx={{
           marginRight: { xs: "40px", sm: "150px", md: "200px", lg: "450px" },
-          marginTop: { xs: "50px", sm: "80px", md: "120px", lg:"150px" },
+          marginTop: { xs: "50px", sm: "80px", md: "120px", lg: "150px" },
           width: { xs: "250px", sm: "400px", md: "550px" },
           height: "auto",
           alignItems: "center",
           bgcolor: "white",
-          padding: "40px"}} height="60%">
-          <CssBaseline />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
-            <Box>
-              <img
-                style={{ width: "80px", height: "80px", margin: "auto" }}
-                src={logo}
-              />
-            </Box>
-            <Typography component="h1" variant="h5">
-              بازیابی رمز عبور
-            </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <CustomTextField
-                inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                variant="standard"
-                disabled={state.sendOtp.done}
-                margin="normal"
-                required
-                fullWidth
-                id="tel"
-                label="شماره موبایل"
-                name="phone_number"
-                type={"text"}
-                autoComplete="09XXXXXXXX"
-                autoFocus={focus === "phone_number" ? true : false}
-                onChange={onChangehandle}
-                value={formData.phone_number}
-              />
-              <CustomTextField
-                inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                sx={state.sendOtp.done && !state.verifyTel.done ? { display: "block" } : { display: "none" }}
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                id="code"
-                label="کد تایید"
-                name="code"
-                type={"text"}
-              />
-              <CustomTextField
-                inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                    // onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPass ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  ),
-                }}
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                id="tel"
-                label="پسورد"
-                name="password"
-                type={showPass ? "text" : "password"}
-                autoComplete="*******"
-                autoFocus={focus === "password" ? true : false}
-                onChange={onChangehandle}
-                value={formData.password}
-              />
-              <CustomTextField
-                inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                    // onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPass ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  ),
-                }}
-                helperText="شامل حداقل ۸ کاراکتر"
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                id="tel"
-                label="تایید پسورد"
-                name="password_confirm"
-                type={showPass ? "text" : "password"}
-                autoComplete="09XXXXXXXX"
-                autoFocus={focus === "password_confirm" ? true : false}
-                onChange={onChangehandle}
-                value={formData.password_confirm}
-              />
-              {state.sendOtp.done && counter && !state.verifyTel.done ? <Counter count={60} /> : <></>}
-
-              <Grid container sx={state.register.error ? { display: "block" } : { display: "none" }}>
-                <Grid item xs margin={1}>
-                  <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
-                    {textErrorRegister}
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid container display={state.sendOtp.error ? "flex" : "none"}>
-                <Grid item xs margin={1}>
-                  <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
-                    {textErrorSendOtp}
-                  </Typography>
-                </Grid>
-              </Grid>
-
-              <Grid container display={state.verifyTel.error ? "flex" : "none"}>
-                <Grid item xs margin={1}>
-                  <Button
-                    sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
-                    onClick={() => { setState(initialState) }}>
-                    <Typography variant="body2" color={"red"}>
-
-                      {textErrorVerifyTel}
-                    </Typography>
-                  </Button>
-
-                </Grid>
-              </Grid>
-
-              <LoadingButton
-                type="submit"
-                fullWidth
-                variant="contained"
-                loading={loading}
-                sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
-              >
-                {state.sendOtp.done && !state.verifyTel.done ? "تایید" : "ثبت نام"}
-              </LoadingButton>
-
-            </Box>
+          padding: "40px"
+        }} height="60%">
+        <CssBaseline />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
+          <Box>
+            <img
+              style={{ width: "80px", height: "80px", margin: "auto" }}
+              src={logo}
+            />
           </Box>
-        </Grid>
+          <Typography component="h1" variant="h5">
+            بازیابی رمز عبور
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <CustomTextField
+              inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              variant="standard"
+              disabled={state.sendOtp.done}
+              margin="normal"
+              required
+              fullWidth
+              id="tel"
+              label="شماره موبایل"
+              name="phone_number"
+              type={"text"}
+              autoComplete="09XXXXXXXX"
+              autoFocus={focus === "phone_number" ? true : false}
+              onChange={onChangehandle}
+              value={formData.phone_number}
+            />
+            <CustomTextField
+              inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              sx={state.sendOtp.done && !state.verifyTel.done ? { display: "block" } : { display: "none" }}
+              variant="standard"
+              margin="normal"
+              required
+              fullWidth
+              id="code"
+              label="کد تایید"
+              name="code"
+              type={"text"}
+            />
+            <CustomTextField
+              inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                  // onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPass ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                ),
+              }}
+              variant="standard"
+              margin="normal"
+              required
+              fullWidth
+              id="tel"
+              label="پسورد"
+              name="password"
+              type={showPass ? "text" : "password"}
+              autoComplete="*******"
+              autoFocus={focus === "password" ? true : false}
+              onChange={onChangehandle}
+              value={formData.password}
+            />
+            <CustomTextField
+              inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+              sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                  // onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPass ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                ),
+              }}
+              helperText="شامل حداقل ۸ کاراکتر"
+              variant="standard"
+              margin="normal"
+              required
+              fullWidth
+              id="tel"
+              label="تایید پسورد"
+              name="password_confirm"
+              type={showPass ? "text" : "password"}
+              autoComplete="09XXXXXXXX"
+              autoFocus={focus === "password_confirm" ? true : false}
+              onChange={onChangehandle}
+              value={formData.password_confirm}
+            />
+            {state.sendOtp.done && counter && !state.verifyTel.done ? <Counter count={60} /> : <></>}
+
+            <Grid container sx={state.register.error ? { display: "block" } : { display: "none" }}>
+              <Grid item xs margin={1}>
+                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                  {textErrorRegister}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid container display={state.sendOtp.error ? "flex" : "none"}>
+              <Grid item xs margin={1}>
+                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                  {textErrorSendOtp}
+                </Typography>
+              </Grid>
+            </Grid>
+
+            <Grid container display={state.verifyTel.error ? "flex" : "none"}>
+              <Grid item xs margin={1}>
+                <Button
+                  sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
+                  onClick={() => { setState(initialState) }}>
+                  <Typography variant="body2" color={"red"}>
+
+                    {textErrorVerifyTel}
+                  </Typography>
+                </Button>
+
+              </Grid>
+            </Grid>
+
+            <LoadingButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              loading={loading}
+              sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
+            >
+              {state.sendOtp.done && !state.verifyTel.done ? "تایید" : "ثبت نام"}
+            </LoadingButton>
+
+          </Box>
+        </Box>
+      </Grid>
     </Modal >
   );
 };
