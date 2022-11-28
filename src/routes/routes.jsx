@@ -27,6 +27,7 @@ import CreditPurches from '../pages/CreditPurches';
 import OrderPlace from "../pages/OrderPlace";
 import RulesConditon from "../pages/rule"
 import Register from "../pages/register/Register"
+import RoleSelectPage from "../pages/register/RoleSelectPage"
 import Login from "../pages/login/Login"
 
 const Router = createBrowserRouter([
@@ -36,11 +37,15 @@ const Router = createBrowserRouter([
         children :[
           {
             path:"/Register",
-            element: <Register/>
+            element: <Register />
+          },
+          {
+            path:"/roleselect",
+            element: <RoleSelectPage />
           },
           {
             path:"/login",
-            element: <Login/>
+            element: <Login />
          },
           {
             index: true,

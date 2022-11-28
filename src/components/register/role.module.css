@@ -1,0 +1,167 @@
+.role {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5rem 2rem;
+}
+
+.role .stepBox {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #e9e9e9;
+    border-radius: .7rem;
+    padding: clamp(1.5rem, 2.5vw, 2.5rem);
+}
+
+.role .stepBox .inputs {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.role .stepBox .inputs .inputbox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1rem ,2vw, 2rem);
+    margin: 0 0 2rem 0;
+}
+
+.role .stepBox .inputs .inputbox .input {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.role .stepBox .inputs .inputbox .input label {
+    margin: 1rem 0;
+    color: #333;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+}
+
+.role .stepBox .inputs .inputbox .input input {
+    color: #333;
+    width: 100%;
+    background: #fff;
+    height: clamp(3.5rem, 5vh, 5rem);
+    border: 1px solid #888;
+    border-radius: .6rem;
+    outline: none;
+    padding: 0 .5rem;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+}
+
+.role .stepBox .inputs .inputbox .inputImg {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.role .stepBox .inputs .inputbox .inputImg .imgbox {
+    width: 12rem;
+    height: 15rem;
+    border: 3px dashed #888;
+    border-radius: .6rem;
+}
+
+.role .stepBox .inputs .inputbox .inputImg .imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.role .stepBox .inputs .inputbox .inputImg .inputfile {
+    position: relative;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem 0;
+}
+
+.role .stepBox .inputs .inputbox .inputImg .inputfile label {
+    position: relative;
+    color: #333;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+}
+
+.role .stepBox .inputs .inputbox .inputImg .inputfile input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    top: 0;
+    right: 0;
+}
+
+
+.role .stepBox .btns {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+
+
+.role .stepBox .btns button {
+    background: #5096ff;
+    padding: 1rem;
+    width: 100%;
+    max-width: 150px;
+    text-align: center;
+    color: #fff;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    border-radius: .6rem;
+    transition: all .2s;
+}
+
+.role .stepBox .btns button:hover {
+    cursor: pointer;
+    background: #1f78fd;
+}
+
+.role .stepBox .rules {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin: 4rem 0;
+}
+
+
+.role .stepBox .rules li p {
+    color: #666;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    margin: .8rem 0;
+}
+
+@media (max-width: 700px) {
+    .role .stepBox .inputs .inputbox {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    .role .stepBox .inputs .inputbox .inputImg {
+        width: 100%;
+        margin: 1.5rem 0;
+    }
+    .role .stepBox .inputs .inputbox .inputImg .inputfile {
+        justify-content: center;
+    }
+}
