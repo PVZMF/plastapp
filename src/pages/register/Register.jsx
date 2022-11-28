@@ -8,12 +8,13 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUserAsync, registerVerifyUserAsync, sendOtpUserAsync } from "../../toolkit/slices/auth";
+import { registerUserAsync, registerVerifyUserAsync, sendOtpUserAsync, toggleIsCreateAccount } from "../../toolkit/slices/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
 import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
+import { RssFeed } from "@mui/icons-material";
 
 const Register = () => {
     // State Register
@@ -27,62 +28,95 @@ const Register = () => {
     const dispatch = useDispatch();
     const st = Storage();
     const navigate = useNavigate();
-    const [tel, setTel] = useState("");
     const errorApi = useSelector((state) => state.auth.error);
     const loading = useSelector((state) => state.auth.loading);
     const counter = useSelector((state) => state.auth.counter)
+    const [formData, setFormData] = useState({ phone_number: "", password: "", password_confirm: "" });
+    const [focus, setFocus] = useState("");
+    const [textErrorSendOtp, setTextErrorSendOtp] = useState("");
+    const [textErrorVerifyTel, setTextErrorVerifyTel] = useState("");
+    const [textErrorRegister, setTextErrorRegister] = useState("");
+
+
+    const onChangehandle = (e) => {
+        e.preventDefault();
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFocus(e.target.name);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form_data = new FormData(e.target);
         const data = Object.fromEntries(form_data.entries());
         if (!state.sendOtp.done) {
-            setTel(data.phone_number);
-            Promise.all([dispatch(sendOtpUserAsync(data))]).then((res) => {
-                const data = res[0].payload;
-                console.log(data);
-                if (data.message === "message sent") {
-                    setState({ ...state, sendOtp: { done: true, error: false, exist: false, trylater: false } });
+            (dispatch(sendOtpUserAsync(data))).unwrap().then((res) => {
+                console.log(res);
+                if (res.message === "message sent") {
+                    setState({ ...state, sendOtp: { done: true, error: false } });
                     navigate("/register");
                     dispatch(onCounter(true));
-                } else if (data.non_field_errors[0] === 'user already exist') {
-                    setState({ ...state, sendOtp: { done: false, error: false, exist: true, trylater: false } });
                 }
-                else if (data.non_field_errors[0] === "try later") {
-                    setState({ ...state, sendOtp: { done: false, error: false, exist: false, trylater: true } });
+                else if (res.non_field_errors === "try later") {
+                    setState({ ...state, sendOtp: { done: false, error: true } });
+                    setTextErrorSendOtp("کمی بعد امتحان کنید");
                 }
+                else if ("phone_number" in res) {
+                    if (res["phone_number"][0] === 'این مقدار نباید خالی باشد.') {
+                        setState({ ...state, sendOtp: { done: false, error: true } });
+                        setTextErrorSendOtp("شماره تلفن الزامی است!");
+                    }
+                    else if (res["phone_number"][0] === 'unvalid phonenumber') {
+                        setState({ ...state, sendOtp: { done: false, error: true } });
+                        setTextErrorSendOtp("شماره تلفن اشتباه است!");
+                    }
+                }
+                else if (res.non_field_errors[0] === 'user already exist') {
+                    setState({ ...state, sendOtp: { done: false, error: true } });
+                    setTextErrorSendOtp("کاربر با این شماره تلفن از قبل موجود است");
+                }
+
             })
                 .catch(error => {
+
                     setState({ ...state, sendOtp: { done: false, error: true, exist: false, trylater: false } });
-                    console.log(error);
-                    console.log(errorApi);
                 })
         } else if (!state.verifyTel.done) {
-            Promise.all([dispatch(registerVerifyUserAsync({ ...data, phone_number: tel }))]).then((res) => {
-                const data = res[0].payload;
-                if (data.message === "account confirmed") {
+            dispatch(registerVerifyUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
+                if (res.message === "account confirmed") {
                     setState({ ...state, verifyTel: { done: true, error: false } });
-                } else if (data.non_field_errors[0] === "code expired") {
-                    setState({ ...state, verifyTel: { done: false, error: true, match: false } });
                 }
-                else if (data.non_field_errors[0] === 'code aren"t match') {
-                    setState({ ...state, verifyTel: { done: false, error: false, match: true } });
+                else if ("non_field_errors" in res) {
+                    if (res.non_field_errors[0] === "code expired") {
+                        setState({ ...state, verifyTel: { done: false, error: true } });
+                        setTextErrorVerifyTel("کد منقضی شده! دوباره تلاش کنید!")
+                    }
+                    else if (res.non_field_errors[0] === 'code aren"t match') {
+                        setState({ ...state, verifyTel: { done: false, error: true } });
+                        setTextErrorVerifyTel("کد تایید اشتباه است!  دوباره تلاش کنید")
+                    }
+                }
+                else if (res.code[0] === "این مقدار نباید خالی باشد.") {
+                    setState({ ...state, verifyTel: { done: false, error: true } });
+                    setTextErrorVerifyTel("وارد کردن کد الزامی است!  دوباره تلاش کنید")
                 }
             })
                 .catch((e) => {
-                    console.log(e);
                     setState({ ...state, verifyTel: { done: false, error: true, exist: false } });
                 })
-        } else if (state.register.done) {
-            Promise.all([dispatch(registerUserAsync({ ...data, phone_number: tel }))]).then((res) => {
-                const data = res[0].payload;
-                if (data.message === "user created") {
-                    setState({ ...state, register: { done: true, error: false, exist: false } });
-                } else if (data.phone_number) {
-                    setState({ ...state, register: { done: false, error: false, exist: true } });
-                    console.log(data.message);
+        } else if (!state.register.done) {
+            dispatch(registerUserAsync(data)).unwrap().then((res) => {
+                console.log(res);
+                if (res.message === "user created") {
+                    setState({ ...state, register: { done: true, error: true } });
+                    dispatch(toggleIsCreateAccount());
+                } else if (res.password[0] === "این مقدار نباید خالی باشد.") {
+                    setState({ ...state, register: { done: false, error: true } });
+                    setTextErrorRegister("وارد کردن پسورد الزامی است!")
                 }
-
+                else if (data.phone_number) {
+                    setState({ ...state, register: { done: false, error: true } });
+                    setTextErrorRegister("کاربر با این شماره تلفن از قبل موجود است");
+                }
             })
                 .catch((e) => {
                     console.log(e);
@@ -91,16 +125,6 @@ const Register = () => {
 
         }
     };
-    const textErrorSendOtp = () => {
-        if (state.sendOtp.error) return ("شماره تلفن وارد شده صحیح نمی باشد!")
-        else if (state.sendOtp.exist) return ("کاربر با این شماره تلفن از قبل موجود است")
-        else if (state.sendOtp.trylater) return ("کمی بعد امتحان کنید")
-    }
-
-    const textErrorVerifyTel = () => {
-        if (state.verifyTel.error) return ("کد منقضی شده! دوباره تلاش کنید!")
-        else if (state.verifyTel.match) return ("کد تایید اشتباه است!")
-    }
 
     const CustomTextField = styled(TextField)({
         root: {
@@ -151,7 +175,6 @@ const Register = () => {
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             variant="standard"
-                            value={state.sendOtp.done ? tel : undefined}
                             disabled={state.sendOtp.done}
                             margin="normal"
                             required
@@ -161,7 +184,9 @@ const Register = () => {
                             name="phone_number"
                             type={"text"}
                             autoComplete="09XXXXXXXX"
-                            autoFocus
+                            autoFocus={focus === "phone_number" ? true : false}
+                            onChange={onChangehandle}
+                            value={formData.phone_number}
                         />
                         <CustomTextField
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
@@ -175,7 +200,6 @@ const Register = () => {
                             label="کد تایید"
                             name="code"
                             type={"text"}
-                            autoFocus
                         />
                         <CustomTextField
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
@@ -190,7 +214,9 @@ const Register = () => {
                             name="password"
                             type={"password"}
                             autoComplete="*******"
-                            autoFocus
+                            autoFocus={focus === "password" ? true : false}
+                            onChange={onChangehandle}
+                            value={formData.password}
                         />
                         <CustomTextField
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
@@ -206,37 +232,38 @@ const Register = () => {
                             name="password_confirm"
                             type={"text"}
                             autoComplete="09XXXXXXXX"
-                            autoFocus
+                            autoFocus={focus === "password_confirm" ? true : false}
+                            onChange={onChangehandle}
+                            value={formData.password_confirm}
                         />
-                        {state.sendOtp.done && counter ? <Counter count={60} /> : <></>}
+                        {state.sendOtp.done && counter && !state.verifyTel.done ? <Counter count={60} /> : <></>}
 
                         <Grid container sx={state.register.error ? { display: "block" } : { display: "none" }}>
                             <Grid item xs margin={1}>
                                 <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
-                                    {state.register.exist ? "کاربر با این شماره تلفن از قبل موجود است." : "حداقل شامل ۸ کاراکتر"}
+                                    {textErrorRegister}
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid container display={state.sendOtp.error || state.sendOtp.exist || state.sendOtp.trylater ? "flex" : "none"}>
+                        <Grid container display={state.sendOtp.error ? "flex" : "none"}>
                             <Grid item xs margin={1}>
                                 <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
-                                    {textErrorSendOtp()}
+                                    {textErrorSendOtp}
                                 </Typography>
                             </Grid>
                         </Grid>
 
-                        <Grid container display={state.verifyTel.error || state.verifyTel.match ? "flex" : "none"}>
+                        <Grid container display={state.verifyTel.error ? "flex" : "none"}>
                             <Grid item xs margin={1}>
-                                <Typography variant="body2" color={"red"}>
-                                    {state.verifyTel.error?
-                                        <Button
-                                            sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
-                                            onClick={() => { setTel(""); setState(initialState) }}>
-                                            {textErrorVerifyTel()}
-                                        </Button>
-                                        : textErrorVerifyTel()
-                                    }
-                                </Typography>
+                                <Button
+                                    sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
+                                    onClick={() => { setState(initialState) }}>
+                                    <Typography variant="body2" color={"red"}>
+
+                                        {textErrorVerifyTel}
+                                    </Typography>
+                                </Button>
+
                             </Grid>
                         </Grid>
 

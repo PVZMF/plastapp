@@ -9,16 +9,15 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUserAsync, registerVerifyForgetPasswordUserAsync, sendOtpForgetPasswordUserAsync } from "../../toolkit/slices/auth";
+import { ForgetPasswordUserAsync, registerVerifyForgetPasswordUserAsync, sendOtpForgetPasswordUserAsync, toggleIsCreateAccount } from "../../toolkit/slices/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
 // import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
 
-
 const ForgetPassword = ({ open, setOpen }) => {
-
+  // State Register
   const initialState = {
     sendOtp: { done: false, error: false, exist: false, trylater: false },
     verifyTel: { done: false, error: false, match: false },
@@ -29,87 +28,115 @@ const ForgetPassword = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const st = Storage();
   const navigate = useNavigate();
-  const [tel, setTel] = useState("");
   const errorApi = useSelector((state) => state.auth.error);
   const loading = useSelector((state) => state.auth.loading);
   const counter = useSelector((state) => state.auth.counter)
+  const [formData, setFormData] = useState({ phone_number: "", password: "", password_confirm: "" });
+  const [focus, setFocus] = useState("");
+  const [textErrorSendOtp, setTextErrorSendOtp] = useState("");
+  const [textErrorVerifyTel, setTextErrorVerifyTel] = useState("");
+  const [textErrorRegister, setTextErrorRegister] = useState("");
+
+
+  const onChangehandle = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFocus(e.target.name);
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
     if (!state.sendOtp.done) {
-      setTel(data.phone_number);
-      Promise.all([dispatch(sendOtpForgetPasswordUserAsync(data))]).then((res) => {
-        const data = res[0].payload;
-        console.log(data);
-        if (data.message === "code send") {
-          setState({ ...state, sendOtp: { done: true, error: false, exist: false, trylater: false } });
+      (dispatch(sendOtpForgetPasswordUserAsync(data))).unwrap().then((res) => {
+        console.log(res);
+        if (res.message === "code send") {
+          setState({ ...state, sendOtp: { done: true, error: false } });
           dispatch(onCounter(true));
-        } else if (data.non_field_errors[0] === 'user already exist') {
-          setState({ ...state, sendOtp: { done: false, error: false, exist: true, trylater: false } });
         }
-        else if (data.non_field_errors[0] === "try later") {
-          setState({ ...state, sendOtp: { done: false, error: false, exist: false, trylater: true } });
+        else if (res.non_field_errors === "try later") {
+          setState({ ...state, sendOtp: { done: false, error: true } });
+          setTextErrorSendOtp("کمی بعد امتحان کنید");
         }
+        else if ("phone_number" in res) {
+          if (res["phone_number"][0] === 'این مقدار نباید خالی باشد.') {
+            setState({ ...state, sendOtp: { done: false, error: true } });
+            setTextErrorSendOtp("شماره تلفن الزامی است!");
+          }
+          else if (res["phone_number"][0] === 'unvalid phonenumber') {
+            setState({ ...state, sendOtp: { done: false, error: true } });
+            setTextErrorSendOtp("شماره تلفن اشتباه است!");
+          }
+        }
+        else if (res.non_field_errors[0] === 'user already exist') {
+          setState({ ...state, sendOtp: { done: false, error: true } });
+          setTextErrorSendOtp("کاربر با این شماره تلفن از قبل موجود است");
+        }
+
       })
         .catch(error => {
+
           setState({ ...state, sendOtp: { done: false, error: true, exist: false, trylater: false } });
-          console.log(error);
-          console.log(errorApi);
         })
     } else if (!state.verifyTel.done) {
-      Promise.all([dispatch(registerVerifyForgetPasswordUserAsync({ ...data, phone_number: tel }))]).then((res) => {
-        const data = res[0].payload;
-        if (data.message === "account confirmed") {
+      dispatch(registerVerifyForgetPasswordUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
+        console.log(res);
+        if (res.message === "account confirmed for changing password") {
           setState({ ...state, verifyTel: { done: true, error: false } });
-        } else if (data.non_field_errors[0] === "code expired") {
-          setState({ ...state, verifyTel: { done: false, error: true, match: false } });
         }
-        else if (data.non_field_errors[0] === 'code aren"t match') {
-          setState({ ...state, verifyTel: { done: false, error: false, match: true } });
+        else if ("non_field_errors" in res) {
+          if (res.non_field_errors[0] === "code expired") {
+            setState({ ...state, verifyTel: { done: false, error: true } });
+            setTextErrorVerifyTel("کد منقضی شده! دوباره تلاش کنید!")
+          }
+          else if (res.non_field_errors[0] === 'code aren"t match') {
+            setState({ ...state, verifyTel: { done: false, error: true } });
+            setTextErrorVerifyTel("کد تایید اشتباه است!  دوباره تلاش کنید")
+          }
+        }
+        else if (res.code[0] === "این مقدار نباید خالی باشد.") {
+          setState({ ...state, verifyTel: { done: false, error: true } });
+          setTextErrorVerifyTel("وارد کردن کد الزامی است!  دوباره تلاش کنید")
         }
       })
         .catch((e) => {
-          console.log(e);
           setState({ ...state, verifyTel: { done: false, error: true, exist: false } });
         })
-    } else if (state.register.done) {
-      Promise.all([dispatch(registerUserAsync({ ...data, phone_number: tel }))]).then((res) => {
-        const data = res[0].payload;
-        if (data.message === "user created") {
-          setState({ ...state, register: { done: true, error: false, exist: false } });
-        } else if (data.phone_number) {
-          setState({ ...state, register: { done: false, error: false, exist: true } });
-          console.log(data.message);
+    } else if (!state.register.done) {
+      dispatch(ForgetPasswordUserAsync({...data,phone_number:formData.phone_number})).unwrap().then((res) => {
+        console.log(res);
+        if (res.message === "user created") {
+          setState({ ...state, register: { done: true, error: true } });
+          dispatch(toggleIsCreateAccount());
+        } else if (res.password[0] === "این مقدار نباید خالی باشد.") {
+          setState({ ...state, register: { done: false, error: true } });
+          setTextErrorRegister("وارد کردن پسورد الزامی است!")
         }
-
+        else if (data.phone_number) {
+          setState({ ...state, register: { done: false, error: true } });
+          setTextErrorRegister("کاربر با این شماره تلفن از قبل موجود است");
+        }
       })
         .catch((e) => {
           console.log(e);
           setState({ ...state, register: { done: false, error: true, exist: false } });
         })
-
     }
   };
-  const textErrorSendOtp = () => {
-    if (state.sendOtp.error) return ("شماره تلفن وارد شده صحیح نمی باشد!")
-    else if (state.sendOtp.exist) return ("کاربر با این شماره تلفن از قبل موجود است")
-    else if (state.sendOtp.trylater) return ("کمی بعد امتحان کنید")
-  }
 
-  const textErrorVerifyTel = () => {
-    if (state.verifyTel.error) return ("کد منقضی شده! دوباره تلاش کنید!")
-    else if (state.verifyTel.match) return ("کد تایید اشتباه است!")
-  }
-
-
+  // Modal
   const handleClose = () => {
     setOpen(false);
   };
 
   const CustomTextField = styled(TextField)({
-    "& label": {
+    root: {
+      '& .MuiFormHelperText-root': {
+        color: "red"
+      }
+    },
+    '& label': {
       transformOrigin: "right !important",
       left: "inherit !important",
       right: "1.75rem !important",
@@ -117,7 +144,7 @@ const ForgetPassword = ({ open, setOpen }) => {
       color: "#807D7B",
       fontWeight: 400,
       overflow: "unset",
-    },
+    }
   });
 
   return (
@@ -127,126 +154,151 @@ const ForgetPassword = ({ open, setOpen }) => {
       aria-labelledby="parent-modal-title"
       aria-describedby="parent-modal-description"
     >
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        noValidate
-        sx={{
-          marginRight: { xs: "40px", sm: "150px", md: "200px", lg: "450px" },
+        <Grid
+         bgcolor={"white"}
+          sx={{
+          marginRight: { xs: "40px", sm: "150px", md: "200px", lg: "300px" },
           marginTop: { xs: "50px", sm: "150px", md: "150px" },
           width: { xs: "250px", sm: "400px", md: "550px" },
-          height: { xs: "350px", sm: "400px", md: "400px" },
+          height: { xs: "350px", sm: "400px", md: "auto" },
           alignItems: "center",
           bgcolor: "white",
-          padding:"40px"
-        }}
-      >
-        <CustomTextField
-          inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-          InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-          variant="standard"
-          value={state.sendOtp.done ? tel : undefined}
-          disabled={state.sendOtp.done}
-          margin="normal"
-          required
-          fullWidth
-          id="tel"
-          label="شماره موبایل"
-          name="phone_number"
-          type={"text"}
-          autoComplete="09XXXXXXXX"
-          autoFocus
-        />
-        <CustomTextField
-          inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-          InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-          sx={state.sendOtp.done && !state.verifyTel.done ? { display: "block" } : { display: "none" }}
-          variant="standard"
-          margin="normal"
-          required
-          fullWidth
-          id="code"
-          label="کد تایید"
-          name="code"
-          type={"text"}
-          autoFocus
-        />
-        <CustomTextField
-          inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-          InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-          sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
-          variant="standard"
-          margin="normal"
-          required
-          fullWidth
-          id="tel"
-          label="پسورد"
-          name="password"
-          type={"password"}
-          autoComplete="*******"
-          autoFocus
-        />
-        <CustomTextField
-          inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-          InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-          sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
-          helperText="شامل حداقل ۸ کاراکتر"
-          variant="standard"
-          margin="normal"
-          required
-          fullWidth
-          id="tel"
-          label="تایید پسورد"
-          name="password_confirm"
-          type={"text"}
-          autoComplete="09XXXXXXXX"
-          autoFocus
-        />
-        {state.sendOtp.done && counter ? <Counter count={60} /> : <></>}
-
-        <Grid container sx={state.register.error ? { display: "block" } : { display: "none" }}>
-          <Grid item xs margin={1}>
-            <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
-              {state.register.exist ? "کاربر با این شماره تلفن از قبل موجود است." : "حداقل شامل ۸ کاراکتر"}
+          padding: "40px"}} height="60%">
+          <CssBaseline />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}> */}
+            <Box>
+              <img
+                style={{ width: "80px", height: "80px", margin: "auto" }}
+                src={logo}
+              />
+            </Box>
+            <Typography component="h1" variant="h5">
+              بازیابی رمز عبور
             </Typography>
-          </Grid>
-        </Grid>
-        <Grid container display={state.sendOtp.error || state.sendOtp.exist || state.sendOtp.trylater ? "flex" : "none"}>
-          <Grid item xs margin={1}>
-            <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
-              {textErrorSendOtp()}
-            </Typography>
-          </Grid>
-        </Grid>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <CustomTextField
+                inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                variant="standard"
+                disabled={state.sendOtp.done}
+                margin="normal"
+                required
+                fullWidth
+                id="tel"
+                label="شماره موبایل"
+                name="phone_number"
+                type={"text"}
+                autoComplete="09XXXXXXXX"
+                autoFocus={focus === "phone_number" ? true : false}
+                onChange={onChangehandle}
+                value={formData.phone_number}
+              />
+              <CustomTextField
+                inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                sx={state.sendOtp.done && !state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                id="code"
+                label="کد تایید"
+                name="code"
+                type={"text"}
+              />
+              <CustomTextField
+                inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                id="tel"
+                label="پسورد"
+                name="password"
+                type={"password"}
+                autoComplete="*******"
+                autoFocus={focus === "password" ? true : false}
+                onChange={onChangehandle}
+                value={formData.password}
+              />
+              <CustomTextField
+                inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
+                sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                helperText="شامل حداقل ۸ کاراکتر"
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                id="tel"
+                label="تایید پسورد"
+                name="password_confirm"
+                type={"text"}
+                autoComplete="09XXXXXXXX"
+                autoFocus={focus === "password_confirm" ? true : false}
+                onChange={onChangehandle}
+                value={formData.password_confirm}
+              />
+              {state.sendOtp.done && counter && !state.verifyTel.done ? <Counter count={60} /> : <></>}
 
-        <Grid container display={state.verifyTel.error || state.verifyTel.match ? "flex" : "none"}>
-          <Grid item xs margin={1}>
-            <Typography variant="body2" color={"red"}>
-              {state.verifyTel.error ?
-                <Button
-                  sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
-                  onClick={() => { setTel(""); setState(initialState) }}>
-                  {textErrorVerifyTel()}
-                </Button>
-                : textErrorVerifyTel()
-              }
-            </Typography>
-          </Grid>
-        </Grid>
-{/* 
-        <LoadingButton
-          type="submit"
-          fullWidth
-          variant="contained"
-          loading={loading}
-          sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
-        >
-          تایید
-        </LoadingButton> */}
+              <Grid container sx={state.register.error ? { display: "block" } : { display: "none" }}>
+                <Grid item xs margin={1}>
+                  <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                    {textErrorRegister}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid container display={state.sendOtp.error ? "flex" : "none"}>
+                <Grid item xs margin={1}>
+                  <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
+                    {textErrorSendOtp}
+                  </Typography>
+                </Grid>
+              </Grid>
 
-      </Box>
+              <Grid container display={state.verifyTel.error ? "flex" : "none"}>
+                <Grid item xs margin={1}>
+                  <Button
+                    sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
+                    onClick={() => { setState(initialState) }}>
+                    <Typography variant="body2" color={"red"}>
+
+                      {textErrorVerifyTel}
+                    </Typography>
+                  </Button>
+
+                </Grid>
+              </Grid>
+
+              <LoadingButton
+                type="submit"
+                fullWidth
+                variant="contained"
+                loading={loading}
+                sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
+              >
+                {state.sendOtp.done && !state.verifyTel.done ? "تایید" : "ثبت نام"}
+              </LoadingButton>
+
+            </Box>
+          </Box>
+        </Grid>
     </Modal >
   );
 };
 
-export default ForgetPassword;
+export default ForgetPassword

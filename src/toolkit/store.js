@@ -11,7 +11,7 @@ import ticketSlice from "./slices/ticketSlice";
 
 
 const persistConfig = {
-  key: "myApp",
+  key: "PlastApp",
   storage,
 };
 const rootReducer = combineReducers({

@@ -36,7 +36,7 @@ api.interceptors.response.use(
             originalRequest._retry = true;
             return api('api/token/refresh/',
                 {
-                    "refresh_token": st.refreshToken()
+                    "refresh_token": st.refreshToken
                 })
                 .then(res => {
                     if (res.status === 201) {
@@ -59,6 +59,7 @@ api.interceptors.response.use(
       // return error.response.data;
       return error.response;
     }
+    return Promise.reject(error.response);
   }
   
 );
