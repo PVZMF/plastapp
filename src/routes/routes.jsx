@@ -16,6 +16,7 @@ import OrdersPage from "../pages/profile/ordersPage";
 import ChequePage from "../pages/cheque";
 import SideBar from "../components/sideBar/sideBar"
 import ClubPage from "../pages/club";
+import ProductsPage from "../pages/products";
 import DetailProductPage from "../pages/products/detailProduct";
 import BlogPage from "../pages/blog";
 import DetailBlogPage from "../pages/blog/detailBlog";
@@ -52,7 +53,11 @@ const Router = createBrowserRouter([
             element: <Home />,
           },
           {
-            path: "/product/:id",
+            path: "/products",
+            element: <ProductsPage />
+          },
+          {
+            path: "/products/:id",
             element: <DetailProductPage />,
           },
           {

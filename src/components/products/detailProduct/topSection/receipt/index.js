@@ -1,15 +1,23 @@
 import React from 'react'
-import { BsPlusLg } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { BsPlusLg, BsCartCheck } from 'react-icons/bs';
 import { BiMessageDetail } from 'react-icons/bi';
 import Profile from '../../../../../assets/imgs/shop_1.jpg';
 
 import { FlexMainReceipt } from './styleReceipt'
+import { addItem } from '../../../../../toolkit/cart/cartAction';
 
 const Receipt = ({ image_profile, name_profile, shop_profile, number_product }) => {
+    
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.cartState);
+    const id = useLocation().pathname;
+
     const price = 2250000;
     const off = 1000000;
-
     const total = price - off;
+
   return (
     <FlexMainReceipt>
         <div className='top-receipt'>
@@ -50,8 +58,12 @@ const Receipt = ({ image_profile, name_profile, shop_profile, number_product }) 
                 <h5>مبلغ قابل پرداخت</h5>
                 <h5>{total.toLocaleString('fa-IR')} <span>تومان</span></h5>
             </div>
-
-            <button className='buy'><BsPlusLg /> افزودن به سبد خرید</button>
+            {state.selectedItems.find(pro => pro.id === id) ?
+                    <button className='buy'><BsCartCheck /></button>
+                    :
+                    <button className='buy' onClick={() => dispatch(addItem(id))}><BsPlusLg /> افزودن به سبد خرید</button>
+            }
+            
         </div>
     </FlexMainReceipt>
   )

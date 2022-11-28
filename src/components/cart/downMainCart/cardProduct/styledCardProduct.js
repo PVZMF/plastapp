@@ -13,10 +13,13 @@ export const FlexCardProduct = styled.div`
   background: #fff;
 
   .image {
-      width: 100%
+      width: 100%;
+      height: 30vh;
       overflow: hidden;
       img {
-          object-fit: cover;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
   }
 
