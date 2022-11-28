@@ -59,7 +59,7 @@ export const CardContainer = styled.div`
           font-size: clamp(.9rem, 1.3vw, 1.3rem);
         }
 
-        .counter {
+        .counter_box {
           width: 100%;
           display: flex;
           align-items: center;

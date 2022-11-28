@@ -79,13 +79,6 @@ export default function GlobalStyles() {
           list-style-type: none;
         }
 
-        input {
-          all: unset;
-          background: var(--primary-white);
-          outline: none;
-          padding: 0px 7px;
-          font-size: 1.4rem;
-        }
 
         figure {
           all: unset;

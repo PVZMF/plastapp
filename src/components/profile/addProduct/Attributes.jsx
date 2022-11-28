@@ -44,6 +44,11 @@ const Attributes = () => {
                 </div>
             ))}
 
+            <div className={style.boxinput_checked}>
+                <input type="checkbox" />
+                <label>امکان خرید اعتباری دارد</label>
+            </div>
+
             <div className={style.boxinput}>
                 <label>توضیحات محصول (اختیاری)</label>
                 <textarea />

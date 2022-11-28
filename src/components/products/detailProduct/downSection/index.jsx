@@ -21,7 +21,7 @@ const DownMainCart = ({ listProducts }) => {
                 {listProducts?.map(item => {
                     ListSugg.push(item)
                     if(ListSugg.length <= 6) {
-                        return (<CardProduct key={item.id + "plastapp"} item={item} />)
+                        return <CardProduct key={item.id + "plastapp"} item={item} />
                     }
                 })}
             </div>

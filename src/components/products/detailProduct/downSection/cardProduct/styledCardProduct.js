@@ -13,7 +13,7 @@ margin: 1rem;
 background: #fff;
 
 .image {
-    width: 100%
+    width: 100%;
     overflow: hidden;
     img {
         object-fit: cover;
@@ -33,6 +33,11 @@ background: #fff;
         font-weight: 400;
         font-size: clamp(1rem, 1.2vw, 1.2rem);
         margin: 1.5rem 0 0 0;
+        transition: all .3s;
+
+        &:hover {
+            color: #69a9ff;
+        }
     }
 
     .location {

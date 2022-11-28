@@ -20,7 +20,7 @@ const CardProduct = ({ item }) => {
   return (
     <FlexCardProduct>
         <div className='image'>
-            <img src={item.image} alt={item.title} />
+            <Link to={`/product/${item.id}`}><img src={item.image} alt={item.title} /></Link>
         </div>
 
         <div className='product-data'>

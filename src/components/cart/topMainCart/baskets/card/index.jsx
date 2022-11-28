@@ -30,7 +30,7 @@ const Card = ({ data }) => {
           <img src={image} alt={title} />
           <div className='box-data'>
             <h2>{title}</h2>
-            <div className='counter'>
+            <div className='counter_box'>
               <div className='number'>
                 <span onClick={() => dispatch(increase(data))}>+</span>
                 <h5>{quantity}</h5>

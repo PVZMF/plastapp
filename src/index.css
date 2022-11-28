@@ -81,13 +81,13 @@ li {
   list-style-type: none;
 }
 
-input {
+/* input {
   all: unset;
   background: var(--primary-white);
   outline: none;
   padding: 0px 7px;
   font-size: 1.4rem;
-}
+} */
 
 figure {
   all: unset;

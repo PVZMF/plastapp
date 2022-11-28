@@ -146,6 +146,7 @@
     border-radius: .5rem;
     margin: 1rem 0;
     background: #fff;
+    outline: none;
 }
 .addProduct .name_grouping .box .boxinput input::placeholder,
 .addProduct .weight .box .boxinput input::placeholder,
@@ -196,6 +197,7 @@
     opacity: 0;
     top: 0;
     left: 0;
+    border: none;
 }
 
 .addProduct .images .boximage input:hover {
@@ -262,6 +264,8 @@
 .addProduct .weight .box .boxinput .input input {
     width: 100%;
     background: transparent;
+    border: none;
+    outline: none;
 }
 
 .addProduct .weight .box .boxinput .input select {
@@ -395,6 +399,28 @@
     border-radius: .7rem;
     outline: none;
     margin: 2rem 0 0 0;
+}
+
+.attributes .box .boxinput_checked {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 3rem 0;
+}
+
+.attributes .box .boxinput_checked label {
+    color: rgb(198, 74, 74);
+    font-size: clamp(1.2rem, 1.4vw, 1.4rem);
+}
+
+.attributes .box .boxinput_checked input {
+    width: 2.3rem !important;
+    height: 2.3rem !important;
+    margin: 0 0 0 1rem;
+}
+.attributes .box .boxinput_checked input:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 600px) {

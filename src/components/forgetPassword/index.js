@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUserAsync, registerVerifyForgetPasswordUserAsync, sendOtpForgetPasswordUserAsync } from "../../toolkit/slices/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
-import LoadingButton from '@mui/lab/LoadingButton';
+// import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
 
@@ -233,7 +233,7 @@ const ForgetPassword = ({ open, setOpen }) => {
             </Typography>
           </Grid>
         </Grid>
-
+{/* 
         <LoadingButton
           type="submit"
           fullWidth
@@ -242,7 +242,7 @@ const ForgetPassword = ({ open, setOpen }) => {
           sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
         >
           تایید
-        </LoadingButton>
+        </LoadingButton> */}
 
       </Box>
     </Modal >
