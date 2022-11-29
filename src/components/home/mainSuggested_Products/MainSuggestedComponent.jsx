@@ -76,7 +76,7 @@ const MainSuggestedComponent = ({ title }) => {
           </SwiperSlide>
           {[...Array(9)].map((item, index) => (
             <SwiperSlide className="slide p10 custom-slide" key={index}>
-              <Link to={`product/${index + 1}`}>
+              <Link to={`products/${index + 1}`}>
                 <SlideSuggested />
               </Link>
             </SwiperSlide>
