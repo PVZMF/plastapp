@@ -29,17 +29,17 @@ const Blog = () => {
     return <Spinner />;
   }
 
-  const [blogListuseState, setBlogListuseState] = useState([]);
-  useEffect(() => {
-    // setLoading(true);
-    getBlogList()
-      .then((results) => {
-        setBlogListuseState(results);
-      })
-      .finally(() => {
-        console.log(blogListuseState);
-      });
-  }, []);
+  // const [blogListuseState, setBlogListuseState] = useState([]);
+  // useEffect(() => {
+  //   // setLoading(true);
+  //   getBlogList()
+  //     .then((results) => {
+  //       setBlogListuseState(results);
+  //     })
+  //     .finally(() => {
+  //       console.log(blogListuseState);
+  //     });
+  // }, []);
 
   return (
     <div className={style.blog}>
