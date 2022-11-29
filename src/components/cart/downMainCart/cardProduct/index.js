@@ -17,12 +17,12 @@ const CardProduct = ({ item }) => {
   return (
     <FlexCardProduct>
         <div className='image'>
-        <Link to={`/product/${item.id}`}><img src={item.image} alt={item.title} /></Link>
+        <Link to={`/products/${item.id}`}><img src={item.image} alt={item.title} /></Link>
         </div>
 
         <div className='product-data'>
             <h3>
-                <Link to={`/product/${item.id}`}>{item.title}</Link>
+                <Link to={`/products/${item.id}`}>{item.title}</Link>
             </h3>
             <div className='location'>
                 <AiTwotoneShop />

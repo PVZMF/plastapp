@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-
 // Redux
 import { useSelector } from 'react-redux';
-
 // Componenets
 import Card from "./card";
-
+// Images
 import Product from '../../../../assets/imgs/pesteh.jpg';
 import Product2 from '../../../../assets/imgs/shalwar.jpg';
-
 // Style
 import { FlexMainBaskets } from './styledBaskets';
 

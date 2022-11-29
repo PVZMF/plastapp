@@ -67,7 +67,7 @@ const MainProductsComponent = ({ title }) => {
           <SwiperSlide className="slide p10 custom-slide">Slide 7</SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">Slide 8</SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">Slide 9</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><AllProductsSlide /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><AllProductsSlide link="products" /></SwiperSlide>
         </Swiper>
       </FlexMainSuggested>
     </GlobalContainer>

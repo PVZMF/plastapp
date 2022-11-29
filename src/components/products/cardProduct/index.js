@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../../../../toolkit/cart/cartAction';
+import { addItem } from '../../../toolkit/cart/cartAction';
 
 // Icons
 import { BsPlusLg, BsCartCheck } from 'react-icons/bs';
 import { AiTwotoneShop } from 'react-icons/ai';
-import { FlexCardProduct } from './styledCardProduct'
+import { FlexProductCard } from './styledProductCard'
 
 const CardProduct = ({ item }) => {
     
@@ -18,7 +18,7 @@ const CardProduct = ({ item }) => {
     const totalprice = item.price - price;
 
   return (
-    <FlexCardProduct>
+    <FlexProductCard>
         <div className='image'>
             <Link to={`/products/${item.id}`}><img src={item.image} alt={item.title} /></Link>
         </div>
@@ -49,7 +49,7 @@ const CardProduct = ({ item }) => {
                 </div>
             </div>
         </div>
-    </FlexCardProduct>
+    </FlexProductCard>
   )
 }
 

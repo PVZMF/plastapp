@@ -5,6 +5,7 @@ import Receipt from './receipt'
 import { FlexTopCart } from './styledTopCart'
 
 const TopMainCart = () => {
+
   return (
     <FlexTopCart>
       <div className='attributes'>

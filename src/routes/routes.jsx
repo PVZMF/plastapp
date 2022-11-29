@@ -16,6 +16,7 @@ import OrdersPage from "../pages/profile/ordersPage";
 import ChequePage from "../pages/cheque";
 import SideBar from "../components/sideBar/sideBar";
 import ClubPage from "../pages/club";
+import ProductsPage from "../pages/products";
 import DetailProductPage from "../pages/products/detailProduct";
 import BlogPage from "../pages/blog";
 import DetailBlogPage from "../pages/blog/detailBlog";
@@ -92,6 +93,10 @@ const Router = createBrowserRouter([
             path: "/profile/myproducts",
             index: true,
             element: <MyProductsPage />,
+          },
+          {
+            path: "/products/:id",
+            element: <DetailProductPage />,
           },
           {
             path: "/profile/orders",
