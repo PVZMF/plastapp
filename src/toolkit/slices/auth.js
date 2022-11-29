@@ -8,11 +8,11 @@ export const loginUserAsync = createAsyncThunk(
   async (authData, thunkAPI) => {
     try {
       const res = await api.post("account/login/", authData)
+      console.log(res)
       return res?.data;
     } catch (err) {
       return err.response.data
     }
-
   }
 );
 
@@ -103,22 +103,25 @@ export const authSlice = createSlice({
     loading: false,
     firstName: "",
     lastName: "",
+    rule: "",
     token: "",
     username: "",
     isLogin: false,
     error: "",
     onToasted: false,
     counter: false,
-    isCreateAccount: false
+    isCreateAccount: false,
+    isChangePassword: false
   },
   reducers: {
     login: (state, action) => {
       const st = Storage();
-      st.setLogin(action.payload.access, action.payload.refresh);
+      st.setLogin(action.payload.refresh,action.payload.access);
       state.isLogin = true;
       state.onToasted = true
     },
     logout: (state) => {
+      logoutUserAsync();
       const st = Storage();
       st.setLogout();
       state.firstName = "";
@@ -130,11 +133,20 @@ export const authSlice = createSlice({
     },
     offToasted: (state) => {
       state.onToasted = false;
+      state.isChangePassword = false;
+      state.isCreateAccount = false;
     },
     onCounter: (state, action) => {
       state.counter = action.payload;
     },
-    toggleIsCreateAccount: (old) => !old
+    toggleIsCreateAccount: (state) =>{
+      state.isCreateAccount = true;
+      state.onToasted = true
+    },
+    toggleIsChangePassword: (state)=>{
+      state.isChangePassword = true;
+      state.onToasted = true
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(loginUserAsync.pending, (state) => {
@@ -190,13 +202,51 @@ export const authSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(registerUserAsync.rejected, (state, action) => {
-      console.log(action);
+      state.loading = false;
+      state.error = action;
+    });
+
+    //forgetPassword
+    builder.addCase(ForgetPasswordUserAsync.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(ForgetPasswordUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(ForgetPasswordUserAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action;
+    });
+
+    //sendOTPForgetPassword
+    builder.addCase(sendOtpForgetPasswordUserAsync.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(sendOtpForgetPasswordUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(sendOtpForgetPasswordUserAsync.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action;
+    });
+    
+    //ForgetPassword
+    builder.addCase(registerVerifyForgetPasswordUserAsync.pending, (state) => {
+      state.loading = true;
+      state.error = "";
+    });
+    builder.addCase(registerVerifyForgetPasswordUserAsync.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+    builder.addCase(registerVerifyForgetPasswordUserAsync.rejected, (state, action) => {
       state.loading = false;
       state.error = action;
     });
   },
 });
 
-export const { logout, login, offToasted, onCounter, toggleIsCreateAccount } = authSlice.actions;
+export const { logout, login, offToasted, onCounter, toggleIsCreateAccount,toggleIsChangePassword } = authSlice.actions;
 
 export default authSlice.reducer;

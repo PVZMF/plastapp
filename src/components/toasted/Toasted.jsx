@@ -3,7 +3,7 @@ import { Alert, Snackbar } from '@mui/material'
 import {Typography} from '@mui/material'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import {offToasted} from '../../toolkit/slices/auth'
+import {offToasted, toggleIsChangePassword, toggleIsCreateAccount} from '../../toolkit/slices/auth'
 
 const Toasted = ({ title, open, severity}) => {
     const dispatch = useDispatch();

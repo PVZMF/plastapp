@@ -1,20 +1,20 @@
 import axios from "axios";
+import { refreshToken } from "./api"
 import Storage from "../service/Storage";
 
 export const baseUrl = "https://plastapp.iran.liara.run/";
 
-const st = Storage();
 const api = axios.create({
   baseURL: baseUrl,
   timeout: "5000"
 });
 
-// api.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(st.accessToken())}`;
-// axios.defaults.headers.post['Authorization'] = `Bearer ${st.accessToken()}`;
 
 api.interceptors.request.use(
   function (config) {
     // Do something before request is sent
+    const st = Storage();
+    config.headers['Authorization'] = `Bearer ${st.accessToken}`;
     return config;
   },
   function (error) {
@@ -31,27 +31,13 @@ api.interceptors.response.use(
     return response;
   },
   function (error) {
-        const originalRequest = error.config;
-        if (error.response.status === 401 && !originalRequest._retry) {
-            originalRequest._retry = true;
-            return api('api/token/refresh/',
-                {
-                    "refresh_token": st.refreshToken
-                })
-                .then(res => {
-                    if (res.status === 201) {
-                        // 1) put token to LocalStorage
-                        st.setLogin(res.data);
-
-                        // 2) Change Authorization header
-                        api.defaults.headers.common['Authorization'] = 'Bearer ' + st.accessToken;
-
-                        // 3) return originalRequest object with Axios.
-                        return api(originalRequest);
-                    }
-                })
-        }
-
+    if (error.response.status == 401) {
+      const st = Storage();
+      console.log({"refresh":st.refreshToken});
+        refreshToken({"refresh":st.refreshToken}).then(res => {
+          st.setAccessToken(res.access);
+        }).catch(error => console.log(error))
+    }
     if (error.response.status === 400) {
       // try to get new access token with refresh token
       // try the request again
@@ -61,7 +47,7 @@ api.interceptors.response.use(
     }
     return Promise.reject(error.response);
   }
-  
+
 );
 
 

@@ -14,7 +14,6 @@ import Storage from "../../service/Storage";
 import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
-import { RssFeed } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -28,11 +27,9 @@ const Register = () => {
     const [state, setState] = useState(initialState);
 
     const dispatch = useDispatch();
-    const st = Storage();
     const navigate = useNavigate();
-    const errorApi = useSelector((state) => state.auth.error);
     const loading = useSelector((state) => state.auth.loading);
-    const counter = useSelector((state) => state.auth.counter)
+    const counter = useSelector((state) => state.auth.counter);
     const [formData, setFormData] = useState({ phone_number: "", password: "", password_confirm: "" });
     const [focus, setFocus] = useState("");
     const [textErrorSendOtp, setTextErrorSendOtp] = useState("");
@@ -111,7 +108,7 @@ const Register = () => {
                 if (res.message === "user created") {
                     setState({ ...state, register: { done: true, error: true } });
                     dispatch(toggleIsCreateAccount());
-                    navigate("/roleselect")
+                    navigate("/roleselect");
                 }
                 else if (data.phone_number) {
                     setState({ ...state, register: { done: false, error: true } });

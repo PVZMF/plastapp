@@ -33,28 +33,28 @@ const DetailBlog = () => {
           <p>{data.title}</p>
         </div>
 
-        <div className={style.boximg}>
-          <img src={data.thumbnail} alt={data.title} />
-        </div>
+            <div className={style.boximg}>
+              <img src={data.thumbnail} alt={data.title} />
+            </div>
 
-        <div className={style.description}>
-          <h2>{data.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
-        </div>
+            <div className={style.description}>
+              <h2>{data.title}</h2>
+              <div dangerouslySetInnerHTML={{ __html: data.description }}></div>
+            </div>
 
-        <div className={style.comments}>
-          <h2 className={style.titleComments}>- نظرات کاربران</h2>
+            <div className={style.comments}>
+              <h2 className={style.titleComments}>- نظرات کاربران</h2>
 
-          {/* {comments.map((item) => (
-            <Comment key={item.id} item={item} />
-          ))} */}
+              {/* {comments.map((item) => (
+                <Comment key={item.id} item={item} />
+              ))} */}
 
-          <div className={style.registerComment}>
-            <textarea></textarea>
-            <button>ثبت نظر</button>
+              <div className={style.registerComment}>
+                <textarea></textarea>
+                <button>ثبت نظر</button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
       {/* <div className={style.likeBlog}>
         <h5>مقالات پیشنهادی</h5>

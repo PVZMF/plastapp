@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import { logout,logoutUserAsync } from "../../../toolkit/slices/auth";
+import { logout, logoutUserAsync } from "../../../toolkit/slices/auth";
 
 
 
@@ -25,7 +25,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
     const listItemLogin = isLogin ? {
         title: "خروج از حساب کاربری",
         icon: <AccountBoxIcon fontSize="large" />,
-        onClick: () => {dispatch(logoutUserAsync(), dispatch(logout()))},
+        onClick: () => { dispatch(logout()) },
         link: "/login"
     } : { title: "ورود به حساب کاربری", icon: <AccountBoxIcon fontSize="large" />, onClick: () => { }, link: "/login" }
     useEffect(() => {
