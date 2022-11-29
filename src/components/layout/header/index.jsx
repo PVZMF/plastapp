@@ -90,7 +90,7 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
           </StyledNavLogo>
           <StyledNavLeftBar>
             <Box color={globalCssVar.light_blue} >
-              <IconButton href="/login" width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
+              <IconButton href={isLogin?"/profile":"/login"} width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
                 {isLogin? <AccountCircleIcon fontSize="large"/> :navLan.login_button}
               </IconButton>
             </Box>

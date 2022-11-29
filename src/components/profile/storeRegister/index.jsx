@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Input from './Input'
 import Select from './Select';
+import { provinces } from "../../../assets/citiesName/CitiesName"
+import {createShop} from "../../../api/api"
 
 // Icons
 import { TbCertificate } from 'react-icons/tb';
@@ -11,76 +13,80 @@ import { CgImage } from 'react-icons/cg';
 // Style
 import style from './storeRegister.module.css'
 
-const StoreRegister = ({ states, citys }) => {
-    const [city, setCity] = useState();
+const StoreRegister = () => {
+    const [cities, setCities] = useState([""])
 
-    const AllCity = (id) => {
-        citys.map(item => {
-            if(item.active === id){
-                setCity(item.list)
-            }
+
+    const handleCities = (e) => {
+        setCities(provinces.filter(item => item.name == e.target.value)[0].cities);
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const form_data = new FormData(e.target);
+        const data = Object.fromEntries(form_data.entries());
+        createShop(data).then(result => {
+            console.log(result);
         })
-    };
+        console.log(data);
+    }
 
-    console.log(city)
+    return (
+        <form onSubmit={(e) => handleSubmit(e)} className={style.store} id={"form"}>
+            <div className={style.boxstore}>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"picPersonalID"} type='file' childern={<ImUserTie />} placeholder="* عکس کارت ملی" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"NationalPersonalId"} childern={<ImUserTie />} placeholder="* کدملی / شناسه ملی" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"PersonalId"} childern={<ImUserTie />} placeholder="* شماره شناسنامه" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"picCertificate"} type='file' childern={<TbCertificate />} placeholder="* عکس پروانه کسب" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"logoShop"} type='file' childern={<CgImage />} placeholder="* لوگو فروشگاه" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"nameShop"} childern={<AiFillShop />} placeholder="* نام فروشگاه" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"addrShop"} childern={<AiFillShop />} placeholder="* آدرس فروشگاه" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"picCertificate"} childern={<AiFillShop />} placeholder="* کدپستی" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"numberSheba"} childern={<CgImage />} placeholder="* شماره شبای بانکی" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"codeIsic"} childern={<TbCertificate />} placeholder="* کد آیسیک پروانه کسب" />
+                </div>
+                <div className={style.boxinput}>
+                    <Select classname={style.input} name={"province"} form={"form"} child={false} title="* استان" items={provinces} onChange={(e) => handleCities(e)} />
+                </div>
+                <div className={style.boxinput}>
+                    <Select classname={style.input} name={"city"} form={"form"} title="* شهر" child={true} items={cities} />
+                </div>
+            </div>
 
-  return (
-    <div className={style.store}>
-        <div className={style.boxstore}>
-            <div className={style.boxinput}>
-                <Input classname={style.input} type='file' childern={<ImUserTie />} placeholder="* عکس کارت ملی" />
+            <div className={style.box_btn}>
+                <button type='submit'>تایید</button>
             </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} childern={<ImUserTie />} placeholder="* کدملی / شناسه ملی" />
-            </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} childern={<ImUserTie />} placeholder="* شماره شناسنامه" />
-            </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} type='file' childern={<TbCertificate />} placeholder="* عکس پروانه کسب" />
-            </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} type='file' childern={<CgImage />} placeholder="* لوگو فروشگاه" />
-            </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} childern={<AiFillShop />} placeholder="* نام فروشگاه" />
-            </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} childern={<AiFillShop />} placeholder="* آدرس فروشگاه" />
-            </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} childern={<AiFillShop />} placeholder="* کدپستی" />
-            </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} childern={<CgImage />} placeholder="* شماره شبای بانکی" />
-            </div>
-            <div className={style.boxinput}>
-                <Input classname={style.input} childern={<TbCertificate />} placeholder="* کد آیسیک پروانه کسب" />
-            </div>
-            <div className={style.boxinput}>
-                <Select classname={style.input} title="* استان" items={states} onChange={(e) => AllCity(e.target.value)} />
-            </div>
-            <div className={style.boxinput}>
-                <Select classname={style.input} title="* شهر" items={city} />
-            </div>
-        </div>
 
-        <div className={style.box_btn}>
-            <button>تایید</button>
-        </div>
+            <div className={style.rules}>
+                <p>فروشنده محترم:</p>
+                <ul>
+                    <li>پروانه کسب باید حتما به نام شخص ثبت نام کننده باشد.</li>
+                    <li>شماره شبای بانکی باید حتما به نام شخص ثبت نام کننده باشد.</li>
+                    <li>عکس های ارسالی حتما باید واضح و خوانا باشد.</li>
+                </ul>
 
-        <div className={style.rules}>
-            <p>فروشنده محترم:</p>
-            <ul>
-                <li>پروانه کسب باید حتما به نام شخص ثبت نام کننده باشد.</li>
-                <li>شماره شبای بانکی باید حتما به نام شخص ثبت نام کننده باشد.</li>
-                <li>عکس های ارسالی حتما باید واضح و خوانا باشد.</li>
-            </ul>
-
-            <h5>درصورت عدم رعایت موارد فوق امکان تایید از سمت پلاست اپ وجود نخواهد داشت .</h5>
-        </div>
-    </div>
-  )
+                <h5>درصورت عدم رعایت موارد فوق امکان تایید از سمت پلاست اپ وجود نخواهد داشت .</h5>
+            </div>
+        </form>
+    )
 }
 
 export default StoreRegister;
