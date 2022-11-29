@@ -10,7 +10,7 @@ import Product2 from '../../../../../assets/imgs/shalwar.jpg';
 import { FlexMainReceipt } from './styleReceipt'
 import { addItem } from '../../../../../toolkit/cart/cartAction';
 
-const Receipt = ({ ProductsList, image_profile, name_profile, shop_profile, number_product }) => {
+const Receipt = ({ ProductsList }) => {
     
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -23,8 +23,6 @@ const Receipt = ({ ProductsList, image_profile, name_profile, shop_profile, numb
             setItem(item)
         }
     })};
-    // const price = item?.price;
-    // const off = 1000000;
 
     useEffect(() => {
         Items()
@@ -66,10 +64,6 @@ const Receipt = ({ ProductsList, image_profile, name_profile, shop_profile, numb
                 </div>
             </div>
 
-            {/* <div className='total-amount'>
-                <h5>مبلغ قابل پرداخت</h5>
-                <h5>{total.toLocaleString('fa-IR')} <span>تومان</span></h5>
-            </div> */}
             <div className='price-box'>
                 {item?.offer > 0 && 
                     <div className='offer'>
@@ -79,8 +73,9 @@ const Receipt = ({ ProductsList, image_profile, name_profile, shop_profile, numb
                 }
                 <h5>{total.toLocaleString('fa-IR')} <span>تومان</span></h5>
             </div>
-            {state.selectedItems.find(pro => pro.id === id) ?
-                    <button className='buy'><BsCartCheck /></button>
+
+            {state.selectedItems.find(pro => pro.id == id) ?
+                    <button className='added'><BsCartCheck /> قبلا انتخاب شده</button>
                     :
                     <button className='buy' onClick={() => dispatch(addItem(item))}><BsPlusLg /> افزودن به سبد خرید</button>
             }

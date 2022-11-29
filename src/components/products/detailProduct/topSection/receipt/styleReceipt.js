@@ -176,6 +176,29 @@ top: 0;
             margin: 0 0 0 1.5rem; 
         }
     }
+
+    .added {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        border-radius: 1.2rem;
+        color: #fff;
+        background: rgb(3, 154, 33);
+        font-size: clamp(1.3rem, 1.5vw, 1.5rem);
+        margin: 2rem 0;
+        transition: all .3s;
+
+        &:hover {
+            cursor: pointer;
+            background: #1971e4;
+        }
+
+        svg {
+            margin: 0 0 0 1.5rem; 
+        }
+    }
 }
 
 .price-box {

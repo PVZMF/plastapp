@@ -1,0 +1,50 @@
+.address {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+    box-sizing: border-box;
+}
+
+.address .card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 0 1rem 0;
+}
+
+.address .card .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.address .card .header .title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.2rem;
+}
+
+.address .card .header .title button {
+    color: #555;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.address .card .header .title button svg {
+    margin: 0 0 0 .6rem;
+}
+.address .card .header .title button:hover {
+    cursor: pointer;
+    color: #222;
+}

@@ -6,7 +6,7 @@ import Product from '../../../assets/imgs/pesteh.jpg';
 import Product2 from '../../../assets/imgs/shop_1.jpg';
 
 const DownMainCart = ({ list }) => {
-    const ListSugg = [];
+  const ListSugg = [];
   return (
     <FlexDownCart>
         <div className='header-suggestion'>

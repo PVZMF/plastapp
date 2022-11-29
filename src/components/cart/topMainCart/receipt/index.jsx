@@ -3,10 +3,15 @@ import { useSelector } from 'react-redux';
 import { MdVerified } from 'react-icons/md';
 import { FlexMainReceipt } from './styleReceipt'
 
-const Receipt = () => {
+const Receipt = ({ step, setStep }) => {
     
   const state = useSelector(state => state.cartState);
-  console.log(state.shops)
+  
+  const handleNextStep = () => {
+      if(state.selectedItems.length > 0) {
+          setStep(step + 1)
+      }
+  }
   return (
     <FlexMainReceipt>
         <h5 className='title-receipt'>جزئیات قیمت</h5>
@@ -39,7 +44,11 @@ const Receipt = () => {
             <h5>{(state.total - state.offers).toLocaleString('fa-IR')} <span>تومان</span></h5>
         </div>
 
-        <button>ادامه خرید {`از ${state.shops.toLocaleString('fa-IR')} غرفه`}</button>
+        <button onClick={handleNextStep}>
+            {step === 0 && `ادامه خرید از${state.shops.toLocaleString('fa-IR')} غرفه`}
+            {step === 1 && 'ادامه و تایید روش ارسال'}
+            {step === 2 && 'پرداخت'}
+        </button>
         
         <p><span><MdVerified /></span> تضمین رضایت: بازگشت سفارش و پول شما تا 7 روز</p>
     </FlexMainReceipt>
