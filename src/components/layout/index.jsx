@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 const Layout = () => {
   const [isOpenDrawer, setOpenDrawer] = useState(false);
   const isLogin = useSelector((state) => state.auth.isLogin);
+  const createAccount = useSelector((state) => state.auth.isCreateAccount);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -22,6 +23,7 @@ const Layout = () => {
       <Sidebar isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer} />
       <Toasted title={"ورود به حساب کاربری با موفقیت انجام شد."} open={isLogin} severity={"success"} />
       <Toasted title={"خروج از حساب کاربری."} open={!isLogin} severity={"warning"} />
+      <Toasted title={"ثبت نام با موفقیت انجام شد."} open={createAccount} severity={"warning"} />
 
       <Grid zIndex={0}>
         <Outlet />

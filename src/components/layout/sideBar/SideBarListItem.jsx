@@ -44,7 +44,6 @@ const SideBarListItem = (props) => {
   else
     return (
       <Link to={props.link}>
-        {console.log(props.link)}
         <ListItemButton onClick={props.onClick}>
           <ListItemIcon sx={{ color: "#69a8ff", minWidth: "auto", flexGrow: "0", ml: 2 }}>{props.icon}</ListItemIcon>
           <ListItemText sx={{ flexGrow: "0", '& span': { fontSize:{xs:"1rem",md:"1.4rem",lg:"1.7rem"} } }}>{props.label}</ListItemText>

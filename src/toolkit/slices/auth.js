@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
 import api from "../../api/axios";
 import apiLogin from "../../api/axiosLogin"
 import Storage from "../../service/Storage";
@@ -6,50 +6,88 @@ import Storage from "../../service/Storage";
 export const loginUserAsync = createAsyncThunk(
   "auth/loginUserAsync",
   async (authData, thunkAPI) => {
-    const res = await api.post("account/login/", authData)
-    return res?.data;
+    try {
+      const res = await api.post("account/login/", authData)
+      return res?.data;
+    } catch (err) {
+      return err.response.data
+    }
+
   }
 );
 
 export const registerVerifyForgetPasswordUserAsync = createAsyncThunk(
-  "auth/registerVerifyUserAsync",
+  "auth/registerVerifyForgetPasswordUserAsync",
   async (verifyCode) => {
-    const res = await api.post("account/forget_password_verify/", verifyCode);
-    return res?.data;
+    try {
+      const res = await api.post("account/forget_password_verify/", verifyCode);
+      return res?.data;
+    } catch (err) {
+      return err.response.data
+    }
   }
 )
 
 export const sendOtpForgetPasswordUserAsync = createAsyncThunk(
-  "auth/sendOtpUserAsync",
+  "auth/sendOtpForgetPasswordUserAsync",
   async (verifyTel, thunkAPI) => {
-    const res = await api.post("account/forget_password_send_otp/", verifyTel);
-    return res?.data;
+    try {
+      const res = await api.post("account/forget_password_send_otp/", verifyTel);
+      return res?.data;
+    } catch (err) {
+      return err.response.data
+    }
+  }
+);
+
+export const ForgetPasswordUserAsync = createAsyncThunk(
+  "auth/ForgetPasswordUserAsync",
+  async (changePass, thunkAPI) => {
+    try {
+      const res = await api.post("account/forget_password/", changePass);
+      return res?.data;
+    } catch (err) {
+      return err.response.data
+    }
   }
 );
 
 export const sendOtpUserAsync = createAsyncThunk(
   "auth/sendOtpUserAsync",
-  async (verifyTel, thunkAPI) => {
-    const res = await api.post("account/send_otp/", verifyTel);
-    return res?.data;
+  async (verifyCode) => {
+    try {
+      const res = await api.post("account/send_otp/", verifyCode);
+      return res?.data;
+    } catch (err) {
+      return err.response.data
+    }
   }
 );
 
 export const registerVerifyUserAsync = createAsyncThunk(
   "auth/registerVerifyUserAsync",
   async (verifyCode) => {
-    const res = await api.post("account/verify_register/", verifyCode);
-    return res?.data;
+    try {
+      const res = await api.post("account/verify_register/", verifyCode);
+      return res?.data;
+    } catch (err) {
+      return err.response.data
+    }
   }
 )
 
 export const registerUserAsync = createAsyncThunk(
   "auth/registerUserAsync",
   async (verifyCode) => {
-    const res = await api.post("account/register/", verifyCode);
-    return res?.data;
+    try {
+      const res = await api.post("account/register/", verifyCode);
+      return res?.data;
+    } catch (err) {
+      return err.response.data
+    }
   }
 )
+
 
 export const logoutUserAsync = createAsyncThunk(
   "auth/logoutUserAsync",
@@ -70,10 +108,13 @@ export const authSlice = createSlice({
     isLogin: false,
     error: "",
     onToasted: false,
-    counter: false
+    counter: false,
+    isCreateAccount: false
   },
   reducers: {
-    login: (state) => {
+    login: (state, action) => {
+      const st = Storage();
+      st.setLogin(action.payload.access, action.payload.refresh);
       state.isLogin = true;
       state.onToasted = true
     },
@@ -90,9 +131,10 @@ export const authSlice = createSlice({
     offToasted: (state) => {
       state.onToasted = false;
     },
-    onCounter: (state,action) => {
+    onCounter: (state, action) => {
       state.counter = action.payload;
-    }
+    },
+    toggleIsCreateAccount: (old) => !old
   },
   extraReducers: (builder) => {
     builder.addCase(loginUserAsync.pending, (state) => {
@@ -148,12 +190,13 @@ export const authSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(registerUserAsync.rejected, (state, action) => {
+      console.log(action);
       state.loading = false;
       state.error = action;
     });
   },
 });
 
-export const { logout, login, offToasted, onCounter} = authSlice.actions;
+export const { logout, login, offToasted, onCounter, toggleIsCreateAccount } = authSlice.actions;
 
 export default authSlice.reducer;

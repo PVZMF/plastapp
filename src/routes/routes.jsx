@@ -25,6 +25,7 @@ import Career_Opportunity_Page from "../pages/career_Opportunity";
 import StoreRegistration from "../pages/StoreRegistration";
 import CreditPurches from "../pages/CreditPurches";
 import OrderPlace from "../pages/OrderPlace";
+import RoleSelectPage from "../pages/register/RoleSelectPage";
 import RulesConditon from "../pages/rule";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
@@ -61,6 +62,10 @@ const Router = createBrowserRouter([
       {
         path: "/support/newticket",
         element: <NewTicket />,
+      },
+      {
+        path: "/roleselect",
+        element: <RoleSelectPage />,
       },
       {
         path: "/support",

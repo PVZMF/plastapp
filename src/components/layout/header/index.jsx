@@ -56,7 +56,6 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
   }, []);
 
   const isLogin = useSelector(state => state.auth.isLogin);
-  console.log(isLogin);
   const state = useSelector(state => state.cartState);
 
   return (
