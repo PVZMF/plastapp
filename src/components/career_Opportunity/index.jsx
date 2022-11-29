@@ -29,7 +29,10 @@ const Career_Opportunity = () => {
       });
   }, []);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(1111);
+  };
   if (loading) {
     return <Spinner />;
   }
@@ -45,7 +48,7 @@ const Career_Opportunity = () => {
         </div>
 
         <div className={style.formBox}>
-          <div ></div>
+          <div></div>
           <hr />
 
           <form onSubmit={handleSubmit}>
@@ -53,7 +56,6 @@ const Career_Opportunity = () => {
               name="first_name"
               title="نام و نام خانوادگی"
               icon={<ImUserTie />}
-              onSubmit={handleSubmit}
             />
             <Input name="last_name" title="نام خانوادگی" icon={<ImUserTie />} />
             <Input

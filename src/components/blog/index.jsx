@@ -5,41 +5,26 @@ import imgBlog from "../../assets/imgs/shop_1.jpg";
 import style from "./blog.module.css";
 import axios from "axios";
 import Spinner from "../Spinner/Spinner";
+import { getBlogList } from "../../api/api";
 const Blog = () => {
   const [blogList, setBlogList] = useState("");
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    axios
-      .get("https://plastapp.iran.liara.run/blog/list/")
-      .then((res) => {
-        console.log(res);
-        setBlogList(res.data);
-        setLoading(false);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
-    // axios
-    //   .get("https://plastapp.iran.liara.run/blog/list/")
-    //   .then((res) => {})
-    //   .catch(() => {});
-  }, []);
-  if (loading) {
-    return <Spinner />;
-  }
 
   const [blogListuseState, setBlogListuseState] = useState([]);
   useEffect(() => {
     // setLoading(true);
     getBlogList()
       .then((results) => {
+        setLoading(false);
         setBlogListuseState(results);
       })
       .finally(() => {
         console.log(blogListuseState);
       });
   }, []);
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className={style.blog}>
