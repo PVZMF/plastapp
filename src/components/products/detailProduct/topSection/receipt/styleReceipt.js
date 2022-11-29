@@ -178,6 +178,41 @@ top: 0;
     }
 }
 
+.price-box {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    flex-direction: column;
+
+    .offer {
+        margin: 1.5rem 0;
+        span {
+            color: #ff5c39;
+            background: #ffe7db;
+            padding: .4rem;
+            font-size: 1.2rem;
+            border-radius: .5rem;
+            margin: 0 .5rem 0 0;
+        }
+    }
+
+    del {
+        color: #999;
+        font-size: 1.4rem;
+    }
+    h5 {
+        color: #333;
+        font-size: 1.7rem;
+
+        span {
+            color: #444;
+            font-size: 1.1rem;
+        }
+    }
+  }
+
 
 @media (max-width: 1000px) {
     width: 100%;

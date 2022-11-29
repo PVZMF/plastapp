@@ -12,20 +12,19 @@ import { addItem } from '../../../../../toolkit/cart/cartAction';
 
 const Receipt = ({ ProductsList, image_profile, name_profile, shop_profile, number_product }) => {
     
+    const { id } = useParams();
     const dispatch = useDispatch();
     const state = useSelector(state => state.cartState);
-    const { id } = useParams();
-
     const [item, setItem] = useState();
-    // const price = item?.price;
-    // const off = 1000000;
-    // const Percent = item?.price * (item?offer )
+    const Percent = (item?.offer * 100) / item?.price;
     const total = item?.price - item?.offer;
     const Items = () => {ProductsList.map(item => {
         if(item.id !== id) {
             setItem(item)
         }
     })};
+    // const price = item?.price;
+    // const off = 1000000;
 
     useEffect(() => {
         Items()
@@ -72,9 +71,9 @@ const Receipt = ({ ProductsList, image_profile, name_profile, shop_profile, numb
                 <h5>{total.toLocaleString('fa-IR')} <span>تومان</span></h5>
             </div> */}
             <div className='price-box'>
-                {item.offer > 0 && 
+                {item?.offer > 0 && 
                     <div className='offer'>
-                        <span>{item?.offer.toLocaleString('fa-IR')}%</span>
+                        <span>{Math.round(Percent).toLocaleString('fa-IR')}%</span>
                         <del>{item?.price.toLocaleString('fa-IR')}</del>
                     </div>
                 }
