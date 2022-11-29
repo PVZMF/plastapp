@@ -10,30 +10,35 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { ForgetPasswordUserAsync, registerVerifyForgetPasswordUserAsync, sendOtpForgetPasswordUserAsync, toggleIsCreateAccount } from "../../toolkit/slices/auth";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import Storage from "../../service/Storage";
+import { ForgetPasswordUserAsync, registerVerifyForgetPasswordUserAsync, sendOtpForgetPasswordUserAsync, toggleIsChangePassword } from "../../toolkit/slices/auth";
+import { useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
+
 const ForgetPassword = ({ open, setOpen }) => {
   // State Register
   const initialState = {
-    sendOtp: { done: false, error: false},
-    verifyTel: { done: false, error: false},
-    register: { done: false, error: false }
+    state: {
+      sendOtp: { done: false, error: false },
+      verifyTel: { done: false, error: false },
+      register: { done: false, error: false }
+    },
+    formDate: {
+      phone_number: "",
+      password: "",
+      password_confirm: ""
+    }
   };
-  const [state, setState] = useState(initialState);
 
+  const [state, setState] = useState(initialState.state);
   const dispatch = useDispatch();
-  const st = Storage();
   const navigate = useNavigate();
-  const errorApi = useSelector((state) => state.auth.error);
   const loading = useSelector((state) => state.auth.loading);
   const counter = useSelector((state) => state.auth.counter)
-  const [formData, setFormData] = useState({ phone_number: "", password: "", password_confirm: "" });
+  const [formData, setFormData] = useState(initialState.formDate);
   const [focus, setFocus] = useState("");
   const [textErrorSendOtp, setTextErrorSendOtp] = useState("");
   const [textErrorVerifyTel, setTextErrorVerifyTel] = useState("");
@@ -57,16 +62,12 @@ const ForgetPassword = ({ open, setOpen }) => {
           setState({ ...state, sendOtp: { done: true, error: false } });
           dispatch(onCounter(true));
         }
-        else if (res.non_field_errors === "try later") {
-          setState({ ...state, sendOtp: { done: false, error: true } });
-          setTextErrorSendOtp("کمی بعد امتحان کنید");
-        }
         else if ("phone_number" in res) {
-          if (res["phone_number"][0] === 'این مقدار نباید خالی باشد.') {
+          if (res.phone_number[0] === 'این مقدار نباید خالی باشد.') {
             setState({ ...state, sendOtp: { done: false, error: true } });
             setTextErrorSendOtp("شماره تلفن الزامی است!");
           }
-          else if (res["phone_number"][0] === 'unvalid phonenumber') {
+          else if (res.phone_number[0] === 'unvalid phonenumber') {
             setState({ ...state, sendOtp: { done: false, error: true } });
             setTextErrorSendOtp("شماره تلفن اشتباه است!");
           }
@@ -74,6 +75,10 @@ const ForgetPassword = ({ open, setOpen }) => {
         else if (res.non_field_errors[0] === 'user already exist') {
           setState({ ...state, sendOtp: { done: false, error: true } });
           setTextErrorSendOtp("کاربر با این شماره تلفن از قبل موجود است");
+        }
+        else if (res.non_field_errors[0] === "try later") {
+          setState({ ...state, sendOtp: { done: false, error: true } });
+          setTextErrorSendOtp("کمی بعد امتحان کنید");
         }
 
       })
@@ -102,19 +107,14 @@ const ForgetPassword = ({ open, setOpen }) => {
         }
       })
         .catch((e) => {
-          setState({ ...state, verifyTel: { done: false, error: true, exist: false } });
+          setState({ ...state, verifyTel: { done: false, error: true} });
         })
     } else if (!state.register.done) {
       dispatch(ForgetPasswordUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
-        console.log(res);
-        if (res.message === "user created") {
-          setState({ ...state, register: { done: true, error: true } });
-          dispatch(toggleIsCreateAccount());
-          navigate("/roleselect")
-        }
-        else if (data.phone_number) {
-          setState({ ...state, register: { done: false, error: true } });
-          setTextErrorRegister("کاربر با این شماره تلفن از قبل موجود است");
+        if (res.message === "password successfully reset") {
+          setState({ ...state, register: { done: true, error: false } });
+          dispatch(toggleIsChangePassword())
+          handleClose();
         }
         else if ("password" in res) {
           if (res.password[0] === "این مقدار نباید خالی باشد.") {
@@ -137,22 +137,27 @@ const ForgetPassword = ({ open, setOpen }) => {
             setState({ ...state, register: { done: false, error: true } });
             setTextErrorRegister("شماره موبایل شما مجددا نیاز به تایید دارد!")
           }
-          else if (data.password !== data.confirmpass) {
+          else if (res.non_field_errors[0] === "this password is same as your pld password") {
             setState({ ...state, register: { done: false, error: true } });
             setTextErrorRegister("عدم مطابقت پسورد! از درست بودن پسورد خود مطمين شوید.")
           }
         }
+        else if (data.phone_number[0]) {
+          setState({ ...state, register: { done: false, error: true } });
+          setTextErrorRegister("کاربر با این شماره تلفن از قبل موجود است");
+        }
       })
         .catch((e) => {
           console.log(e);
-          setState({ ...state, register: { done: false, error: true, exist: false } });
+          setState({ ...state, register: { done: false, error: true} });
         })
     }
   };
 
   // Modal
   const handleClose = () => {
-    setState(initialState);
+    setState(initialState.state);
+    setFormData(initialState.formDate);
     setOpen(false);
   };
 

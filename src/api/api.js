@@ -41,9 +41,23 @@ export async function getRulesConditon() {
   return res.data;
 }
 
+export async function getBlogList() {
+  const res = await apiLogin.get("blog/list/");
+  return res.data;
+}
+
+export async function getBlogDetails(id) {
+  const res = await apiLogin.get(`blog/detail/${id}/`);
+  return res.data;
+}
+
 export async function loginUser(authData) {
   const res = await api.post("account/login/", authData);
   return res.data;
 }
 
+export async function refreshToken(token) {
+  const res = await api.post("api/token/refresh/", token);
+  return res.data;
+}
 

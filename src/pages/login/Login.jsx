@@ -4,7 +4,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import FormControl from '@mui/material/FormControl';
 import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg";
 import { styled } from "@mui/system";
@@ -13,57 +12,53 @@ import { login, loginUserAsync } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
-import {IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
+import Storage from "../../service/Storage";
 export default function SignIn() {
 
   const [error, setError] = useState(false);
   const [textError, setTextError] = useState("");
-  const [onSpinerButton, setonSpinerButton] = useState(false);
   const [showForgetpass, setShowForgetpass] = useState(false);
   const [showPass, SetShowPass] = useState(false);
   const [formData, setFormData] = useState({ phone_number: "", password: "" });
   const [focus, setFocus] = useState("");
   const isLogin = useSelector((state) => state.auth.isLogin);
   const loading = useSelector((state) => state.auth.loading);
-  const errorApi = useSelector((state) => state.auth.error);
+  const auth = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const st = Storage();
+  let onSpinerButton = true;
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
-    setonSpinerButton(true);
-    (dispatch(loginUserAsync(data))).unwrap()
-      .then((res) => {
-        // console.log(res.access);
-        if (res?.message === "no user with this credential   exists ") {
-          setTextError("کاربری با این مشخصات وجود ندارد!");
-          setError(true);
-        }
-        else if (res?.access) {
-          console.log(res.access);
-          console.log(res.refresh);
-          dispatch(login(res.access, res.refresh));
-          setError(false);
-          console.log("Login")
-        }
-        else if (res?.phone_number[0] === "این مقدار نباید خالی باشد.") {
-          setTextError("شمازه تلفن الزامی است!")
-          setError(true);
-        }
-        else if (res?.phone_number[0] === "unvalid phonenumber") {
-          setTextError("شمازه تلفن اشتباه است!")
-          setError(true);
-        }
-        else if (res?.password) {
-          setTextError("پسورد الزامی است!")
-          setError(true);
-        }
-      })
+    onSpinerButton = false;
+    dispatch(loginUserAsync(data)).unwrap().then((res) => {
+      if (res?.message === "no user with this credential   exists ") {
+        setTextError("کاربری با این مشخصات وجود ندارد!");
+        setError(true);
+      }
+      else if (res?.access) {
+        dispatch(login({access:res.access, refresh:res.refresh}));
+        setError(false);
+      }
+      else if (res?.phone_number[0] === "این مقدار نباید خالی باشد.") {
+        setTextError("شمازه تلفن الزامی است!")
+        setError(true);
+      }
+      else if (res?.phone_number[0] === "unvalid phonenumber") {
+        setTextError("شمازه تلفن اشتباه است!")
+        setError(true);
+      }
+      else if (res?.password) {
+        setTextError("پسورد الزامی است!")
+        setError(true);
+      }
+    })
       .catch((e) => {
         console.log(e)
         setError(e);
@@ -71,6 +66,10 @@ export default function SignIn() {
   };
 
   if (isLogin) {
+    if(!auth.firstName || !auth.lastName || !auth.rule){
+      return <Navigate to={"/roleselect"} />;
+    }
+    console.log(auth);
     return <Navigate to={"/"} />;
   }
 
@@ -111,11 +110,11 @@ export default function SignIn() {
         Item
         bgcolor={"white"}
         sx={{
-          width: { xs: "100%", sm: "80%", md: "50%" },
+          width: { xs: "100%", sm: "80%", md: "40%" },
           margin: { xs: 3, md: 6 },
           padding: { xs: 3, md: 6 },
         }}
-        height="60%"
+        height="50%"
       >
         <CssBaseline />
         <Box

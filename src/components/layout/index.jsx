@@ -14,6 +14,8 @@ const Layout = () => {
   const [isOpenDrawer, setOpenDrawer] = useState(false);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const createAccount = useSelector((state) => state.auth.isCreateAccount);
+  const changePassword = useSelector((state) => state.auth.isChangePassword);
+  const conditionToast = createAccount || changePassword;
   return (
     <React.Fragment>
       <CssBaseline />
@@ -21,9 +23,10 @@ const Layout = () => {
       <ScrollToTop />
       <Header isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer} />
       <Sidebar isOpenDrawer={isOpenDrawer} setOpenDrawer={setOpenDrawer} />
-      <Toasted title={"ورود به حساب کاربری با موفقیت انجام شد."} open={isLogin} severity={"success"} />
-      <Toasted title={"خروج از حساب کاربری."} open={!isLogin} severity={"warning"} />
-      <Toasted title={"ثبت نام با موفقیت انجام شد."} open={createAccount} severity={"warning"} />
+      <Toasted title={"ورود به حساب کاربری با موفقیت انجام شد."} open={isLogin && !conditionToast} severity={"success"} />
+      <Toasted title={"خروج از حساب کاربری."} open={!isLogin && !conditionToast} severity={"warning"} />
+      <Toasted title={"ثبت نام با موفقیت انجام شد."} open={createAccount} severity={"success"} />
+      <Toasted title={"تغییر پسورد با موفقیت انجام شد."} open={changePassword} severity={"success"} />
 
       <Grid zIndex={0}>
         <Outlet />
