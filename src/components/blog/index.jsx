@@ -10,16 +10,15 @@ const Blog = () => {
   const [blogList, setBlogList] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const [blogListuseState, setBlogListuseState] = useState([]);
   useEffect(() => {
     // setLoading(true);
     getBlogList()
       .then((results) => {
+        setBlogList(results);
         setLoading(false);
-        setBlogListuseState(results);
       })
       .finally(() => {
-        console.log(blogListuseState);
+        setLoading(false);
       });
   }, []);
   if (loading) {

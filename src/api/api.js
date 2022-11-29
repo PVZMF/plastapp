@@ -42,17 +42,17 @@ export async function getCreatePurches() {
 }
 
 export async function getRulesConditon() {
-  const res = await api.get("config/cradite_purches/");
+  const res = await api.get("config/rule/");
   return res.data;
 }
 
 export async function getBlogList() {
-  const res = await apiLogin.get("blog/list/");
+  const res = await api.get("blog/list/");
   return res.data;
 }
 
 export async function getBlogDetails(id) {
-  const res = await apiLogin.get(`blog/detail/${id}/`);
+  const res = await api.get(`blog/detail/${id}/`);
   return res.data;
 }
 
