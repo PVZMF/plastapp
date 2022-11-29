@@ -1,7 +1,7 @@
 // Modules
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import ClickAwayListener from "../../ClickAwayListener/ClickAwayListener"
 // Redux
 import { useSelector } from 'react-redux';
 
@@ -13,7 +13,6 @@ import { Box } from '@mui/material';
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import CloseIcon from '@mui/icons-material/Close';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import {
   FlexNavContainer,
@@ -90,9 +89,10 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
           </StyledNavLogo>
           <StyledNavLeftBar>
             <Box color={globalCssVar.light_blue} >
-              <IconButton href={isLogin?"/profile":"/login"} width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
-                {isLogin? <AccountCircleIcon fontSize="large"/> :navLan.login_button}
-              </IconButton>
+            {isLogin?
+              <ClickAwayListener/>:<IconButton href={isLogin?"/profile":"/login"} width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
+              {navLan.login_button}
+           </IconButton> }
             </Box>
             <Link to="/cart">
               <IconButton sx={{
