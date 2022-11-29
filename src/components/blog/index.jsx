@@ -20,6 +20,10 @@ const Blog = () => {
       .catch((err) => {
         console.log(err);
       });
+    // axios
+    //   .get("https://plastapp.iran.liara.run/blog/list/")
+    //   .then((res) => {})
+    //   .catch(() => {});
   }, []);
   if (loading) {
     return <Spinner />;

@@ -10,27 +10,22 @@ import Spinner from "../../components/Spinner/Spinner";
 // Style
 import style from "./careerOpportunity.module.css";
 import axios from "axios";
-
+import { getJobs } from "../../api/api";
 const Career_Opportunity = () => {
   const data = "";
   const [jobs, setJobs] = useState("");
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    var config = {
-      method: "get",
-      url: "https://plastapp.iran.liara.run/job/list/",
-      headers: {},
-      data: data,
-    };
 
-    axios(config)
-      .then(function (response) {
+  useEffect(() => {
+    // setLoading(true);
+    getJobs()
+      .then((results) => {
         setLoading(false);
-        console.log(response.data);
-        setJobs(response.data);
+        console.log(results);
+        setJobs(results);
       })
-      .catch(function (error) {
-        console.log(error);
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -50,7 +45,7 @@ const Career_Opportunity = () => {
         </div>
 
         <div className={style.formBox}>
-          <p>lorem5</p>
+          <div ></div>
           <hr />
 
           <form onSubmit={handleSubmit}>
@@ -58,6 +53,7 @@ const Career_Opportunity = () => {
               name="first_name"
               title="نام و نام خانوادگی"
               icon={<ImUserTie />}
+              onSubmit={handleSubmit}
             />
             <Input name="last_name" title="نام خانوادگی" icon={<ImUserTie />} />
             <Input

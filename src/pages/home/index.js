@@ -29,7 +29,7 @@ const Home = () => {
 
   useEffect(() => {
     // setLoading(true);
-    Promise.all([getTwoelvBanners()])
+    getTwoelvBanners()
       .then((results) => {
         setBanners(results[0].data);
       })
