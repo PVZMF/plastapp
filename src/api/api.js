@@ -42,7 +42,7 @@ export async function getCreatePurches() {
 }
 
 export async function getRulesConditon() {
-  const res = await api.get("config/cradite_purches/");
+  const res = await api.get("config/rule/");
   return res.data;
 }
 
