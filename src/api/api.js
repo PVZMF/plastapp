@@ -47,12 +47,12 @@ export async function getRulesConditon() {
 }
 
 export async function getBlogList() {
-  const res = await apiLogin.get("blog/list/");
+  const res = await api.get("blog/list/");
   return res.data;
 }
 
 export async function getBlogDetails(id) {
-  const res = await apiLogin.get(`blog/detail/${id}/`);
+  const res = await api.get(`blog/detail/${id}/`);
   return res.data;
 }
 
