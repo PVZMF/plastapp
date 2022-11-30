@@ -76,11 +76,11 @@ export async function getCities() {
 }
 
 export async function createProduct(dataProduct) {
-  const res = await apiLogin.post("product/create/",dataProduct);
+  const res = await apiLogin.post("product/create/", dataProduct);
   return res.data;
 }
 
 export async function createShop(dataShop) {
-  const res = await apiLogin.post("shop/create/",dataShop);
+  const res = await apiLogin.post("shop/create/", dataShop);
   return res.data;
 }
