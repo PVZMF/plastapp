@@ -5,6 +5,9 @@ export const MainSearchContainer = styled.div`
   background: var(--primary-light);
   padding: 25px 0;
   margin: 10px 0;
+  select{
+    border:none
+  }
 `;
 
 export const FlexMainSearch = styled.div`

@@ -6,9 +6,12 @@ import Comment from "./comment";
 import axios from "axios";
 import Spinner from "../../Spinner/Spinner";
 import { getBlogDetails } from "../../../api/api";
+import {createShop} from "../../../api/api"
+
 const DetailBlog = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  //   console.log("params = = ", id);
   const [data, setData] = useState("");
   useEffect(() => {
     getBlogDetails(id)

@@ -16,6 +16,7 @@ export async function getSliderImage() {
   return res.data;
 }
 
+// Categories
 export async function getCategories() {
   const res = await api.get("category/list/");
   return res.data;
@@ -66,5 +67,20 @@ export async function applyJob(authData) {
 }
 export async function refreshToken(token) {
   const res = await api.post("api/token/refresh/", token);
+  return res.data;
+}
+
+export async function getCities() {
+  const res = await api.post("api/token/refresh/");
+  return res.data;
+}
+
+export async function createProduct(dataProduct) {
+  const res = await apiLogin.post("product/create/",dataProduct);
+  return res.data;
+}
+
+export async function createShop(dataShop) {
+  const res = await apiLogin.post("shop/create/",dataShop);
   return res.data;
 }

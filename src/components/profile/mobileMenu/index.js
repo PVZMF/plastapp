@@ -61,14 +61,6 @@ const MobileMenu = ({ ProfileImage, shopName, userName, cash, setMenu }) => {
             >
                 <Link to="/profile/orders"><HiOutlineClipboardList /> سفارشات</Link>
             </h5>
-            <h5 className={pathName === '/profile/storregiser' ? style.active : null}
-             onClick={() => setMenu(false)}
-            >
-                <Link to="/profile/storregiser"><BiStore /> ثبت فروشگاه</Link>
-            </h5>
-            <h5>
-                <Link to="/support"><BiSupport /> پشتیبانی</Link>
-            </h5>
             <div className={style.submenu}>
                 <div className={style.h5box} onClick={() => setActive(!active)}>
                     <h5><BiSupport /> پشتیبانی</h5>
