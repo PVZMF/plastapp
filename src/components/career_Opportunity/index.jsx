@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import JobImg from "../../assets/imgs/shop_1.jpg";
+import { applyJob } from "../../api/api";
 // Icons
 import { ImUserTie } from "react-icons/im";
 import { BsTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { TbCertificate } from "react-icons/tb";
+import { FaRegFileAlt } from "react-icons/fa";
 import Spinner from "../../components/Spinner/Spinner";
 // Style
 import style from "./careerOpportunity.module.css";
-import axios from "axios";
 import { getJobs } from "../../api/api";
 const Career_Opportunity = () => {
-  const data = "";
   const [jobs, setJobs] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +21,6 @@ const Career_Opportunity = () => {
     getJobs()
       .then((results) => {
         setLoading(false);
-        console.log(results);
         setJobs(results);
       })
       .finally(() => {
@@ -31,7 +30,9 @@ const Career_Opportunity = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(1111);
+    const dataform = new FormData(e.target);
+    const data = Object.fromEntries(dataform.entries());
+    console.log(data);
   };
   if (loading) {
     return <Spinner />;
@@ -51,12 +52,14 @@ const Career_Opportunity = () => {
           <div></div>
           <hr />
 
-          <form onSubmit={handleSubmit}>
-            <Input
-              name="first_name"
-              title="نام و نام خانوادگی"
-              icon={<ImUserTie />}
-            />
+          <form
+            // method="POST"
+            // action="https://plastapp.iran.liara.run/job/apply/"
+            // enctype="multipart/form-data"
+            // charset="utf-8"
+            onSubmit={handleSubmit}
+          >
+            <Input name="first_name" title="نام" icon={<ImUserTie />} />
             <Input name="last_name" title="نام خانوادگی" icon={<ImUserTie />} />
             <Input
               name="phone_number"
@@ -78,8 +81,15 @@ const Career_Opportunity = () => {
                 ))}
               </select>
             </div>
+            <Input
+              name="resume"
+              title="رزومه"
+              icon={<FaRegFileAlt />}
+              type="file"
+              placeholder="بارگذاری رزومه"
+            />
 
-            <button>ارسال</button>
+            <button type="submit">ارسال</button>
           </form>
         </div>
       </div>
