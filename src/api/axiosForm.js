@@ -1,6 +1,7 @@
 import axios from "axios";
 import { refreshToken } from "./api"
 import Storage from "../service/Storage";
+
 export const baseUrl = "https://plastapp.iran.liara.run/";
 
 const api = axios.create({
@@ -14,6 +15,7 @@ api.interceptors.request.use(
     // Do something before request is sent
     const st = Storage();
     config.headers['Authorization'] = `Bearer ${st.accessToken}`;
+    config.headers["Content-Type"] = "multipart/form-data";
     return config;
   },
   function (error) {
@@ -48,8 +50,6 @@ api.interceptors.response.use(
   }
 
 );
-
-
 
 export default api;
 

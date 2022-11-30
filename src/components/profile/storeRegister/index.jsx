@@ -15,8 +15,7 @@ import style from './storeRegister.module.css'
 
 const StoreRegister = () => {
     const [cities, setCities] = useState([""])
-
-
+    const [img, setImg] = useState("");
     const handleCities = (e) => {
         setCities(provinces.filter(item => item.name == e.target.value)[0].cities);
     }
@@ -24,14 +23,20 @@ const StoreRegister = () => {
         e.preventDefault();
         const form_data = new FormData(e.target);
         const data = Object.fromEntries(form_data.entries());
+        console.log(img)
+        form_data.append("national_card_image", img);
+        // ticketImage && formData.append("image", ticketImage);
+        // data.append("sender", 1);
+
+        console.log(data);
         createShop(data).then(result => {
             console.log(result);
         })
-        console.log(data);
+
     }
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)} className={style.store} id={"form"}>
+        <form action="https://plastapp.iran.liara.run/shop/create/" onSubmit={(e) => handleSubmit(e)} className={style.store} id={"form"} method="GET" enctype="multipart/form-data">
             <div className={style.boxstore}>
                 <div className={style.boxinput}>
                     <Input classname={style.input} name={"first_name"} childern={<ImUserTie />} placeholder="* نام" />
@@ -40,7 +45,11 @@ const StoreRegister = () => {
                     <Input classname={style.input} name={"last_name"} childern={<ImUserTie />} placeholder="* نام خانوادگی" />
                 </div>
                 <div className={style.boxinput}>
-                    <Input classname={style.input} name={"national_card_image"} type='file' childern={<ImUserTie />} placeholder="* عکس کارت ملی" />
+                    <div className={style.input}>
+                        <input type={'file'} name={"national_card_image"} placeholder="* عکس کارت ملی" onChange={(e)=> setImg(e)} />
+                        <span><ImUserTie /></span>
+                        <h5>* عکس کارت ملی</h5>
+                    </div>
                 </div>
                 <div className={style.boxinput}>
                     <Input classname={style.input} name={"economic_code"} childern={<ImUserTie />} placeholder="* کدملی / شناسه ملی" />
@@ -52,7 +61,7 @@ const StoreRegister = () => {
                     <Input classname={style.input} name={"license_image"} type='file' childern={<TbCertificate />} placeholder="* عکس پروانه کسب" />
                 </div>
                 <div className={style.boxinput}>
-                    <Input classname={style.input} name={"logo"} type='file' childern={<CgImage />} placeholder="* لوگو فروشگاه" />
+                    <Input classname={style.input} id="logo" name={"logo"} type='file' childern={<CgImage />} placeholder="* لوگو فروشگاه" />
                 </div>
                 <div className={style.boxinput}>
                     <Input classname={style.input} name={"name"} childern={<AiFillShop />} placeholder="* نام فروشگاه" />
@@ -73,10 +82,10 @@ const StoreRegister = () => {
                     <Select classname={style.input} name={"state"} form={"form"} child={false} title="* استان" items={provinces} onChange={(e) => handleCities(e)} />
                 </div>
                 <div className={style.boxinput}>
-                    <Select classname={style.input} name={"city"} form={"form"} title="* شهر" child={false} items={cities} />
+                    <Select classname={style.input} name={"city"} form={"form"} title="* شهر" child={true} items={cities} />
                 </div>
                 <div className={style.boxinput}>
-                    <Select classname={style.input} name={"is_active"} form={"form"} title="در دسترس" child={true} items={["فعال","غیرفعال"]} />
+                    <Select classname={style.input} name={"is_active"} form={"form"} title="دسترسی" child={true} items={["فعال", "غیرفعال"]} />
                 </div>
             </div>
 

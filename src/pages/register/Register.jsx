@@ -115,13 +115,13 @@ const Register = () => {
                     setTextErrorRegister("کاربر با این شماره تلفن از قبل موجود است");
                 }
                 else if ("password" in res) {
-                    if (res.password[0] === "این مقدار نباید خالی باشد.") {
+                    if (res.password === "این مقدار نباید خالی باشد.") {
                         setState({ ...state, register: { done: false, error: true } });
                         setTextErrorRegister("وارد کردن پسورد الزامی است!")
                     }
                 }
                 else if ("password_confirm" in res) {
-                    if (res.password_confirm[0] === "این مقدار نباید خالی باشد.") {
+                    if (res.password_confirm === "این مقدار نباید خالی باشد.") {
                         setState({ ...state, register: { done: false, error: true } });
                         setTextErrorRegister("وارد کردن تایید پسورد الزامی است!")
                     }
