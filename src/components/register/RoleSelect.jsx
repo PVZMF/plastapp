@@ -38,7 +38,9 @@ const RoleSelect = ({ image }) => {
                         </Link>
 
                     </button>
-                    <button>مشتری هستم</button>
+                    <Link to="../">
+                        <button>مشتری هستم</button>
+                    </Link>
                 </div>
 
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Input from './Input'
 import Select from './Select';
 import { provinces } from "../../../assets/citiesName/CitiesName"
-import {createShop} from "../../../api/api"
+import { createShop } from "../../../api/api"
 
 // Icons
 import { TbCertificate } from 'react-icons/tb';
@@ -33,6 +33,12 @@ const StoreRegister = () => {
     return (
         <form onSubmit={(e) => handleSubmit(e)} className={style.store} id={"form"}>
             <div className={style.boxstore}>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"first_name"} childern={<ImUserTie />} placeholder="* نام" />
+                </div>
+                <div className={style.boxinput}>
+                    <Input classname={style.input} name={"last_name"} childern={<ImUserTie />} placeholder="* نام خانوادگی" />
+                </div>
                 <div className={style.boxinput}>
                     <Input classname={style.input} name={"national_card_image"} type='file' childern={<ImUserTie />} placeholder="* عکس کارت ملی" />
                 </div>
@@ -67,7 +73,10 @@ const StoreRegister = () => {
                     <Select classname={style.input} name={"state"} form={"form"} child={false} title="* استان" items={provinces} onChange={(e) => handleCities(e)} />
                 </div>
                 <div className={style.boxinput}>
-                    <Select classname={style.input} name={"city"} form={"form"} title="* شهر" child={true} items={cities} />
+                    <Select classname={style.input} name={"city"} form={"form"} title="* شهر" child={false} items={cities} />
+                </div>
+                <div className={style.boxinput}>
+                    <Select classname={style.input} name={"is_active"} form={"form"} title="در دسترس" child={true} items={["فعال","غیرفعال"]} />
                 </div>
             </div>
 

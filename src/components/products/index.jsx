@@ -1,24 +1,38 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import CardProduct from './cardProduct'
-
+import { getCategories } from '../../api/api'
 // Images
 import Product from '../../assets/imgs/pesteh.jpg'
 import Product2 from '../../assets/imgs/pro1.jpg'
 // Style
 import style from './products.module.css'
 
-const Products = ({ listProducts, categorys }) => {
+
+
+
+const Products = ({ listProducts }) => {
+  const [categorys, setCategorys] = useState([]);
+   // Categories
+ useEffect(() => {
+  // setLoading(true);
+  getCategories().then((results) => {
+    setCategorys(results);
+  })
+    .finally(() => {
+      
+    });
+}, []);
 
   return (
     <div className={style.products}>
-
+      { console.log(categorys)}
 
         <div className={style.sidebar}>
             <div className={style.productsgroup}>
                 <h5>دسته بندی محصولات</h5>
                 <ul>
                     {categorys.map((item, index) => (
-                        <li key={index + "categorys"}><p>{item.name}</p></li>
+                        <li key={index + "categorys"}><p>{item.title}</p></li>
                     ))}
                 </ul>
             </div>
@@ -32,7 +46,7 @@ const Products = ({ listProducts, categorys }) => {
                 <select>
                     <option>انتخاب دسته بندی</option>
                     {categorys.map((item, index) => (
-                        <option key={index + "categorys"} value={item.name}>{item.name}</option>
+                        <option key={index + "categorys"} value={item.title}>{item.title}</option>
                     ))}
                 </select>
             </div>
@@ -109,39 +123,5 @@ Products.defaultProps = {
         number: 1,
         location: "تهران - لوازم خانگی گل سرخ"
       },
-    ],
-    categorys: [
-        {
-          id: '1',
-          name: 'محصولات نایلون و نایلکس'
-        },
-        {
-          id: '2',
-          name: 'محصولات سلولزی'
-        },
-        {
-          id: '3',
-          name: 'محصولات یک‌بار مصرف'
-        },
-        {
-          id: '4',
-          name: 'محصولات خانه و آشپزخانه'
-        },
-        {
-          id: '5',
-          name: 'محصولات بهداشت و حمام'
-        },
-        {
-          id: '6',
-          name: ' سفارشات چاپی'
-        },
-        {
-          id: '7',
-          name: ' مواد اولیه'
-        },
-        {
-          id: '8',
-          name: ' تجهیزات و دستگاه خط تولید'
-        },
     ]
 }
