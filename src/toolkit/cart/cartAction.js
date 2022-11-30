@@ -32,6 +32,18 @@ export const checkout = () => {
     }
 }
 
+export const stepPlus = () => {
+    return {
+        type: "STEP_PLUS"
+    }
+}
+
+export const stepMinus = () => {
+    return {
+        type: "STEP_MINUS"
+    }
+}
+
 export const clear = () => {
     return {
         type: "CLEAR"

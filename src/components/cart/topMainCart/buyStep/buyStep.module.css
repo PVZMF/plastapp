@@ -1,0 +1,349 @@
+.buystep {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+    box-sizing: border-box;
+}
+
+.buystep .buyheader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem;
+    background: #fff;
+}
+
+.buystep .buyheader button {
+    color: #555;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buystep .buyheader p {
+    display: flex;
+    align-items: center;
+    color: #777;
+    font-weight: 100;
+    font-size: clamp(1.2rem, 1.4vw, 1.4rem);
+}
+
+.buystep .buyheader p svg {
+    font-size: clamp(1.8rem, 2vw, 2rem);
+    margin: 0 0 0 .6rem;
+}
+
+.buystep .buyheader button svg {
+    margin: 0 0 0 .6rem;
+}
+.buystep .buyheader button:hover {
+    cursor: pointer;
+    color: #222;
+}
+
+.buystep .OfferCode {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    background: #fff;
+}
+
+.buystep .OfferCode label {
+    color: #444;
+    font-weight: 100;
+    font-size: 1.5rem;
+}
+
+.buystep .OfferCode .inputBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.buystep .OfferCode .inputBox input {
+    width: 100%;
+    max-width: 350px;
+    height: 5rem;
+    border: 1px solid #888;
+    border-radius: .7rem;
+    outline: none;
+    padding: 1rem;
+}
+
+.buystep .OfferCode .inputBox button {
+    height: 4.7rem;
+    color: #69a9ff;
+    border: 2px solid #69a9ff;
+    border-radius: .6rem;
+    font-size: 1.9rem;
+    padding: 0 2rem;
+    margin: 0 1rem;
+    transition: all .3s;
+}
+
+
+.buystep .OfferCode .inputBox button:hover {
+    cursor: pointer;
+    background: #69a9ff;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.buystep .list {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    background: #fff;
+}
+
+.buystep .list .wallet {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+}
+
+.buystep .list .wallet .checkboxDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.buystep .list .wallet .checkboxDiv label {
+    margin: 0 1rem;
+    color: #333;
+    font-size: 1.4rem;
+}
+
+.buystep .list .wallet h4 {
+    color: #333;
+    font-size: 1.4rem;
+}
+
+.buystep .list .factortitle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
+}
+
+.buystep .list .factortitle h5 {
+    color: #333;
+    font-size: 1.4rem;
+}
+
+.buystep .boxCards {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.buystep .boxCards .card_item:last-child {
+    border: none;
+}
+
+.card_item {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 2rem;
+    border-bottom: 4px solid #e1e1e1;
+}
+
+.card_item .cardHeader {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card_item .cardHeader .dataProduct {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card_item .cardHeader .dataProduct h4 {
+    color: #888;
+    font-weight: 100;
+    font-size: 1.4rem;
+    margin: 0 0 1rem 0;
+}
+.card_item .cardHeader .dataProduct h4 span {
+    color: #222;
+    font-weight: 100;
+    font-size: 1.7rem;
+}
+
+.card_item .cardHeader .dataProduct p {
+    color: #888;
+    font-weight: 100;
+    font-size: 1.4rem;
+}
+
+.card_item .cardHeader h2 {
+    color: #222;
+    font-weight: 100;
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+}
+
+.card_item .cardHeader h2:hover {
+    cursor: pointer;
+}
+
+.card_item .cardHeader h2 .up,
+.card_item .cardHeader h2 .down {
+    color: #222;
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 .7rem 0 0;
+    display: flex;
+    align-items: center;
+    transition: all .3s;
+}
+
+.card_item .cardHeader h2 .down {
+    transform: rotate(180deg);
+}
+
+.card_item .bodyCard {
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0;
+    transition: all .3s ease-in;
+    overflow: hidden;
+    /* animation-name: heightCard;
+    animation-duration: 4s; */
+}
+.card_item .bodyCard_Hide {
+    width: 100%;
+    height: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    transition: all .2s ease-out;
+    transition-delay: 0;
+    overflow: hidden;
+    /* animation-name: heightCard;
+    animation-duration: 4s; */
+}
+/* @keyframes heightCard {
+    from {max-height: 100%;}
+    to {max-height: 0;}
+  } */
+  
+
+.card_item .bodyCard .proData,
+.card_item .bodyCard_Hide .proData {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.card_item .bodyCard .proData img,
+.card_item .bodyCard_Hide .proData img {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+}
+
+.card_item .bodyCard .proData .proName,
+.card_item .bodyCard_Hide .proData .proName {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 1.5rem 0 0;
+}
+
+.card_item .bodyCard .proData .proName h3,
+.card_item .bodyCard_Hide .proData .proName h3 {
+    color: #888;
+    font-weight: 100;
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.card_item .bodyCard .proData .proName h5,
+.card_item .bodyCard_Hide .proData .proName h5 {
+    color: #888;
+    font-weight: 100;
+    font-size: 1.3rem;
+}
+
+.card_item .bodyCard h4,
+.card_item .bodyCard_Hide h4 {
+    color: #333;
+    font-weight: 100;
+    font-size: 1.8rem;
+}
+
+.buystep .buyfooter {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+    background: #fff;
+}
+
+.buystep .buyfooter h5 {
+    color: #444;
+    font-weight: 100;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+}
+.buystep .buyfooter h5 p {
+    color: #222;
+    font-size: 1.5rem;
+    margin: 0 .5rem;
+}
+
+.buystep .buyfooter .btn_box {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.buystep .buyfooter .btn_box button {
+    color: #69a9ff;
+    font-size: 1.5rem;
+    border: 2px solid #69a9ff;
+    border-radius: .6rem;
+    padding: 1rem 2rem;
+    transition: all .3s;
+}
+.buystep .buyfooter .btn_box button:hover {
+    cursor: pointer;
+    background: #69a9ff;
+    color: #fff;
+    border: 2px solid #fff;
+}

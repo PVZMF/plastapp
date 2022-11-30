@@ -24,7 +24,7 @@ const SlideSuggested = ({ offer, image, title, price, number, point, id, credit_
         </div>
         
         <h2>
-            <Link to={`/product/${id}`}>{title}</Link>
+            <Link to={`/products/${id}`}>{title}</Link>
         </h2>
         
         {number > 0 ?

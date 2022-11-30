@@ -14,7 +14,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 0 0 1rem 0;
+    margin: 0 0 2rem 0;
+    gap: .2rem;
 }
 
 .address .card .header {
@@ -47,4 +48,162 @@
 .address .card .header .title button:hover {
     cursor: pointer;
     color: #222;
+}
+
+.address .card .data_address {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    background: #fff;
+    padding: 2rem;
+}
+
+.address .card .data_address .headerCard {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 0 1rem 0;
+}
+
+
+.address .card .data_address .headerCard h5 {
+    color: #888;
+    font-weight: 100;
+    font-size: 1.2rem;
+}
+.address .card .data_address .headerCard h5 svg {
+    color: #222;
+    font-size: 1.7rem;
+}
+
+.address .card .data_address .headerCard button {
+    color: #2181ff;
+    font-size: 1.2rem;
+    transition: all .3s;
+    padding: .6rem;
+    border-radius: .3rem;
+}
+
+.address .card .data_address .headerCard button:hover {
+    cursor: pointer;
+    background: #9fc7fc44;
+}
+
+.address .card .data_address .username {
+    color: #444;
+    font-weight: 100;
+    font-size: 1.2rem;
+    margin: 0 0 1rem 0;
+}
+
+.address .card .data_address .location {
+    color: #222;
+    font-size: 1.4rem;
+    margin: 0 0 1rem 0;
+}
+
+.address .card .data_address .footerCard {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.address .card .data_address .footerCard h3 {
+    color: #888;
+    font-weight: 100;
+    font-size: 1.2rem;
+    margin: 0 0 0 3rem;
+}
+
+.address .card .boxCards {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.card_item {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    background: #fff;
+    padding: 2rem;
+    margin: 0 0 1rem 0;
+}
+
+.card_item h5 {
+    color: #333;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    margin-bottom: 1rem;
+}
+
+.card_item .sendas {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.card_item .sendas h5 span {
+    color: #888;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+}
+
+.card_item .sendas h5 {
+    color: #333;
+    font-weight: 100;
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+    margin: 0 0 1rem 2rem;
+}
+
+.card_item .imgBox {
+    position: relative;
+    width: 10rem;
+    height: 10rem;
+    overflow: hidden;
+}
+
+.card_item .imgBox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card_item .imgBox p {
+    position: absolute;
+    bottom: .6rem;
+    left: .6rem;
+    background: #fff;
+    font-weight: 100;
+    font-size: 1.3rem;
+    padding: .3rem .6rem;
+}
+
+.card_item h2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #777;
+    font-weight: 100;
+    font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+    margin: 2rem 0 0 0;
+}
+
+.card_item h2 svg {
+    color: #999;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    margin: 0 0 0 .6rem;
+}
+
+.card_item p {
+    color: #222;
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+    margin: 0 1rem 0 0;
 }

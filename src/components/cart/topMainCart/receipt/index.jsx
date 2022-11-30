@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { MdVerified } from 'react-icons/md';
 import { FlexMainReceipt } from './styleReceipt'
+import { stepPlus } from '../../../../toolkit/cart/cartAction';
 
 const Receipt = ({ step, setStep }) => {
     
+  const dispatch = useDispatch()
   const state = useSelector(state => state.cartState);
   
   const handleNextStep = () => {
       if(state.selectedItems.length > 0) {
-          setStep(step + 1)
+        dispatch(stepPlus())
       }
   }
   return (
@@ -45,9 +47,9 @@ const Receipt = ({ step, setStep }) => {
         </div>
 
         <button onClick={handleNextStep}>
-            {step === 0 && `ادامه خرید از${state.shops.toLocaleString('fa-IR')} غرفه`}
-            {step === 1 && 'ادامه و تایید روش ارسال'}
-            {step === 2 && 'پرداخت'}
+            {state.step === 0 && `ادامه خرید از${state.shops.toLocaleString('fa-IR')} غرفه`}
+            {state.step === 1 && 'ادامه و تایید روش ارسال'}
+            {state.step === 2 && 'پرداخت'}
         </button>
         
         <p><span><MdVerified /></span> تضمین رضایت: بازگشت سفارش و پول شما تا 7 روز</p>

@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BsArrowRight } from 'react-icons/bs';
 import { GrLocation } from 'react-icons/gr';
 
 // Redux
-import { useSelector } from 'react-redux';
-// Images
-import Product from '../../../../assets/imgs/pesteh.jpg';
-import Product2 from '../../../../assets/imgs/shalwar.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { stepMinus } from '../../../../toolkit/cart/cartAction';
+// Component
+import Card from './Card';
 // Style
 import style from './address.module.css'
 
-const Address = ({ setStep, step, user_name, location, postal_code, phone }) => {
-  
+const Address = ({ setStep, step, user_name, location, postal_code, phone, price_Send }) => {
+  const dispatch = useDispatch();
   const state = useSelector(state => state.cartState);
 
   return (
     <div className={style.address}>
       <div className={style.card}>
         <div className={style.header}>
-            <div className={style.title}><button onClick={() => setStep(step - 1)}><BsArrowRight /> انتخاب آدرس</button></div>
+            <div className={style.title}>
+              <button onClick={() => dispatch(stepMinus())}><BsArrowRight /> انتخاب آدرس</button>
+            </div>
         </div>
         
         <div className={style.data_address}>
-          <div className={style.header}>
+          <div className={style.headerCard}>
             <h5><GrLocation /> آدرس گیرنده</h5>
-            <button>به آدرس دیگر ارسال شود</button>
+            {/* <button>به آدرس دیگر ارسال شود</button> */}
           </div>
           <h4 className={style.username}>{user_name}</h4>
           <p className={style.location}>{location}</p>
@@ -34,6 +36,25 @@ const Address = ({ setStep, step, user_name, location, postal_code, phone }) => 
           </div>
         </div>
       </div>
+
+      
+      <div className={style.card}>
+        <div className={style.header}>
+            <div className={style.title}>
+              <button>
+                هزینه ارسال برای {state.selectedItems.length} بسته {state.sendPrice > 0 ? `${state.sendPrice.toLocaleString('fa-IR')} تومان` : 'رایگان'}
+              </button>
+            </div>
+        </div>
+
+        <div className={style.boxCards}>
+          {state.selectedItems.map((item, index) => (
+            <Card key={index + "cardCart"} index={index} item={item} all={state.selectedItems.length} />
+          ))}
+        </div>
+        
+      </div>
+
     </div>
   )
 }
@@ -41,6 +62,8 @@ const Address = ({ setStep, step, user_name, location, postal_code, phone }) => 
 export default Address;
 
 Address.defaultProps = {
-  postal_code: '',
+  user_name: 'علی لهراسبی',
+  location: 'تهران، امیرآباد، کارگر شمالی، پلاک ۸۹',
+  postal_code: '۶۴۰۲۵۱۸۸۹۹۹',
   phone: '۰۹۱۲۱۱۱۷۷۸۸',
 }

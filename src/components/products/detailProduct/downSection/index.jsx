@@ -41,6 +41,7 @@ DownMainCart.defaultProps = {
         offer: 10,
         image: Product,
         number: 3,
+        sendPrice: 5000,
         location: "تهران - لوازم خانگی گل سرخ"
       },
   
@@ -51,6 +52,7 @@ DownMainCart.defaultProps = {
         offer: 0,
         image: Product2,
         number: 1,
+        sendPrice: 4000,
         location: "تهران - لوازم خانگی گل سرخ"
       },
       {
@@ -60,6 +62,7 @@ DownMainCart.defaultProps = {
         offer: 75,
         image: Product,
         number: 3,
+        sendPrice: 15000,
         location: "تهران - لوازم خانگی گل سرخ"
       },
   
@@ -70,6 +73,7 @@ DownMainCart.defaultProps = {
         offer: 8,
         image: Product2,
         number: 1,
+        sendPrice: 6000,
         location: "تهران - لوازم خانگی گل سرخ"
       },
       {
@@ -79,6 +83,7 @@ DownMainCart.defaultProps = {
         offer: 0,
         image: Product,
         number: 3,
+        sendPrice: 0,
         location: "تهران - لوازم خانگی گل سرخ"
       },
   
@@ -89,6 +94,7 @@ DownMainCart.defaultProps = {
         offer: 15,
         image: Product2,
         number: 1,
+        sendPrice: 0,
         location: "تهران - لوازم خانگی گل سرخ"
       },
     ]

@@ -43,6 +43,7 @@ DownMainCart.defaultProps = {
         image: Product,
         shop: 'پسته طلایی گلشن',
         number: 3,
+        sendPrice: 5000,
         location: "دامغان - خشکبار عمو قاسم"
       },
   
@@ -54,6 +55,7 @@ DownMainCart.defaultProps = {
         image: Product2,
         shop: 'لوازم خانگی گل سرخ',
         number: 1,
+        sendPrice: 4000,
         location: "تهران - لوازم خانگی گل سرخ"
       },
       {
@@ -64,6 +66,7 @@ DownMainCart.defaultProps = {
         image: Product,
         shop: 'پسته طلایی',
         number: 3,
+        sendPrice: 15000,
         location: "کرمان - خشکبار کرمانی"
       },
   
@@ -75,6 +78,7 @@ DownMainCart.defaultProps = {
         image: Product2,
         shop: 'شلوار فروش',
         number: 1,
+        sendPrice: 6000,
         location: "تهران - بوتیک جاوید"
       },
       {
@@ -85,6 +89,7 @@ DownMainCart.defaultProps = {
         image: Product,
         shop: 'پسته طلایی گلشن',
         number: 3,
+        sendPrice: 0,
         location: "تهران - مغازه هشمت"
       },
   
@@ -96,6 +101,7 @@ DownMainCart.defaultProps = {
         image: Product2,
         shop: 'پسته دامغان',
         number: 1,
+        sendPrice: 0,
         location: "شیراز - فلکه گاز"
       },
     ]
