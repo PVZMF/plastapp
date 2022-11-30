@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { BsArrowLeft } from 'react-icons/bs';
 import BoxOff from '../../../assets/imgs/basket.png'
 import TextOff from '../../../assets/imgs/wonder.png'
@@ -6,6 +6,7 @@ import pro1 from '../../../assets/imgs/pro1.jpg'
 import pro2 from '../../../assets/imgs/pro2.jpg'
 import style from './wonderFullyComponent.module.css'
 import { Link } from 'react-router-dom';
+import {partialData} from "../../../api/api"
 
 const WonderFullyComponent = ({ products }) => {
 
@@ -20,12 +21,23 @@ const WonderFullyComponent = ({ products }) => {
     }
     const MaxPresent = findMax(products);
 
+    const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // setLoading(true);
+    partialData()
+      .then((res) => {
+        setData(res.data);
+      })
+      .finally(() => {
+      });
+  }, []);
   return (
     <div className={style.wonderfully}>
         <div className={style.wonderfully_box}>
             <div className={style.title}>
-                <img src={BoxOff} alt='شگفتانه پلاست اپ' className={style.boxOff} />
-                <img src={TextOff} alt='شگفتانه پلاست اپ' className={style.textOff} />
+                <img src={data.special_suggestion_image} alt='شگفتانه پلاست اپ' className={style.boxOff} />
+                <img src={data.special_suggestion_text} alt='شگفتانه پلاست اپ' className={style.textOff} />
                 <h4>تا {MaxPresent} % تخفیف</h4>
             </div>
 

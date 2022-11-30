@@ -11,7 +11,6 @@ import { Navigation } from "swiper";
 import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested";
 
 import { Typography } from "@mui/material";
-
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 // import { FlexMainPopular } from "./styledMainPopular";
 
@@ -24,16 +23,23 @@ import bannerImg1 from "../../../assets/imgs/offer-banner.jpg";
 
 import { HomeLan } from "../../../json/language/fa";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
-
+import {amazingListProduct} from "../../../api/api"
 const MainPopularComponent = ({ }) => {
+  
   // const dispatch = useDispatch();
   // const state = useSelector(mainPopularProducts);
+  // const [amazingProduct, setAmazingProduct] = useState([]);
 
   // useEffect(() => {
-  //   if (state.length <= 0) {
-  //     // dispatch(getAllPopular(MAIN_SUGGESTED_PRODUCTS));
-  //   }
-  // }, [state.length, dispatch]);
+  //   // setLoading(true);
+  //   getTwoelvBanners()
+  //     .then((res) => {
+  //       setAmazingProduct(resizeTo);
+  //     })
+  //     .finally(() => {
+  //       console.log()
+  //     });
+  // }, []);
 
   return (
     <GlobalContainer>

@@ -15,7 +15,7 @@ api.interceptors.request.use(
     // Do something before request is sent
     const st = Storage();
     config.headers['Authorization'] = `Bearer ${st.accessToken}`;
-    config.headers["Content-Type"] = "multipart/form-data";
+    
     return config;
   },
   function (error) {

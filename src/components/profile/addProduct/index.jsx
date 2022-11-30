@@ -3,38 +3,37 @@ import { TbTruckDelivery } from 'react-icons/tb';
 import { TbClipboardList } from 'react-icons/tb';
 import { v4 as uuidv4 } from "uuid";
 import { provinces } from "../../../assets/citiesName/CitiesName"
-import {createProduct} from "../../../api/api"
-
+import { createProduct } from "../../../api/api"
+import { useDispatch } from 'react-redux';
 // Components
-import NameAndGrouping from './NameAndGrouping'
-import Images from './Images'
-import WeightAndPrice from './WeightAndPrice'
+// import NameAndGrouping from './NameAndGrouping'
+// import Images from './Images'
+// import WeightAndPrice from './WeightAndPrice'
 import { TbTag } from 'react-icons/tb';
-import SendData from './SendData'
-import Attributes from './Attributes'
+// import SendData from './SendData'
+// import Attributes from './Attributes'
 import { getCategories } from '../../../api/api'
 
-
+// Icons
+import { BsImage } from 'react-icons/bs';
 // Style
 import style from './addProduct.module.css'
 import { BiCategory } from 'react-icons/bi';
 
 //Icons
-import { BsImage } from 'react-icons/bs';
 
 const AddProduct = () => {
 
-  const [categorys, setCategorys] = useState([])
+  const [categorys, setCategorys] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
-    console.log(data);
-    createProduct().then(result => {
+    createProduct(data).then(result => {
       console.log(result);
-    })
+    }).catch(res => console.log(res))
   }
-
 
   // Categories
   useEffect(() => {
@@ -243,22 +242,22 @@ const AddProduct = () => {
               <input type="radio" name='allCity' id='city' value={false} onChange={(e) => setActive(e.target.value)} />
             </div>
           </div>
-          
-            <div className={style.boxinput}>
-              <label>انتخاب شهر</label>
-              <select onChange={e => handleCities(e)} name='city' form='form' required>
-                <option>انتخاب استان</option>
-                {provinces.map(item => (
-                  <option key={item.name}>{item.name}</option>
-                ))}
-              </select>
-              <select name='city' form='form' required>
-                <option>انتخاب شهر</option>
-                {cities.map(item => (
-                  <option key={item}>{item}</option>
-                ))}
-              </select>
-            </div>
+
+          <div className={style.boxinput}>
+            <label>انتخاب شهر</label>
+            <select onChange={e => handleCities(e)} name='city' form='form' required>
+              <option>انتخاب استان</option>
+              {provinces.map(item => (
+                <option key={item.name}>{item.name}</option>
+              ))}
+            </select>
+            <select name='city' form='form' required>
+              <option>انتخاب شهر</option>
+              {cities.map(item => (
+                <option key={item}>{item}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 

@@ -3,7 +3,6 @@ import Storage from "../service/Storage";
 
 export const baseUrl = "https://plastapp.iran.liara.run/";
 
-const st = Storage();
 const api = axios.create({
   baseURL: baseUrl,
   timeout: 5000,

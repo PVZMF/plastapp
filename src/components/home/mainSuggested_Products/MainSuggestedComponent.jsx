@@ -1,5 +1,5 @@
 // Modules
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Typography } from "@mui/material";
@@ -25,27 +25,41 @@ import { Navigation} from "swiper";
 import AllProducts from '../AllProductCart/AllProductsSlide';
 import { Autoplay } from 'swiper';
 import { Link } from "react-router-dom";
-
-
+import { getAmazingListProduct } from "../../../api/api"
+import {partialData} from "../../../api/api"
 
 
 
 const MainSuggestedComponent = ({ title }) => {
-  // const dispatch = useDispatch();
-  // const state = useSelector(mainSuggestedProducts);
 
-  // useEffect(() => {
-  //   if (state.length <= 0) {
-  //     // dispatch(getAllSuggested(MAIN_SUGGESTED_PRODUCTS));
-  //   }
-  // }, [state.length, dispatch]);
+  const [amazingProduct, setAmazingProduct] = useState([]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // setLoading(true);
+    getAmazingListProduct()
+      .then((res) => {
+        setAmazingProduct(res);
+      })
+      .finally(() => {
+      });
+
+      partialData()
+      .then((res) => {
+        setData(res.data);
+      })
+      .finally(() => {
+      });
+
+  }, []);
+
 
   return (
     <GlobalContainer>
       <Typography component="h2" variant="h2" textAlign="center" marginY={4} fontSize="clamp(1.8rem, 3vw, 3rem)">
         {title}
       </Typography>
-
+      {console.log(amazingProduct)}
       <FlexMainSuggested className="rounded-1 hidden p10">
         <Swiper
           breakpoints={{
@@ -69,15 +83,15 @@ const MainSuggestedComponent = ({ title }) => {
           modules={[Navigation,Autoplay]}
         >
           <SwiperSlide className="slide custom-slide">
-            <img className="slide-banner" src={bannerImg} alt="پیشنهاد ویژه"/>
+            <img className="slide-banner" src={data.best_seller_image} alt="پیشنهاد ویژه"/>
+            <Typography>
+              {data.best_seller_text}
+            </Typography>
           </SwiperSlide>
-          <SwiperSlide className="slide custom-slide">
-            <img className="slide-banner" src={bannerImg} alt="پیشنهاد ویژه" />
-          </SwiperSlide>
-          {[...Array(9)].map((item, index) => (
+          {amazingProduct.map((item, index) => (
             <SwiperSlide className="slide p10 custom-slide" key={index}>
               <Link to={`products/${index + 1}`}>
-                <SlideSuggested />
+                <SlideSuggested image={item.thumbnails} price={title.price} title={item.title}  />
               </Link>
             </SwiperSlide>
           ))}
