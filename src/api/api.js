@@ -1,6 +1,8 @@
 import api from "./axios";
 import apiLogin from "./axiosLogin";
-import apiForm from "./axiosForm"
+import apiForm from "./axiosForm";
+
+import Storage from "../service/Storage";
 
 export async function getAllBanners() {
   const res = await api.get("advertise/notice_banner/");
@@ -93,5 +95,17 @@ export async function getAmazingListProduct() {
 
 export async function partialData() {
   const res = await api.get("advertise/partial_data/");
+  return res.data;
+}
+export async function createTicket(ticketDetail) {
+  const st = Storage();
+  const config = {
+    headers: {
+      Authorization: `Bearer ${st.accessToken}`,
+      "X-CSRFToken":
+        "egMAdP4VD3dMQBnfZ2wufNNNieN4MsXLY1PkXZP32k1abU5N14Sl5kDnq7iEGTAY",
+    },
+  };
+  const res = await apiLogin.post("ticket/crate", ticketDetail, config);
   return res.data;
 }

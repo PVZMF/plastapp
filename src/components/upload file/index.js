@@ -3,11 +3,13 @@ import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
 
 const UploadFile = ({ index }) => {
   return (
-    <>
-      <label>بارگزاری فایل {index + 2}</label>
+    <div
+      style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}
+    >
+      <label>بارگزاری فایل {index + 1}</label>
       <AttachFileRoundedIcon />
-      <input type="file" name={`document1`} accept="image/*" />
-    </>
+      <input type="file" name={`document${index}`} accept="image/*" />
+    </div>
   );
 };
 
