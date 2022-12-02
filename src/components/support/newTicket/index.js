@@ -1,68 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "./style.module.css";
 import { MenuItem, Select, TextField } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setTitle,
-  setUser,
-  setStatus,
-  setPriority,
-  setDocument,
-  clearAllTicketState,
-} from "../../../toolkit/slices/ticketSlice";
-import axios from "axios";
 import UploadFile from "../../upload file";
-import Storage from "../../../service/Storage";
+import { createTicket } from "../../../api/api";
 const NewTicketComponent = () => {
-  const [image, setImage] = useState("");
-  const st = Storage();
-  useEffect(() => {
-    console.log("image = ", image);
-  }, [image]);
-  console.log(st);
+  const [fileIndex, setFileIndex] = useState(1);
+  const [fileInputs, setFileInputs] = useState([<UploadFile index={0} />]);
 
-  const [file, setFile] = useState([]);
-  const addInputTypeFile = () => {
-    if (file.length < 2) {
-      setFile((state) => {
-        return [...state, state.length + 2];
-      });
-    }
-  };
-  console.log("st.accessToken", st.accessToken);
   const hanldeSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log("data is ===", data);
-    const { title, document1, message, priority } = data;
-    console.log("data", document1);
-    axios
-      .post(
-        "https://plastapp.iran.liara.run/ticket/crate/",
 
-        {
-          user: 1,
-          title,
-          message,
-          priority,
-          document: [{ file: [document1, document1] }],
-          status: "unread",
-        },
-        {
-          headers: {
-            "Content-Type": `multipart/form-data;`,
-            Authorization: `Bearer ${st.accessToken}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+    function prepareDocumentArray() {
+      let fileArray = [];
+      for (let i = 0; i < fileIndex; i++) {
+        fileArray.push(data[`document${i}`]);
+      }
+      return fileArray;
+    }
+
+    let requestData = {
+      title: data.title,
+      user: 1,
+      status: "unread",
+      priority: data.priority,
+      ticket_number: 1,
+      document: prepareDocumentArray(),
+      message: data.message,
+    };
+
+    console.log(data);
+    console.log(requestData);
+    createTicket(JSON.stringify(requestData));
   };
-  const dispatch = useDispatch();
-  const priority = useSelector((state) => state.ticket.priority);
+
+  function addInput() {
+    setFileIndex((prev) => (prev += 1));
+    setFileInputs((prev) => [...prev, <UploadFile index={fileIndex} />]);
+  }
 
   return (
     <div className={style.newticket}>
@@ -83,8 +59,7 @@ const NewTicketComponent = () => {
             <TextField
               name="title"
               type="text"
-              required
-              label="ssss"
+              label="عنوان"
               sx={{ width: "70%" }}
             />
             <Select
@@ -92,9 +67,7 @@ const NewTicketComponent = () => {
               sx={{ width: "20%" }}
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              label="sadasdsa"
-              value={priority}
-              onChange={(event) => dispatch(setPriority(event.target.value))}
+              label="اولویت"
             >
               <MenuItem value={"high"}>بالا</MenuItem>
               <MenuItem value={"medium"} selected={true}>
@@ -107,37 +80,39 @@ const NewTicketComponent = () => {
             <textarea placeholder="متن پیام شما..." name="message" />
           </div>
           <div
+            onClick={addInput}
+            className={style.plusButton}
             style={{
               width: "40px",
               height: "40px",
-              background: "red",
               fontSize: "40px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              cursor: "pointer",
+              color: "#428aca",
             }}
-            onClick={addInputTypeFile}
           >
             +
           </div>
-          <div className={style.footer}>
-            <div className={style.import}>
-              <UploadFile
-                index={-1}
-                name="document1"
-                onChange={(e) => {
-                  setImage(e.target.value);
-                }}
-              />
-              {/* {file
-                ? file.map((items, index) => {
-                    return <UploadFile key={`${index}`} index={index} />;
-                  })
-                : ""} */}
-              <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
+          <div className={style.lowerContainer}>
+            <div className={style.footer}>
+              <div className={style.import}>
+                {fileInputs.map((el) => el)}
+                <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
+              </div>
             </div>
-
-            <button type="sumbit">ثبت</button>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <button type="sumbit" className={style.submitButton}>
+                ثبت
+              </button>
+            </div>
           </div>
         </form>
       </div>

@@ -84,3 +84,11 @@ export async function createShop(dataShop) {
   const res = await apiLogin.post("shop/create/", dataShop);
   return res.data;
 }
+
+export async function createTicket(ticketDetail) {
+  const config = {
+    headers: {},
+  };
+  const res = await apiLogin.post("ticket/crate", ticketDetail, config);
+  return res.data;
+}
