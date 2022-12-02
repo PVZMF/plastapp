@@ -32,7 +32,7 @@ const NewTicketComponent = () => {
 
     console.log(data);
     console.log(requestData);
-    createTicket(JSON.stringify(requestData));
+    createTicket(requestData);
   };
 
   function addInput() {
