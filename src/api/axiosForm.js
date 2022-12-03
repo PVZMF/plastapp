@@ -6,7 +6,7 @@ export const baseUrl = "https://plastapp.iran.liara.run/";
 
 const api = axios.create({
   baseURL: baseUrl,
-  timeout: "5000",
+  timeout: "60000",
 });
 
 api.interceptors.request.use(

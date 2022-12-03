@@ -1,158 +1,171 @@
 .cheque {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: #f1f1f1;
-    min-height: 70vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #f1f1f1;
+  min-height: 70vh;
 }
 
 .cheque .boxCheque {
-    width: 100%;
-    max-width: 700px;
-    /* min-width: 300px; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 700px;
+  /* min-width: 300px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
 }
 
 .cheque .boxCheque .boximage {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .cheque .boxCheque .imgBox {
-    width: 100%;
-    height: clamp(15vh, 40vh, 40vh);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: #d3eae0;
-    border-radius: 1rem 1rem 0 0;
-    padding: .5rem 1rem;
+  width: 100%;
+  height: clamp(15vh, 40vh, 40vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #d3eae0;
+  border-radius: 1rem 1rem 0 0;
+  padding: 0.5rem 1rem;
 }
 
 .cheque .boxCheque .imgBox img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
 }
 
 .cheque .boxCheque .uploadimg {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: .5rem 0;
-    background: #e1e1e1;
-    border-radius: 0 0 1rem 1rem;
-    transition: all .3s;
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  background: #e1e1e1;
+  border-radius: 0 0 1rem 1rem;
+  transition: all 0.3s;
 }
 
 .cheque .boxCheque .uploadimg:hover {
-    cursor: pointer;
-    background: #69a9ff;
+  cursor: pointer;
+  background: #69a9ff;
 }
 
 .cheque .boxCheque .uploadimg span {
-    color: #222;
-    font-weight: 100;
-    font-size: clamp(1.3rem, 1.7vw, 1.7rem);
-    padding: 0 1rem;
+  color: #222;
+  font-weight: 100;
+  font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+  padding: 0 1rem;
 }
 
 .cheque .boxCheque .uploadimg svg {
-    color: #000;
-    font-size: clamp(4rem, 6vw, 6rem);
-    padding: 0 1rem;
+  color: #000;
+  font-size: clamp(4rem, 6vw, 6rem);
+  padding: 0 1rem;
 }
 
 .cheque .boxCheque .uploadimg input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }
 
 .cheque .boxCheque .description {
-    width: 50%;
-    height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    padding: 1rem;
+  width: 50%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 1rem;
 }
 
 .cheque .boxCheque .description .rules {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .cheque .boxCheque .description .rules span {
-    color: #222;
-    font-size: clamp(1rem, 1.3vw, 1.3rem);
+  color: #222;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
 }
 
 .cheque .boxCheque .description .rules a {
-    color: #69a9ff;
-    font-size: clamp(1rem, 1.3vw, 1.3rem);
-    margin: 0 .5rem;
+  color: #69a9ff;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  margin: 0 0.5rem;
 }
 
 .cheque .boxCheque .description button {
-    width: 90%;
-    color: #fff;
-    background: #69a9ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    border-radius: .7rem;
-    font-size: clamp(1rem, 1.3vw, 1.3rem);
-    transition: all .3s;
+  width: 90%;
+  color: #fff;
+  background: #69a9ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 0.7rem;
+  font-size: clamp(1rem, 1.3vw, 1.3rem);
+  transition: all 0.3s;
 }
 
 .cheque .boxCheque .description button:hover {
-    cursor: pointer;
-    background: #738baa;
+  cursor: pointer;
+  background: #738baa;
 }
-
 
 @media (max-width: 800px) {
-    .cheque .boxCheque {
-        flex-direction: column;
-        width: 280px;
-        margin: 5rem 0;
-    }
-    .cheque .boxCheque .boximage,
-    .cheque .boxCheque .description {
-        width: 100%;
-    }
+  .cheque .boxCheque {
+    flex-direction: column;
+    width: 280px;
+    margin: 5rem 0;
+  }
+  .cheque .boxCheque .boximage,
+  .cheque .boxCheque .description {
+    width: 100%;
+  }
 }
 
-@media (max-width: 500px) {
-    .cheque .boxCheque {
-        width: 230px;
-    }
-    .cheque .boxCheque .imgBox {
-        height: 200px;
-    }
-    
-    .cheque .boxCheque .description {
-        height: 200px;
-    }
+/* @media (max-width: 500px) {
+  .cheque .boxCheque {
+    width: 230px;
+  }
+  .cheque .boxCheque .imgBox {
+    height: 200px;
+  }
+
+  .cheque .boxCheque .description {
+    height: 200px;
+  }
 }
+.input {
+  max-width: 230px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1rem;
+  height: clamp(3rem, 5vw, 5rem);
+  border: 1px solid #888;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  padding: 0.5rem;
+  position: relative;
+} */
