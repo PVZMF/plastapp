@@ -60,7 +60,7 @@ const Career_Opportunity = () => {
           <form
             // method="POST"
             // action="https://plastapp.iran.liara.run/job/apply/"
-            // enctype="multipart/form-data"
+            enctype="multipart/form-data"
             // charset="utf-8"
             onSubmit={handleSubmit}
           >

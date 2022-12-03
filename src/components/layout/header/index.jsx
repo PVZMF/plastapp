@@ -24,9 +24,9 @@ import {
 // images------------------------
 import imgLogo from "../../../assets/imgs/plastAppLogo.png";
 import { navLan } from "../../../json/language/fa";
-import { GlobalButton } from "../../../global/styles/GlobalButton";
+// import { GlobalButton } from "../../../global/styles/GlobalButton";
 import { globalCssVar } from "../../../global/styles/globalStyles";
-import { GlobalContainer } from "../../../global/styles/globalContainer";
+// import { GlobalContainer } from "../../../global/styles/globalContainer";
 import bannerImg from "../../../assets/imgs/header_1.jpg"
 // api
 import { getAllBanners } from "../../../api/api"

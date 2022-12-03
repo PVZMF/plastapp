@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Input from './Input'
 import Select from './Select';
 import { provinces } from "../../../assets/citiesName/CitiesName"
@@ -15,7 +15,6 @@ import style from './storeRegister.module.css'
 
 const StoreRegister = () => {
     const [cities, setCities] = useState([""])
-    const [img, setImg] = useState("");
     const handleCities = (e) => {
         setCities(provinces.filter(item => item.name == e.target.value)[0].cities);
     }
@@ -23,20 +22,17 @@ const StoreRegister = () => {
         e.preventDefault();
         const form_data = new FormData(e.target);
         const data = Object.fromEntries(form_data.entries());
-        console.log(img)
-        form_data.append("national_card_image", img);
         // ticketImage && formData.append("image", ticketImage);
         // data.append("sender", 1);
-
         console.log(data);
         createShop(data).then(result => {
             console.log(result);
-        })
+        }).catch(err => console.log(err))
 
     }
 
     return (
-        <form action="https://plastapp.iran.liara.run/shop/create/" onSubmit={(e) => handleSubmit(e)} className={style.store} id={"form"} method="GET" enctype="multipart/form-data">
+        <form onSubmit={(e) => handleSubmit(e)} className={style.store} id={"form"} method="POST" enctype="multipart/form-data">
             <div className={style.boxstore}>
                 <div className={style.boxinput}>
                     <Input classname={style.input} name={"first_name"} childern={<ImUserTie />} placeholder="* نام" />
@@ -46,7 +42,7 @@ const StoreRegister = () => {
                 </div>
                 <div className={style.boxinput}>
                     <div className={style.input}>
-                        <input type={'file'} name={"national_card_image"} placeholder="* عکس کارت ملی" onChange={(e)=> setImg(e)} />
+                        <input type={'file'} name={"national_card_image"} placeholder="* عکس کارت ملی" />
                         <span><ImUserTie /></span>
                         <h5>* عکس کارت ملی</h5>
                     </div>
@@ -85,7 +81,14 @@ const StoreRegister = () => {
                     <Select classname={style.input} name={"city"} form={"form"} title="* شهر" child={true} items={cities} />
                 </div>
                 <div className={style.boxinput}>
-                    <Select classname={style.input} name={"is_active"} form={"form"} title="دسترسی" child={true} items={["فعال", "غیرفعال"]} />
+                    <div className={style.input}>
+                        <select name={"is_active"} form={"form"}>
+                            <option>{"دسترسی"}</option>
+                            {["فعال", "غیرفعال"]?.map((item) => (
+                                <option key={item} value={item === "فعال"}>{item}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
             </div>
 

@@ -10,9 +10,9 @@ const Cart = () => {
 
   return (
     <CartContainer>
-        <TopMainCart />
-        {state.step < 1 && <hr /> }
-        {state.step < 1 && <DownMainCart />}
+      <TopMainCart />
+      {state.step < 1 && <hr /> }
+      {state.step < 1 && <DownMainCart />}
     </CartContainer>
   )
 }

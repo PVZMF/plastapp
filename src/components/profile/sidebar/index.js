@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 // Icons
 import { BsChevronLeft, BsBox, BsChevronDown } from 'react-icons/bs';
-import { BiCategory, BiUserPin, BiStore, BiSupport } from 'react-icons/bi';
+import { BiCategory, BiUserPin, BiSupport } from 'react-icons/bi';
 import { IoWallet, IoReceiptOutline } from 'react-icons/io5';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { TbTruckDelivery } from 'react-icons/tb';
@@ -14,10 +14,11 @@ import Shop from '../../../assets/imgs/adImage.png';
 
 // Style
 import style from './sidebar.module.css';
+import { useSelector } from 'react-redux';
 
 const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
     const pathName = useLocation().pathname;
-
+    const status = useSelector(state => state.auth.status);
     const [active, setActive] = useState(false);
 
   return (
@@ -44,12 +45,12 @@ const Sidebar = ({ ProfileImage, shopName, userName, cash }) => {
 
 
         <div className={style.items}>
-            <h5 className={pathName === '/profile/addproduct' ? style.active : null}>
+            {status?<h5 className={pathName === '/profile/addproduct' ? style.active : null}>
                 <Link to='/profile/addproduct'><BiCategory /> افزودن محصول</Link>
-            </h5>
-            <h5 className={pathName === '/profile/myproducts' ? style.active : null}>
+            </h5>:""}
+            {status?<h5 className={pathName === '/profile/myproducts' ? style.active : null}>
                 <Link to='/profile/myproducts'><BsBox /> محصولات</Link>
-            </h5>
+            </h5>:""}
             <h5 className={pathName === '/profile/orders' ? style.active : null}>
                 <Link to="/profile/orders"><HiOutlineClipboardList /> سفارشات</Link>
             </h5>

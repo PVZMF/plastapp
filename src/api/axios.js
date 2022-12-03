@@ -5,7 +5,7 @@ export const baseUrl = "https://plastapp.iran.liara.run/";
 
 const api = axios.create({
   baseURL: baseUrl,
-  timeout: 5000,
+  timeout: 60000,
 });
 
 // api.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(st.accessToken())}`;

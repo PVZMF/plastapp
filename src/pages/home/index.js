@@ -19,9 +19,9 @@ import { getTwoelvBanners } from "../../api/api";
 import { HomeLan } from "../../json/language/fa";
 import ListBannerImages from "../../components/home/ListBannerImages/ListBannerImages";
 import { baseUrl } from "../../api/axios";
-import ad1 from "../../assets/imgs/adImgs/ad1.webp";
-import ad2 from "../../assets/imgs/adImgs/ad2.webp";
-import ad3 from "../../assets/imgs/adImgs/ad3.webp";
+// import ad1 from "../../assets/imgs/adImgs/ad1.webp";
+// import ad2 from "../../assets/imgs/adImgs/ad2.webp";
+// import ad3 from "../../assets/imgs/adImgs/ad3.webp";
 
 const Home = () => {
   const [banners, setBanners] = useState([]);

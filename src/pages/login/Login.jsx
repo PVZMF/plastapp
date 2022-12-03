@@ -29,7 +29,7 @@ export default function SignIn() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const st = Storage();
+
   let onSpinerButton = true;
   
   const handleSubmit = (e) => {
@@ -47,7 +47,7 @@ export default function SignIn() {
         setError(false);
       }
       else if (res?.phone_number[0] === "این مقدار نباید خالی باشد.") {
-        setTextError("شمازه تلفن الزامی است!")
+        setTextError("شمازه تلفن الزامی است!");
         setError(true);
       }
       else if (res?.phone_number[0] === "unvalid phonenumber") {
@@ -66,7 +66,7 @@ export default function SignIn() {
   };
 
   if (isLogin) {
-    if(!auth.firstName || !auth.lastName || !auth.rule){
+    if(!auth.status){
       return <Navigate to={"/roleselect"} />;
     }
     console.log(auth);

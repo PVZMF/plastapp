@@ -24,7 +24,6 @@ const WonderFullyComponent = ({ products }) => {
     const [data, setData] = useState([]);
 
   useEffect(() => {
-    // setLoading(true);
     partialData()
       .then((res) => {
         setData(res.data);
@@ -32,6 +31,7 @@ const WonderFullyComponent = ({ products }) => {
       .finally(() => {
       });
   }, []);
+  
   return (
     <div className={style.wonderfully}>
         <div className={style.wonderfully_box}>
@@ -40,7 +40,6 @@ const WonderFullyComponent = ({ products }) => {
                 <img src={data.special_suggestion_text} alt='شگفتانه پلاست اپ' className={style.textOff} />
                 <h4>تا {MaxPresent} % تخفیف</h4>
             </div>
-
             <div className={style.productsList}>
                 {products.map((item, index) => {
                     if (index <= 4) {

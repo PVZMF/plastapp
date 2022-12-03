@@ -31,9 +31,7 @@ api.interceptors.response.use(
   function (error) {
     if (error.response.status == 401) {
       const st = Storage();
-      console.log({ refresh: st.refreshToken });
-      refreshToken({ refresh: st.refreshToken })
-        .then((res) => {
+        refreshToken({"refresh":st.refreshToken}).then(res => {
           st.setAccessToken(res.access);
         })
         .catch((error) => console.log(error));
