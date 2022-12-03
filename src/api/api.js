@@ -55,6 +55,11 @@ export async function getBlogList() {
   return res.data;
 }
 
+export async function getOffers() {
+  const res = await api.get("order/coustomer_club_list/");
+  return res.data;
+}
+
 export async function getBlogDetails(id) {
   const res = await api.get(`blog/detail/${id}/`);
   return res.data;
