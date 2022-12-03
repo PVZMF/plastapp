@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Input from './Input'
 import Select from './Select';
 import { provinces } from "../../../assets/citiesName/CitiesName"

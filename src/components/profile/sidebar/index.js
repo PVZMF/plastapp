@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 // Icons
 import { BsChevronLeft, BsBox, BsChevronDown } from 'react-icons/bs';
-import { BiCategory, BiUserPin, BiStore, BiSupport } from 'react-icons/bi';
+import { BiCategory, BiUserPin, BiSupport } from 'react-icons/bi';
 import { IoWallet, IoReceiptOutline } from 'react-icons/io5';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { TbTruckDelivery } from 'react-icons/tb';
