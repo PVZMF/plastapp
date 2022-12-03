@@ -33,7 +33,7 @@ const Career_Opportunity = () => {
     const dataform = new FormData(e.target);
     const data = Object.fromEntries(dataform.entries());
     console.log(data);
-    applyJob(JSON.stringify(data));
+    applyJob(data);
   };
   if (loading) {
     return <Spinner />;
@@ -56,7 +56,7 @@ const Career_Opportunity = () => {
           <form
             // method="POST"
             // action="https://plastapp.iran.liara.run/job/apply/"
-            // enctype="multipart/form-data"
+            enctype="multipart/form-data"
             // charset="utf-8"
             onSubmit={handleSubmit}
           >
