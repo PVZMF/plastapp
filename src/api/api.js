@@ -59,6 +59,10 @@ export async function getOffers() {
   const res = await api.get("order/coustomer_club_list/");
   return res.data;
 }
+export async function getAboutUs() {
+  const res = await api.get("config/about_us/");
+  return res.data;
+}
 
 export async function getBlogDetails(id) {
   const res = await api.get(`blog/detail/${id}/`);
@@ -70,9 +74,7 @@ export async function loginUser(authData) {
   return res.data;
 }
 export async function applyJob(authData) {
-
   const res = await api.post("job/apply", authData, {
-
     headers: {
       "Content-Type": "multipart/form-data",
     },

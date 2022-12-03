@@ -11,7 +11,7 @@ import { GlobalButton } from "../../../global/styles/GlobalButton";
 
 import { globalCssVar } from "../../../global/styles/globalStyles";
 import { TextField } from "@mui/material";
-import {provinces} from "../../../assets/citiesName/CitiesName"
+import { provinces } from "../../../assets/citiesName/CitiesName";
 
 const MainSearchComponent = () => {
   return (
@@ -30,15 +30,21 @@ const MainSearchComponent = () => {
               >
                 <LocationOnOutlinedIcon />
                 <select>
-                    <option>انتخاب استان</option>
-                    {provinces.map((item, index) => (
-                        <option key={index + "categorys"} value={item.name}>{item.name}</option>
-                    ))}
+                  <option>انتخاب استان</option>
+                  {provinces.map((item, index) => (
+                    <option key={index + "categorys"} value={item.name}>
+                      {item.name}
+                    </option>
+                  ))}
                 </select>
               </GlobalButton>
 
-              <input  className="search_box--input" type="text" placeholder={HomeLan.search_placeHolder} />
-          
+              <input
+                className="search_box--input"
+                type="text"
+                style={{ paddingInline: "1rem" }}
+                placeholder={HomeLan.search_placeHolder}
+              />
             </div>
 
             <GlobalButton

@@ -1,12 +1,25 @@
-import React from 'react'
-import AboutUs from '../../components/aboutus';
+import React, { useEffect, useState } from "react";
+import { getAboutUs } from "../../api/api";
+import AboutUs from "../../components/aboutus";
 
 const AboutUsPage = () => {
+  const [aboutUs, setAboutUs] = useState({});
+
+  useEffect(() => {
+    getAboutUs()
+      .then((results) => {
+        setAboutUs(results.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
-        <AboutUs />
+      <AboutUs imageUrl={aboutUs.image} description={aboutUs.description} />
     </>
-  )
-}
+  );
+};
 
 export default AboutUsPage;
