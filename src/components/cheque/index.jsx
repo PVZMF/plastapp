@@ -27,19 +27,17 @@ const Cheque = () => {
     setToast((state) => {
       return { ...state, success: true };
     });
-    if (isAccept) {
-      addCheque(dataToNum)
-        .then((res) => {
-          Toasted("عکس با موفقیت اپلود شد", true, "success");
-          setImage(true);
-          setChequeImage(res.cheque_image);
-          setNationalImage(res.national_image);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-    }
+
+    addCheque(dataToNum)
+      .then((res) => {
+        Toasted("عکس با موفقیت اپلود شد", true, "success");
+        setImage(true);
+        setChequeImage(res.cheque_image);
+        setNationalImage(res.national_image);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   useEffect(() => {
     console.log("isAccept = ", isAccept);
