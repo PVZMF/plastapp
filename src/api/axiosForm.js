@@ -1,22 +1,20 @@
 import axios from "axios";
-import { refreshToken } from "./api"
+import { refreshToken } from "./api";
 import Storage from "../service/Storage";
 
 export const baseUrl = "https://plastapp.iran.liara.run/";
 
 const api = axios.create({
   baseURL: baseUrl,
-  timeout: "5000"
+  timeout: "5000",
 });
-
 
 api.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     const st = Storage();
-    config.headers['Authorization'] = `Bearer ${st.accessToken}`;
-    config.headers["Content-Type"] = "multipart/form-data" ;
-    
+    config.headers["Authorization"] = `Bearer ${st.accessToken}`;
+    config.headers["Content-Type"] = "multipart/form-data";
     return config;
   },
   function (error) {
@@ -35,10 +33,12 @@ api.interceptors.response.use(
   function (error) {
     if (error.response.status == 401) {
       const st = Storage();
-      console.log({"Storage":st});
-        refreshToken({"refresh":st.refreshToken}).then(res => {
+      console.log({ refresh: st.refreshToken });
+      refreshToken({ refresh: st.refreshToken })
+        .then((res) => {
           st.setAccessToken(res.access);
-        }).catch(error => console.log(error))
+        })
+        .catch((error) => console.log(error));
     }
     if (error.response.status === 400) {
       // try to get new access token with refresh token
@@ -49,9 +49,6 @@ api.interceptors.response.use(
     }
     return Promise.reject(error.response);
   }
-
 );
 
 export default api;
-
-

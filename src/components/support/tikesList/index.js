@@ -14,8 +14,6 @@ const TikesListComponent = ({ list }) => {
       .get("https://plastapp.iran.liara.run/ticket/list/", {
         headers: {
           Authorization: `Bearer ${st.accessToken}`,
-          "X-CSRFToken":
-            "egMAdP4VD3dMQBnfZ2wufNNNieN4MsXLY1PkXZP32k1abU5N14Sl5kDnq7iEGTAY",
         },
       })
       .then((res) => {

@@ -31,10 +31,19 @@ const MainProductsComponent = ({ title }) => {
   //     dispatch(getSomeProduct(MAIN_SUGGESTED_PRODUCTS));
   //   }
   // }, [state.length, dispatch]);
-
+  useEffect(() => {
+    
+  }, []);
   return (
     <GlobalContainer>
-      <Typography component="h2" variant="h2" textAlign="center" marginTop={5} marginBottom={1} fontSize="clamp(1.5rem, 3vw, 3rem)">
+      <Typography
+        component="h2"
+        variant="h2"
+        textAlign="center"
+        marginTop={5}
+        marginBottom={1}
+        fontSize="clamp(1.5rem, 3vw, 3rem)"
+      >
         {title}
       </Typography>
 
@@ -42,11 +51,11 @@ const MainProductsComponent = ({ title }) => {
         <Swiper
           breakpoints={{
             300: {
-              slidesPerView: 2
+              slidesPerView: 2,
             },
             768: {
-              slidesPerView: 4
-            }
+              slidesPerView: 4,
+            },
           }}
           autoplay={{
             delay: 3000,
@@ -55,10 +64,12 @@ const MainProductsComponent = ({ title }) => {
           slidesPerView={4}
           spaceBetween={25}
           navigation={true}
-          modules={[Navigation,Autoplay]}
+          modules={[Navigation, Autoplay]}
           className="custom_swiper "
         >
-          <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg} alt=""/></SwiperSlide>
+          <SwiperSlide className="slide custom-slide">
+            <img className="slide-banner" src={bannerImg} alt="" />
+          </SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">Slide 2</SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">Slide 3</SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">Slide 4</SwiperSlide>
@@ -67,7 +78,9 @@ const MainProductsComponent = ({ title }) => {
           <SwiperSlide className="slide p10 custom-slide">Slide 7</SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">Slide 8</SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">Slide 9</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><AllProductsSlide link="products" /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide">
+            <AllProductsSlide link="products" />
+          </SwiperSlide>
         </Swiper>
       </FlexMainSuggested>
     </GlobalContainer>

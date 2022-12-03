@@ -33,7 +33,11 @@ const Career_Opportunity = () => {
     const dataform = new FormData(e.target);
     const data = Object.fromEntries(dataform.entries());
     console.log(data);
-    applyJob(data);
+    applyJob(data)
+      .then((res) => {
+        console.log("res post", res);
+      })
+      .catch(() => {});
   };
   if (loading) {
     return <Spinner />;

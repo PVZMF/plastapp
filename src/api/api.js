@@ -65,7 +65,9 @@ export async function loginUser(authData) {
   return res.data;
 }
 export async function applyJob(authData) {
-  const res = await api.post("job/apply/", authData, {
+
+  const res = await api.post("job/apply", authData, {
+
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -99,6 +101,16 @@ export async function getAmazingListProduct() {
 
 export async function partialData() {
   const res = await api.get("advertise/partial_data/");
+  return res.data;
+}
+
+export async function createTicket(ticketDetail) {
+  const res = await apiForm.post("ticket/crate/", ticketDetail);
+  return res.data;
+}
+
+export async function addCheque(chequeDetail) {
+  const res = await apiForm.post("order/check_create/", chequeDetail);
   return res.data;
 }
 
