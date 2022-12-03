@@ -69,10 +69,6 @@ const Router = createBrowserRouter([
         element: <NewTicket />,
       },
       {
-        path: "/roleselect",
-        element: <RoleSelectPage />,
-      },
-      {
         path: "/support",
         element: <SupportPage />,
       },
@@ -156,6 +152,11 @@ const Router = createBrowserRouter([
       },
     ],
   },
+    {
+      path: "/roleselect",
+      element: <RoleSelectPage />,
+    },
+
 ]);
 
 export default Router;

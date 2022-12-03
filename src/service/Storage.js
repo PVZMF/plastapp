@@ -4,7 +4,7 @@ function Storage() {
       const data = {
         refreshToken,
         accessToken,
-        isLogin: true,
+        isLogin: true
       };
       localStorage.setItem("auth", JSON.stringify(data));
     },

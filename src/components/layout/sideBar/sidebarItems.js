@@ -6,15 +6,16 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import GroupsIcon from "@mui/icons-material/Groups";
 import InfoIcon from "@mui/icons-material/Info";
 import WebIcon from "@mui/icons-material/Web";
-import { useNavigate } from "react-router-dom";
 
-function sidebarItems(isLogin) {
+
+function sidebarItems(rule) {
   return [
-    { title: "صفحه اصلی", icon: <HomeIcon fontSize="large" />, link: "/" },
+    { title: "صفحه اصلی", icon: <HomeIcon fontSize="large" />, link: "/", show:true},
     {
       title: "دسته بندی‌ها",
       icon: <CategoryIcon fontSize="large" />,
       onClick: () => {},
+      show:true,
       children: [
         { label: "محصولات نایلون و نایلکس", icon: "" },
         { label: " محصولات سلولزی", icon: "", link: "/", onClick: () => {} },
@@ -50,6 +51,7 @@ function sidebarItems(isLogin) {
       title: "پشتیبانی",
       icon: <HeadsetMicIcon fontSize="large" />,
       onClick: () => {},
+      show:true,
       children: [
         {
           label: "تماس با پشتیبانی",
@@ -77,24 +79,42 @@ function sidebarItems(isLogin) {
       icon: <BusinessCenterIcon fontSize="large" />,
       link: "/jobs",
       onClick: () => {},
+      show:true,
+    },
+    {
+      title: "ارسال چک",
+      icon: <BusinessCenterIcon fontSize="large" />,
+      link: "/cheque",
+      onClick: () => {},
+      show:!rule,
     },
     {
       title: "باشگاه مشتریان ",
       icon: <GroupsIcon fontSize="large" />,
       link: "/",
       onClick: () => {},
+      show:!rule
+    },
+    {
+      title: "افزودن محصول",
+      icon: <GroupsIcon fontSize="large" />,
+      link: "/profile/addproduct",
+      onClick: () => {},
+      show: rule
     },
     {
       title: "درباره ما ",
       icon: <InfoIcon fontSize="large" />,
       link: "/aboutus",
       onClick: () => {},
+      show:true
     },
     {
       title: " وبگاه ",
       icon: <WebIcon fontSize="large" />,
       link: "/blog",
       onClick: () => {},
+      show:true
     },
   ];
 }

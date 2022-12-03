@@ -126,7 +126,12 @@ export async function listShops() {
   return res.data;
 }
 
-export async function checkStatus() {
-  const res = await api.get("account/token/");
+export async function checkRule(token) {
+  const res = await apiLogin.post("account/token/",token);
+  return res.data;
+}
+
+export async function myShopInfo(token) {
+  const res = await apiLogin.get("shop/my_shop/",token);
   return res.data;
 }

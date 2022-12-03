@@ -20,9 +20,9 @@ function handleOutSide(e, isOpenDrawer, setOpenDrawer) {
 
 const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
 
-    const isLogin = useSelector(state => state.auth.isLogin);
+    const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    const listItemLogin = isLogin ? {
+    const listItemLogin = auth.isLogin ? {
         title: "خروج از حساب کاربری",
         icon: <AccountBoxIcon fontSize="large" />,
         onClick: () => { dispatch(logout()) },
@@ -31,7 +31,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
     useEffect(() => {
         setOpenDrawer(false);
     }, [useLocation().pathname]);
-    const sidebarList = sidebarItems(isLogin);
+    const sidebarList = sidebarItems(auth.rule );
     return (
 
         <ClickAwayListener onClickAway={(e) => handleOutSide(e, isOpenDrawer, setOpenDrawer)} >
@@ -56,7 +56,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
                     component="nav"
                     aria-labelledby="nested-list-subheader"
                 >
-                    {sidebarList.map((item, index) => (
+                    {sidebarList.filter(item => item.show).map((item, index) => (
                         <SideBarListItem
                             key={index}
                             label={item.title}
