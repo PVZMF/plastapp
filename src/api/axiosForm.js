@@ -15,6 +15,7 @@ api.interceptors.request.use(
     // Do something before request is sent
     const st = Storage();
     config.headers['Authorization'] = `Bearer ${st.accessToken}`;
+    config.headers["Content-Type"] = "multipart/form-data" ;
     
     return config;
   },
@@ -34,7 +35,7 @@ api.interceptors.response.use(
   function (error) {
     if (error.response.status == 401) {
       const st = Storage();
-      console.log({"refresh":st.refreshToken});
+      console.log({"Storage":st});
         refreshToken({"refresh":st.refreshToken}).then(res => {
           st.setAccessToken(res.access);
         }).catch(error => console.log(error))

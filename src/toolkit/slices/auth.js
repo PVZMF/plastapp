@@ -111,12 +111,14 @@ export const authSlice = createSlice({
     onToasted: false,
     counter: false,
     isCreateAccount: false,
-    isChangePassword: false
+    isChangePassword: false,
+    status: false,
   },
   reducers: {
     login: (state, action) => {
       const st = Storage();
       st.setLogin(action.payload.refresh,action.payload.access);
+      
       state.isLogin = true;
       state.onToasted = true
     },
@@ -130,6 +132,9 @@ export const authSlice = createSlice({
       state.username = "";
       state.isLogin = false;
       state.onToasted = true
+    },
+    setStatus: (state,action) => {
+      state.status = action.payload;
     },
     offToasted: (state) => {
       state.onToasted = false;
@@ -247,6 +252,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { logout, login, offToasted, onCounter, toggleIsCreateAccount,toggleIsChangePassword } = authSlice.actions;
+export const { logout, login, offToasted, onCounter, toggleIsCreateAccount,toggleIsChangePassword, setStatus} = authSlice.actions;
 
 export default authSlice.reducer;

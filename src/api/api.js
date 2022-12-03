@@ -101,16 +101,13 @@ export async function partialData() {
   const res = await api.get("advertise/partial_data/");
   return res.data;
 }
-export async function createTicket(ticketDetail) {
-  const st = Storage();
-  const config = {
-    headers: {
-      Authorization: `Bearer ${st.accessToken}`,
-      "X-CSRFToken":
-        "egMAdP4VD3dMQBnfZ2wufNNNieN4MsXLY1PkXZP32k1abU5N14Sl5kDnq7iEGTAY",
-      "Content-Type": "multipart/form-data",
-    },
-  };
-  const res = await apiLogin.post("ticket/crate/", ticketDetail, config);
+
+export async function listShops() {
+  const res = await api.get("shop/list/");
+  return res.data;
+}
+
+export async function checkStatus() {
+  const res = await api.get("account/token/");
   return res.data;
 }

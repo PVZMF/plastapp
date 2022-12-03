@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { TbTag } from 'react-icons/tb';
 // import SendData from './SendData'
 // import Attributes from './Attributes'
-import { getCategories } from '../../../api/api'
+import {listShops, getCategories } from '../../../api/api'
 
 // Icons
 import { BsImage } from 'react-icons/bs';
@@ -25,7 +25,7 @@ import { BiCategory } from 'react-icons/bi';
 const AddProduct = () => {
 
   const [categorys, setCategorys] = useState([]);
-
+  const [Shops, setListShops] = useState([]);
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
@@ -38,13 +38,24 @@ const AddProduct = () => {
   // Categories
   useEffect(() => {
     // setLoading(true);
-    getCategories().then((results) => {
-      setCategorys(results);
+    listShops().then((results) => {
+      setListShops(results);
     })
       .finally(() => {
-        console.log(categorys);
+        console.log(Shops);
       });
   }, []);
+
+    // ListShop
+    useEffect(() => {
+      // setLoading(true);
+      getCategories().then((results) => {
+        setCategorys(results);
+      })
+        .finally(() => {
+          console.log(categorys);
+        });
+    }, []);
 
 
   // Images
@@ -126,9 +137,9 @@ const AddProduct = () => {
             <input name='titleProduct' type="text" placeholder='مثلا کیسه زباله' />
           </div>
           <select>
-            <option>انتخاب دسته بندی</option>
-            {categorys.map(item => (
-              <option key={item.id} value={item.title}>{item.title}</option>
+            <option>انتخاب فروشگاه</option>
+            {Shops.map(item => (
+              <option key={item.id} value={item.name}>{item.name}</option>
             ))}
           </select>
         </div>
