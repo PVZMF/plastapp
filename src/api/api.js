@@ -65,7 +65,11 @@ export async function loginUser(authData) {
   return res.data;
 }
 export async function applyJob(authData) {
-  const res = await api.post("job/apply", authData);
+  const res = await api.post("job/apply", authData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 }
 export async function refreshToken(token) {
@@ -104,6 +108,7 @@ export async function createTicket(ticketDetail) {
       Authorization: `Bearer ${st.accessToken}`,
       "X-CSRFToken":
         "egMAdP4VD3dMQBnfZ2wufNNNieN4MsXLY1PkXZP32k1abU5N14Sl5kDnq7iEGTAY",
+      "Content-Type": "multipart/form-data",
     },
   };
   const res = await apiLogin.post("ticket/crate", ticketDetail, config);
