@@ -1,5 +1,8 @@
 import api from "./axios";
 import apiLogin from "./axiosLogin";
+import apiForm from "./axiosForm";
+
+import Storage from "../service/Storage";
 
 export async function getAllBanners() {
   const res = await api.get("advertise/notice_banner/");
@@ -62,7 +65,11 @@ export async function loginUser(authData) {
   return res.data;
 }
 export async function applyJob(authData) {
-  const res = await api.post("job/apply", authData);
+  const res = await api.post("job/apply/", authData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return res.data;
 }
 export async function refreshToken(token) {
@@ -76,11 +83,34 @@ export async function getCities() {
 }
 
 export async function createProduct(dataProduct) {
-  const res = await apiLogin.post("product/create/",dataProduct);
+  const res = await apiForm.post("product/create/", dataProduct);
   return res.data;
 }
 
 export async function createShop(dataShop) {
-  const res = await apiLogin.post("shop/create/",dataShop);
+  const res = await apiForm.post("shop/create/", dataShop);
+  return res.data;
+}
+
+export async function getAmazingListProduct() {
+  const res = await api.get("product/amazing_list/");
+  return res.data;
+}
+
+export async function partialData() {
+  const res = await api.get("advertise/partial_data/");
+  return res.data;
+}
+export async function createTicket(ticketDetail) {
+  const st = Storage();
+  const config = {
+    headers: {
+      Authorization: `Bearer ${st.accessToken}`,
+      "X-CSRFToken":
+        "egMAdP4VD3dMQBnfZ2wufNNNieN4MsXLY1PkXZP32k1abU5N14Sl5kDnq7iEGTAY",
+      "Content-Type": "multipart/form-data",
+    },
+  };
+  const res = await apiLogin.post("ticket/crate/", ticketDetail, config);
   return res.data;
 }

@@ -7,29 +7,6 @@ const RoleSelect = ({ image }) => {
     return (
         <div className={style.role}>
             <div className={style.stepBox}>
-                <div className={style.inputs}>
-                    <div className={style.inputbox}>
-                        <div className={style.input}>
-                            <label>نام و نام خانوادگی :</label>
-                            <input type="text" />
-                        </div>
-                        <div className={style.input}>
-                            <label>آدرس :</label>
-                            <input type="text" />
-                        </div>
-                        <div className={style.inputImg}>
-                            <div className={style.imgbox}>
-                                <img src={image ? image : User} alt="user" />
-                            </div>
-                            <div className={style.inputfile}>
-                                <label>انتخاب تصویر</label>
-                                <input type="file" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
                 <div className={style.btns}>
 
                     <button>
