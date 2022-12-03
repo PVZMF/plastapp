@@ -102,15 +102,14 @@ export async function partialData() {
   return res.data;
 }
 export async function createTicket(ticketDetail) {
-  const st = Storage();
-  const config = {
-    headers: {
-      Authorization: `Bearer ${st.accessToken}`,
-      "X-CSRFToken":
-        "egMAdP4VD3dMQBnfZ2wufNNNieN4MsXLY1PkXZP32k1abU5N14Sl5kDnq7iEGTAY",
-      "Content-Type": "multipart/form-data",
-    },
-  };
-  const res = await apiLogin.post("ticket/crate", ticketDetail, config);
+  const res = await apiForm.post("ticket/crate/", ticketDetail);
+  return res.data;
+}
+export async function getProduct() {
+  const res = await api.get("ticket/crate/");
+  return res.data;
+}
+export async function addCheque(chequeDetail) {
+  const res = await apiForm.post("order/check_create/", chequeDetail);
   return res.data;
 }

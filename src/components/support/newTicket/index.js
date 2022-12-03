@@ -3,10 +3,12 @@ import style from "./style.module.css";
 import { MenuItem, Select, TextField } from "@mui/material";
 import UploadFile from "../../upload file";
 import { createTicket } from "../../../api/api";
+import axios from "axios";
+import Storage from "../../../service/Storage";
 const NewTicketComponent = () => {
   const [fileIndex, setFileIndex] = useState(1);
   const [fileInputs, setFileInputs] = useState([<UploadFile index={0} />]);
-
+  const st = Storage();
   const hanldeSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -32,7 +34,20 @@ const NewTicketComponent = () => {
 
     console.log(data);
     console.log(requestData);
-    createTicket(requestData);
+    // createTicket(requestData)
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    axios.post("https://plastapp.iran.liara.run/ticket/crate/", requestData, {
+      headers: {
+        Authorization: `Bearer ${st.accessToken}`,
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
   };
 
   function addInput() {
