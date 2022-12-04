@@ -31,7 +31,8 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
     useEffect(() => {
         setOpenDrawer(false);
     }, [useLocation().pathname]);
-    const sidebarList = sidebarItems(auth.rule );
+    console.log(auth);
+    const sidebarList = sidebarItems(auth.rule, auth.isLogin );
     return (
 
         <ClickAwayListener onClickAway={(e) => handleOutSide(e, isOpenDrawer, setOpenDrawer)} >

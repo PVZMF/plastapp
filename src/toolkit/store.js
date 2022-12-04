@@ -15,6 +15,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist'
+import MyShopSlicer from "./slices/MyShop.slice";
 
 
 const persistConfig = {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   cartReducer: cartSlice,
   cartState: cartReducer,
   auth: authSlice,
+  myShop: MyShopSlicer,
   ticket: ticketSlice,
 });
 
@@ -39,7 +41,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(logger)
 });
 
 export const persistor = persistStore(store);

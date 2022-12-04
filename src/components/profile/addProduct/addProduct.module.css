@@ -331,7 +331,41 @@
     margin: 1rem 0 0 0;
 }
 
+.addProduct .send .box .boxinput .input {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .6rem .5rem;
+    border: 1px solid #999;
+    border-radius: .5rem;
+    background: #fff;
+    margin: 1rem 0 0 0;
+}
 
+.addProduct .send .box .boxinput:nth-child(2) .input {
+    padding: 0 .5rem 0 0;
+}
+
+.addProduct .send .box .boxinput .input input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.addProduct .send .box .boxinput textarea {
+    width: 90%;
+    min-width: 90%;
+    max-width: 90%;
+    height: clamp(15vh, 20vh, 20vh);
+    max-height: clamp(15vh, 20vh, 20vh);
+    min-height: clamp(15vh, 20vh, 20vh);
+    border: 1px solid #888;
+    border-radius: .7rem;
+    outline: none;
+    margin: 2rem 0 0 0;
+}
 /* ----------- Attributes ------------ */
 
 .addProduct .attributes .box .header {

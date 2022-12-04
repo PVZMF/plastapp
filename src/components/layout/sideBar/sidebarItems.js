@@ -8,7 +8,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import WebIcon from "@mui/icons-material/Web";
 
 
-function sidebarItems(rule) {
+function sidebarItems(rule,isLogin) {
   return [
     { title: "صفحه اصلی", icon: <HomeIcon fontSize="large" />, link: "/", show:true},
     {
@@ -86,21 +86,21 @@ function sidebarItems(rule) {
       icon: <BusinessCenterIcon fontSize="large" />,
       link: "/cheque",
       onClick: () => {},
-      show:!rule,
+      show:!rule && isLogin,
     },
     {
       title: "باشگاه مشتریان ",
       icon: <GroupsIcon fontSize="large" />,
       link: "/",
       onClick: () => {},
-      show:!rule
+      show:!rule && isLogin
     },
     {
       title: "افزودن محصول",
       icon: <GroupsIcon fontSize="large" />,
       link: "/profile/addproduct",
       onClick: () => {},
-      show: rule
+      show: rule && isLogin
     },
     {
       title: "درباره ما ",

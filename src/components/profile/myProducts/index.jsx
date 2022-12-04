@@ -1,9 +1,22 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { RiAddFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import style from './myProducts.module.css'
+import {listProduct} from "../../../api/api"
+
 
 const MyProducts = ({ list }) => {
+    const [listProduct,setListProduct] = useState([])
+// ListProduct
+  useEffect(() => {
+    // setLoading(true);
+    MyProducts().then((results) => {
+        setListProduct(results);
+    })
+      .finally(() => {
+        console.log(listProduct);
+      });
+  }, []);
   return (
     <div className={style.myproducts}>
         <div className={style.products}>

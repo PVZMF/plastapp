@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { TbTag } from 'react-icons/tb';
 // import SendData from './SendData'
 // import Attributes from './Attributes'
-import {listShops, getCategories } from '../../../api/api'
+import { listShops, getCategories } from '../../../api/api'
 
 // Icons
 import { BsImage } from 'react-icons/bs';
@@ -21,6 +21,8 @@ import style from './addProduct.module.css'
 import { BiCategory } from 'react-icons/bi';
 
 //Icons
+import { myShopInfo } from '../../../api/api';
+import { ImagesearchRoller } from '@mui/icons-material';
 
 const AddProduct = () => {
 
@@ -30,10 +32,24 @@ const AddProduct = () => {
     e.preventDefault();
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
+    data.shop = myShop.id;
+    data.feature = JSON.stringify(att);
+    data.image = [{image:data.imagee, product:2}];
+    console.log(data);
     createProduct(data).then(result => {
       console.log(result);
     }).catch(res => console.log(res))
   }
+
+  const [myShop, setMyShop] = useState([]);
+
+  // MyShopInfo
+  useEffect(() => {
+    // setLoading(true);
+    myShopInfo().then((results) => {
+      setMyShop(results);
+    }).catch(res => console.log(res))
+  }, []);
 
   // Categories
   useEffect(() => {
@@ -46,16 +62,16 @@ const AddProduct = () => {
       });
   }, []);
 
-    // ListShop
-    useEffect(() => {
-      // setLoading(true);
-      getCategories().then((results) => {
-        setCategorys(results);
-      })
-        .finally(() => {
-          console.log(categorys);
-        });
-    }, []);
+  // ListShop
+  useEffect(() => {
+    // setLoading(true);
+    getCategories().then((results) => {
+      setCategorys(results);
+    })
+      .finally(() => {
+        console.log(categorys);
+      });
+  }, []);
 
 
   // Images
@@ -113,7 +129,7 @@ const AddProduct = () => {
       });
     });
   };
-
+  console.log(att);
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...att];
@@ -121,8 +137,8 @@ const AddProduct = () => {
     setAtt(list);
   };
   return (
-    <form onSubmit={handleSubmit} className={style.addProduct} id="form">
-
+    <form onSubmit={handleSubmit} method="post" className={style.addProduct} id="form" enctype="multipart/form-data">
+      {console.log(categorys)}
       {/* NameAndGrouping */}
       <div className={style.header}>
         <h5>خانه</h5><span>{'>'}</span><h5>افزودن محصول</h5>
@@ -134,12 +150,12 @@ const AddProduct = () => {
           <h4>قوانین محصولات ممنوعه در پلاست اپ</h4>
           <div className={style.boxinput}>
             <label>عنوان محصول</label>
-            <input name='titleProduct' type="text" placeholder='مثلا کیسه زباله' />
+            <input name='title' type="text" placeholder='مثلا کیسه زباله' />
           </div>
-          <select>
-            <option>انتخاب فروشگاه</option>
-            {Shops.map(item => (
-              <option key={item.id} value={item.name}>{item.name}</option>
+          <select name={"category"} form='form'>
+            <option>دسته بندی</option>
+            {categorys.map(item => (
+              <option key={item.id} value={item.id}>{item.title}</option>
             ))}
           </select>
         </div>
@@ -155,9 +171,25 @@ const AddProduct = () => {
 
           <div className={style.addImg}>
             <div className={style.boximage}>
-              <input name="pictures" type='file' ref={fileInputRef} onChange={handleFileChange} />
+              <input name="imagee"  type='file' />
               <BsImage />
               <p>افزودن تصویر</p>
+            </div>
+
+            <div className={style.listImage}>
+              {images.map((item, index) => (
+                <div className={style.img}>
+                  <button onClick={() => handleRemoveImg(item, index)}>-</button>
+                  {item.file.name}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={style.addImg}>
+            <div className={style.boximage}>
+              <input name="thumbnails" type='file' />
+              <BsImage />
+              <p>افزودن تصویر پیش نمایشی</p>
             </div>
 
             <div className={style.listImage}>
@@ -182,14 +214,14 @@ const AddProduct = () => {
             <div className={style.input}>
               <input name="weight" type="text" />
               {/* <span>گرم</span> */}
-              <select form='form' name='unitWeight' defaultValue="کیلوگرم">
-                <option value="گرم">گرم</option>
-                <option value="کیلوگرم">کیلوگرم</option>
-                <option value="رول">رول</option>
-                <option value="بسته">بسته</option>
-                <option value="کارتن">کارتن</option>
-                <option value="تعداد">تعداد</option>
-                <option value="دستگاه">دستگاه</option>
+              <select form='form' name='sales_unit' defaultValue="کیلوگرم">
+                <option value="g">گرم</option>
+                <option value="kg">کیلوگرم</option>
+                <option value="roll">رول</option>
+                <option value="box">بسته</option>
+                <option value="pocket">کارتن</option>
+                <option value="numerical">تعداد</option>
+                <option value="tom">دستگاه</option>
               </select>
             </div>
           </div>
@@ -205,26 +237,14 @@ const AddProduct = () => {
           <div className={style.boxinput}>
             <label>قیمت محصول</label>
             <div className={style.input}>
-              <input value="price" type="text" />
-              <span>تومان</span>
-            </div>
-          </div>
-
-          <div className={style.boxinput}>
-            <label>قیمت محصول با تخفیف (اختیاری)</label>
-            <div className={style.input}>
-              <input name="priceOffer" type="text" />
+              <input name='price' type="number" />
               <span>تومان</span>
             </div>
           </div>
 
           <div className={style.boxinput}>
             <label>تعداد موجودی</label>
-            <div className={style.boxadd}>
-              <button>+</button>
-              <span>10</span>
-              <button>-</button>
-            </div>
+            <input className={style.boxadd} type="number" name='inventory' />
           </div>
         </div>
       </div>
@@ -246,11 +266,11 @@ const AddProduct = () => {
             <label>محدوده ارسال</label>
             <div className={style.input}>
               <label htmlFor="allcity">به سراسر ایران</label>
-              <input type="radio" name='allCity' id='allcity' value={true} onChange={(e) => setActive(e.target.value)} defaultChecked />
+              <input type="radio" name='send_to_all_point' id='allcity' onChange={(e) => setActive(e.target.value)} defaultChecked />
             </div>
             <div className={style.input}>
               <label htmlFor="city">انتخاب شهر</label>
-              <input type="radio" name='allCity' id='city' value={false} onChange={(e) => setActive(e.target.value)} />
+              <input type="radio" name='City' id='city' onChange={(e) => setActive(e.target.value)} />
             </div>
           </div>
 
@@ -269,6 +289,28 @@ const AddProduct = () => {
               ))}
             </select>
           </div>
+
+          <div className={style.boxinput}>
+            <label>زمان ارسال</label>
+            <div className={style.input}>
+              <input name='delivery_time' type="number" />
+              <span>روز</span>
+            </div>
+          </div>
+
+          <div className={style.boxinput}>
+            <label>هزینه ارسال</label>
+            <div className={style.input}>
+              <input name='delivery_cost' type="number" />
+              <span>تومان</span>
+            </div>
+          </div>
+
+          <div className={style.boxinput}>
+            <label>شرایط ارسال</label>
+            <textarea name='transition' />
+          </div>
+
         </div>
       </div>
 
@@ -293,13 +335,13 @@ const AddProduct = () => {
           ))}
 
           <div className={style.boxinput_checked}>
-            <input type="checkbox" />
+            <input type="checkbox" name='credit_sale' />
             <label>امکان خرید اعتباری دارد</label>
           </div>
 
           <div className={style.boxinput}>
             <label>توضیحات محصول (اختیاری)</label>
-            <textarea />
+            <textarea name='description' />
           </div>
 
         </div>

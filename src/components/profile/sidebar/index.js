@@ -7,13 +7,13 @@ import { BiCategory, BiUserPin, BiSupport } from 'react-icons/bi';
 import { IoWallet, IoReceiptOutline } from 'react-icons/io5';
 import { HiOutlineClipboardList } from 'react-icons/hi';
 import { TbTruckDelivery } from 'react-icons/tb';
-
+import { setMyShop } from '../../../toolkit/slices/MyShop.slice';
 // Images
 import Shop from '../../../assets/imgs/adImage.png';
 
 // Style
 import style from './sidebar.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { isPending } from '@reduxjs/toolkit';
 import { myShopInfo } from '../../../api/api';
 
@@ -22,6 +22,8 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
     const auth = useSelector(state => state.auth);
     const [active, setActive] = useState(false);
     const [myShop, setMyShop] = useState([]);
+    // const myShop2 = useSelector(state => state.myShop)
+    // const dispatch = useDispatch();
 
     // MyShopInfo
     useEffect(() => {
@@ -32,14 +34,12 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
     }, []);
 
 
-
     return (
         <div className={style.sidebar}>
-            {console.log(myShop)}
             <div className={style.details}>
                 <div className={style.boxProfile}>
                     <div className={style.profile}>
-                        <img src={myShop.logo} alt={shopName} />
+                        <img src={myShop.logo} alt={myShop.name} />
                         <div className={style.name}>
                             <h2>{!auth.rule ? "کاربر" : myShop.name}</h2>
                             <h3>{!auth.rule ? auth.username : [myShop.first_name+" "+myShop.last_name]}</h3>
