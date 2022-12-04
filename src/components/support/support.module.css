@@ -11,9 +11,9 @@
 }
 
 .support .box_data {
-    /* width: clamp(50rem, 100vw, 100rem); */
+    width: clamp(30rem, 90vw, 90rem);
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     background: #fff;
 }
@@ -40,7 +40,7 @@
     justify-content: space-between;
     flex-direction: column;
     padding: clamp(1rem, 2vw, 2rem);
-    min-height: 400px;
+    /* min-height: 400px; */
 }
 
 .support .box_data .data .hours_work {
@@ -123,9 +123,13 @@
 
 @media (max-width: 700px) {
     .support .box_data {
+        width: auto;
         flex-direction: column;
     }
     .support .box_data .map {
         height: 200px;
+    }
+    .support .box_data .data {
+        justify-content: center;
     }
 }

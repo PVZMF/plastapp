@@ -44,6 +44,12 @@ export const stepMinus = () => {
     }
 }
 
+export const stepDefault = () => {
+    return {
+        type: "STEP_DEFAULT"
+    }
+}
+
 export const clear = () => {
     return {
         type: "CLEAR"

@@ -5,6 +5,8 @@ import UploadFile from "../../upload file";
 import { createTicket } from "../../../api/api";
 import axios from "axios";
 import Storage from "../../../service/Storage";
+
+
 const NewTicketComponent = () => {
   const [fileIndex, setFileIndex] = useState(1);
   const [fileInputs, setFileInputs] = useState([<UploadFile index={0} />]);
@@ -72,12 +74,14 @@ const NewTicketComponent = () => {
             }}
           >
             <TextField
+              className={style.textField}
               name="title"
               type="text"
               label="عنوان"
-              sx={{ width: "70%" }}
+              sx={{ width: "70%", textAlign: 'right' }}
             />
             <Select
+            className={style.selectField}
               name="priority"
               sx={{ width: "20%" }}
               labelId="demo-simple-select-label"

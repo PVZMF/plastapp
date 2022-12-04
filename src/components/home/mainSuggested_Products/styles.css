@@ -1,4 +1,6 @@
 .custom-slide {
+    width: 100%;
+    min-width: 280px;
     border-radius: 1.5rem;
     -webkit-border-radius: 1.5rem;
     -moz-border-radius: 1.5rem;

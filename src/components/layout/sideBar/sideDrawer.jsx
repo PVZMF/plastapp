@@ -46,7 +46,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
                     [`& .MuiPaper-root`]: {
                         position: "fixed",
                         borderTop: "1px solid gray",
-                        marginTop: { xs: "9vw", sm: "6.5vw", md: "6vw", lg: "6.5vw", xl: "5.5vw" },
+                        marginTop: { xs: "10vw", sm: "7.5vw", md: "7vw", lg: "7.5vw", xl: "6.5vw" },
                         zIndex: "25"
                     }
                 }}

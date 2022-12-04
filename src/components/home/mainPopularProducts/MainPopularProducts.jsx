@@ -8,6 +8,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 
+// Components
+import SlideSuggested from '../mainSuggested_Products/slideSuggested'
+
 import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested";
 
 import { Typography } from "@mui/material";
@@ -24,6 +27,7 @@ import bannerImg1 from "../../../assets/imgs/offer-banner.jpg";
 import { HomeLan } from "../../../json/language/fa";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
 import {amazingListProduct} from "../../../api/api"
+
 const MainPopularComponent = ({ }) => {
   
   // const dispatch = useDispatch();
@@ -68,13 +72,7 @@ const MainPopularComponent = ({ }) => {
           className="custom_swiper"
         >
           <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg1} alt=""/></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><img className="slide-banner" src={bannerImg} alt="" /></SwiperSlide>
+          {[...Array(8)].map((item, index) => (<SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>))}
           <SwiperSlide className="slide p10 custom-slide"><AllProductsSlide /></SwiperSlide>
         </Swiper>
       </FlexMainSuggested>

@@ -7,6 +7,7 @@
   padding: clamp(1rem, 2vw, 2rem);
   background: #f1f3fa;
   min-height: 70vh;
+  overflow: hidden;
 }
 
 .box_ticket {
@@ -145,6 +146,12 @@ form {
   display: flex;
 }
 
+@media (max-width: 600px) {
+  .lowerContainer {
+    flex-direction: column;
+  }
+}
+
 .lowerContainer button {
   width: clamp(7rem, 10vw, 10rem);
   color: #fff;
@@ -178,4 +185,31 @@ form {
   border-radius: 3px;
   border: 1px solid black;
   color: rgb(6, 46, 81);
+}
+
+
+.textField input,
+.selectField input {
+  border: none;
+}
+
+.textField fieldset,
+.selectField fieldset {
+  text-align: right;
+  direction: rtl;
+}
+
+.selectField span {
+  opacity: 1 !important;
+}
+
+.box_input label {
+  transform-origin: right !important;
+  left: inherit !important;
+  right: 1.75rem !important;
+  font-size: small;
+  color: #807D7B;
+  font-weight: 400;
+  overflow: unset;
+  padding: 0 1.2rem 0 0;
 }

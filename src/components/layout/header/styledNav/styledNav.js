@@ -27,10 +27,11 @@ export const StyledNavLogo = styled.div`
 
 export const StyledNavLeftBar = styled.div`
   display: flex;
+  align-items: center;
   gap: 2rem;
   
-  .badge span {
-    font-size: 1.3rem;
+  .badge span svg {
+    font-size: 2.5rem !important;
   }
 `;
 

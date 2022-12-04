@@ -11,9 +11,9 @@
 }
 
 .aboutus .box_data {
-    max-width: clamp(50rem, 100vw, 100rem);
+    width: clamp(30rem, 90vw, 90rem);
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: center;
     background: #fff;
 }
@@ -39,7 +39,7 @@
     max-height: 70vh;
     display: flex;
     align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-direction: column;
     padding: clamp(1rem, 2vw, 2rem);
     min-height: 400px;
@@ -70,6 +70,7 @@
 
 @media (max-width: 700px) {
     .aboutus .box_data {
+        width: auto;
         flex-direction: column;
     }
     .aboutus .box_data .map {

@@ -22,7 +22,7 @@ const MainSearchComponent = () => {
             <img className="img_holder--img" src={detective} alt="" />
           </div>
 
-          <div className="search_box">
+          <div className="search_box" style={{maxWidth: '650px', minWidth: '250px'}}>
             <div className="search_box_holder">
               <GlobalButton
                 className="search_box--button d_flex--1"

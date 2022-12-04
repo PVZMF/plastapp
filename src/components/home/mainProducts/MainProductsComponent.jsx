@@ -17,6 +17,7 @@ import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested
 
 import bannerImg from "../../../assets/imgs/offer-banner.jpg";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
+import SlideSuggested from "../mainSuggested_Products/slideSuggested";
 
 // import { MAIN_SUGGESTED_PRODUCTS } from "../../../../service/homeService";
 
@@ -70,14 +71,11 @@ const MainProductsComponent = ({ title }) => {
           <SwiperSlide className="slide custom-slide">
             <img className="slide-banner" src={bannerImg} alt="" />
           </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 2</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 3</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 4</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 5</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 6</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 7</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 8</SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">Slide 9</SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">
             <AllProductsSlide link="products" />
           </SwiperSlide>

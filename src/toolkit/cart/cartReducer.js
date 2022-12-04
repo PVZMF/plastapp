@@ -92,6 +92,12 @@ const cartReducer = (state=initialState, action) => {
                 step: 0,
                 checkout: false,
             }
+        case "STEP_DEFAULT" : {
+            return { 
+                ...state,
+                step: 0 
+            }
+        }
         default: 
             return state;
     }   

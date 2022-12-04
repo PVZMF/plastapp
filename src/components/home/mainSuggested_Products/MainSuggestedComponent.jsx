@@ -83,7 +83,7 @@ const MainSuggestedComponent = ({ title }) => {
           modules={[Navigation,Autoplay]}
         >
           <SwiperSlide className="slide custom-slide">
-            <img className="slide-banner" src={data.best_seller_image} alt="پیشنهاد ویژه"/>
+            <img className="slide-banner" src={data.best_seller_image ? data.best_seller_image : bannerImg} alt="پیشنهاد ویژه"/>
             <Typography>
               {data.best_seller_text}
             </Typography>

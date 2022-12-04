@@ -81,7 +81,7 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
           </IconButton>
 
           <StyledNavLogo>
-            <Box sx={{ width: { xs: "70px", sm: "100px", md: "120px", lg: "150px" } }}>
+            <Box sx={{ width: { xs: "70px", sm: "100px", md: "120px", lg: "150px" }, padding: '1rem 0' }}>
               <Link to="/">
                 <img src={imgLogo} width="100%" alt="logo" />
               </Link>
@@ -90,9 +90,12 @@ const Header = ({ isOpenDrawer, setOpenDrawer }) => {
           <StyledNavLeftBar>
             <Box color={globalCssVar.light_blue} >
             {isLogin?
-              <ClickAwayListener/>:<IconButton href={isLogin?"/profile":"/login"} width="100%" sx={{ fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem", lg: "2rem" } }}>
-              {navLan.login_button}
-           </IconButton> }
+              <ClickAwayListener/>
+              :
+              <IconButton href={isLogin?"/profile":"/login"} width="100%" sx={{ fontSize: { xs: ".8rem", sm: "1rem", md: "1.2rem", lg: "1.4rem" },color: '#333', border: '3px solid #69a9ff', borderRadius: '.5rem',":hover":{background:'#69a9ff'} }}>
+                {navLan.login_button}
+              </IconButton> 
+            }
             </Box>
             <Link to="/cart">
               <IconButton sx={{

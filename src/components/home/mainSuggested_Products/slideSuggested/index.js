@@ -10,10 +10,10 @@ const SlideSuggested = ({ offer, image, title, price, number, point, id, credit_
   const off = price * (offer / 100);
   return (
     <FlexMainSlidSuggested>
-        <div className='offer-notif'>
+        {offer !== 0 && <div className='offer-notif'>
             <h5>{offer}% OFF</h5>
             <p>فقط تا آخر خرداد</p>
-        </div>
+        </div>}
 
         <img src={image} alt={title} />
         
@@ -36,8 +36,8 @@ const SlideSuggested = ({ offer, image, title, price, number, point, id, credit_
         {credit_shoping ? <p className='noting'>امکان خرید اعتباری</p> : null}
 
         <div className='price-box'>
-            {offer && <del>{price} <span>تومان - </span></del>}
-            <h5>{off} <span>تومان</span></h5>
+            {offer !== 0 && <del>{price} <span>تومان - </span></del>}
+            <h5>{off > 0 ? off : price} <span>تومان</span></h5>
         </div>
     </FlexMainSlidSuggested>
   )

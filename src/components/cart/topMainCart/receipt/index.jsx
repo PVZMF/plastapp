@@ -2,17 +2,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdVerified } from "react-icons/md";
 import { FlexMainReceipt } from "./styleReceipt";
-import { stepPlus } from "../../../../toolkit/cart/cartAction";
+import { stepDefault, stepPlus } from "../../../../toolkit/cart/cartAction";
 
-const Receipt = ({ step, setStep }) => {
+const Receipt = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cartState);
 
   const handleNextStep = () => {
-    if (state.selectedItems.length > 0) {
+    if (state.selectedItems.length > 0 && state.step < 2) {
       dispatch(stepPlus());
+    } else {
+      // console.log("state.step")
+      dispatch(stepDefault())
     }
   };
+  // console.log(state.step)
   return (
     <FlexMainReceipt>
       <h5 className="title-receipt">جزئیات قیمت</h5>
@@ -54,12 +58,12 @@ const Receipt = ({ step, setStep }) => {
       </div>
 
       <button onClick={handleNextStep}>
-        {state.step === 0
-          ? `ادامه خرید از${state.shops.toLocaleString("fa-IR")} غرفه`
-          : "ادامه پرداخت"}
+        {state.step === 0 && `ادامه خرید از${state.shops.toLocaleString("fa-IR")} غرفه`}
         {state.step === 1 && "ادامه و تایید روش ارسال"}
         {state.step === 2 && "پرداخت"}
+        {state.step !== 0 && state.step !== 1 && state.step !== 2 && "ادامه پرداخت"}
       </button>
+      {/* <button onClick={() => dispatch(stepDefault())}>از اول</button> */}
 
       <p>
         <span>

@@ -15,7 +15,8 @@ const AboutUs = ({ imageUrl, description }) => {
           <img src={`${baseUrl}${imageUrl}`} alt="plastapp" />
         </div>
 
-        <div className={style.data}>{`${description}`}</div>
+        {/* <div className={style.data}>{`${description}`}</div> */}
+        <div className={style.data} dangerouslySetInnerHTML={{ __html: description }}></div>
       </div>
     </div>
   );

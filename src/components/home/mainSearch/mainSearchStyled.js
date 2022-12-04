@@ -19,11 +19,21 @@ export const FlexMainSearch = styled.div`
   }
 
   .search_box {
+    min-widht: 270px;
     --border-radius: 25px;
     flex-basis: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    select {
+      font-size: clamp(.8rem, 1.2vw, 1.2rem);
+      outline: none;
+      background: transparent;
+    }
+    input {
+      outline: none;
+    }
 
     .search_box_holder {
       width: 100%;
@@ -47,7 +57,7 @@ export const FlexMainSearch = styled.div`
       font-size: clamp(0.5rem, 2vw, 1.5rem);
     } 
     .search_box--button {
-      width: 20%;
+      width: 30%;
       padding: 7px 20px;
       gap: 5px;
       border-radius: 0px;
