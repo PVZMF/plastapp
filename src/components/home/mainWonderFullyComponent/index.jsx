@@ -7,6 +7,7 @@ import pro2 from "../../../assets/imgs/pro2.jpg";
 import style from "./wonderFullyComponent.module.css";
 import { Link } from "react-router-dom";
 import { partialData } from "../../../api/api";
+import { baseUrl } from "../../../api/axios";
 
 const WonderFullyComponent = ({ products }) => {
   function findMax(array) {
@@ -27,6 +28,7 @@ const WonderFullyComponent = ({ products }) => {
   useEffect(() => {
     partialData()
       .then((res) => {
+        console.log(res);
         setData(res.data);
       })
       .finally(() => {});
@@ -37,15 +39,17 @@ const WonderFullyComponent = ({ products }) => {
       <div className={style.wonderfully_box}>
         <div className={style.title}>
           <img
-            src={data.special_suggestion_image}
-            alt="شگفتانه پلاست اپ"
+            src={baseUrl+data.mid_banner_image}
+            alt={data.mid_banner_text}
             className={style.boxOff}
           />
-          <img
-            src={data.special_suggestion_text}
+          <div
             alt="شگفتانه پلاست اپ"
             className={style.textOff}
-          />
+          >
+            {data.special_suggestion_text}
+          </div>
+          
           <h4>تا {MaxPresent.toLocaleString("fa-IR")} % تخفیف</h4>
         </div>
         <div className={style.productsList}>

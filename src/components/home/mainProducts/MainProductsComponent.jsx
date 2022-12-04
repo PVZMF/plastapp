@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState} from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,22 +18,24 @@ import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested
 import bannerImg from "../../../assets/imgs/offer-banner.jpg";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
 import SlideSuggested from "../mainSuggested_Products/slideSuggested";
+import { getListMostPopularShops } from "../../../api/api";
 
 // import { MAIN_SUGGESTED_PRODUCTS } from "../../../../service/homeService";
 
 // import { HomeLan } from "../../../json/language/fa";
 
 const MainProductsComponent = ({ title }) => {
-  // const dispatch = useDispatch();
-  // const state = useSelector(() => mainProductsSlice);
 
-  // useEffect(() => {
-  //   if (state.length <= 0) {
-  //     dispatch(getSomeProduct(MAIN_SUGGESTED_PRODUCTS));
-  //   }
-  // }, [state.length, dispatch]);
+  const [shops, setShops] = useState([]);
+  // ListShop
   useEffect(() => {
-    
+    // setLoading(true);
+    getListMostPopularShops().then((results) => {
+      setShops(results);
+      console.log(results);
+    })
+      .finally(() => {
+      });
   }, []);
   return (
     <GlobalContainer>

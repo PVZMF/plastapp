@@ -97,7 +97,7 @@ export async function createProduct(dataProduct) {
 }
 
 export async function createShop(dataShop) {
-  const res = await apiForm.post("shop/create/", dataShop);
+  const res = await apiLogin.post("shop/create/", dataShop);
   return res.data;
 }
 
@@ -121,10 +121,19 @@ export async function addCheque(chequeDetail) {
   return res.data;
 }
 
-export async function listShops() {
+export async function getListShops() {
   const res = await api.get("shop/list/");
   return res.data;
 }
+export async function getNewListShops() {
+  const res = await api.get("shop/newest/");
+  return res.data;
+}
+export async function getListMostPopularShops() {
+  const res = await api.get("shop/most_popular/");
+  return res.data;
+}
+
 
 export async function checkRule(token) {
   const res = await apiLogin.post("account/token/",token);

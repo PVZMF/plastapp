@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { TbTag } from 'react-icons/tb';
 // import SendData from './SendData'
 // import Attributes from './Attributes'
-import { listShops, getCategories } from '../../../api/api'
+import { getListShops, getCategories } from '../../../api/api'
 
 // Icons
 import { BsImage } from 'react-icons/bs';
@@ -54,7 +54,7 @@ const AddProduct = () => {
   // Categories
   useEffect(() => {
     // setLoading(true);
-    listShops().then((results) => {
+    getListShops().then((results) => {
       setListShops(results);
     })
       .finally(() => {
