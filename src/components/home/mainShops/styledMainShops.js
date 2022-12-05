@@ -7,6 +7,8 @@ export const FlexMainShops = styled.div`
     }
 
   .shop_box {
+    display: flex;
+    align-items: center;
     flex-direction: column;
     width: clamp(100px,4vw,200px);
     padding: 15px;
@@ -18,6 +20,10 @@ export const FlexMainShops = styled.div`
       font-size: 1.4rem;
     }
 
-    &--img {}
+    &--img {
+      width: 100%;
+      height: 8rem;
+      object-fit: cover;
+    }
   }
 `;

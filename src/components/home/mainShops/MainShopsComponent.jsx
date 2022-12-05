@@ -55,7 +55,7 @@ const MainShopsComponent = ({ title, state }) => {
             < SwiperSlide key={item.id}>
               < div className="shop_box">
                 <img src={item.logo} alt={item.name} className="shop_box--img" />
-                <div className="shop_box--title p10">item.name</div>
+                <div className="shop_box--title p10">{item.name}</div>
               </div>
             </SwiperSlide>
             )

@@ -1,13 +1,17 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../toolkit/slices/auth';
 import Box from '@mui/material/Box';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import { IconButton, Button } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../toolkit/slices/auth';
+import { MdOutlineDashboard } from "react-icons/md";
+import { BiExit } from "react-icons/bi";
+
+
 
 export default function ClickAway() {
     const [open, setOpen] = React.useState(false);
@@ -27,7 +31,8 @@ export default function ClickAway() {
         zIndex: 1,
         border: '1px solid',
         bgcolor: 'background.paper',
-        width: "133px",
+        width: "160px",
+        overflow: 'hidden',
     };
 
     return (
@@ -45,7 +50,7 @@ export default function ClickAway() {
                                 maxWidth: "3600px",
                                 bgcolor: 'background.paper',
                                 position: 'relative',
-                                overflow: 'auto',
+                                overflow: 'hidden',
                                 maxHeight: 300,
                             }}
                             subheader={<li />}
@@ -53,13 +58,13 @@ export default function ClickAway() {
                             <li>
                                 <Link to="/profile">
                                     <ul>
-                                        <ListSubheader>پروفایل</ListSubheader>
+                                        <ListSubheader><MdOutlineDashboard /> پروفایل</ListSubheader>
                                     </ul>
                                 </Link>
                             </li>
                             <li>
                                 <ul onClick={() => dispatch(logout())}>
-                                    <ListSubheader sx={{cursor:"pointer"}}>خروج از حساب کاربری</ListSubheader>
+                                    <ListSubheader sx={{cursor:"pointer"}}><BiExit /> خروج از حساب کاربری</ListSubheader>
                                 </ul>
                             </li>
 
