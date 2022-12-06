@@ -39,17 +39,14 @@ const WonderFullyComponent = ({ products }) => {
       <div className={style.wonderfully_box}>
         <div className={style.title}>
           <img
-            src={baseUrl+data.mid_banner_image}
+            src={baseUrl + data.mid_banner_image}
             alt={data.mid_banner_text}
             className={style.boxOff}
           />
-          <div
-            alt="شگفتانه پلاست اپ"
-            className={style.textOff}
-          >
-            {data.special_suggestion_text}
+          <div alt="شگفتانه پلاست اپ" className={style.textOff}>
+            {data.mid_banner_text}
           </div>
-          
+
           <h4>تا {MaxPresent.toLocaleString("fa-IR")} % تخفیف</h4>
         </div>
         <div className={style.productsList}>

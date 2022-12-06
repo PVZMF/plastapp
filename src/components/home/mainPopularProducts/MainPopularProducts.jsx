@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 
 // Components
-import SlideSuggested from '../mainSuggested_Products/slideSuggested'
+import SlideSuggested from "../mainSuggested_Products/slideSuggested";
 
 import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested";
 
@@ -26,28 +26,30 @@ import bannerImg1 from "../../../assets/imgs/offer-banner.jpg";
 
 import { HomeLan } from "../../../json/language/fa";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
-import {amazingListProduct} from "../../../api/api"
+import { amazingListProduct, partialData } from "../../../api/api";
+import { baseUrl } from "../../../api/axios";
 
-const MainPopularComponent = ({ }) => {
-  
+const MainPopularComponent = ({}) => {
   // const dispatch = useDispatch();
   // const state = useSelector(mainPopularProducts);
   // const [amazingProduct, setAmazingProduct] = useState([]);
+  const [data, setData] = useState();
 
-  // useEffect(() => {
-  //   // setLoading(true);
-  //   getTwoelvBanners()
-  //     .then((res) => {
-  //       setAmazingProduct(resizeTo);
-  //     })
-  //     .finally(() => {
-  //       console.log()
-  //     });
-  // }, []);
+  useEffect(() => {
+    partialData().then((result) => {
+      setData(result.data);
+    });
+  }, []);
 
   return (
     <GlobalContainer>
-      <Typography component="h2" variant="h2" textAlign="center" marginY={4} fontSize="clamp(1.5rem, 3vw, 3rem)">
+      <Typography
+        component="h2"
+        variant="h2"
+        textAlign="center"
+        marginY={4}
+        fontSize="clamp(1.5rem, 3vw, 3rem)"
+      >
         {HomeLan.mainPopularProducts_title}
       </Typography>
 
@@ -55,11 +57,11 @@ const MainPopularComponent = ({ }) => {
         <Swiper
           breakpoints={{
             300: {
-              slidesPerView: 2
+              slidesPerView: 2,
             },
             768: {
-              slidesPerView: 4
-            }
+              slidesPerView: 4,
+            },
           }}
           autoplay={{
             delay: 3000,
@@ -67,13 +69,28 @@ const MainPopularComponent = ({ }) => {
           }}
           spaceBetween={10}
           navigation={true}
-          
-          modules={[Navigation,Autoplay]}
+          modules={[Navigation, Autoplay]}
           className="custom_swiper"
         >
-          <SwiperSlide className="slide custom-slide"><img className="slide-banner" src={bannerImg1} alt=""/></SwiperSlide>
-          {[...Array(8)].map((item, index) => (<SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>))}
-          <SwiperSlide className="slide p10 custom-slide"><AllProductsSlide /></SwiperSlide>
+          <SwiperSlide className="slide custom-slide">
+            <img
+              className="slide-banner"
+              src={
+                data?.best_seller_image
+                  ? `${baseUrl}${data?.best_seller_image}`
+                  : bannerImg
+              }
+              alt=""
+            />
+          </SwiperSlide>
+          {[...Array(8)].map((item, index) => (
+            <SwiperSlide className="slide p10 custom-slide">
+              <SlideSuggested offer={0} />
+            </SwiperSlide>
+          ))}
+          <SwiperSlide className="slide p10 custom-slide">
+            <AllProductsSlide />
+          </SwiperSlide>
         </Swiper>
       </FlexMainSuggested>
     </GlobalContainer>
