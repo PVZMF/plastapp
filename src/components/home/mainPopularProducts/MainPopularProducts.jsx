@@ -84,7 +84,7 @@ const MainPopularComponent = ({}) => {
             />
           </SwiperSlide>
           {[...Array(8)].map((item, index) => (
-            <SwiperSlide className="slide p10 custom-slide">
+            <SwiperSlide className="slide p10 custom-slide" key={index}>
               <SlideSuggested offer={0} />
             </SwiperSlide>
           ))}
