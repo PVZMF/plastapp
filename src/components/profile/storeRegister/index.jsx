@@ -9,26 +9,29 @@ import { TbCertificate } from 'react-icons/tb';
 import { ImUserTie } from 'react-icons/im';
 import { AiFillShop } from 'react-icons/ai';
 import { CgImage } from 'react-icons/cg';
-
+import storage from '../../../service/Storage'
 // Style
 import style from './storeRegister.module.css'
 
 const StoreRegister = () => {
     const [cities, setCities] = useState([""])
+    const st = storage();
     const handleCities = (e) => {
         setCities(provinces.filter(item => item.name == e.target.value)[0].cities);
     }
+    console.log(st.refreshToken);
+    console.log("st.refreshToken");
     const handleSubmit = (e) => {
         e.preventDefault();
         const form_data = new FormData(e.target);
         const data = Object.fromEntries(form_data.entries());
+        console.log(st.refreshToken);
         // ticketImage && formData.append("image", ticketImage);
         // data.append("sender", 1);
-        console.log(data);
+        console.log("dsdfs");
         createShop(data).then(result => {
             console.log(result);
         }).catch(err => console.log(err))
-
     }
 
     return (

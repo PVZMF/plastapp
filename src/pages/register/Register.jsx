@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUserAsync, registerVerifyUserAsync, sendOtpUserAsync, toggleIsCreateAccount } from "../../toolkit/slices/auth";
+import { login, loginUserAsync, registerUserAsync, registerVerifyUserAsync, sendOtpUserAsync, toggleIsCreateAccount } from "../../toolkit/slices/auth";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import Storage from "../../service/Storage";
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -16,7 +16,7 @@ import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
+import { loginUser } from "../../api/api"
 const Register = () => {
     // State Register
     const initialState = {
@@ -109,11 +109,11 @@ const Register = () => {
                     setState({ ...state, register: { done: true, error: true } });
                     dispatch(toggleIsCreateAccount());
                     navigate("/roleselect");
-                }
-                else if (data.phone_number) {
-                    setState({ ...state, register: { done: false, error: true } });
-                    setTextErrorRegister("کاربر با این شماره تلفن از قبل موجود است");
-                }
+                    dispatch(loginUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
+                        console.log(res);
+                        dispatch(login({ access: res.access, refresh: res.refresh, tel: data.phone_number }));
+                    })}
+
                 else if ("password" in res) {
                     if (res.password === "این مقدار نباید خالی باشد.") {
                         setState({ ...state, register: { done: false, error: true } });
@@ -131,16 +131,16 @@ const Register = () => {
                         setState({ ...state, register: { done: false, error: true } });
                         setTextErrorRegister("پسورد باید بین ۶ تا ۹ کاراکتر باشد!")
                     }
-                    else if (res.non_field_errors[0] === "{'this phone_number not confirmed'}"){
+                    else if (res.non_field_errors[0] === "{'this phone_number not confirmed'}") {
                         setState({ ...state, register: { done: false, error: true } });
                         setTextErrorRegister("شماره موبایل شما مجددا نیاز به تایید دارد!")
                     }
-                    else if (data.password !== data.confirmpass){
+                    else if (data.password !== data.confirmpass) {
                         setState({ ...state, register: { done: false, error: true } });
                         setTextErrorRegister("عدم مطابقت پسورد! از درست بودن پسورد خود مطمين شوید.")
                     }
-                    
-                    
+
+
                 }
 
             })

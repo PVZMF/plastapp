@@ -5,18 +5,34 @@ import style from './role.module.css'
 import { useDispatch } from 'react-redux';
 import setStatus from "../../toolkit/slices/auth"
 const RoleSelect = ({ image }) => {
-
     const dispatch = useDispatch();
+    const handleClick = () => {
+        
+    };
     return (
         <div className={style.role}>
             <div className={style.stepBox}>
+                <div className={style.inputs}>
+                    <div className={style.inputbox}>
+                        <div className={style.input}>
+                            <label id='fname'>نام</label>
+                            <input type="text" id='fname' name='fname' />
+                        </div>
+                    </div>
+                    <div className={style.inputbox}>
+                        <div className={style.input}>
+                            <label id='lname'>نام خانوادگی</label>
+                            <input type="text" id='lname' name='lname' />
+                        </div>
+                    </div>
+                </div>
                 <div className={style.btns}>
-                    <button onClick={()=>dispatch(setStatus(true))}>
+                    <button onClick={() => dispatch(setStatus(true))}>
                         <Link to="../profile/storregiser">
                             فروشنده هستم
                         </Link>
                     </button>
-                    <button onClick={()=>dispatch(setStatus(false))}>
+                    <button onClick={() => dispatch(setStatus(false))}>
                         <Link to="../">
                             مشتری هستم
                         </Link>

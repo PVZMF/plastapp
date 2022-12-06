@@ -157,3 +157,8 @@ export async function checkout() {
   const res = await apiLogin.post("carts/");
   return res.data;
 }
+
+export async function setProfile(data) {
+  const res = await api.post("account/update_info/",data);
+  return res.data;
+}

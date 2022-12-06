@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 // Components
-import Address from "./address";
-import Baskets from "./baskets";
-import BuyStep from "./buyStep";
-import Receipt from "./receipt/index";
+
+import Address from './address'
+import Baskets from './baskets'
+import BuyStep from './buyStep'
+import Receipt from './receipt'
 
 import { FlexTopCart } from "./styledTopCart";
 
