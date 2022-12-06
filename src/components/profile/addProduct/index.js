@@ -28,15 +28,70 @@ const AddProduct = () => {
 
   const [categorys, setCategorys] = useState([]);
   const [Shops, setListShops] = useState([]);
+  const [base64,setBase64] = useState([])
+  const getBase64 = file => {
+    return new Promise(resolve => {
+      let fileInfo;
+      let baseURL = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        console.log("Called", reader);
+        baseURL = reader.result;
+        console.log(baseURL);
+        resolve(baseURL);
+      };
+      console.log(fileInfo);
+    });
+  };
+
+  const handleFileInputChange = e => {
+    console.log(e.target.files[0]);
+    let file = base64;
+
+    file = e.target.files[0];
+
+    getBase64(file)
+      .then(result => {
+        file["base64"] = result;
+        console.log("File Is", file);
+        setBase64({
+          base64URL: result,
+          file
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    setBase64({
+      file: e.target.files[0]
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
-    const data = Object.fromEntries(form_data.entries());
-    data.shop = myShop.id;
-    data.feature = JSON.stringify(att);
-    data.image = [{image:data.imagee, product:2}];
+    let data = Object.fromEntries(form_data.entries());
+    form_data.append('shop', myShop.id);
+    form_data.append('feature', JSON.stringify(att));
+    form_data.append("image",{image:base64,product:9});
+    // form_data.append("image[0][product]",1);
+    data = Object.fromEntries(form_data.entries());
+    // localStorage.setItem("Data", JSON.stringify(form_data));
+    // const data = Object.fromEntries(form_data.entries());
+    // data.image = [{image:"",product:9}]
+    // data.shop = myShop.id;
+    // data.feature = JSON.stringify(att);
+    data.image = [{ image: base64, product: 2 }];
     console.log(data);
-    createProduct(data).then(result => {
+    createProduct(form_data).then(result => {
       console.log(result);
     }).catch(res => console.log(res))
   }
@@ -78,6 +133,7 @@ const AddProduct = () => {
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
   const [cities, setCities] = useState([""])
+
   const handleFileChange = ({ target }) => {
     const imgUrl = fileInputRef.current.value;
     let imageFile = target.files[0];
@@ -171,7 +227,7 @@ const AddProduct = () => {
 
           <div className={style.addImg}>
             <div className={style.boximage}>
-              <input name="imagee"  type='file' />
+              <input name="imagee" type='file' onChange={handleFileInputChange} />
               <BsImage />
               <p>افزودن تصویر</p>
             </div>

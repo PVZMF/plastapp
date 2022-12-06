@@ -1,7 +1,7 @@
 import axios from "axios";
 import { refreshToken } from "./api";
 import Storage from "../service/Storage";
-
+import Qs from "qs"
 export const baseUrl = "https://plastapp.iran.liara.run/";
 
 const api = axios.create({
@@ -15,6 +15,9 @@ api.interceptors.request.use(
     const st = Storage();
     config.headers["Authorization"] = `Bearer ${st.accessToken}`;
     config.headers["Content-Type"] = "multipart/form-data";
+    config.paramsSerializer = (params) => {
+      return Qs.stringify(params, {arrayFormat: 'Object'})
+    }
     return config;
   },
   function (error) {

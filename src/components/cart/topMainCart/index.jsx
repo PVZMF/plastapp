@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import Address from './address'
 import Baskets from './baskets'
 import BuyStep from './buyStep'
-import Receipt from './receipt'
+import Receipt from './receipt/Index'
 
 import { FlexTopCart } from './styledTopCart'
 
@@ -13,6 +13,7 @@ const TopMainCart = () => {
 
   const [step, setStep] = useState(0)
   const state = useSelector(state => state.cartState);
+  
 
   return (
     <FlexTopCart>
@@ -26,6 +27,7 @@ const TopMainCart = () => {
       <div className='receipt'>
         <Receipt step={step} setStep={setStep} />
       </div>
+
     </FlexTopCart>
   )
 }

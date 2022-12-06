@@ -11,12 +11,10 @@ import { AiTwotoneShop } from 'react-icons/ai';
 import { FlexProductCard } from './styledProductCard'
 
 const CardProduct = ({ item }) => {
-    
     const dispatch = useDispatch();
     const state = useSelector(state => state.cartState);
     const price = item.price * (item.offer / 100);
     const totalprice = item.price - price;
-
   return (
     <FlexProductCard>
         <div className='image'>

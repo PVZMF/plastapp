@@ -33,7 +33,7 @@ const CardProduct = ({ item }) => {
                 {state.selectedItems.find(pro => pro.id === item.id) ?
                     <button className='added'><BsCartCheck /></button>
                     :
-                    <button onClick={() => dispatch(addItem(item))}><BsPlusLg /></button>
+                    <button onClick={() => dispatch(addItem(item))}> <BsPlusLg /> </button>
                 }
                 <div className='price-box'>
                     {item.offer > 0 && 

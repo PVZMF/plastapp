@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MdVerified } from "react-icons/md";
 import { FlexMainReceipt } from "./styleReceipt";
 import { stepPlus } from "../../../../toolkit/cart/cartAction";
+import { checkout } from "../../../../api/api";
 
 const Receipt = ({ step, setStep }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cartState);
-
+  const [card, setCard] = useState([])
   const handleNextStep = () => {
     if (state.selectedItems.length > 0) {
       dispatch(stepPlus());
     }
+
   };
+  // ListShop
+  useEffect(() => {
+    if(state.step === 1){
+    // setLoading(true);
+    checkout().then((results) => {
+      setCard(results);
+    })
+      .finally(() => {
+        console.log();
+      });
+    }
+  }, [state.step]);
+  console.log(card);
   return (
     <FlexMainReceipt>
       <h5 className="title-receipt">جزئیات قیمت</h5>
-
       <div className="top-receipt">
         <div className="products-price">
           <div className="price">
@@ -54,9 +68,7 @@ const Receipt = ({ step, setStep }) => {
       </div>
 
       <button onClick={handleNextStep}>
-        {state.step === 0
-          ? `ادامه خرید از${state.shops.toLocaleString("fa-IR")} غرفه`
-          : "ادامه پرداخت"}
+        {state.step === 0? `ادامه خرید از${state.shops.toLocaleString("fa-IR")} غرفه`: "ادامه پرداخت"}
         {state.step === 1 && "ادامه و تایید روش ارسال"}
         {state.step === 2 && "پرداخت"}
       </button>
