@@ -1,4 +1,4 @@
-import React, { useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,23 +19,29 @@ import bannerImg from "../../../assets/imgs/offer-banner.jpg";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
 import SlideSuggested from "../mainSuggested_Products/slideSuggested";
 import { getListMostPopularShops } from "../../../api/api";
+import { partialData } from "../../../api/api";
+import { baseUrl } from "../../../api/axios";
 
 // import { MAIN_SUGGESTED_PRODUCTS } from "../../../../service/homeService";
 
 // import { HomeLan } from "../../../json/language/fa";
 
 const MainProductsComponent = ({ title }) => {
-
   const [shops, setShops] = useState([]);
+  const [product, setProduct] = useState();
   // ListShop
   useEffect(() => {
     // setLoading(true);
-    getListMostPopularShops().then((results) => {
-      setShops(results);
-      console.log(results);
-    })
-      .finally(() => {
-      });
+    getListMostPopularShops()
+      .then((results) => {
+        setShops(results);
+        console.log(results);
+      })
+      .finally(() => {});
+
+    partialData().then((data) => {
+      setProduct(data.data);
+    });
   }, []);
   return (
     <GlobalContainer>
@@ -71,13 +77,31 @@ const MainProductsComponent = ({ title }) => {
           className="custom_swiper "
         >
           <SwiperSlide className="slide custom-slide">
-            <img className="slide-banner" src={bannerImg} alt="" />
+            <img
+              className="slide-banner"
+              src={
+                product?.product_image
+                  ? `${baseUrl}${product?.product_image}`
+                  : bannerImg
+              }
+              alt=""
+            />
           </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide"><SlideSuggested offer={0} /></SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide">
+            <SlideSuggested offer={0} />
+          </SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide">
+            <SlideSuggested offer={0} />
+          </SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide">
+            <SlideSuggested offer={0} />
+          </SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide">
+            <SlideSuggested offer={0} />
+          </SwiperSlide>
+          <SwiperSlide className="slide p10 custom-slide">
+            <SlideSuggested offer={0} />
+          </SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">
             <AllProductsSlide link="products" />
           </SwiperSlide>

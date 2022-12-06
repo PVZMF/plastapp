@@ -63,6 +63,10 @@ export async function getAboutUs() {
   const res = await api.get("config/about_us/");
   return res.data;
 }
+export async function getContactUs() {
+  const res = await api.get("config/contact_us/");
+  return res.data;
+}
 
 export async function getBlogDetails(id) {
   const res = await api.get(`blog/detail/${id}/`);
@@ -134,14 +138,13 @@ export async function getListMostPopularShops() {
   return res.data;
 }
 
-
 export async function checkRule(token) {
-  const res = await apiLogin.post("account/token/",token);
+  const res = await apiLogin.post("account/token/", token);
   return res.data;
 }
 
 export async function myShopInfo(token) {
-  const res = await apiLogin.get("shop/my_shop/",token);
+  const res = await apiLogin.get("shop/my_shop/", token);
   return res.data;
 }
 
