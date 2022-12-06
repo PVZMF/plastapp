@@ -24,15 +24,15 @@ const NewTicketComponent = () => {
 
     let requestData = {
       title: data.title,
-      user: 1,
-      status: "unread",
+      // user: 1,
+      //status: "unread",
       priority: data.priority,
-      ticket_number: 1,
+      // ticket_number: 1,
       document: prepareDocumentArray(),
       message: data.message,
     };
 
-    console.log(data);
+    // console.log(data);
     console.log(requestData);
     // createTicket(requestData)
     //   .then((res) => {
@@ -46,6 +46,8 @@ const NewTicketComponent = () => {
         Authorization: `Bearer ${st.accessToken}`,
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
+        "X-CSRFToken":
+          "QS5LMewsk4LCnxJDfgyaMRB4CZ2tQM3X0C8sfFfW5E5p1BXVggZOvlfqdl8jAnyK",
       },
     });
   };
