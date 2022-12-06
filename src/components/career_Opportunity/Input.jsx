@@ -11,6 +11,7 @@ const Input = ({ name, title, icon, type, placeholder, register }) => {
           name={name}
           type={type ? type : "text"}
           placeholder={placeholder}
+          required="required"
         />
         {type === "file" && (
           <h5>

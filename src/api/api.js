@@ -78,7 +78,7 @@ export async function loginUser(authData) {
   return res.data;
 }
 export async function applyJob(authData) {
-  const res = await api.post("job/apply", authData, {
+  const res = await api.post("job/apply/", authData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
