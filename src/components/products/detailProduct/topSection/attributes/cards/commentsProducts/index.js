@@ -80,6 +80,12 @@ const CommentsProduct = ({ list }) => {
                 ))}
             </div>
 
+            <div className='add_comment_box'>
+                <label>- دیدگاه خود را بنویسید</label>
+                <textarea></textarea>
+                <button>ثبت دیدگاه</button>
+            </div>
+
         </div>
 
     </FlexMainComments>

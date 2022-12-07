@@ -121,6 +121,45 @@ export const FlexMainComments = styled.div`
     flex-direction: column;
   }
 
+  .add_comment_box {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 2rem 0;
+
+    label {
+      color: #333;
+      font-weight: 900;
+      font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+    }
+
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      height: clamp(10vh, 20vh, 20vh);
+      max-height: clamp(10vh, 20vh, 20vh);
+      font-size: clamp(.9rem, 1.2vw, 1.2rem);
+      border-radius: .7rem;
+      margin: 2rem 0;
+      outline: none;
+      padding: 1rem;
+    }
+
+    button {
+      color: #fff;
+      background: #69a9ff;
+      padding: 1rem 2rem;
+      border-radius: .7rem;
+      font-size: clamp(.9rem, 1.2vw, 1.2rem);
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
   @media (max-width: 600px) {
     .title-comment {
       align-items: flex-start;
