@@ -199,8 +199,13 @@ form {
   direction: rtl;
 }
 
+.selectField fieldset legend {
+  overflow: visible;
+}
+
 .selectField span {
   opacity: 1 !important;
+  background: #fff;
 }
 
 .box_input label {
