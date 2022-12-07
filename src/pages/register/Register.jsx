@@ -113,7 +113,7 @@ const Register = () => {
         } else if (!state.register) {
             dispatch(registerUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
                 if (res.message === "user created") {
-                    setState({ ...state, register: true, error: true });
+                    setState({ ...state, register: true, error: false });
                     dispatch(toggleIsCreateAccount());
                     setTextSubmitButton("ورود");
                 }

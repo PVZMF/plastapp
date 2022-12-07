@@ -116,7 +116,7 @@ export async function partialData() {
 }
 
 export async function createTicket(ticketDetail) {
-  const res = await apiForm.post("ticket/crate/", ticketDetail);
+  const res = await apiLogin.post("ticket/crate/", ticketDetail);
   return res.data;
 }
 

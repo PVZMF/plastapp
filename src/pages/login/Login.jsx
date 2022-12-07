@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg";
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { login, loginUserAsync, setInfo } from "../../toolkit/slices/auth";
+import { login, loginUserAsync, setInfo, setRole } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
@@ -23,7 +23,6 @@ export default function SignIn() {
   const [showPass, SetShowPass] = useState(false);
   const [formData, setFormData] = useState({ phone_number: "", password: "" });
   const [focus, setFocus] = useState("");
-  const [role, setRole] = useState();
 
   const auth = useSelector((state) => state.auth);
 
@@ -45,12 +44,12 @@ export default function SignIn() {
       else if (res?.access) {
         dispatch(login({ access: res.access, refresh: res.refresh, tel: data.phone_number }));
         checkRole(data).then(res => {
-          setRole(res.status);
+          dispatch(setRole(res.status));
         }).catch((err) => {
           console.log(err)
         });
         infoAccount().then(res => {
-          dispatch(setInfo({...res, role: role}));
+          dispatch(setInfo({ ...res }));
         })
         setError(false);
       }
@@ -71,13 +70,13 @@ export default function SignIn() {
         console.log(e)
         setError(e);
       });
-  };
+  }; 
 
   if (auth.isLogin) {
-    if (auth.role) {
-      return <Navigate to={"/"} />;
+    if (auth.role === "business") {
+      return <Navigate to={"/profile"} />;
     }
-    return <Navigate to={"/profile"} />;
+    return <Navigate to={"/"} />;
   }
 
   const CustomTextField = styled(TextField)({
@@ -103,7 +102,6 @@ export default function SignIn() {
   const handleClickShowPassword = () => {
     SetShowPass(old => !old);
   };
-
   return (
     <Grid
       container

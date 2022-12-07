@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
-import JobImg from "../../assets/imgs/shop_1.jpg";
 import { applyJob } from "../../api/api";
 // Icons
 import { ImUserTie } from "react-icons/im";
@@ -16,8 +15,7 @@ const Career_Opportunity = () => {
   const [jobs, setJobs] = useState("");
   const [loading, setLoading] = useState(true);
   const [isSending, setIsSending] = useState(false);
-  const [error, setError] = useState("");
-
+  const [indexJob, setIndexJob] = useState(1);
   useEffect(() => {
     // setLoading(true);
     getJobs()
@@ -34,7 +32,6 @@ const Career_Opportunity = () => {
     e.preventDefault();
     const dataform = new FormData(e.target);
     const data = Object.fromEntries(dataform.entries());
-    console.log(data);
     setIsSending(true);
     applyJob(data)
       .then((res) => {
@@ -42,28 +39,32 @@ const Career_Opportunity = () => {
         setIsSending(false);
       })
       .catch((error) => {
-        setError(error.message);
         setIsSending(false);
+        console.log(error)
       });
   };
   if (loading) {
     return <Spinner />;
   }
+  const handleChange = (e) =>{
+    setIndexJob(e.target.value-1);
+  }
   return (
     <div className={style.jobs}>
+      {console.log(indexJob)}
       <div className={style.title}>
         <h3>فرصت های شغلی</h3>
       </div>
 
       <div className={style.jobsBox}>
         <div className={style.imageBox}>
-          <img src={JobImg} alt="career opportunity" />
+          <img src={jobs[indexJob].thumbnail} alt="career opportunity" />
         </div>
         {isSending ? (
           <Spinner />
         ) : (
           <div className={style.formBox}>
-            <div></div>
+            <div dangerouslySetInnerHTML={{ __html: jobs[indexJob].description }}></div>
             <hr />
 
             <form
@@ -98,7 +99,7 @@ const Career_Opportunity = () => {
               />
               <div className={style.selectbox}>
                 <label>انتخاب فرصت شغلی</label>
-                <select name="job">
+                <select onChange={handleChange} name="job">
                   {jobs.map((item) => (
                     <option value={item.id}>{item.title}</option>
                   ))}
@@ -114,7 +115,6 @@ const Career_Opportunity = () => {
 
               <button type="submit">ارسال</button>
             </form>
-            <p style={{ color: "red" }}>{error}</p>
           </div>
         )}
       </div>

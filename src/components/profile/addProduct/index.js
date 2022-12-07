@@ -5,13 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { provinces } from "../../../assets/citiesName/CitiesName"
 import { createProduct } from "../../../api/api"
 import { useDispatch } from 'react-redux';
-// Components
-// import NameAndGrouping from './NameAndGrouping'
-// import Images from './Images'
-// import WeightAndPrice from './WeightAndPrice'
 import { TbTag } from 'react-icons/tb';
-// import SendData from './SendData'
-// import Attributes from './Attributes'
 import { getListShops, getCategories } from '../../../api/api'
 
 // Icons
@@ -36,9 +30,7 @@ const AddProduct = () => {
     file = e.target.files[0];
     getBase64(file)
       .then(result => {
-        setBase64({
-          file: result,
-        });
+          base64 ? setBase64([...base64, { "file": result }]) : setBase64([{ "file": result }]);
       })
       .catch(err => {
         console.log(err);
@@ -95,29 +87,6 @@ const AddProduct = () => {
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
   const [cities, setCities] = useState([""])
-
-  const handleFileChange = ({ target }) => {
-    const imgUrl = fileInputRef.current.value;
-    let imageFile = target.files[0];
-
-    if (imageFile == null) return;
-    setImages((prev) => {
-      if (
-        images.find((img) =>
-          img.name === imageFile.name) ||
-        imgUrl.file === ""
-      ) {
-        return [...prev];
-      }
-      return [
-        ...prev,
-        {
-          // url: objectUrl,
-          file: imageFile,
-        },
-      ];
-    });
-  };
 
   const handleRemoveImg = (item, i) => {
     setImages(() => {
@@ -188,7 +157,7 @@ const AddProduct = () => {
 
           <div className={style.addImg}>
             <div className={style.boximage}>
-              <input name="imagee" type='file' onChange={handleFileInputChange} />
+              <input name="images" type='file' onChange={handleFileInputChange} />
               <BsImage />
               <p>افزودن تصویر</p>
             </div>

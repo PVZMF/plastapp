@@ -128,7 +128,6 @@ export const authSlice = createSlice({
       state.lastName = action.payload.last_name;
       state.user_point = action.payload.user_point;
       state.user_wallet = action.payload.user_wallet;
-      state.role = action.payload.role;
     },
     logout: (state) => {
       logoutUserAsync();
