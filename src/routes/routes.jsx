@@ -30,7 +30,10 @@ import RoleSelectPage from "../pages/register/RoleSelectPage";
 import RulesConditon from "../pages/rule";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
+import { useSelector } from "react-redux";
 
+
+// const auth = useSelector(state => state.auth);
 const Router = createBrowserRouter([
   {
     path: "/",

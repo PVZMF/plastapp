@@ -18,7 +18,7 @@ const RoleSelect = ({ image }) => {
         setProfile(data).then(res => {
             if (res.phone_number){
                 if(role === "business") navigate("../profile/storregiser")
-                else navigate("./")
+                else navigate("../")
             }
             else if(res.data.code === "token_not_valid"){
                 setTextError("خطای سرور")

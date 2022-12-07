@@ -8,13 +8,13 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg";
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { login, loginUserAsync, setRole} from "../../toolkit/slices/auth";
+import { login, loginUserAsync, setInfo } from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {checkRole} from "../../api/api"
+import { checkRole, infoAccount } from "../../api/api"
 export default function SignIn() {
 
   const [error, setError] = useState(false);
@@ -23,14 +23,15 @@ export default function SignIn() {
   const [showPass, SetShowPass] = useState(false);
   const [formData, setFormData] = useState({ phone_number: "", password: "" });
   const [focus, setFocus] = useState("");
-  const isLogin = useSelector((state) => state.auth.isLogin);
-  const loading = useSelector((state) => state.auth.loading);
+  const [role, setRole] = useState();
+
+  const auth = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   let onSpinerButton = true;
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form_data = new FormData(e.target);
@@ -42,12 +43,15 @@ export default function SignIn() {
         setError(true);
       }
       else if (res?.access) {
-        dispatch(login({access:res.access, refresh:res.refresh, tel:data.phone_number}));
-        checkRole(data).then(res =>{
-          dispatch(setRole(res.status === "business"));
-        }).catch((err) =>{
+        dispatch(login({ access: res.access, refresh: res.refresh, tel: data.phone_number }));
+        checkRole(data).then(res => {
+          setRole(res.status);
+        }).catch((err) => {
           console.log(err)
         });
+        infoAccount().then(res => {
+          dispatch(setInfo({...res, role: role}));
+        })
         setError(false);
       }
       else if (res?.phone_number[0] === "این مقدار نباید خالی باشد.") {
@@ -68,10 +72,9 @@ export default function SignIn() {
         setError(e);
       });
   };
-  const auth = useSelector((state) => state.auth);
 
-  if (isLogin) {
-    if(auth.role){
+  if (auth.isLogin) {
+    if (auth.role) {
       return <Navigate to={"/"} />;
     }
     return <Navigate to={"/profile"} />;
@@ -226,7 +229,7 @@ export default function SignIn() {
               type="submit"
               fullWidth
               variant="contained"
-              loading={loading && onSpinerButton}
+              loading={auth.loading && onSpinerButton}
               sx={{
                 margin: { xs: 1, md: 2 },
                 padding: 2,
@@ -241,7 +244,7 @@ export default function SignIn() {
               // href="/register"
               fullWidth
               variant="contained"
-              loading={loading && !onSpinerButton}
+              loading={auth.loading && !onSpinerButton}
               sx={{
                 margin: { xs: 1, md: 2 },
                 padding: 2,

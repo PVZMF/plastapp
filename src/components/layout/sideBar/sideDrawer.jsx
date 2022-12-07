@@ -32,7 +32,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
         setOpenDrawer(false);
     }, [useLocation().pathname]);
     console.log(auth);
-    const sidebarList = sidebarItems(auth.rule, auth.isLogin );
+    const sidebarList = sidebarItems(auth, auth.isLogin );
     return (
 
         <ClickAwayListener onClickAway={(e) => handleOutSide(e, isOpenDrawer, setOpenDrawer)} >
