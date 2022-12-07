@@ -17,12 +17,16 @@ import { onCounter } from "../../toolkit/slices/auth"
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { loginUser } from "../../api/api"
+
+
 const Register = () => {
     // State Register
     const initialState = {
-        sendOtp: { done: false, error: false, exist: false, trylater: false },
-        verifyTel: { done: false, error: false, match: false },
-        register: { done: false, error: false, exist: false, confirmpass: false }
+        error: false,
+        sendOtp: false,
+        verifyTel: false,
+        register: false,
+        login: false
     };
     const [state, setState] = useState(initialState);
 
@@ -32,9 +36,8 @@ const Register = () => {
     const counter = useSelector((state) => state.auth.counter);
     const [formData, setFormData] = useState({ phone_number: "", password: "", password_confirm: "" });
     const [focus, setFocus] = useState("");
-    const [textErrorSendOtp, setTextErrorSendOtp] = useState("");
-    const [textErrorVerifyTel, setTextErrorVerifyTel] = useState("");
-    const [textErrorRegister, setTextErrorRegister] = useState("");
+    const [textError, setTextError] = useState("");
+    const [textSubmitButton, setTextSubmitButton] = useState("ارسال کد");
     const [showPass, SetShowPass] = useState(false);
 
     const onChangehandle = (e) => {
@@ -47,97 +50,97 @@ const Register = () => {
         e.preventDefault();
         const form_data = new FormData(e.target);
         const data = Object.fromEntries(form_data.entries());
-        if (!state.sendOtp.done) {
+        if (!state.sendOtp) {
             (dispatch(sendOtpUserAsync(data))).unwrap().then((res) => {
                 console.log(res);
                 if (res.message === "message sent") {
-                    setState({ ...state, sendOtp: { done: true, error: false } });
+                    setState({ ...state, sendOtp: true, error: false });
                     navigate("/register");
                     dispatch(onCounter(true));
+                    setTextSubmitButton("تایید");
                 }
                 else if (res.non_field_errors === "try later") {
-                    setState({ ...state, sendOtp: { done: false, error: true } });
-                    setTextErrorSendOtp("کمی بعد امتحان کنید");
+                    setState({ ...state, sendOtp: false, error: true });
+                    setTextError("کمی بعد امتحان کنید");
                 }
                 else if ("phone_number" in res) {
                     if (res["phone_number"][0] === 'این مقدار نباید خالی باشد.') {
-                        setState({ ...state, sendOtp: { done: false, error: true } });
-                        setTextErrorSendOtp("شماره تلفن الزامی است!");
+                        setState({ ...state, sendOtp: false, error: true });
+                        setTextError("شماره تلفن الزامی است!");
                     }
                     else if (res["phone_number"][0] === 'unvalid phonenumber') {
-                        setState({ ...state, sendOtp: { done: false, error: true } });
-                        setTextErrorSendOtp("شماره تلفن اشتباه است!");
+                        setState({ ...state, sendOtp: false, error: true });
+                        setTextError("شماره تلفن اشتباه است!");
                     }
                 }
                 else if (res.non_field_errors[0] === 'user already exist') {
-                    setState({ ...state, sendOtp: { done: false, error: true } });
-                    setTextErrorSendOtp("کاربر با این شماره تلفن از قبل موجود است");
+                    setState({ ...state, sendOtp: false, error: true });
+                    setTextError("کاربر با این شماره تلفن از قبل موجود است");
                 }
 
             })
-                .catch(error => {
-
-                    setState({ ...state, sendOtp: { done: false, error: true, exist: false, trylater: false } });
+                .catch(e => {
+                    console.log(e);
+                    setState({ ...state, sendOtp: false, error: true });
+                    setTextError("ارتباط با سرور مقدور نیست!");
                 })
-        } else if (!state.verifyTel.done) {
+        } else if (!state.verifyTel) {
             dispatch(registerVerifyUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
                 if (res.message === "account confirmed") {
-                    setState({ ...state, verifyTel: { done: true, error: false } });
+                    setState({ ...state, verifyTel: true, error: false });
+                    setTextSubmitButton("ثبت نام")
                 }
                 else if ("non_field_errors" in res) {
                     if (res.non_field_errors[0] === "code expired") {
-                        setState({ ...state, verifyTel: { done: false, error: true } });
-                        setTextErrorVerifyTel("کد منقضی شده! دوباره تلاش کنید!")
+                        setState({ ...state, verifyTel: false, error: true });
+                        setTextError("کد منقضی شده! دوباره تلاش کنید!")
                     }
                     else if (res.non_field_errors[0] === 'code aren"t match') {
-                        setState({ ...state, verifyTel: { done: false, error: true } });
-                        setTextErrorVerifyTel("کد تایید اشتباه است!  دوباره تلاش کنید")
+                        setState({ ...state, verifyTel: false, error: true });
+                        setTextError("کد تایید اشتباه است!  دوباره تلاش کنید")
                     }
                 }
                 else if (res.code[0] === "این مقدار نباید خالی باشد.") {
-                    setState({ ...state, verifyTel: { done: false, error: true } });
-                    setTextErrorVerifyTel("وارد کردن کد الزامی است!  دوباره تلاش کنید")
+                    setState({ ...state, verifyTel: false, error: true });
+                    setTextError("وارد کردن کد الزامی است!  دوباره تلاش کنید")
                 }
             })
-                .catch((e) => {
-                    setState({ ...state, verifyTel: { done: false, error: true, exist: false } });
+                .catch(e => {
+                    setState({ ...state, verifyTel: false, error: true });
+                    setTextError("ارتباط با سرور مقدور نیست!");
+                    console.log(e);
                 })
-        } else if (!state.register.done) {
+        } else if (!state.register) {
             dispatch(registerUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
-                console.log(res);
                 if (res.message === "user created") {
-                    setState({ ...state, register: { done: true, error: true } });
+                    setState({ ...state, register: true, error: true });
                     dispatch(toggleIsCreateAccount());
-                    navigate("/roleselect");
-                    dispatch(loginUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
-                        console.log(res);
-                        dispatch(login({ access: res.access, refresh: res.refresh, tel: data.phone_number }));
-                    })}
-
+                    setTextSubmitButton("ورود");
+                }
                 else if ("password" in res) {
                     if (res.password === "این مقدار نباید خالی باشد.") {
-                        setState({ ...state, register: { done: false, error: true } });
-                        setTextErrorRegister("وارد کردن پسورد الزامی است!")
+                        setState({ ...state, register: false, error: true });
+                        setTextError("وارد کردن پسورد الزامی است!")
                     }
                 }
                 else if ("password_confirm" in res) {
                     if (res.password_confirm === "این مقدار نباید خالی باشد.") {
-                        setState({ ...state, register: { done: false, error: true } });
-                        setTextErrorRegister("وارد کردن تایید پسورد الزامی است!")
+                        setState({ ...state, register: false, error: true });
+                        setTextError("وارد کردن تایید پسورد الزامی است!")
                     }
                 }
                 else if ("non_field_errors" in res) {
                     if (res.non_field_errors[0] === 'new password char must be in range 6 and 9') {
-                        setState({ ...state, register: { done: false, error: true } });
-                        setTextErrorRegister("پسورد باید بین ۶ تا ۹ کاراکتر باشد!")
+                        setState({ ...state, register: false, error: true });
+                        setTextError("پسورد باید بین ۶ تا ۹ کاراکتر باشد!")
                     }
                     else if (res.non_field_errors[0] === "{'this phone_number not confirmed'}") {
-                        setState({ ...state, register: { done: false, error: true } });
-                        setTextErrorRegister("شماره موبایل شما مجددا نیاز به تایید دارد!")
+                        setState({ ...state, register: false, error: true });
+                        setTextError("شماره موبایل شما مجددا نیاز به تایید دارد!")
                     }
                     else if (data.password !== data.confirmpass) {
-                        setState({ ...state, register: { done: false, error: true } });
-                        setTextErrorRegister("عدم مطابقت پسورد! از درست بودن پسورد خود مطمين شوید.")
+                        setState({ ...state, register: false, error: true });
+                        setTextError("عدم مطابقت پسورد! از درست بودن پسورد خود مطمين شوید.")
                     }
 
 
@@ -146,9 +149,25 @@ const Register = () => {
             })
                 .catch((e) => {
                     console.log(e);
-                    setState({ ...state, register: { done: false, error: true, exist: false } });
-                })
+                    setState({ ...state, register: false, error: true });
+                    setTextError("ارتباط با سرور مقدور نیست!");
 
+                })
+        }
+
+        else {
+            dispatch(loginUserAsync(formData)).unwrap().then((res) => {
+
+                if (res?.message === "no user with this credential   exists ") {
+                    setState({ ...state, login: false, error: true });
+                    setTextError("کاربری با این مشخصات وجود ندارد!");
+                }
+                else if (res?.access) {
+                    setState({ ...state, login: true, error: false });
+                    dispatch(login({ access: res.access, refresh: res.refresh, tel: data.phone_number }));
+                    navigate("/roleselect");
+                }
+            })
         }
     };
     const handleClickShowPassword = () => {
@@ -204,7 +223,7 @@ const Register = () => {
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             variant="standard"
-                            disabled={state.sendOtp.done}
+                            disabled={state.sendOtp}
                             margin="normal"
                             required
                             fullWidth
@@ -220,7 +239,7 @@ const Register = () => {
                         <CustomTextField
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                            sx={state.sendOtp.done && !state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                            sx={state.sendOtp && !state.verifyTel ? { display: "block" } : { display: "none" }}
                             variant="standard"
                             margin="normal"
                             required
@@ -233,7 +252,7 @@ const Register = () => {
                         <CustomTextField
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                            sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                            sx={state.verifyTel && !state.register ? { display: "block" } : { display: "none" }}
                             InputProps={{
                                 endAdornment: (
                                     <IconButton
@@ -261,7 +280,7 @@ const Register = () => {
                         <CustomTextField
                             inputProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
                             InputLabelProps={{ style: { fontSize: "clamp(1rem,2vw,2rem)" } }}
-                            sx={state.verifyTel.done ? { display: "block" } : { display: "none" }}
+                            sx={state.verifyTel && !state.register ? { display: "block" } : { display: "none" }}
                             InputProps={{
                                 endAdornment: (
                                     <IconButton
@@ -287,30 +306,15 @@ const Register = () => {
                             onChange={onChangehandle}
                             value={formData.password_confirm}
                         />
-                        {state.sendOtp.done && counter && !state.verifyTel.done ? <Counter count={60} /> : <></>}
+                        {state.sendOtp && counter && !state.verifyTel ? <Counter count={60} /> : <></>}
 
-                        <Grid container sx={state.register.error ? { display: "block" } : { display: "none" }}>
-                            <Grid item xs margin={1}>
-                                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
-                                    {textErrorRegister}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid container display={state.sendOtp.error ? "flex" : "none"}>
-                            <Grid item xs margin={1}>
-                                <Typography variant="body2" color={"red"} fontSize={"clamp(0.5rem,3vw,1rem)"}>
-                                    {textErrorSendOtp}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-
-                        <Grid container display={state.verifyTel.error ? "flex" : "none"}>
+                        <Grid container display={state.error ? "flex" : "none"}>
                             <Grid item xs margin={1}>
                                 <Button
                                     sx={{ fontSize: "clamp(0.8rem,2vw,1.2rem)" }}
                                     onClick={() => { setState(initialState) }}>
                                     <Typography variant="body2" color={"red"}>
-                                        {textErrorVerifyTel}
+                                        {textError}
                                     </Typography>
                                 </Button>
 
@@ -324,7 +328,7 @@ const Register = () => {
                             loading={loading}
                             sx={{ margin: 2, padding: 2, borderRadius: 4, bgcolor: "rgb(105, 169, 255)", fontSize: "clamp(1rem,2vw,1.2rem)" }}
                         >
-                            {state.sendOtp.done && !state.verifyTel.done ? "تایید" : "ثبت نام"}
+                            {textSubmitButton}
                         </LoadingButton>
 
                         <Grid container>

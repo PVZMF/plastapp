@@ -101,7 +101,7 @@ export async function createProduct(dataProduct) {
 }
 
 export async function createShop(dataShop) {
-  const res = await apiLogin.post("shop/create/", dataShop);
+  const res = await apiForm.post("shop/create/", dataShop);
   return res.data;
 }
 
@@ -138,7 +138,7 @@ export async function getListMostPopularShops() {
   return res.data;
 }
 
-export async function checkRule(token) {
+export async function checkRole(token) {
   const res = await apiLogin.post("account/token/", token);
   return res.data;
 }
@@ -159,6 +159,6 @@ export async function checkout() {
 }
 
 export async function setProfile(data) {
-  const res = await api.post("account/update_info/",data);
+  const res = await apiLogin.patch("account/update_info/",data);
   return res.data;
 }

@@ -102,12 +102,7 @@ const Router = createBrowserRouter([
             path: "/profile/orders",
             index: true,
             element: <OrdersPage />,
-          },
-          {
-            path: "/profile/storregiser",
-            index: true,
-            element: <StoreRegisterPage />,
-          },
+          }
         ],
       },
       {
@@ -152,10 +147,21 @@ const Router = createBrowserRouter([
       },
     ],
   },
-    {
-      path: "/roleselect",
-      element: <RoleSelectPage />,
-    },
+  {
+    path: "/roleselect",
+    element: <RoleSelectPage />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
+    children: [
+      {
+        path: "/profile/storregiser",
+        index: true,
+        element: <StoreRegisterPage />,
+      }
+    ]
+  }
 
 ]);
 

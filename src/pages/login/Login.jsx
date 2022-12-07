@@ -8,13 +8,13 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg";
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { login, loginUserAsync, setRule} from "../../toolkit/slices/auth";
+import { login, loginUserAsync, setRole} from "../../toolkit/slices/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {checkRule} from "../../api/api"
+import {checkRole} from "../../api/api"
 export default function SignIn() {
 
   const [error, setError] = useState(false);
@@ -43,14 +43,11 @@ export default function SignIn() {
       }
       else if (res?.access) {
         dispatch(login({access:res.access, refresh:res.refresh, tel:data.phone_number}));
-        checkRule(data).then(res =>{
-          dispatch(setRule(res.status === "business"));
+        checkRole(data).then(res =>{
+          dispatch(setRole(res.status === "business"));
         }).catch((err) =>{
           console.log(err)
         });
-        console.log("2")
-        
-        console.log("3")
         setError(false);
       }
       else if (res?.phone_number[0] === "این مقدار نباید خالی باشد.") {
@@ -74,7 +71,7 @@ export default function SignIn() {
   const auth = useSelector((state) => state.auth);
 
   if (isLogin) {
-    if(auth.rule){
+    if(auth.role){
       return <Navigate to={"/"} />;
     }
     return <Navigate to={"/profile"} />;

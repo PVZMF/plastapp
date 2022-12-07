@@ -80,6 +80,10 @@ const ForgetPassword = ({ open, setOpen }) => {
           setState({ ...state, sendOtp: { done: false, error: true } });
           setTextErrorSendOtp("کمی بعد امتحان کنید");
         }
+        else if (res.non_field_errors[0] === "account's  with this phone_number dose not exists"){
+          setState({ ...state, sendOtp: { done: false, error: true } });
+          setTextErrorSendOtp("کاربری با این شماره تلفن ثبت نام نکرده است.");
+        }
 
       })
         .catch(error => {

@@ -103,7 +103,7 @@ export const authSlice = createSlice({
     loading: false,
     firstName: "",
     lastName: "",
-    rule: false,
+    role: "",
     token: "",
     username: "",
     isLogin: false,
@@ -133,8 +133,8 @@ export const authSlice = createSlice({
       state.isLogin = false;
       state.onToasted = true
     },
-    setRule: (state,action) => {
-      state.rule = action.payload;
+    setRole: (state,action) => {
+      state.role = action.payload;
     },
     offToasted: (state) => {
       state.onToasted = false;
@@ -252,6 +252,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { logout, login, offToasted, onCounter, toggleIsCreateAccount,toggleIsChangePassword, setRule} = authSlice.actions;
+export const { logout, login, offToasted, onCounter, toggleIsCreateAccount,toggleIsChangePassword, setRole} = authSlice.actions;
 
 export default authSlice.reducer;

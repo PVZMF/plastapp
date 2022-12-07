@@ -8,7 +8,9 @@
     padding: 2rem clamp(.5rem, 4vw, 4rem);
     /* margin: 1rem; */
 }
-
+.title{
+    margin: 15px;
+}
 .store .boxstore {
     width: 100%;
     /* background: #fff; */
