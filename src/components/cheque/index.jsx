@@ -1,13 +1,15 @@
-import { useSelect } from "@mui/base";
 import React, { useEffect, useState } from "react";
-import { FiUpload } from "react-icons/fi";
-import { ImUserTie } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { addCheque } from "../../api/api";
-import ChequeImg from "../../assets/imgs/defaultImg.svg";
+import { useSelect } from "@mui/base";
+import { FiUpload } from "react-icons/fi";
+import { ImUserTie } from "react-icons/im";
 import Toasted from "../toasted/Toasted";
-import style from "./cheque.module.css";
+import ChequeImg from "../../assets/imgs/defaultImg.svg";
 import chequeImage1 from "../../assets/imgs/cheque.svg";
+import style from "./cheque.module.css";
+
+
 const Cheque = () => {
   const [img, setImage] = useState(false);
   const [isAccept, setIsAccept] = useState("");
@@ -39,68 +41,67 @@ const Cheque = () => {
         console.log(err);
       });
   };
+
   useEffect(() => {
     console.log("isAccept = ", isAccept);
     console.log("nationalImage ", nationalImage);
     console.log("chequeImage ", chequeImage);
   }, [nationalImage, chequeImage, isAccept]);
+
+
   return (
     <form onSubmit={handleClick}>
       <div className={style.cheque}>
         <div className={style.boxCheque}>
-          <div className={style.boximage}>
-            <div className={style.imgBox}>
-              <img
-                src={img ? nationalImage : ChequeImg}
-                alt="nationalImage"
-                style={{
-                  width: "100%",
-                  height: "50%",
-                  objectFit: "contain",
-                }}
-              />
-              <img
-                src={img ? chequeImage : ChequeImg}
-                alt="chequeImage"
-                style={{
-                  width: "100%",
-                  height: "50%",
-                  objectFit: "contain",
-                }}
-              />
-            </div>
-            <button className={style.uploadimg}>
-              <input
-                type="file"
-                name="cheque_image"
-                onChange={(e) => setChequeImage(e.target.files[0])}
-              />
-              <span>ارسال تصویر کارت ملی</span> <FiUpload />
-            </button>
-            {/* <div className={style.boxinput}>
-              <div className={style.input}>
-                <input
-                  type={"file"}
-                  name="cheque_image"
-                  placeholder="* عکس کارت ملی"
+
+          <div className={style.box_inputs_image}>
+            <div className={style.boximage}>
+              <div className={style.imgBox}>
+                <img
+                  src={img ? chequeImage : ChequeImg}
+                  alt="chequeImage"
+                  style={{
+                    width: "100%",
+                    height: "50%",
+                    objectFit: "contain",
+                  }}
                 />
-                <span>
-                  <ImUserTie />
-                </span>
-                <h5>* عکس کارت ملی</h5>
-              </div> */}
-            <button className={style.uploadimg}>
-              <input
-                type="file"
-                name="national_image"
-                onChange={(e) => setNationalImage(e.target.files[0])}
-              />
-              <span>ارسال تصویر چک</span> <FiUpload />
-            </button>
+              </div>
+              <button className={style.uploadimg}>
+                <input
+                  type="file"
+                  name="national_image"
+                  onChange={(e) => setNationalImage(e.target.files[0])}
+                />
+                <span>ارسال تصویر چک</span> <FiUpload />
+              </button>
+            </div>
+
+            <div className={style.boximage}>
+              <div className={style.imgBox}>
+                <img
+                  src={img ? nationalImage : ChequeImg}
+                  alt="nationalImage"
+                  style={{
+                    width: "100%",
+                    height: "50%",
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
+              <button className={style.uploadimg}>
+                <input
+                  type="file"
+                  name="cheque_image"
+                  onChange={(e) => setChequeImage(e.target.files[0])}
+                />
+                <span>ارسال تصویر کارت ملی</span> <FiUpload />
+              </button>
+            </div>
           </div>
 
           <div className={style.description}>
-            <div style={{ width: "80%" }}>
+            <div style={{ width: "100%" }}>
               <label htmlFor="amount">مبلغ چک</label>
               <div
                 style={{
@@ -115,16 +116,17 @@ const Cheque = () => {
                 <input
                   type="number"
                   name="amount"
-                  style={{ border: "none", outline: "none" }}
+                  style={{ width: '100%',border: "none", outline: "none" }}
                 />
-                <img
+                <span style={{margin: '0 .7rem'}}>ریال</span>
+                {/* <img
                   src={chequeImage1}
                   style={{ width: "25px", height: "25px" }}
-                />
+                /> */}
               </div>
             </div>
             <label
-              style={{ width: "80%", textAlign: "right" }}
+              style={{ width: "100%", textAlign: "right" }}
               htmlFor="description"
             >
               توضیحات
@@ -134,7 +136,7 @@ const Cheque = () => {
               id=""
               cols="40"
               rows="4"
-              style={{ width: "80%", marginBottom: "20px", resize: "none" }}
+              style={{ width: "100%", marginBottom: "20px", resize: "none" }}
             ></textarea>
             <div style={{ marginBottom: "20px" }}>
               <span>کلیه </span>

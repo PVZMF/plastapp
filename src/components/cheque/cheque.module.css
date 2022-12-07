@@ -6,11 +6,13 @@
   flex-direction: column;
   background: #f1f1f1;
   min-height: 70vh;
+  padding: 2rem;
 }
 
 .cheque .boxCheque {
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
+  min-height: 300px;
   /* min-width: 300px; */
   display: flex;
   align-items: center;
@@ -18,19 +20,28 @@
   background: #fff;
   border-radius: 1rem;
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+}
+
+.cheque .box_inputs_image {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cheque .boxCheque .boximage {
-  width: 50%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin: 1rem;
 }
 
 .cheque .boxCheque .imgBox {
   width: 100%;
-  height: clamp(15vh, 40vh, 40vh);
+  height: clamp(15vh, 30vh, 30vh);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +54,7 @@
 .cheque .boxCheque .imgBox img {
   width: 150px;
   height: 150px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .cheque .boxCheque .uploadimg {
@@ -66,13 +77,13 @@
 .cheque .boxCheque .uploadimg span {
   color: #222;
   font-weight: 100;
-  font-size: clamp(1.3rem, 1.7vw, 1.7rem);
+  font-size: clamp(.9rem, 1.2vw, 1.2rem);
   padding: 0 1rem;
 }
 
 .cheque .boxCheque .uploadimg svg {
   color: #000;
-  font-size: clamp(4rem, 6vw, 6rem);
+  font-size: clamp(1.8rem, 3vw, 3rem);
   padding: 0 1rem;
 }
 
@@ -84,9 +95,12 @@
   height: 100%;
   opacity: 0;
 }
+.cheque .boxCheque .uploadimg input:hover {
+  cursor: pointer;
+}
 
 .cheque .boxCheque .description {
-  width: 50%;
+  width: 40%;
   height: 250px;
   display: flex;
   align-items: center;
@@ -134,12 +148,22 @@
 @media (max-width: 800px) {
   .cheque .boxCheque {
     flex-direction: column;
-    width: 280px;
+    width: 500px;
     margin: 5rem 0;
   }
-  .cheque .boxCheque .boximage,
+  .cheque .boxCheque .box_inputs_image,
   .cheque .boxCheque .description {
     width: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .cheque .boxCheque {
+    flex-direction: column;
+    width: 300px;
+  }
+  .cheque .boxCheque .box_inputs_image {
+    flex-direction: column;
   }
 }
 
