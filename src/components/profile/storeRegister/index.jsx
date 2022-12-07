@@ -4,20 +4,21 @@ import Select from './Select';
 import { provinces } from "../../../assets/citiesName/CitiesName"
 import { createShop } from "../../../api/api"
 
+
 // Icons
 import { TbCertificate } from 'react-icons/tb';
 import { ImUserTie } from 'react-icons/im';
 import { AiFillShop } from 'react-icons/ai';
 import { CgImage } from 'react-icons/cg';
-import storage from '../../../service/Storage'
 // Style
 import style from './storeRegister.module.css'
 import getBase64 from '../../../functions/base64';
+import { useNavigate } from 'react-router-dom';
 
 const StoreRegister = () => {
     const [cities, setCities] = useState([""])
-    const st = storage();
     const [base64,setBase64] = useState([]);
+    const navigate = useNavigate()
 
     //cities
     const handleCities = (e) => {
@@ -41,11 +42,11 @@ const StoreRegister = () => {
         e.preventDefault();
         const form_data = new FormData(e.target);
         const data = Object.fromEntries(form_data.entries());
-        console.log(base64);
-        // ticketImage && formData.append("image", ticketImage);
-        // data.append("sender", 1);
         createShop(data).then(result => {
             console.log(result);
+            // infoAccount().then(res => {
+                navigate("../")
+            // })
         }).catch(err => console.log(err))
     }
     return (

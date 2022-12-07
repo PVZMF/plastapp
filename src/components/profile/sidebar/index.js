@@ -15,13 +15,14 @@ import Shop from '../../../assets/imgs/adImage.png';
 import style from './sidebar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { isPending } from '@reduxjs/toolkit';
-import { myShopInfo } from '../../../api/api';
+import { myShopInfo, infoAccount } from '../../../api/api';
 
 const Sidebar = ({ ProfileImage, shopName, cash }) => {
     const pathName = useLocation().pathname;
     const auth = useSelector(state => state.auth);
     const [active, setActive] = useState(false);
     const [myShop, setMyShop] = useState([]);
+    const [info, setInfo] = useState([]);
     // const myShop2 = useSelector(state => state.myShop)
     // const dispatch = useDispatch();
 
@@ -31,6 +32,10 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
         myShopInfo().then((results) => {
             setMyShop(results);
         }).catch(res => console.log(res))
+
+        infoAccount().then((results) => {
+            setInfo(results);
+        }).catch(res => console.log(res))
     }, []);
 
 
@@ -39,10 +44,10 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
             <div className={style.details}>
                 <div className={style.boxProfile}>
                     <div className={style.profile}>
-                        <img src={myShop.logo} alt={myShop.name} />
+                        {auth.role === "business" ? <img src={myShop.logo} alt={myShop.name} /> : null}
                         <div className={style.name}>
-                            <h2>{!auth.rule ? "کاربر" : myShop.name}</h2>
-                            <h3>{!auth.rule ? auth.username : [myShop.first_name+" "+myShop.last_name]}</h3>
+                            <h2>{auth.role === "business" ? myShop.name : [info.first_name + " " + info.last_name]}</h2>
+                            <h3>{auth.role === "business" ? [info.first_name + " " + info.last_name] : info.phone_number}</h3>
                         </div>
                     </div>
                     <span><BsChevronLeft /></span>
@@ -50,7 +55,7 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
                 <div className={style.boxwallet}>
                     <div className={style.wallet}>
                         <h4><IoWallet /> کیف پول</h4>
-                        <h5>{cash.toLocaleString('fa-IR')} <span>تومان</span></h5>
+                        <h5>{info.user_wallet} <span>تومان</span></h5>
                     </div>
                     <span><BsChevronLeft /></span>
                 </div>
@@ -58,10 +63,10 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
 
 
             <div className={style.items}>
-                {auth.rule ? <h5 className={pathName === '/profile/addproduct' ? style.active : null}>
+                {auth.role === "business" ? <h5 className={pathName === '/profile/addproduct' ? style.active : null}>
                     <Link to='/profile/addproduct'><BiCategory /> افزودن محصول</Link>
                 </h5> : ""}
-                {auth.rule ? <h5 className={pathName === '/profile/myproducts' ? style.active : null}>
+                {auth.role === "business" ? <h5 className={pathName === '/profile/myproducts' ? style.active : null}>
                     <Link to='/profile/myproducts'><BsBox /> محصولات</Link>
                 </h5> : ""}
                 <h5 className={pathName === '/profile/orders' ? style.active : null}>
@@ -87,7 +92,7 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
             </div>
 
 
-            <div className={style.finish}>
+            {auth.role === "business"?<div className={style.finish}>
                 <div className={style.itemFinish}>
                     <TbTruckDelivery />
                     <div className={style.data}>
@@ -109,7 +114,7 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
                         <h4>لیست مشتریان، لیست تجربه خریدها</h4>
                     </div>
                 </div>
-            </div>
+            </div>:null}
         </div>
     )
 }

@@ -1,75 +1,47 @@
 import React, { useState } from "react";
 import style from "./style.module.css";
 import { MenuItem, Select, TextField } from "@mui/material";
-import UploadFile from "../../upload file";
 import { createTicket } from "../../../api/api";
-import axios from "axios";
-import Storage from "../../../service/Storage";
 import Spinner from "../../Spinner/Spinner";
+import getBase64 from "../../../functions/base64";
+import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
+import { useNavigate } from "react-router-dom";
 
 const NewTicketComponent = () => {
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState("");
+  const [base64,setBase64] = useState();
+  const navigate = useNavigate();
 
-  const [fileIndex, setFileIndex] = useState(1);
-  const [fileInputs, setFileInputs] = useState([<UploadFile index={0} />]);
-  const st = Storage();
+  //base64
+  const handleFileInputChange = e => {
+    let file = e.target.files[0];
+    getBase64(file)
+      .then(result => {
+        console.log("result");
+        console.log(result);
+        base64?setBase64([...base64,{"file": result}]):setBase64([{"file": result}]);
+      })
+      .catch(err => {
+        console.log(err);
+        
+      });
+  };
+
+
+  //submit
   const hanldeSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-
-    function prepareDocumentArray() {
-      let fileArray = [];
-      for (let i = 0; i < fileIndex; i++) {
-        fileArray.push(data[`document${i}`]);
-      }
-      return fileArray;
-    }
-
-    let requestData = {
-      title: data.title,
-      // user: 1,
-      //status: "unread",
-      priority: data.priority,
-      // ticket_number: 1,
-      document: prepareDocumentArray(),
-      message: data.message,
-    };
-
-    // console.log(data);
-    console.log(requestData);
-    // createTicket(requestData)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    setIsSending(true);
-    axios
-      .post("https://plastapp.iran.liara.run/ticket/crate/", requestData, {
-        headers: {
-          Authorization: `Bearer ${st.accessToken}`,
-          "Content-Type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*",
-          "X-CSRFToken":
-            "QS5LMewsk4LCnxJDfgyaMRB4CZ2tQM3X0C8sfFfW5E5p1BXVggZOvlfqdl8jAnyK",
-        },
-      })
-      .then(() => {
-        setIsSending(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setIsSending(false);
-      });
+    data.document = base64;
+    console.log(data);
+    createTicket(data).then(res => {
+      console.log(res);
+    }).catch(err => {
+      if(err.data.code === "bad_authorization_header") navigate("/login")
+    })
   };
-
-  function addInput() {
-    setFileIndex((prev) => (prev += 1));
-    setFileInputs((prev) => [...prev, <UploadFile index={fileIndex} />]);
-  }
 
   return (
     <div className={style.newticket}>
@@ -115,27 +87,21 @@ const NewTicketComponent = () => {
             <div className={style.box_input}>
               <textarea placeholder="متن پیام شما..." name="message" />
             </div>
-            <div
-              onClick={addInput}
-              className={style.plusButton}
-              style={{
-                width: "40px",
-                height: "40px",
-                fontSize: "40px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-                color: "#428aca",
-              }}
-            >
-              +
-            </div>
+
             <div className={style.lowerContainer}>
               <div className={style.footer}>
                 <div className={style.import}>
-                  {fileInputs.map((el) => el)}
+
+                  <div
+                    style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}
+                  >
+                    <label>بارگزاری فایل</label>
+                    <AttachFileRoundedIcon />
+                    <input type="file" accept="image/*" onChange={handleFileInputChange} />
+                  </div>
+
                   <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
+
                 </div>
               </div>
               <div

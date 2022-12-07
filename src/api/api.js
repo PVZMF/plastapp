@@ -162,3 +162,8 @@ export async function setProfile(data) {
   const res = await apiLogin.patch("account/update_info/",data);
   return res.data;
 }
+
+export async function infoAccount() {
+  const res = await apiLogin.get("account/info/");
+  return res.data;
+}

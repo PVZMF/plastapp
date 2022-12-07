@@ -6,6 +6,7 @@ import Storage from "../../../service/Storage.js";
 import { FlexMainTikesList } from "./styledMainTikesList.js";
 import Ticket from "./Ticket.js";
 
+
 const TikesListComponent = ({ list }) => {
   const st = Storage();
   const [ticket, setTicket] = useState("");
