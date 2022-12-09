@@ -17,22 +17,27 @@ const CommentsProduct = ({ list }) => {
   const { id } = useParams();
 
   const [comments, setComments] = useState([]);
+  const [loadComments, setLoadComments] = useState(0);
 
   useEffect(() => {
     getProductComments(id).then((res) => {
       setComments(res);
     });
-  }, []);
+  }, [loadComments]);
 
-  useEffect(() => {
-    postProductComments(id, { content: "test comments content" })
+  function handleSubmit(e) {
+    e.preventDefault();
+    const dataform = new FormData(e.target);
+    const data = Object.fromEntries(dataform.entries());
+    postProductComments(id, data)
       .then((res) => {
-        console.log("post request done >>>>>", res);
+        console.log("res post", res);
+        setLoadComments((prev) => prev + 1);
       })
       .catch((error) => {
-        console.log("post request error >>>>>", error);
+        console.log(error);
       });
-  }, []);
+  }
 
   console.log("comments >>>>>>>", comments);
 
@@ -111,16 +116,20 @@ const CommentsProduct = ({ list }) => {
         </div>
 
         <div className="list-comments">
-          {list.map((item) => (
+          {comments.map((item) => (
             <CardComment key={item.id} item={item} />
           ))}
         </div>
 
-        <div className="add_comment_box">
+        <form
+          className="add_comment_box"
+          enctype="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
           <label>- دیدگاه خود را بنویسید</label>
-          <textarea></textarea>
-          <button>ثبت دیدگاه</button>
-        </div>
+          <textarea name="content"></textarea>
+          <button type="submit">ثبت دیدگاه</button>
+        </form>
       </div>
     </FlexMainComments>
   );
