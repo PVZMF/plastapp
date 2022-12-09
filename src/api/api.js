@@ -133,8 +133,16 @@ export async function getNewListShops() {
   const res = await api.get("shop/newest/");
   return res.data;
 }
+
 export async function getListMostPopularShops() {
   const res = await api.get("shop/most_popular/");
+  return res.data;
+}
+
+export async function getProductComments(id) {
+  const res = await api.get(
+    `api/comments/?app_name=product&model_name=product&model_id=${id}`
+  );
   return res.data;
 }
 
@@ -159,7 +167,7 @@ export async function checkout() {
 }
 
 export async function setProfile(data) {
-  const res = await apiLogin.patch("account/update_info/",data);
+  const res = await apiLogin.patch("account/update_info/", data);
   return res.data;
 }
 
