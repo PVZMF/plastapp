@@ -5,18 +5,33 @@ import CardComment from "./cardComment";
 import Profile from "../../../../../../../assets/imgs/shop_1.jpg";
 
 import { FlexMainComments } from "./styledComments";
-import { getProductComments } from "../../../../../../../api/api";
+import {
+  getProductComments,
+  postProductComments,
+} from "../../../../../../../api/api";
+import { useParams } from "react-router-dom";
 
 const CommentsProduct = ({ list }) => {
   const total = 5;
   const avrage = 4.4;
+  const { id } = useParams();
 
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    getProductComments(1).then((res) => {
+    getProductComments(id).then((res) => {
       setComments(res);
     });
+  }, []);
+
+  useEffect(() => {
+    postProductComments(id, { content: "test comments content" })
+      .then((res) => {
+        console.log("post request done >>>>>", res);
+      })
+      .catch((error) => {
+        console.log("post request error >>>>>", error);
+      });
   }, []);
 
   console.log("comments >>>>>>>", comments);

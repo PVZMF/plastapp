@@ -146,6 +146,14 @@ export async function getProductComments(id) {
   return res.data;
 }
 
+export async function postProductComments(id, data) {
+  const res = await apiLogin.post(
+    `api/comments/create/?app_name=product&model_name=product&model_id=${id}`,
+    data
+  );
+  return res.data;
+}
+
 export async function checkRole(token) {
   const res = await apiLogin.post("account/token/", token);
   return res.data;
