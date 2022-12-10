@@ -18,7 +18,7 @@ import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested
 import bannerImg from "../../../assets/imgs/offer-banner.jpg";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
 import SlideSuggested from "../mainSuggested_Products/slideSuggested";
-import { getListMostPopularShops, listProduct } from "../../../api/api";
+import { getListMostPopularShops, getListProduct } from "../../../api/api";
 import { partialData } from "../../../api/api";
 import { baseUrl } from "../../../api/axios";
 
@@ -44,7 +44,7 @@ const MainProductsComponent = ({ title }) => {
       setProduct(data.data);
     });
 
-    listProduct().then((res) => setProductsList(res));
+    getListProduct().then((res) => setProductsList(res));
   }, []);
 
   console.log("products list >>", productsList);
