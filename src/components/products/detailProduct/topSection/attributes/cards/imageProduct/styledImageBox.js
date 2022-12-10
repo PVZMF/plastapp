@@ -16,17 +16,29 @@ export const FlexImageBox = styled.div`
     justify-content: flex-start;
     flex-direction: column;
 
-    .active-img {
+    .active_img {
       position: relative;
       overflow: hidden;
       width: 100%;
       height: clamp(24rem, 48vh, 48rem);
       margin: 0 .5rem 2rem;
+      background-repeat: no-repeat;
+      background-size: 100% 100% !important;
+
+
+      &:hover img {
+        transform: scale(1.5);
+      }
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        pointer-events: none;
+        transition: all .4s;
+        &:hover {
+          transform: scale(1.5);
+        }
       }
 
       .next-img, .prev-img {

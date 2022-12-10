@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { RiAddFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import style from './myProducts.module.css'
-import {listProduct} from "../../../api/api"
+// import {listProduct} from "../../../api/api"
 
 
 const MyProducts = ({ list }) => {
@@ -36,23 +36,23 @@ const MyProducts = ({ list }) => {
                     </thead>
 
                     <tbody>
-                        {list.map(item => (
-                            <tr key={item.id}>
+                        {list?.map(item => (
+                            <tr key={item?.id}>
                                 <td>
-                                    <h3>{item.name}</h3>
+                                    <h3>{item?.name}</h3>
                                 </td>
                                 <td>
-                                    <h3>{item.date}</h3>
+                                    <h3>{item?.date}</h3>
                                 </td>
                                 <td>
-                                    <h3>{item.stock}</h3>
+                                    <h3>{item?.stock}</h3>
                                 </td>
                                 <td>
-                                    <h3>{item.price} تومان</h3>
+                                    <h3>{item?.price} تومان</h3>
                                 </td>
                                 <td>
-                                    <h3 className={item.status ? style.itis : style.noting}>
-                                        {item.status ? 'موجود در انبار' : 'ناموجود'}
+                                    <h3 className={item?.status ? style.itis : style.noting}>
+                                        {item?.status ? 'موجود در انبار' : 'ناموجود'}
                                     </h3>
                                 </td>
                             </tr>
