@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Admin from './Admin';
 import style from './ticketComponent.module.css'
 import User from './User';
+import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
 
 const TicketComponent = ({ list }) => {
   
@@ -46,6 +47,27 @@ const TicketComponent = ({ list }) => {
             ))
           }
         </div>
+
+        <form className={style.box_input_message}>
+
+          <textarea placeholder='متن خود را بنویسید...' />
+
+          <div className={style.footer}>
+            <div className={style.import}>
+              <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem", position: 'relative' }} >
+                <label>بارگزاری فایل</label>
+                <AttachFileRoundedIcon />
+                <input type="file" accept="image/*" onChange={null} />
+              </div>
+
+              <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
+
+            </div>
+
+            <button>ارسال</button>
+          </div>
+        </form>
+
       </div>
     </div>
   )
