@@ -96,3 +96,26 @@
 .myproducts .boxtable table tbody tr td .noting {
     color: rgb(244, 33, 33);
 }
+
+.myproducts .boxtable table tbody tr td .box_offer_edit {
+    width: clamp(10rem, 20vw, 20rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.myproducts .boxtable table tbody tr td .box_offer_edit input {
+    width: 100%;
+    max-width: 120px;
+}
+
+.myproducts .boxtable table tbody tr td .box_offer_edit .edit {
+    background: rgb(245, 185, 74);
+    color: #fff;
+    padding: .7rem 1.3rem;
+    border-radius: .4rem;
+}
+
+.myproducts .boxtable table tbody tr td .box_offer_edit button:hover {
+    cursor: pointer;
+}

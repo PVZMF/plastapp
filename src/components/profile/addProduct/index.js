@@ -18,6 +18,7 @@ import { BiCategory } from 'react-icons/bi';
 import { myShopInfo } from '../../../api/api';
 import { ImagesearchRoller } from '@mui/icons-material';
 import getBase64 from '../../../functions/base64';
+import Spinner from '../../../assets/spinner2.gif'
 
 const AddProduct = () => {
 
@@ -37,8 +38,11 @@ const AddProduct = () => {
       });
   };
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const form_data = new FormData(e.target);
     let data = Object.fromEntries(form_data.entries());
     form_data.append('shop', myShop.id);
@@ -46,7 +50,8 @@ const AddProduct = () => {
     data = Object.fromEntries(form_data.entries());
     data.image = [{ image: base64, product: 2 }];
     createProduct(data).then(result => {
-    }).catch(res => console.log(res))
+      setLoading(false)
+    }).catch(err => console.log(err))
   }
 
   const [myShop, setMyShop] = useState([]);
@@ -97,7 +102,7 @@ const AddProduct = () => {
   };
 
   // Send Data 
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const handleCities = (e) => {
     setCities(provinces.filter(item => item.name == e.target.value)[0].cities);
   }
@@ -252,15 +257,15 @@ const AddProduct = () => {
             <label>محدوده ارسال</label>
             <div className={style.input}>
               <label htmlFor="allcity">به سراسر ایران</label>
-              <input type="radio" name='send_to_all_point' id='allcity' onChange={(e) => setActive(e.target.value)} defaultChecked />
+              <input type="radio" name='send_to_all_point' id='allcity' onChange={(e) => setActive(false)} defaultChecked />
             </div>
             <div className={style.input}>
               <label htmlFor="city">انتخاب شهر</label>
-              <input type="radio" name='City' id='city' onChange={(e) => setActive(e.target.value)} />
+              <input type="radio" name='send_to_all_point' id='city' onChange={(e) => setActive(true)} />
             </div>
           </div>
 
-          <div className={style.boxinput}>
+          {active && <div className={style.boxinput}>
             <label>انتخاب شهر</label>
             <select onChange={e => handleCities(e)} name='city' form='form' required>
               <option>انتخاب استان</option>
@@ -274,7 +279,7 @@ const AddProduct = () => {
                 <option key={item}>{item}</option>
               ))}
             </select>
-          </div>
+          </div>}
 
           <div className={style.boxinput}>
             <label>زمان ارسال</label>
@@ -334,7 +339,11 @@ const AddProduct = () => {
       </div>
 
       <div className={style.footer}>
-        <button type="submit">انتشار محصول</button>
+        {loading ? 
+          <button type="submit"><img src={Spinner} alt='spinner' /></button> 
+          : 
+          <button type="submit">انتشار محصول</button>
+        }
       </div>
     </form>
   )

@@ -23,11 +23,11 @@ const SendData = ({ citys }) => {
                 <label>محدوده ارسال</label>
                 <div className={style.input}>
                     <label htmlFor="allcity">به سراسر ایران</label>
-                    <input type="radio" name='allCity' id='allcity' value={true} onChange={(e) => setActive(e.target.value)} defaultChecked />
+                    <input type="radio" name='allCity' id='allcity' value={active} onChange={(e) => setActive(e.target.value)} defaultChecked />
                 </div>
                 <div className={style.input}>
                     <label htmlFor="city">انتخاب شهر</label>
-                    <input type="radio" name='allCity' id='city' value={false} onChange={(e) => setActive(e.target.value)} />
+                    <input type="radio" name='allCity' id='city' value={active} onChange={(e) => setActive(e.target.value)} />
                 </div>
             </div>
             

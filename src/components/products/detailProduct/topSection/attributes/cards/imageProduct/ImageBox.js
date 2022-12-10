@@ -34,11 +34,25 @@ const ImageBox = ({ title, image, image_list }) => {
     }
   }
 
+
+  const src = image_list[activeImg]?.img;
+  const [styleImg, setStyleImg] = useState({
+    backgroundImage: `url('${src}')`,
+    backgroundPosition: '700% 200%',
+  })
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.target.getBoundingClientRect()
+    const x = (e.pageX - left) / width * 100
+    const y = (e.pageY - top) / height * 100
+    setStyleImg({ backgroundPosition: `${x}% ${y}% !important` })
+  }
+  
+
   return (
     <FlexImageBox>
       <div className='right-imgbox'>
-        <div className='active-img'>
-          <img src={image_list[activeImg]?.img} alt={title} />
+        <div className='active_img' onMouseMove={(e) => handleMouseMove(e)} style={styleImg}>
+          <img src={src} alt={title} />
           <button className='next-img' onClick={() => NextImg()}><BsChevronRight /></button>
           <button className='prev-img' onClick={() => PrevImg()}><BsChevronLeft /></button>
         </div>
