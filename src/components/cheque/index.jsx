@@ -7,10 +7,15 @@ import { ImUserTie } from "react-icons/im";
 import Toasted from "../toasted/Toasted";
 import ChequeImg from "../../assets/imgs/defaultImg.svg";
 import chequeImage1 from "../../assets/imgs/cheque.svg";
+import Spinner from "../../assets/spinner2.gif";
 import style from "./cheque.module.css";
+import { useDispatch } from "react-redux";
+import { toggleIsAcceptCheque, toggleIsNotAcceptCheque } from "../../toolkit/slices/auth";
 
 
 const Cheque = () => {
+  const dispath = useDispatch();
+  const [loading, setLoading] = useState(false)
   const [img, setImage] = useState(false);
   const [isAccept, setIsAccept] = useState("");
   const [nationalImage, setNationalImage] = useState("");
@@ -19,6 +24,11 @@ const Cheque = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    setLoading(true)
+    if (isAccept === "" || nationalImage === "" || chequeImage === "") {
+      setLoading(false)
+      dispath(toggleIsNotAcceptCheque());
+    } else {
     const form_data = new FormData(e.target);
     const data = Object.fromEntries(form_data.entries());
     const dataToNum = {
@@ -26,20 +36,24 @@ const Cheque = () => {
       amount: parseInt(data.amount),
     };
     console.log(dataToNum);
-    setToast((state) => {
-      return { ...state, success: true };
-    });
-
+    // setToast((state) => {
+    //   return { ...state, success: true };
+    // });
+    
     addCheque(dataToNum)
-      .then((res) => {
-        Toasted("عکس با موفقیت اپلود شد", true, "success");
+    .then((res) => {
+        console.log(res)
         setImage(true);
         setChequeImage(res.cheque_image);
         setNationalImage(res.national_image);
+        setLoading(false)
+        if(res.submitter) dispath(toggleIsAcceptCheque());
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false) 
       });
+    }
   };
 
   useEffect(() => {
@@ -116,7 +130,7 @@ const Cheque = () => {
                 <input
                   type="number"
                   name="amount"
-                  style={{ width: '100%',border: "none", outline: "none" }}
+                  style={{ width: '100%',border: "none", outline: "none", padding: '.2rem .5rem', }}
                 />
                 <span style={{margin: '0 .7rem'}}>ریال</span>
                 {/* <img
@@ -136,9 +150,9 @@ const Cheque = () => {
               id=""
               cols="40"
               rows="4"
-              style={{ width: "100%", marginBottom: "20px", resize: "none" }}
+              style={{ width: "100%", marginBottom: "20px", minHeight: '70px', resize: "none", padding: '.7rem', fontSize: '1.3rem' }}
             ></textarea>
-            <div style={{ marginBottom: "20px" }}>
+            <div style={{ marginBottom: "20px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span>کلیه </span>
               <Link>قوانین</Link>
               <span> مربوط به خرید اعتباری را می پذیرم</span>
@@ -148,7 +162,12 @@ const Cheque = () => {
                 onChange={(e) => setIsAccept(e.target.checked)}
               />
             </div>
-            <button>ارسال چک</button>
+            <button>
+              {loading ? 
+                <img src={Spinner} alt='Spinner' /> 
+                : 'ارسال چک'
+              }
+            </button>
           </div>
         </div>
       </div>

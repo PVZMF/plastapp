@@ -15,7 +15,9 @@ const Layout = () => {
   const isLogin = useSelector((state) => state.auth.isLogin);
   const createAccount = useSelector((state) => state.auth.isCreateAccount);
   const changePassword = useSelector((state) => state.auth.isChangePassword);
-  const conditionToast = createAccount || changePassword;
+  const acceptCheque = useSelector((state) => state.auth.acceptCheque)
+  const notAcceptCheque = useSelector((state) => state.auth.notAcceptCheque)
+  const conditionToast = createAccount || changePassword || acceptCheque || notAcceptCheque;
   return (
     <React.Fragment>
       <CssBaseline />
@@ -27,7 +29,8 @@ const Layout = () => {
       <Toasted title={"خروج از حساب کاربری."} open={!isLogin && !conditionToast} severity={"warning"} />
       <Toasted title={"ثبت نام با موفقیت انجام شد."} open={createAccount} severity={"success"} />
       <Toasted title={"تغییر پسورد با موفقیت انجام شد."} open={changePassword} severity={"success"} />
-
+      <Toasted title={"چک با موفقیت ثبت شد."} open={acceptCheque} severity={"success"} />
+      <Toasted title={"همه فیلدها را کامل کنید."} open={notAcceptCheque} severity={"warning"} />
       <Grid zIndex={0}>
         <Outlet />
       </Grid>

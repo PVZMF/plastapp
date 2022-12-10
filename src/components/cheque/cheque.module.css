@@ -94,6 +94,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
+  padding: .2rem .5rem;
 }
 .cheque .boxCheque .uploadimg input:hover {
   cursor: pointer;
@@ -129,6 +130,8 @@
 
 .cheque .boxCheque .description button {
   width: 90%;
+  height: 3.5rem;
+  max-height: 3.5rem;
   color: #fff;
   background: #69a9ff;
   display: flex;
@@ -138,6 +141,12 @@
   border-radius: 0.7rem;
   font-size: clamp(1rem, 1.3vw, 1.3rem);
   transition: all 0.3s;
+}
+
+.cheque .boxCheque .description button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .cheque .boxCheque .description button:hover {

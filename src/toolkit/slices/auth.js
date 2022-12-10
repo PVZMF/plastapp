@@ -113,6 +113,8 @@ export const authSlice = createSlice({
     counter: false,
     isCreateAccount: false,
     isChangePassword: false,
+    acceptCheque: false,
+    notAcceptCheque: false,
   },
   reducers: {
     login: (state, action) => {
@@ -147,6 +149,8 @@ export const authSlice = createSlice({
       state.onToasted = false;
       state.isChangePassword = false;
       state.isCreateAccount = false;
+      state.acceptCheque = false;
+      state.notAcceptCheque = false;
     },
     onCounter: (state, action) => {
       state.counter = action.payload;
@@ -158,7 +162,16 @@ export const authSlice = createSlice({
     toggleIsChangePassword: (state)=>{
       state.isChangePassword = true;
       state.onToasted = true
+    },
+    toggleIsAcceptCheque: (state)=>{
+      state.acceptCheque = true;
+      state.onToasted = true
+    },
+    toggleIsNotAcceptCheque: (state)=>{
+      state.notAcceptCheque = true;
+      state.onToasted = true
     }
+
   },
   extraReducers: (builder) => {
     builder.addCase(loginUserAsync.pending, (state) => {
@@ -259,6 +272,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { logout, login, offToasted, onCounter, toggleIsCreateAccount,toggleIsChangePassword, setRole, setInfo} = authSlice.actions;
+export const { logout, login, offToasted, onCounter, toggleIsCreateAccount,toggleIsChangePassword, setRole, setInfo,toggleIsAcceptCheque, toggleIsNotAcceptCheque} = authSlice.actions;
 
 export default authSlice.reducer;
