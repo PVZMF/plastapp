@@ -53,7 +53,7 @@ const WonderFullyComponent = ({ products }) => {
           {products.map((item, index) => {
             if (index <= 4) {
               return (
-                <Link key={index + "wonderfully"}>
+                <Link key={index + "wonderfully"} to={`products/${item.id}`}>
                   <div className={style.product_box}>
                     <img src={item.img} alt={item.img} />
                     <p>{item.percent.toLocaleString("fa-IR")}%</p>
@@ -64,7 +64,7 @@ const WonderFullyComponent = ({ products }) => {
           })}
         </div>
 
-        <Link to="/product">
+        <Link to="/products">
           <button className={style.more}>
             بیش از {products.length.toLocaleString("fa-IR")} کالا{" "}
             <BsArrowLeft />
