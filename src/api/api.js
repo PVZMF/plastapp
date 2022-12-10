@@ -110,6 +110,11 @@ export async function getAmazingListProduct() {
   return res.data;
 }
 
+export async function getPopularListProduct() {
+  const res = await api.get("product/best_seller_list/");
+  return res.data;
+}
+
 export async function partialData() {
   const res = await api.get("advertise/partial_data/");
   return res.data;
@@ -159,7 +164,7 @@ export async function checkout() {
 }
 
 export async function setProfile(data) {
-  const res = await apiLogin.patch("account/update_info/",data);
+  const res = await apiLogin.patch("account/update_info/", data);
   return res.data;
 }
 

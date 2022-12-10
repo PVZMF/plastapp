@@ -26,20 +26,30 @@ import bannerImg1 from "../../../assets/imgs/offer-banner.jpg";
 
 import { HomeLan } from "../../../json/language/fa";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
-import { amazingListProduct, partialData } from "../../../api/api";
+import {
+  amazingListProduct,
+  getPopularListProduct,
+  partialData,
+} from "../../../api/api";
 import { baseUrl } from "../../../api/axios";
+import { PowerInput } from "@mui/icons-material";
 
 const MainPopularComponent = ({}) => {
   // const dispatch = useDispatch();
   // const state = useSelector(mainPopularProducts);
   // const [amazingProduct, setAmazingProduct] = useState([]);
   const [data, setData] = useState();
+  const [popularProducts, setPopularProducts] = useState([]);
 
   useEffect(() => {
     partialData().then((result) => {
       setData(result.data);
     });
+
+    getPopularListProduct().then((res) => setPopularProducts(res));
   }, []);
+
+  console.log("popular products >>>>", popularProducts);
 
   return (
     <GlobalContainer>
@@ -83,13 +93,20 @@ const MainPopularComponent = ({}) => {
               alt=""
             />
           </SwiperSlide>
-          {[...Array(8)].map((item, index) => (
+          {popularProducts.map((item, index) => (
             <SwiperSlide className="slide p10 custom-slide" key={index}>
-              <SlideSuggested offer={0} />
+              <SlideSuggested
+                offer={0}
+                id={item?.id}
+                title={item?.title}
+                image={item?.thumbnails}
+                price={item?.price}
+                number={item?.inventory}
+              />
             </SwiperSlide>
           ))}
           <SwiperSlide className="slide p10 custom-slide">
-            <AllProductsSlide />
+            <AllProductsSlide link={"products/"} />
           </SwiperSlide>
         </Swiper>
       </FlexMainSuggested>
