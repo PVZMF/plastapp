@@ -11,6 +11,10 @@ export const FlexMainTikesList = styled.div`
   min-height: 70vh;
   overflow: hidden;
 
+  a {
+    width: 100%;
+  }
+
   .box-ticket {
     width: 100%;
     display: flex;

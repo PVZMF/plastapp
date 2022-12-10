@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import CardProduct from './cardProduct'
-import { getCategories, getListProduct } from '../../api/api'
+import React, { useState, useEffect } from "react";
+import CardProduct from "./cardProduct";
+import { getCategories, getListProduct } from "../../api/api";
 
 // Style
-import style from './products.module.css'
-
+import style from "./products.module.css";
 
 const Products = () => {
   const [categorys, setCategorys] = useState([]);
   const [listProducts, setListProducts] = useState([]);
 
-  
   useEffect(() => {
-    //Products 
-    getListProduct().then(res => {
-      setListProducts(res);
-      }).catch(err => console.log(err))
+    //Products
+    getListProduct()
+      .then((res) => {
+        setListProducts(res);
+      })
+      .catch((err) => console.log(err));
 
     // Categories
-    getCategories().then((results) => {
-      setCategorys(results);
-    })
-      .finally(() => {
-      });
+    getCategories()
+      .then((results) => {
+        setCategorys(results);
+      })
+      .finally(() => {});
   }, []);
 
-
+  console.log("categories >>>>>", categorys);
+  console.log("products >>>>>", listProducts);
 
   return (
     <div className={style.products}>
@@ -34,7 +35,9 @@ const Products = () => {
           <h5>دسته بندی محصولات</h5>
           <ul>
             {categorys.map((item, index) => (
-              <li key={index + "categorys"}><p>{item.title}</p></li>
+              <li key={index + "categorys"}>
+                <p>{item.title}</p>
+              </li>
             ))}
           </ul>
         </div>
@@ -42,13 +45,15 @@ const Products = () => {
 
       <div className={style.productsBox}>
         <div className={style.searchbox}>
-          <input type="text" placeholder='جستجو محصول' />
+          <input type="text" placeholder="جستجو محصول" />
         </div>
         <div className={style.group_categorys}>
           <select>
             <option>انتخاب دسته بندی</option>
             {categorys.map((item, index) => (
-              <option key={index + "categorys"} value={item.title}>{item.title}</option>
+              <option key={index + "categorys"} value={item.title}>
+                {item.title}
+              </option>
             ))}
           </select>
         </div>
@@ -57,13 +62,17 @@ const Products = () => {
           {console.log(listProducts)}
           {listProducts.map((item, index) => {
             return (
-              <CardProduct item={item} key={index + "products"} />
-            )
+              <CardProduct
+                item={item}
+                key={index + "products"}
+                categorys={categorys}
+              />
+            );
           })}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

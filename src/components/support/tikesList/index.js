@@ -6,7 +6,6 @@ import Storage from "../../../service/Storage.js";
 import { FlexMainTikesList } from "./styledMainTikesList.js";
 import Ticket from "./Ticket.js";
 
-
 const TikesListComponent = ({ list }) => {
   const st = Storage();
   const [ticket, setTicket] = useState("");
@@ -71,7 +70,11 @@ const TikesListComponent = ({ list }) => {
 
             {ticket
               ? ticket.map((item, index) => {
-                  return <Ticket data={item} />;
+                  return (
+                    <Link to={`/support/ticketsList/${item.id}`}>
+                      <Ticket data={item} />
+                    </Link>
+                  );
                 })
               : ""}
 
