@@ -48,7 +48,7 @@ const CommentsProduct = ({ list }) => {
       </div>
 
       <div className="comments-list">
-        <div className="title-comment">
+        {/* <div className="title-comment">
           <div className="point">
             <h5>
               {avrage.toLocaleString("fa-IR")}{" "}
@@ -113,7 +113,7 @@ const CommentsProduct = ({ list }) => {
               <span>15</span>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="list-comments">
           {comments.map((item) => (
