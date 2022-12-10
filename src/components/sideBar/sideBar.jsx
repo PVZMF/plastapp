@@ -48,9 +48,6 @@ export default function PermanentDrawerRight() {
             {Categories.map(item => {
               return (
                 <ListItem  key={item.id}>
-                  {/* <ListItemIcon>
-                      <img src={item.logo} alt="" />
-                    </ListItemIcon> */}
                   <ListItemText sx={{textAlign:"right"}} id={item.id} primary={item.title} />
                   <Switch
                     dir='rtl'
@@ -65,30 +62,6 @@ export default function PermanentDrawerRight() {
               )
             })}
           </List>
-
-
-
-          {/* <Button>
-            مواد اولیه
-          </Button>
-          <Button>
-            سفارشات چاپی
-          </Button>
-          <Button>
-            نایلون و نایلکس
-          </Button>
-          <Button>
-            سلولزی
-          </Button>
-          <Button>
-            خانه و آشپزخانه
-          </Button>
-          <Button>
-            یکبار مصرف
-          </Button>
-          <Button>
-            بهداشت و حمام
-          </Button> */}
         </Grid>
       </Grid>
       <Grid Item xs={8} bgcolor={"blue"}>

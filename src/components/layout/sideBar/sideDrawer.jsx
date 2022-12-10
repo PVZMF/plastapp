@@ -31,7 +31,6 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
     useEffect(() => {
         setOpenDrawer(false);
     }, [useLocation().pathname]);
-    console.log(auth);
     const sidebarList = sidebarItems(auth, auth.isLogin );
     return (
 

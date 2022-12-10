@@ -169,13 +169,28 @@ export async function myShopInfo(token) {
   return res.data;
 }
 
-export async function listProduct() {
-  const res = await apiLogin.get("product/list/");
+export async function getListProduct() {
+  const res = await api.get("product/list/");
+  return res.data;
+}
+export async function getListMyProduct() {
+  const res = await apiLogin.get("product/my_shop/");
   return res.data;
 }
 
-export async function checkout() {
-  const res = await apiLogin.post("carts/");
+export async function createCart() {
+  const res = await api.post("carts/");
+  return res.data;
+}
+
+export async function deleteCart(cart_pk) {
+  console.log("deleteeeeeee")
+  const res = await api.delete(`carts/${cart_pk}/`);
+  return res.data;
+}
+
+export async function addItemToCart(item,cart_pk) {
+  const res = await api.post(`carts/${cart_pk}/items/`,item);
   return res.data;
 }
 

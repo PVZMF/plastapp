@@ -1,77 +1,24 @@
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { RiAddFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import style from './myProducts.module.css'
-import {listProduct} from "../../../api/api"
+import { getListMyProduct } from "../../../api/api"
 
 
-const MyProducts = ({ list }) => {
-    const [listProduct,setListProduct] = useState([])
-// ListProduct
-  useEffect(() => {
-    // setLoading(true);
-    MyProducts().then((results) => {
-        setListProduct(results);
-    })
-      .finally(() => {
-        console.log(listProduct);
-      });
-  }, []);
-  return (
-    <div className={style.myproducts}>
-        <div className={style.products}>
-            <div className={style.header}>
-                <h4>محصولات من</h4>
-                <Link to="/profile/addproduct"><button><RiAddFill /></button></Link>
-            </div>
+const MyProducts = () => {
+    const [listProducts, setListProducts] = useState([])
+    // ListProduct
+    useEffect(() => {
+        // setLoading(true);
+        getListMyProduct().then((results) => {
+            setListProducts(results);
+        })
+            .finally(() => {
 
-            <div className={style.boxtable}>
-                <table>
-                    <thead>
-                        <th><h4>محصول</h4></th>
-                        <th><h4>زمان آماده سازی</h4></th>
-                        <th><h4>موجودی</h4></th>
-                        <th><h4>قیمت</h4></th>
-                        <th><h4>وضعیت</h4></th>
-                    </thead>
-
-                    <tbody>
-                        {list.map(item => (
-                            <tr key={item.id}>
-                                <td>
-                                    <h3>{item.name}</h3>
-                                </td>
-                                <td>
-                                    <h3>{item.date}</h3>
-                                </td>
-                                <td>
-                                    <h3>{item.stock}</h3>
-                                </td>
-                                <td>
-                                    <h3>{item.price} تومان</h3>
-                                </td>
-                                <td>
-                                    <h3 className={item.status ? style.itis : style.noting}>
-                                        {item.status ? 'موجود در انبار' : 'ناموجود'}
-                                    </h3>
-                                </td>
-                            </tr>
-                        ))
-                        }
-                    </tbody>
-                    
-                    <tfoot></tfoot>
-                </table>
-            </div>
-        </div>
-    </div>
-  )
-}
-
-export default MyProducts;
-
-MyProducts.defaultProps = {
-    list: [
+            });
+    }, []);
+    console.log(listProducts);
+    const list = [
         {
             id: 1,
             name: 'پلاستیک فریزر',
@@ -97,4 +44,55 @@ MyProducts.defaultProps = {
             status: false,
         },
     ]
+    return (
+        <div className={style.myproducts}>
+            <div className={style.products}>
+                <div className={style.header}>
+                    <h4>محصولات من</h4>
+                    <Link to="/profile/addproduct"><button><RiAddFill /></button></Link>
+                </div>
+
+                <div className={style.boxtable}>
+                    <table>
+                        <thead>
+                            <th><h4>محصول</h4></th>
+                            <th><h4>محدوده ارسال</h4></th>
+                            <th><h4>موجودی</h4></th>
+                            <th><h4>قیمت</h4></th>
+                            <th><h4>وضعیت</h4></th>
+                        </thead>
+
+                        <tbody>
+                            {listProducts.map(item => (
+                                <tr key={item.id}>
+                                    <td>
+                                        <h3>{item.title}</h3>
+                                    </td>
+                                    <td>
+                                        <h3>{item.send_to_all_point?"سرار کشور":""}</h3>
+                                    </td>
+                                    <td>
+                                        <h3>{item.inventory}</h3>
+                                    </td>
+                                    <td>
+                                        <h3>{item.price} تومان</h3>
+                                    </td>
+                                    <td>
+                                        <h3 className={item.credit_sale? style.itis : style.noting}>
+                                            {item.credit_sale ? 'موجود در انبار' : 'ناموجود'}
+                                        </h3>
+                                    </td>
+                                </tr>
+                            ))
+                            }
+                        </tbody>
+
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    )
 }
+
+export default MyProducts;

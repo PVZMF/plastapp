@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../../toolkit/cart/cartAction';
+import { addItem } from '../../../toolkit/slices/cart.slice';
 
 // Icons
 import { BsPlusLg, BsCartCheck } from 'react-icons/bs';
@@ -13,12 +13,13 @@ import { FlexProductCard } from './styledProductCard'
 const CardProduct = ({ item }) => {
     const dispatch = useDispatch();
     const state = useSelector(state => state.cartState);
-    const price = item.price * (item.offer / 100);
+    const offer = item.offer? item.offer: 0;
+    const price = item.price * (offer/ 100);
     const totalprice = item.price - price;
   return (
     <FlexProductCard>
         <div className='image'>
-            <Link to={`/products/${item.id}`}><img src={item.image} alt={item.title} /></Link>
+            <Link to={`/products/${item.id}`}><img src={item.thumbnails} alt={item.title} /></Link>
         </div>
 
         <div className='product-data'>
@@ -27,7 +28,7 @@ const CardProduct = ({ item }) => {
             </h3>
             <div className='location'>
                 <AiTwotoneShop />
-                <p>{item.location}</p>
+                <p>{item.send_to_all_point?"سراسر ایران":""}</p>
             </div>
 
             <div className='down-items'>
@@ -37,7 +38,7 @@ const CardProduct = ({ item }) => {
                     <button onClick={() => dispatch(addItem(item))}><BsPlusLg /></button>
                 }
                 <div className='price-box'>
-                    {item.offer > 0 && 
+                    {offer && 
                         <div className='offer'>
                             <span>{item.offer.toLocaleString('fa-IR')}%</span>
                             <del>{item.price.toLocaleString('fa-IR')}</del>

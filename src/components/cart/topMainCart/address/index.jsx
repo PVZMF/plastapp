@@ -4,7 +4,7 @@ import { GrLocation } from 'react-icons/gr';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { stepMinus } from '../../../../toolkit/cart/cartAction';
+import { stepMinus } from '../../../../toolkit/slices/cart.slice';
 // Component
 import Card from './Card';
 // Style
