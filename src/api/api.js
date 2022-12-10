@@ -144,6 +144,11 @@ export async function getListMostPopularShops() {
   return res.data;
 }
 
+export async function getUserPoints() {
+  const res = await apiLogin.get("account/info/");
+  return res.data.user_point;
+}
+
 export async function getProductComments(id) {
   const res = await api.get(
     `api/comments/?app_name=product&model_name=product&model_id=${id}`
@@ -184,13 +189,13 @@ export async function createCart() {
 }
 
 export async function deleteCart(cart_pk) {
-  console.log("deleteeeeeee")
+  console.log("deleteeeeeee");
   const res = await api.delete(`carts/${cart_pk}/`);
   return res.data;
 }
 
-export async function addItemToCart(item,cart_pk) {
-  const res = await api.post(`carts/${cart_pk}/items/`,item);
+export async function addItemToCart(item, cart_pk) {
+  const res = await api.post(`carts/${cart_pk}/items/`, item);
   return res.data;
 }
 
