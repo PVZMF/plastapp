@@ -18,7 +18,7 @@ import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested
 import bannerImg from "../../../assets/imgs/offer-banner.jpg";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
 import SlideSuggested from "../mainSuggested_Products/slideSuggested";
-import { getListMostPopularShops } from "../../../api/api";
+import { getListMostPopularShops, listProduct } from "../../../api/api";
 import { partialData } from "../../../api/api";
 import { baseUrl } from "../../../api/axios";
 
@@ -29,6 +29,7 @@ import { baseUrl } from "../../../api/axios";
 const MainProductsComponent = ({ title }) => {
   const [shops, setShops] = useState([]);
   const [product, setProduct] = useState();
+  const [productsList, setProductsList] = useState([]);
   // ListShop
   useEffect(() => {
     // setLoading(true);
@@ -42,7 +43,11 @@ const MainProductsComponent = ({ title }) => {
     partialData().then((data) => {
       setProduct(data.data);
     });
+
+    listProduct().then((res) => setProductsList(res));
   }, []);
+
+  console.log("products list >>", productsList);
   return (
     <GlobalContainer>
       <Typography
@@ -87,7 +92,23 @@ const MainProductsComponent = ({ title }) => {
               alt=""
             />
           </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
+          {productsList?.map((item, index) => {
+            if (index <= 4) {
+              return (
+                <SwiperSlide className="slide p10 custom-slide">
+                  <SlideSuggested
+                    offer={0}
+                    id={item?.id}
+                    title={item?.title}
+                    image={item?.thumbnails}
+                    price={item?.price}
+                    number={item?.inventory}
+                  />
+                </SwiperSlide>
+              );
+            }
+          })}
+          {/* <SwiperSlide className="slide p10 custom-slide">
             <SlideSuggested offer={0} />
           </SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">
@@ -98,10 +119,7 @@ const MainProductsComponent = ({ title }) => {
           </SwiperSlide>
           <SwiperSlide className="slide p10 custom-slide">
             <SlideSuggested offer={0} />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested offer={0} />
-          </SwiperSlide>
+          </SwiperSlide> */}
           <SwiperSlide className="slide p10 custom-slide">
             <AllProductsSlide link="products" />
           </SwiperSlide>

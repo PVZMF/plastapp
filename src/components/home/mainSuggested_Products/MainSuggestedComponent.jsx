@@ -106,7 +106,7 @@ const MainSuggestedComponent = ({ title }) => {
             </SwiperSlide>
           ))}
           <SwiperSlide className="slide p10 custom-slide">
-            <AllProductsSlide />
+            <AllProductsSlide link={"products/"} />
           </SwiperSlide>
         </Swiper>
       </FlexMainSuggested>
