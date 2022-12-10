@@ -178,8 +178,14 @@ export async function getListProduct() {
   const res = await api.get("product/list/");
   return res.data;
 }
+
 export async function getListMyProduct() {
   const res = await apiLogin.get("product/my_shop/");
+  return res.data;
+}
+
+export async function getProductDetail(id) {
+  const res = await apiLogin.get(`product/detail/${id}`);
   return res.data;
 }
 
