@@ -110,6 +110,11 @@ export async function getAmazingListProduct() {
   return res.data;
 }
 
+export async function getPopularListProduct() {
+  const res = await api.get("product/best_seller_list/");
+  return res.data;
+}
+
 export async function partialData() {
   const res = await api.get("advertise/partial_data/");
   return res.data;
@@ -133,8 +138,24 @@ export async function getNewListShops() {
   const res = await api.get("shop/newest/");
   return res.data;
 }
+
 export async function getListMostPopularShops() {
   const res = await api.get("shop/most_popular/");
+  return res.data;
+}
+
+export async function getProductComments(id) {
+  const res = await api.get(
+    `api/comments/?app_name=product&model_name=product&model_id=${id}`
+  );
+  return res.data;
+}
+
+export async function postProductComments(id, data) {
+  const res = await apiLogin.post(
+    `api/comments/create/?app_name=product&model_name=product&model_id=${id}`,
+    data
+  );
   return res.data;
 }
 
@@ -148,18 +169,33 @@ export async function myShopInfo(token) {
   return res.data;
 }
 
-export async function listProduct() {
-  const res = await apiLogin.get("product/list/");
+export async function getListProduct() {
+  const res = await api.get("product/list/");
+  return res.data;
+}
+export async function getListMyProduct() {
+  const res = await apiLogin.get("product/my_shop/");
   return res.data;
 }
 
-export async function checkout() {
-  const res = await apiLogin.post("carts/");
+export async function createCart() {
+  const res = await api.post("carts/");
+  return res.data;
+}
+
+export async function deleteCart(cart_pk) {
+  console.log("deleteeeeeee")
+  const res = await api.delete(`carts/${cart_pk}/`);
+  return res.data;
+}
+
+export async function addItemToCart(item,cart_pk) {
+  const res = await api.post(`carts/${cart_pk}/items/`,item);
   return res.data;
 }
 
 export async function setProfile(data) {
-  const res = await apiLogin.patch("account/update_info/",data);
+  const res = await apiLogin.patch("account/update_info/", data);
   return res.data;
 }
 

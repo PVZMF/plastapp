@@ -14,7 +14,7 @@ const Card = ({ index, all, item }) => {
         </div>
 
         <div className={style.imgBox}>
-            <img src={item?.image} alt={item?.title} />
+            <img src={item?.thumbnails} alt={item?.title} />
             <p>{item?.quantity}</p>
         </div>
 

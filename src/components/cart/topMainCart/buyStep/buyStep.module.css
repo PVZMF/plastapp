@@ -128,6 +128,10 @@
     font-size: 1.4rem;
 }
 
+.buystep .list .wallet .checkboxDiv .error {
+    color: rgb(255, 0, 0);
+    font-size: 1.4rem;
+}
 .buystep .list .wallet h4 {
     color: #333;
     font-size: 1.4rem;

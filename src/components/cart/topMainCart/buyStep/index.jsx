@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { stepMinus } from '../../../../toolkit/cart/cartAction';
+import { stepMinus } from '../../../../toolkit/slices/cart.slice';
 // Component
 import Card from './Card';
 import { Switch } from '@mui/material';
@@ -11,17 +11,28 @@ import { RiErrorWarningLine } from 'react-icons/ri';
 // Style
 import style from './buyStep.module.css'
 
-const BuyStep = ({ setStep, step, value, username, location }) => {
-  
+const BuyStep = ({ setStep, step, value, username, location, list }) => {
+
   const dispatch = useDispatch()
   const state = useSelector(state => state.cartState);
+  let textError = "";
+  let creditShopping =false;
+
+  const total = [];
+  state.selectedItems.map((product) => {
+    if (!total.includes(product.title)) total.push(product.title);
+  });
+  creditShopping = total.length > 1
+  if (creditShopping) textError = ("خرید اعتباری تنها از یک فروشگاه امکان پذیر است!")
+
+
 
   return (
     <div className={style.buystep}>
       <div className={style.buyheader}>
         <button onClick={() => dispatch(stepMinus())}><BsArrowRight /> پرداخت</button>
       </div>
-      
+
       <div className={style.OfferCode}>
         <label>کد تخفیف</label>
         <div className={style.inputBox}>
@@ -34,8 +45,9 @@ const BuyStep = ({ setStep, step, value, username, location }) => {
         <div className={style.wallet}>
           <div className={style.checkboxDiv}>
             {/* <input type="checkbox" /> */}
-            <Switch checked={value < 0 && false} onChange={null} />
-            <label>کسر از اعتبار</label>
+            <Switch disabled={creditShopping} sx={{mr:6}}/>
+            <label htmlFor='creditShopping'>کسر از اعتبار</label>
+            <span className={style.error}>{textError}</span>
           </div>
 
           <h4>اعتبار: <span>{value}</span> تومان</h4>
@@ -49,7 +61,7 @@ const BuyStep = ({ setStep, step, value, username, location }) => {
           ))}
         </div>
       </div>
-      
+
       <div className={style.buyheader}>
         <p><RiErrorWarningLine /> شماره شما برای غرفه‌دار این محصولات و «شرکت پست ایران» ارسال خواهد شد.</p>
       </div>

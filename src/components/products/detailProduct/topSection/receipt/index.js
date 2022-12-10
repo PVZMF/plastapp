@@ -8,7 +8,7 @@ import Product from '../../../../../assets/imgs/pesteh.jpg';
 import Product2 from '../../../../../assets/imgs/shalwar.jpg';
 
 import { FlexMainReceipt } from './styleReceipt'
-import { addItem } from '../../../../../toolkit/cart/cartAction';
+import { addItem } from '../../../../../toolkit/slices/cart.slice';
 
 const Receipt = ({ ProductsList }) => {
     

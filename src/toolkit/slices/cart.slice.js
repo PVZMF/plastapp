@@ -1,94 +1,117 @@
+import { Merge } from "@mui/icons-material";
 import { createSlice } from "@reduxjs/toolkit";
 
 
-const sumItems = (items) => {
-  const itemsCounter = items.reduce((total, product) => total + product.quantity, 0);
-  let total = items.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2);
-  return {itemsCounter, total}
+const sumItems = state => {
+  const items = state.selectedItems;
+  state.itemsCounter = items.reduce((total, product) => total + product.quantity, 0);
+  state.sendPrice = items.reduce((total, product) => total + product.sendPrice, 0);
+  state.total = items.reduce((total, product) => total + product.price * product.quantity, 0);
+  state.offers = items.reduce((total, product) => total + ((product.price * product.offer / 100) * product.quantity), 0);
+  const numbers = [];
+  items.map(item => numbers.push(item.shop))
+  const newNumbers = [...new Set(numbers)];
+  state.shops = newNumbers.length;
 }
 
-
 export const cartSlice = createSlice({
-  name: "cart",
+  name: "cartState",
   initialState: {
     selectedItems: [],
     itemsCounter: 0,
     total: 0,
     offers: 0,
     shops: 0,
-    checkout: false
+    sendPrice: 0,
+    step: 0,
+    checkout: false,
+    idCart: "",
   },
   reducers: {
-    sumItems : (state, action) => {
-      const itemsCounter = state.reduce((total, product) => total + product.quantity, 0);
-      let total = state.reduce((total, product) => total + product.price * product.quantity, 0);
-      let offers = state.reduce((total, product) => total + ((product.price * product.offer / 100) * product.quantity), 0);
-      const numbers = [];
-      state.map(item => numbers.push(item.shop))
-      const newNumbers = [...new Set(numbers)];
-      return { itemsCounter, total, offers, shops: newNumbers.length }
-    },
-    addItemToCart: (state, action) => {
+    addItem: (state, action) => {
       if (!state.selectedItems.find(item => item.id === action.payload.id)) {
         state.selectedItems.push({
-            ...action.payload,
-            quantity: 1,
+          ...action.payload,
+          quantity: 1,
         })
-    }
-    return {
-        ...state,
-        selectedItems: [...state.selectedItems],
-        ...sumItems(state.selectedItems),
-        checkout: false,
-    }
-    },
-    removeItemFromCart: (state, action) => {
-      const newSelectedItems = state.selectedItems.filter(item => item.id !== action.payload.id);
-      return {
-          ...state,
-          selectedItems: [...newSelectedItems],
-          ...sumItems(newSelectedItems),
-
+        state.checkout = false;
+        sumItems(state)
       }
     },
-    increaseItemFromCart: (state, action) => {
+
+    removeItem: (state, action) => {
+      state.selectedItems = state.selectedItems.filter(item => item.id !== action.payload.id);
+      sumItems(state);
+    },
+
+    increase: (state, action) => {
       const indexI = state.selectedItems.findIndex(item => item.id === action.payload.id);
       state.selectedItems[indexI].quantity++;
-      return {
-          ...state,
-          ...sumItems(state.selectedItems),
-
-      }
+      sumItems(state);
     },
-    decreaseItemFromCart: (state, action) => {
+
+    decrease: (state, action) => {
       const indexD = state.selectedItems.findIndex(item => item.id === action.payload.id);
       state.selectedItems[indexD].quantity--;
-      return {
-          ...state,
-          ...sumItems(state.selectedItems),
-
-      }
+      sumItems(state)
     },
-    clearCart: (state) => {
-      return {
+
+    checkout: () => {
+      return{
         selectedItems: [],
         itemsCounter: 0,
         total: 0,
-        shops: 0,
         offers: 0,
-        checkout: false
-    }
+        shops: 0,
+        sendPrice: 0,
+        step: 0,
+        checkout: true
+      }
     },
-  },
+
+    stepPlus: (state) => {
+      state.step += 1;
+    },
+
+    stepMinus: (state) => {
+       state.step -= 1;
+    },
+
+    clear: (state) => {
+      state = {
+        selectedItems: [],
+        itemsCounter: 0,
+        total: 0,
+        offers: 0,
+        shops: 0,
+        sendPrice: 0,
+        step: 0,
+        checkout: false
+      }
+    },
+
+    stepDefault: (state) => {
+      state.step = 0
+    },
+
+    setIdCart: (state, action) => {
+      state.idCart = action.payload;
+    },
+  }
 });
 
-
 export const {
-  addItemToCart,
-  removeItemFromCart,
-  increaseItemFromCart,
-  decreaseItemFromCart,
-  clearCart,
+  addItem,
+  removeItem,
+  increase,
+  decrease,
+  checkout,
+  stepPlus,
+  stepMinus,
+  clear,
+  stepDefault,
+  setIdCart,
+  sendToCart
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

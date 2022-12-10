@@ -13,7 +13,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
 import { IconButton } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Maximize, Visibility, VisibilityOff } from "@mui/icons-material";
 import { checkRole, infoAccount } from "../../api/api"
 export default function SignIn() {
 
@@ -205,7 +205,7 @@ export default function SignIn() {
             />
 
             <Grid container display={error ? "flex" : "none"}>
-              <Grid item xs margin={1}>
+              <Grid item margin={1}>
                 <Typography
                   variant="body2"
                   color={"red"}

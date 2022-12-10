@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../../../../../toolkit/cart/cartAction';
+import { addItem } from '../../../../../toolkit/slices/cart.slice';
 
 // Icons
 import { BsPlusLg, BsCartCheck } from 'react-icons/bs';

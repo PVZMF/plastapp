@@ -4,7 +4,6 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import cartSlice from "./slices/cart.slice";
-import cartReducer from "./cart/cartReducer";
 import authSlice from "./slices/auth";
 import ticketSlice from "./slices/ticketSlice";
 import {
@@ -24,10 +23,9 @@ const persistConfig = {
 };
 const rootReducer = combineReducers({
   // myreducerName: reducer;
-  cartReducer: cartSlice,
-  cartState: cartReducer,
+  cartState: cartSlice,
   auth: authSlice,
-  myShop: MyShopSlicer,
+  MyShop: MyShopSlicer,
   ticket: ticketSlice,
 });
 
@@ -41,7 +39,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    })
+    }).concat(logger)
 });
 
 export const persistor = persistStore(store);

@@ -90,9 +90,7 @@ const MobileMenu = ({ ProfileImage, shopName, userName, cash, setMenu }) => {
                     </ul>
                 </div>
             </div>
-
-
-            {auth.role === "business"?<div className={style.finish}>
+            {auth.role === "business" ? <div className={style.finish}>
                 <div className={style.itemFinish}>
                     <TbTruckDelivery />
                     <div className={style.data}>
@@ -114,7 +112,7 @@ const MobileMenu = ({ ProfileImage, shopName, userName, cash, setMenu }) => {
                         <h4>لیست مشتریان، لیست تجربه خریدها</h4>
                     </div>
                 </div>
-            </div>:null}
+            </div> : null}
         </div>
     )
 }
