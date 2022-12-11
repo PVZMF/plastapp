@@ -17,7 +17,7 @@ const TopMainCart = ({ open, setOpen }) => {
   return (
     <FlexTopCart>
       <div className="baskets">
-        {state.step === 0 && !state.modal && <Baskets />}
+        {state.step < 2 && <Baskets />}
         {state.step === 2 && <Address  />}
         {state.step === 3 && <BuyStep  />}
       </div>

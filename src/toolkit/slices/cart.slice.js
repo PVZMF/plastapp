@@ -92,7 +92,7 @@ export const cartSlice = createSlice({
     },
 
     stepDefault: (state) => {
-      state.step = 0
+      state.step = -1
     },
 
     setIdCart: (state, action) => {
