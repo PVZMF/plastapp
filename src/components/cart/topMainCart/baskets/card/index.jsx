@@ -2,31 +2,27 @@ import React from 'react'
 import { TbTrash } from 'react-icons/tb';
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { decrease, increase, removeItem, setIdCart } from '../../../../../toolkit/slices/cart.slice';
-
-import Product from '../../../../../assets/imgs/pesteh.jpg';
+import { useDispatch } from 'react-redux';
+import { decrease, increase, removeItem } from '../../../../../toolkit/slices/cart.slice';
 
 // Style
 import { CardContainer } from './styledCard'
-import { createCart } from '../../../../../api/api';
 
 const Card = ({ data }) => {
-
+  console.log("dataaaaaaaaa",data)
   const dispatch = useDispatch();
   const {thumbnails, title, price, quantity, shop, offer} = data;
-  const state = useSelector(state => state.cartState);
 
   const priceOff = price * (offer?  offer / 100 : 0);
   const priceOrigin = price - priceOff;
-  console.log(data)
+ 
   const handleClick = () =>{
     dispatch(removeItem(data));
   }
   return (
     <CardContainer>
       <div className='top-header'>
-        <h3>از غرفه {shop}</h3>
+        <h3>از غرفه {shop.name}</h3>
         <h2>یک کالا</h2>
       </div>
 
@@ -64,12 +60,3 @@ const Card = ({ data }) => {
 }
 
 export default Card;
-
-Card.defaultProps = {
-  title: "مغز  پسته مناسب مصارف قنادی و ... با ارسال رایگان(500 گرمی)",
-  price: 550000,
-  image: Product,
-  shop: 'پسته طلایی گلشن',
-  number: 3,
-  offer: 20,
-}
