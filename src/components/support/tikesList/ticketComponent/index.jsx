@@ -4,31 +4,42 @@ import Admin from "./Admin";
 import style from "./ticketComponent.module.css";
 import User from "./User";
 import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
-import { ticketDetail } from "../../../../api/api";
+import { createTicketMessage, ticketDetail } from "../../../../api/api";
+import getBase64 from "../../../../functions/base64";
 
 const TicketComponent = ({ list }) => {
   const [data, setData] = useState();
   const [ticketInfo, setTicketInfo] = useState();
-  const pathName = useParams();
-
-  const fetchData = () => {
-    list?.map((item) => {
-      if (item.id === pathName.id) {
-        setData(item);
-      }
-    });
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-  console.log(data);
+  const [base64, setBase64] = useState();
 
   const { id } = useParams();
 
   useEffect(() => {
     ticketDetail(id).then((res) => setTicketInfo(res));
   }, []);
+
+  //base64
+  const handleFileInputChange = (e) => {
+    let file = e.target.files[0];
+    getBase64(file)
+      .then((result) => {
+        console.log("result");
+        console.log(result);
+        setBase64({ file: result });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    data.document = base64;
+    console.log(data);
+    createTicketMessage(data, id).then((res) => console.log(res));
+  }
 
   return (
     <div className={style.ticket}>
@@ -66,8 +77,12 @@ const TicketComponent = ({ list }) => {
           )}
         </div>
 
-        <form className={style.box_input_message}>
-          <textarea placeholder="متن خود را بنویسید..." />
+        <form
+          className={style.box_input_message}
+          encType="multipart/form-data"
+          onSubmit={handleSubmit}
+        >
+          <textarea placeholder="متن خود را بنویسید..." name="message" />
 
           <div className={style.footer}>
             <div className={style.import}>
@@ -81,13 +96,17 @@ const TicketComponent = ({ list }) => {
               >
                 <label>بارگزاری فایل</label>
                 <AttachFileRoundedIcon />
-                <input type="file" accept="image/*" onChange={null} />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileInputChange}
+                />
               </div>
 
               <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
             </div>
 
-            <button>ارسال</button>
+            <button type="submit">ارسال</button>
           </div>
         </form>
       </div>

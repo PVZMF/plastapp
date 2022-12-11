@@ -125,6 +125,11 @@ export async function createTicket(ticketDetail) {
   return res.data;
 }
 
+export async function createTicketMessage(ticketDetail, id) {
+  const res = await apiLogin.post(`ticket/message_crate/${id}`, ticketDetail);
+  return res.data;
+}
+
 export async function ticketDetail(id) {
   const res = await apiLogin.get(`ticket/detail/${id}/`);
   return res.data;
