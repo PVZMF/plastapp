@@ -1,0 +1,15 @@
+.input1 {
+  margin: 5px;
+  height: 50px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  text-align: right;
+  padding: 5px;
+  margin: 5px 0px;
+}
+.input1:focus {
+  outline: none;
+  border: 2.5px solid #007aff;
+  transition: all 0.3;
+}

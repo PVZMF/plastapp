@@ -18,12 +18,12 @@ const SlideSuggested = ({
   const off = price * (offer / 100);
   return (
     <FlexMainSlidSuggested>
-      {offer !== 0 && (
+      {/* {offer !== 0 && (
         <div className="offer-notif">
           <h5>{offer}% OFF</h5>
           <p>فقط تا آخر خرداد</p>
         </div>
-      )}
+      )} */}
 
       <img src={image} alt={title} />
 
