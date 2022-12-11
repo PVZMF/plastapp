@@ -37,10 +37,10 @@ const Receipt = ({ ProductsList }) => {
         <h5 className="title">فروشگاه</h5>
 
         <div className="profile">
-          <img src={ProductsList[0].image} alt={ProductsList[0].title} />
+          <img src={item?.shop.logo} alt={item?.shop.name} />
           <div className="box-profle">
-            <h4>{ProductsList[0].shop}</h4>
-            <h5>{ProductsList[0].name_shop}</h5>
+            <h4>{item?.shop.name}</h4>
+            <h5>{item?.category.title}</h5>
           </div>
         </div>
 
@@ -60,7 +60,10 @@ const Receipt = ({ ProductsList }) => {
           </div>
           <div className="send-box">
             <h5>ارسال از فروشگاه</h5>
-            <h4>3 روز دیگر</h4>
+            <h4>
+              <span>{item?.delivery_time.toLocaleString("fa-IR")}</span>
+              <span> روز دیگر </span>
+            </h4>
           </div>
           <div className="send-box">
             <h5>فروش محصول</h5>
@@ -76,7 +79,9 @@ const Receipt = ({ ProductsList }) => {
             </div>
           )}
           <h5>
-            {item?.offer ? total.toLocaleString("fa-IR") : item?.price}{" "}
+            {item?.offer
+              ? total.toLocaleString("fa-IR")
+              : item?.price.toLocaleString("fa-IR")}{" "}
             <span>تومان</span>
           </h5>
         </div>
