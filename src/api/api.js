@@ -96,7 +96,7 @@ export async function getCities() {
 }
 
 export async function createProduct(dataProduct) {
-  const res = await apiForm.post("product/create/", dataProduct);
+  const res = await apiForm.postForm("product/create/", dataProduct);
   return res.data;
 }
 

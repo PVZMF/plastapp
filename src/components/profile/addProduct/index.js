@@ -25,10 +25,17 @@ const AddProduct = () => {
   const [categorys, setCategorys] = useState([]);
   const [Shops, setListShops] = useState([]);
   const [base64, setBase64] = useState([]);
+  const [thumnail, setThumnail] = useState([]);
 
   const handleFileInputChange = e => {
     let file = base64;
     file = e.target.files[0];
+    if (e.target.name = "thumbnails"){
+      getBase64(file)
+      .then(result => {
+        setThumnail({ "thumbnails" : result });
+      })
+    }else{
     getBase64(file)
       .then(result => {
           base64 ? setBase64([...base64, { "file": result }]) : setBase64([{ "file": result }]);
@@ -36,6 +43,7 @@ const AddProduct = () => {
       .catch(err => {
         console.log(err);
       });
+    }
   };
 
   const [loading, setLoading] = useState(false);
@@ -44,6 +52,8 @@ const AddProduct = () => {
     e.preventDefault();
     setLoading(true)
     const form_data = new FormData(e.target);
+    // form_data.append("image",[{ image: base64, product: 2 }]);
+
     let data = Object.fromEntries(form_data.entries());
     form_data.append('shop', myShop.id);
     form_data.append('feature', JSON.stringify(att));
@@ -55,7 +65,6 @@ const AddProduct = () => {
   }
 
   const [myShop, setMyShop] = useState([]);
-
   // MyShopInfo
   useEffect(() => {
     // setLoading(true);
@@ -216,15 +225,6 @@ const AddProduct = () => {
               </select>
             </div>
           </div>
-          {/* <div className={style.boxinput}>
-                <label>وزن با دسته بندی</label>
-                <div className={style.input}>
-                    <input type="text" />
-                    <span>گرم</span>
-                </div>
-                <p>- وزن خالص محصول به اضافه وزن کارتن بسته بندی را اینجا ثبت کنید.</p>
-                <p>- این وزن در محاسبه هزینه ارسال اهمیت دارد.</p>
-            </div> */}
           <div className={style.boxinput}>
             <label>قیمت محصول</label>
             <div className={style.input}>
@@ -232,7 +232,6 @@ const AddProduct = () => {
               <span>تومان</span>
             </div>
           </div>
-
           <div className={style.boxinput}>
             <label>تعداد موجودی</label>
             <input className={style.boxadd} type="number" name='inventory' />
