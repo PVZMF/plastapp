@@ -8,12 +8,14 @@ import style from "./products.module.css";
 const Products = () => {
   const [categorys, setCategorys] = useState([]);
   const [listProducts, setListProducts] = useState([]);
+  const [reverselistProducts, setReverseListProducts] = useState([]);
 
   useEffect(() => {
     //Products
     getListProduct()
       .then((res) => {
         setListProducts(res);
+        setReverseListProducts([...listProducts].reverse());
       })
       .catch((err) => console.log(err));
 
@@ -60,7 +62,7 @@ const Products = () => {
 
         <div className={style.items}>
           {console.log(listProducts)}
-          {listProducts.map((item, index) => {
+          {reverselistProducts.map((item, index) => {
             return (
               <CardProduct
                 item={item}
