@@ -125,6 +125,11 @@ export async function createTicket(ticketDetail) {
   return res.data;
 }
 
+export async function ticketDetail(id) {
+  const res = await apiLogin.get(`ticket/detail/${id}/`);
+  return res.data;
+}
+
 export async function addCheque(chequeDetail) {
   const res = await apiForm.post("order/check_create/", chequeDetail);
   return res.data;
