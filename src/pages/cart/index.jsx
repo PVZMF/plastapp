@@ -14,8 +14,8 @@ const Cart = () => {
     <CartContainer>
       <GetAddress open={open} setOpen={setOpen}/>
       <TopMainCart open={open} setOpen={setOpen}/>
-      {state.step < 1 && <hr /> }
-      {state.step < 1 && <DownMainCart />}
+      {state.step < 2 && <hr/> }
+      {state.step < 2 && <DownMainCart/>}
     </CartContainer>
   )
 }

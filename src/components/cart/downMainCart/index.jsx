@@ -9,10 +9,11 @@ import { getListProduct } from '../../../api/api';
 const DownMainCart = () => {
   const [listProducts, setListProducts] = useState();
 
+  getListProduct().then(res => setListProducts(res)).catch(err => console.log(err));
   useEffect(() => {
-    getListProduct().then(res => setListProducts(res)).catch(err => console.log(err))
+    
   },[])
-
+  console.log(listProducts);
   return (
     <FlexDownCart>
       <div className='header-suggestion'>

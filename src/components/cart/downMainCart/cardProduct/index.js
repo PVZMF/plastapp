@@ -5,7 +5,6 @@ import { AiTwotoneShop } from 'react-icons/ai';
 import { FlexCardProduct } from './styledCardProduct'
 import { addItem, setIdCart } from '../../../../toolkit/slices/cart.slice';
 import { Link } from 'react-router-dom';
-import { createCart } from '../../../../api/api';
 
 const CardProduct = ({ item }) => {
     const dispatch = useDispatch();
