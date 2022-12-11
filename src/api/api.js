@@ -3,6 +3,8 @@ import apiLogin from "./axiosLogin";
 import apiForm from "./axiosForm";
 
 import Storage from "../service/Storage";
+import { async } from './api';
+import { PestControlRodentSharp } from "@mui/icons-material";
 
 export async function getAllBanners() {
   const res = await api.get("advertise/notice_banner/");
@@ -222,5 +224,10 @@ export async function setProfile(data) {
 
 export async function infoAccount() {
   const res = await apiLogin.get("account/info/");
+  return res.data;
+}
+
+export async function postOrder(data) {
+  const res = await apiForm.post("order/orders/",data);
   return res.data;
 }

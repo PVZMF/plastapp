@@ -104,7 +104,10 @@
     font-size: 1.4rem;
     margin: 0 0 1rem 0;
 }
-
+.address .card .data_address input {
+    width: 80%;
+    height: max-content;
+}
 .address .card .data_address .footerCard {
     width: 100%;
     display: flex;

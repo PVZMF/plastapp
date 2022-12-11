@@ -29,7 +29,7 @@ const Address = ({ setStep, step, user_name, location, postal_code, phone, price
             {/* <button>به آدرس دیگر ارسال شود</button> */}
           </div>
           <h4 className={style.username}>{user_name}</h4>
-          <input type={"text"} className={style.location} placeholder={location}/>
+          <p className={style.location}>{location}</p>
           <div className={style.footerCard}>
             <h3>کد پستی: {postal_code}</h3>
             <h3>شماره‌همراه: {phone}</h3>
@@ -52,7 +52,9 @@ const Address = ({ setStep, step, user_name, location, postal_code, phone, price
             <Card key={index + "cardCart"} index={index} item={item} all={state.selectedItems.length} />
           ))}
         </div>
+        
       </div>
+
     </div>
   )
 }

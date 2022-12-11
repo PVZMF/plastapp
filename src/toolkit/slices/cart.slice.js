@@ -24,6 +24,7 @@ export const cartSlice = createSlice({
     shops: 0,
     sendPrice: 0,
     step: 0,
+    modal:false,
     checkout: false,
     idCart: "",
   },
@@ -97,6 +98,10 @@ export const cartSlice = createSlice({
     setIdCart: (state, action) => {
       state.idCart = action.payload;
     },
+
+    setModal: (state,action) => {
+      state.modal = action.payload;
+    }
   }
 });
 
@@ -111,7 +116,8 @@ export const {
   clear,
   stepDefault,
   setIdCart,
-  sendToCart
+  sendToCart,
+  setModal
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

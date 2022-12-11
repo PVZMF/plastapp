@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setModal } from "../../../toolkit/slices/cart.slice";
 // Components
 
 import Address from './address'
@@ -10,20 +10,20 @@ import Receipt from './receipt'
 
 import { FlexTopCart } from "./styledTopCart";
 
-const TopMainCart = () => {
-  const [step, setStep] = useState(0);
+const TopMainCart = ({ open, setOpen }) => {
   const state = useSelector((state) => state.cartState);
-
+  const dispatch = useDispatch();
+  if(state.step === 1) dispatch(setModal(true));
   return (
     <FlexTopCart>
       <div className="baskets">
-        {state.step === 0 && <Baskets />}
-        {state.step === 1 && <Address step={step} setStep={setStep} />}
-        {state.step === 2 && <BuyStep step={step} setStep={setStep} />}
+        {state.step === 0 && !state.modal && <Baskets />}
+        {state.step === 2 && <Address  />}
+        {state.step === 3 && <BuyStep  />}
       </div>
 
       <div className="receipt">
-        <Receipt step={step} setStep={setStep} />
+        <Receipt setOpen ={setOpen}/>
       </div>
     </FlexTopCart>
   );
