@@ -9,7 +9,7 @@ const Card = ({ index, all, item }) => {
     <div className={style.card_item}>
         <h5>مرسوله {index + 1} از {all}</h5>
         <div className={style.sendas}>
-            <h5><span>از غرفه</span>: {item?.shop}</h5>
+            <h5><span>از غرفه</span>: {item?.shop.name}</h5>
             <h5><span>ارسال از</span>: {item?.city}</h5>
         </div>
 

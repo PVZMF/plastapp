@@ -53,7 +53,7 @@ const Receipt = ({setOpen}) => {
     else if (state.step === 2) setTextButton("ادامه فرایند ثبت سفارش")
     else if (state.step === 3) setTextButton("پرداخت")
   }, [state.step]);
-
+  console.log(state)
   return (
     <FlexMainReceipt>
       <h5 className="title-receipt">جزئیات قیمت</h5>
