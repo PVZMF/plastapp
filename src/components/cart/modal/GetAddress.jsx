@@ -1,25 +1,12 @@
 import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { FormControl, FormHelperText, Grid, Input, InputLabel } from '@mui/material';
-import { containerStyles } from '../../about-us-component/aboutUsComponentStyles';
-import { bgcolor } from '@mui/system';
-import { setModal, stepPlus } from '../../../toolkit/slices/cart.slice';
+import { setModal, setSendInfo, stepPlus } from '../../../toolkit/slices/cart.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { postOrder } from '../../../api/api';
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
+import { Input, InputLabel } from '@mui/material';
+import { Grid } from 'swiper';
+
 
 export default function GetAddress({ open, setOpen }) {
     const dispatch = useDispatch();
@@ -31,10 +18,14 @@ export default function GetAddress({ open, setOpen }) {
         e.preventDefault()
         const form_data = new FormData(e.target);
         form_data.append("cart_id", state.idCart);
-        postOrder(form_data).then(res => console.log(res));
+        const data = Object.fromEntries(form_data.entries());
+        postOrder(form_data).then(res => {
+            console.log(res);
+        dispatch(setSendInfo(data))
         handleClose();
         dispatch(stepPlus());
         dispatch(setModal(false));
+    }).catch(err => console.log(err));
     };
     return (
         <Grid container>
@@ -48,7 +39,7 @@ export default function GetAddress({ open, setOpen }) {
                 <Grid container display={"flex"} justifyContent="center" bgcolor={"white"} maxWidth={300} marginTop={10} marginRight={50}>
                     <Box component={"form"} onSubmit={handleSubmit}>
                         <InputLabel htmlFor="addr">شهر</InputLabel>
-                        <Input name='city' id="addr" margin='5' />
+                        <input name='city' id="addr" margin='5' />
                         <InputLabel htmlFor="addr">استان</InputLabel>
                         <Input name="state" id="addr" margin='5' />
                         <InputLabel htmlFor="addr">آدرس</InputLabel>

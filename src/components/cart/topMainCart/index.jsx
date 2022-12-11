@@ -17,8 +17,8 @@ const TopMainCart = ({ open, setOpen }) => {
   return (
     <FlexTopCart>
       <div className="baskets">
-        {state.step < 2 && <Baskets />}
-        {state.step === 2 && <Address  />}
+        {state.step <1 && <Baskets />}
+        {state.step >1  && <Address  />}
         {state.step === 3 && <BuyStep  />}
       </div>
 

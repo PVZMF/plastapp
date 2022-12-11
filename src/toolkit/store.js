@@ -21,13 +21,21 @@ const persistConfig = {
   key: "PlastApp",
   storage,
 };
-const rootReducer = combineReducers({
+const combinedReducer = combineReducers({
   // myreducerName: reducer;
   cartState: cartSlice,
   auth: authSlice,
   MyShop: MyShopSlicer,
   ticket: ticketSlice,
 });
+
+export const rootReducer = (state, action) => {
+  if (action.type === 'auth/logout') {
+    localStorage.clear();
+    state = {};
+  }
+  return combinedReducer(state, action);
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

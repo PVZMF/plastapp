@@ -50,6 +50,7 @@ const Receipt = ({setOpen}) => {
   // ListShop
   useEffect(() => {
     if (state.step === 0) { auth.isLogin ? setTextButton("ثبت سفارش") : setTextButton("ورود و ثبت سفارش") }
+    else if (state.step === 1) {setTextButton("افزودن آدرس")}
     else if (state.step === 2) setTextButton("ادامه فرایند ثبت سفارش")
     else if (state.step === 3) setTextButton("پرداخت")
   }, [state.step]);

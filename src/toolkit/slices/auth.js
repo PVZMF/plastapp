@@ -131,16 +131,8 @@ export const authSlice = createSlice({
       state.user_point = action.payload.user_point;
       state.user_wallet = action.payload.user_wallet;
     },
-    logout: (state) => {
+    logout: () => {
       logoutUserAsync();
-      const st = Storage();
-      st.setLogout();
-      state.firstName = "";
-      state.lastName = "";
-      state.token = "";
-      state.username = "";
-      state.isLogin = false;
-      state.onToasted = true
     },
     setRole: (state,action) => {
       state.role = action.payload;
