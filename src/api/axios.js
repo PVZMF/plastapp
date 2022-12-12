@@ -12,6 +12,7 @@ const api = axios.create({
 // api.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem(st.accessToken())}`;
 // axios.defaults.headers.post['Authorization'] = `Bearer ${st.accessToken()}`;
 
+
 api.interceptors.request.use(
   function (res) {
     // Do something before request is sent
@@ -30,19 +31,19 @@ api.interceptors.response.use(
     // Do something with response data
     return response;
   },
-  function (error) {
-    if (error.response.status == 401) {
-      const st = Storage();
-      console.log({ refresh: st.refreshToken });
-      refreshToken({ refresh: st.refreshToken })
-        .then((res) => {
-          st.setAccessToken(res.access);
-        })
-        .catch((error) => console.log(error));
-    }
+  // function (error) {
+  //   if (error.response.status == 401) {
+  //     const st = Storage();
+  //     console.log({ refresh: st.refreshToken });
+  //     refreshToken({ refresh: st.refreshToken })
+  //       .then((res) => {
+  //         st.setAccessToken(res.access);
+  //       })
+  //       .catch((error) => console.log(error));
+  //   }
 
-    return Promise.reject(error);
-  }
+  //   return Promise.reject(error);
+  // }
 );
 
 export default api;

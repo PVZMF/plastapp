@@ -10,7 +10,8 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { ForgetPasswordUserAsync, registerVerifyForgetPasswordUserAsync, sendOtpForgetPasswordUserAsync, toggleIsChangePassword } from "../../toolkit/slices/auth";
+import { ForgetPasswordUserAsync, registerVerifyForgetPasswordUserAsync, sendOtpForgetPasswordUserAsync } from "../../toolkit/slices/auth";
+import {toggleIsChangePassword} from "../../toolkit/slices/toasted.slice";
 import { useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";

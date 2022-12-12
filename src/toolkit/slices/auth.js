@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/axios";
 import apiLogin from "../../api/axiosLogin"
 import Storage from "../../service/Storage";
@@ -88,7 +88,6 @@ export const registerUserAsync = createAsyncThunk(
   }
 )
 
-
 export const logoutUserAsync = createAsyncThunk(
   "auth/logoutUserAsync",
   async () => {
@@ -109,19 +108,13 @@ export const authSlice = createSlice({
     phone_number: null,
     isLogin: false,
     error: "",
-    onToasted: false,
     counter: false,
-    isCreateAccount: false,
-    isChangePassword: false,
-    acceptCheque: false,
-    notAcceptCheque: false,
   },
   reducers: {
     login: (state, action) => {
       const st = Storage();
       st.setLogin(action.payload.refresh,action.payload.access);
       state.isLogin = true;
-      state.onToasted = true;
       state.username = action.payload.tel;
     },
     setInfo: (state,action) => {
@@ -131,47 +124,15 @@ export const authSlice = createSlice({
       state.user_point = action.payload.user_point;
       state.user_wallet = action.payload.user_wallet;
     },
-    logout: (state) => {
+    logout: () => {
       logoutUserAsync();
-      const st = Storage();
-      st.setLogout();
-      state.firstName = "";
-      state.lastName = "";
-      state.token = "";
-      state.username = "";
-      state.isLogin = false;
-      state.onToasted = true
     },
     setRole: (state,action) => {
       state.role = action.payload;
     },
-    offToasted: (state) => {
-      state.onToasted = false;
-      state.isChangePassword = false;
-      state.isCreateAccount = false;
-      state.acceptCheque = false;
-      state.notAcceptCheque = false;
-    },
     onCounter: (state, action) => {
       state.counter = action.payload;
-    },
-    toggleIsCreateAccount: (state) =>{
-      state.isCreateAccount = true;
-      state.onToasted = true
-    },
-    toggleIsChangePassword: (state)=>{
-      state.isChangePassword = true;
-      state.onToasted = true
-    },
-    toggleIsAcceptCheque: (state)=>{
-      state.acceptCheque = true;
-      state.onToasted = true
-    },
-    toggleIsNotAcceptCheque: (state)=>{
-      state.notAcceptCheque = true;
-      state.onToasted = true
     }
-
   },
   extraReducers: (builder) => {
     builder.addCase(loginUserAsync.pending, (state) => {
@@ -272,6 +233,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { logout, login, offToasted, onCounter, toggleIsCreateAccount,toggleIsChangePassword, setRole, setInfo,toggleIsAcceptCheque, toggleIsNotAcceptCheque} = authSlice.actions;
+export const { logout, login, onCounter, setRole, setInfo } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -10,6 +10,7 @@ import List from '@mui/material/List';
 import ListSubheader from '@mui/material/ListSubheader';
 import { MdOutlineDashboard } from "react-icons/md";
 import { BiExit } from "react-icons/bi";
+import { onToasted } from '../../toolkit/slices/toasted.slice';
 
 
 
@@ -43,7 +44,7 @@ export default function ClickAway() {
                 </IconButton>
 
                 {open ? (
-                    <Box borderRadius="10px" sx={styles} onClick={()=>setOpen(false)}>
+                    <Box borderRadius="10px" sx={styles} onClick={() => setOpen(false)}>
                         <List
                             sx={{
                                 width: '100%',
@@ -63,8 +64,8 @@ export default function ClickAway() {
                                 </Link>
                             </li>
                             <li>
-                                <ul onClick={() => dispatch(logout())}>
-                                    <ListSubheader sx={{cursor:"pointer"}}><BiExit /> خروج از حساب کاربری</ListSubheader>
+                                <ul onClick={() => { dispatch(logout()); dispatch(onToasted()) }}>
+                                    <ListSubheader sx={{ cursor: "pointer" }}><BiExit /> <Link to="../">خروج از حساب کاربری </Link></ListSubheader>
                                 </ul>
                             </li>
 

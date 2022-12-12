@@ -15,19 +15,29 @@ import {
   REGISTER,
 } from 'redux-persist'
 import MyShopSlicer from "./slices/MyShop.slice";
+import toastedSlice from "./slices/toasted.slice";
 
 
 const persistConfig = {
   key: "PlastApp",
   storage,
 };
-const rootReducer = combineReducers({
+const combinedReducer = combineReducers({
   // myreducerName: reducer;
   cartState: cartSlice,
   auth: authSlice,
   MyShop: MyShopSlicer,
   ticket: ticketSlice,
+  toasted: toastedSlice
 });
+
+export const rootReducer = (state, action) => {
+  if (action.type === 'auth/logout') {
+    localStorage.clear();
+    state = {};
+  }
+  return combinedReducer(state, action);
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

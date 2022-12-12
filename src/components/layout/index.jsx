@@ -13,11 +13,12 @@ import { useSelector } from 'react-redux';
 const Layout = () => {
   const [isOpenDrawer, setOpenDrawer] = useState(false);
   const isLogin = useSelector((state) => state.auth.isLogin);
-  const createAccount = useSelector((state) => state.auth.isCreateAccount);
-  const changePassword = useSelector((state) => state.auth.isChangePassword);
-  const acceptCheque = useSelector((state) => state.auth.acceptCheque)
-  const notAcceptCheque = useSelector((state) => state.auth.notAcceptCheque)
+  const createAccount = useSelector((state) => state.toasted.isCreateAccount);
+  const changePassword = useSelector((state) => state.toasted.isChangePassword);
+  const acceptCheque = useSelector((state) => state.toasted.acceptCheque)
+  const notAcceptCheque = useSelector((state) => state.toasted.notAcceptCheque)
   const conditionToast = createAccount || changePassword || acceptCheque || notAcceptCheque;
+  
   return (
     <React.Fragment>
       <CssBaseline />

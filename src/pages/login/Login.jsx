@@ -13,8 +13,9 @@ import { Navigate, useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import ForgetPassword from "../../components/forgetPassword";
 import { IconButton } from "@mui/material";
-import { Maximize, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { checkRole, infoAccount } from "../../api/api"
+import { onToasted } from "../../toolkit/slices/toasted.slice";
 export default function SignIn() {
 
   const [error, setError] = useState(false);
@@ -42,7 +43,7 @@ export default function SignIn() {
         setError(true);
       }
       else if (res?.access) {
-        dispatch(login({ access: res.access, refresh: res.refresh, tel: data.phone_number }));
+        dispatch(login({ access: res.access, refresh: res.refresh, tel: data.phone_number.strin }));
         checkRole(data).then(res => {
           dispatch(setRole(res.status));
         }).catch((err) => {
@@ -73,6 +74,7 @@ export default function SignIn() {
   }; 
 
   if (auth.isLogin) {
+    dispatch(onToasted());
     if (auth.role === "business") {
       return <Navigate to={"/profile"} />;
     }

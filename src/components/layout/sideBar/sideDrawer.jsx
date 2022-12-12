@@ -7,7 +7,8 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import { logout, logoutUserAsync } from "../../../toolkit/slices/auth";
+import { logout } from "../../../toolkit/slices/auth";
+import { onToasted } from "../../../toolkit/slices/toasted.slice";
 
 
 
@@ -25,9 +26,12 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
     const listItemLogin = auth.isLogin ? {
         title: "خروج از حساب کاربری",
         icon: <AccountBoxIcon fontSize="large" />,
-        onClick: () => { dispatch(logout()) },
-        link: "/login"
-    } : { title: "ورود به حساب کاربری", icon: <AccountBoxIcon fontSize="large" />, onClick: () => { }, link: "/login" }
+        onClick: () => { 
+            dispatch(logout());
+            dispatch(onToasted())
+         },
+        link: "../"
+    } : { title: "ورود به حساب کاربری", icon: <AccountBoxIcon fontSize="large" />, onClick: () => {}, link: "/login" }
     useEffect(() => {
         setOpenDrawer(false);
     }, [useLocation().pathname]);

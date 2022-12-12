@@ -10,7 +10,7 @@ import Card from './Card';
 // Style
 import style from './address.module.css'
 
-const Address = ({ setStep, step, user_name, location, postal_code, phone, price_Send }) => {
+const Address = () => {
   const dispatch = useDispatch();
   const state = useSelector(state => state.cartState);
 
@@ -28,11 +28,11 @@ const Address = ({ setStep, step, user_name, location, postal_code, phone, price
             <h5><GrLocation /> آدرس گیرنده</h5>
             {/* <button>به آدرس دیگر ارسال شود</button> */}
           </div>
-          <h4 className={style.username}>{user_name}</h4>
-          <p className={style.location}>{location}</p>
+          <h4 className={style.username}>{state.sendInfo.receiver_name}</h4>
+          <p className={style.location}>{state.sendInfo.address_text}</p>
           <div className={style.footerCard}>
-            <h3>کد پستی: {postal_code}</h3>
-            <h3>شماره‌همراه: {phone}</h3>
+            <h3>کد پستی: {state.sendInfo.postal_code}</h3>
+            <h3>شماره‌همراه: {state.sendInfo.phone_number}</h3>
           </div>
         </div>
       </div>
@@ -61,9 +61,3 @@ const Address = ({ setStep, step, user_name, location, postal_code, phone, price
 
 export default Address;
 
-Address.defaultProps = {
-  user_name: 'علی لهراسبی',
-  location: 'تهران، امیرآباد، کارگر شمالی، پلاک ۸۹',
-  postal_code: '۶۴۰۲۵۱۸۸۹۹۹',
-  phone: '۰۹۱۲۱۱۱۷۷۸۸',
-}

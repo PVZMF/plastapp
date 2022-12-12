@@ -9,17 +9,13 @@ import { getListProduct } from "../../../api/api";
 const DownMainCart = () => {
   const [listProducts, setListProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  // getListProduct()
-  //   .then((res) => {
-  //     setListProducts(res);
-  //     setLoading(false);
-  //   })
-  //   .catch((err) => console.log(err));
-  useEffect(() => {}, []);
-  console.log(listProducts);
-  // if (loading) {
-  //   return <h1>Loading . . .</h1>;
-  // }
+
+  useEffect(() => {
+    getListProduct().then(res => {setLoading(false);setListProducts(res)}).catch(err => console.log(err));
+  }, [])
+  if (loading) {
+     return <h1>Loading . . .</h1>;
+  }
   return (
     <FlexDownCart>
       <div className="header-suggestion">
@@ -31,7 +27,6 @@ const DownMainCart = () => {
           <button>همه محصولات</button>
         </Link>
       </div>
-
       <div className="list-suggestion">
         <div className="box-list">
           {/* {[...listProducts]
