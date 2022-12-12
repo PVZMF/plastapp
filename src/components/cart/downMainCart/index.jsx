@@ -29,12 +29,12 @@ const DownMainCart = () => {
       </div>
       <div className="list-suggestion">
         <div className="box-list">
-          {/* {[...listProducts]
+          {[...listProducts]
             .reverse()
             .slice(0, 6)
             .map((item) => {
               return <CardProduct key={item.id + "plastapp"} item={item} />;
-            })} */}
+            })}
         </div>
       </div>
     </FlexDownCart>
