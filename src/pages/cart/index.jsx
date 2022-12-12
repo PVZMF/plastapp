@@ -12,7 +12,7 @@ const Cart = () => {
 
   return (
     <CartContainer>
-      {/* <GetAddress open={open} setOpen={setOpen}/> */}
+      <GetAddress open={open} setOpen={setOpen}/>
       <TopMainCart open={open} setOpen={setOpen}/>
       {state.step < 2 && <hr/> }
       {state.step < 2 && <DownMainCart/>}

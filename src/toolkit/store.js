@@ -15,6 +15,7 @@ import {
   REGISTER,
 } from 'redux-persist'
 import MyShopSlicer from "./slices/MyShop.slice";
+import toastedSlice from "./slices/toasted.slice";
 
 
 const persistConfig = {
@@ -27,6 +28,7 @@ const combinedReducer = combineReducers({
   auth: authSlice,
   MyShop: MyShopSlicer,
   ticket: ticketSlice,
+  toasted: toastedSlice
 });
 
 export const rootReducer = (state, action) => {

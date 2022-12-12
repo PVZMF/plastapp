@@ -98,7 +98,7 @@ export async function getCities() {
 }
 
 export async function createProduct(dataProduct) {
-  const res = await apiForm.postForm("product/create/", dataProduct);
+  const res = await apiLogin.postForm("product/create/", dataProduct);
   return res.data;
 }
 
@@ -229,5 +229,10 @@ export async function infoAccount() {
 
 export async function postOrder(data) {
   const res = await apiForm.post("order/orders/",data);
+  return res.data;
+}
+
+export async function getOrders() {
+  const res = await apiLogin.get("order/orders/");
   return res.data;
 }

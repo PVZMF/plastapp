@@ -5,15 +5,15 @@ import { FlexDownCart } from './styledDownCart'
 import Product from '../../../assets/imgs/pesteh.jpg';
 import Product2 from '../../../assets/imgs/shop_1.jpg';
 import { getListProduct } from '../../../api/api';
+import { Grid } from '@mui/material';
 
 const DownMainCart = () => {
   const [listProducts, setListProducts] = useState();
 
-  getListProduct().then(res => setListProducts(res)).catch(err => console.log(err));
   useEffect(() => {
-    
-  },[])
-  console.log(listProducts);
+    getListProduct().then(res => setListProducts(res)).catch(err => console.log(err));
+  }, [])
+  
   return (
     <FlexDownCart>
       <div className='header-suggestion'>
@@ -24,13 +24,11 @@ const DownMainCart = () => {
         <Link to="/products" ><button>همه محصولات</button></Link>
       </div>
 
-      <div className='list-suggestion'>
-        <div className='box-list'>
-          {listProducts?.map(item => {
-            return(<CardProduct key={item.id + "plastapp"} item={item} />)
-          })}
-        </div>
-      </div>
+      <Grid container className='list-suggestion'>
+      {listProducts?.map(item => {
+            return (<CardProduct key={item.id + "plastapp"} item={item} />)
+        })}
+      </Grid>
     </FlexDownCart>
   )
 }

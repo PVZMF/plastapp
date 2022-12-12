@@ -10,7 +10,7 @@ import chequeImage1 from "../../assets/imgs/cheque.svg";
 import Spinner from "../../assets/spinner2.gif";
 import style from "./cheque.module.css";
 import { useDispatch } from "react-redux";
-import { toggleIsAcceptCheque, toggleIsNotAcceptCheque } from "../../toolkit/slices/auth";
+import { toggleIsAcceptCheque, toggleIsNotAcceptCheque } from "../../toolkit/slices/toasted.slice";
 
 
 const Cheque = () => {

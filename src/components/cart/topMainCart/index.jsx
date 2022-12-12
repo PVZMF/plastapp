@@ -23,7 +23,7 @@ const TopMainCart = ({ open, setOpen }) => {
       </div>
 
       <div className="receipt">
-        <Receipt setOpen ={setOpen}/>
+        <Receipt open={open} setOpen ={setOpen}/>
       </div>
     </FlexTopCart>
   );

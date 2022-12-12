@@ -21,7 +21,7 @@ async function sendItem(items, idCart) {
 }
 
 
-const Receipt = ({setOpen}) => {
+const Receipt = ({open, setOpen}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.cartState);
@@ -44,7 +44,6 @@ const Receipt = ({setOpen}) => {
     }
     if (!state.modal) { dispatch(stepPlus()) }
     else setOpen(true);
-
   }
 
   // ListShop

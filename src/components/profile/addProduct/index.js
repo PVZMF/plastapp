@@ -30,19 +30,19 @@ const AddProduct = () => {
   const handleFileInputChange = e => {
     let file = base64;
     file = e.target.files[0];
-    if (e.target.name = "thumbnails"){
+    if (e.target.name = "thumbnails") {
       getBase64(file)
-      .then(result => {
-        setThumnail({ "thumbnails" : result });
-      })
-    }else{
-    getBase64(file)
-      .then(result => {
+        .then(result => {
+          setThumnail({ "thumbnails": result });
+        })
+    } else {
+      getBase64(file)
+        .then(result => {
           base64 ? setBase64([...base64, { "file": result }]) : setBase64([{ "file": result }]);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   };
 
@@ -59,6 +59,7 @@ const AddProduct = () => {
     form_data.append('feature', JSON.stringify(att));
     data = Object.fromEntries(form_data.entries());
     data.image = [{ image: base64, product: 2 }];
+    data = { ...data, ...thumnail };
     createProduct(data).then(result => {
       setLoading(false)
     }).catch(err => console.log(err))
@@ -338,9 +339,9 @@ const AddProduct = () => {
       </div>
 
       <div className={style.footer}>
-        {loading ? 
-          <button type="submit"><img src={Spinner} alt='spinner' /></button> 
-          : 
+        {loading ?
+          <button type="submit"><img src={Spinner} alt='spinner' /></button>
+          :
           <button type="submit">انتشار محصول</button>
         }
       </div>
