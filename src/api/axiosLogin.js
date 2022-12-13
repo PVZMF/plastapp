@@ -1,6 +1,7 @@
 import axios from "axios";
 import { refreshToken } from "./api";
 import Storage from "../service/Storage";
+import { applyAuthTokenInterceptor } from 'axios-jwt';
 export const baseUrl = "https://plastapp.iran.liara.run/";
 
 const api = axios.create({
@@ -8,10 +9,11 @@ const api = axios.create({
   timeout: "60000",
 });
 
+const st = Storage();
+
 api.interceptors.request.use(
   function (config) {
     // Do something before request is sent
-    const st = Storage();
     config.headers["Authorization"] = `Bearer ${st.accessToken}`;
     return config;
   },
@@ -20,6 +22,9 @@ api.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+// Refresh Token
+applyAuthTokenInterceptor(api, refreshToken(st.refreshToken));
 
 // Add a response interceptor
 api.interceptors.response.use(

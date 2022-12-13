@@ -8,15 +8,14 @@ import Typography from "@mui/material/Typography";
 import logo from "../../assets/imgs/logo.svg"
 import { styled } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { login, loginUserAsync, registerUserAsync, registerVerifyUserAsync, sendOtpUserAsync, toggleIsCreateAccount } from "../../toolkit/slices/auth";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import Storage from "../../service/Storage";
+import { login, loginUserAsync, registerUserAsync, registerVerifyUserAsync, sendOtpUserAsync } from "../../toolkit/slices/auth";
+import { toggleIsCreateAccount } from "../../toolkit/slices/toasted.slice";
+import { Link, useNavigate } from "react-router-dom";
 import LoadingButton from '@mui/lab/LoadingButton';
 import Counter from "../../components/counter/Counter";
 import { onCounter } from "../../toolkit/slices/auth"
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { loginUser } from "../../api/api"
 
 
 const Register = () => {

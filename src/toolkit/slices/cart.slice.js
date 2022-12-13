@@ -66,7 +66,8 @@ export const cartSlice = createSlice({
         shops: 0,
         sendPrice: 0,
         step: 0,
-        checkout: true
+        checkout: true,
+        sendInfo:{}
       }
     },
 
@@ -101,6 +102,10 @@ export const cartSlice = createSlice({
 
     setModal: (state,action) => {
       state.modal = action.payload;
+    },
+
+    setSendInfo: (state, action) => {
+      state.sendInfo = action.payload;
     }
   }
 });
@@ -117,7 +122,8 @@ export const {
   stepDefault,
   setIdCart,
   sendToCart,
-  setModal
+  setModal,
+  setSendInfo
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

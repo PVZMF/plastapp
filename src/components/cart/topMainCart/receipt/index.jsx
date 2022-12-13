@@ -21,7 +21,7 @@ async function sendItem(items, idCart) {
 }
 
 
-const Receipt = ({setOpen}) => {
+const Receipt = ({open, setOpen}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const state = useSelector((state) => state.cartState);
@@ -44,16 +44,16 @@ const Receipt = ({setOpen}) => {
     }
     if (!state.modal) { dispatch(stepPlus()) }
     else setOpen(true);
-
   }
 
   // ListShop
   useEffect(() => {
     if (state.step === 0) { auth.isLogin ? setTextButton("ثبت سفارش") : setTextButton("ورود و ثبت سفارش") }
+    else if (state.step === 1) {setTextButton("افزودن آدرس")}
     else if (state.step === 2) setTextButton("ادامه فرایند ثبت سفارش")
     else if (state.step === 3) setTextButton("پرداخت")
   }, [state.step]);
-
+  console.log(state)
   return (
     <FlexMainReceipt>
       <h5 className="title-receipt">جزئیات قیمت</h5>

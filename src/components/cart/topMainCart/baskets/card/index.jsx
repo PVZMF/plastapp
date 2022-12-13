@@ -11,9 +11,9 @@ import { CardContainer } from './styledCard'
 const Card = ({ data }) => {
   console.log("dataaaaaaaaa",data)
   const dispatch = useDispatch();
-  const {thumbnails, title, price, quantity, shop, offer} = data;
+  const {thumbnails, title, price, quantity, shop, price_with_offer} = data;
 
-  const priceOff = price * (offer?  offer / 100 : 0);
+  const priceOff = price * (price_with_offer?  price_with_offer / 100 : 0);
   const priceOrigin = price - priceOff;
  
   const handleClick = () =>{
@@ -43,11 +43,11 @@ const Card = ({ data }) => {
         </div>
 
         <div className='left'>
-          {data.offer? <del>{data.price.toLocaleString('fa-IR')} <span>تومان</span></del> : null}
+          {price_with_offer? <del>{data.price.toLocaleString('fa-IR')} <span>تومان</span></del> : null}
           <div className='price'>
-          {data.offer !== 0 ? <h5>{priceOff.toLocaleString('fa-IR')} <span>تخفیف</span></h5> : null}
+          {price_with_offer? <h5>{priceOff.toLocaleString('fa-IR')} <span>تخفیف</span></h5> : null}
             <p>{console.log(priceOrigin)}
-              {data.offer?
+              {price_with_offer?
                 priceOrigin
                 :
                 data.price.toLocaleString('fa-IR')

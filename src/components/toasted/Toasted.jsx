@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Alert, Snackbar } from '@mui/material'
 import {Typography} from '@mui/material'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import {offToasted, toggleIsChangePassword, toggleIsCreateAccount} from '../../toolkit/slices/auth'
+import {offToasted} from '../../toolkit/slices/toasted.slice'
 
 const Toasted = ({ title, open, severity}) => {
     const dispatch = useDispatch();
-    const toaste = useSelector((state) => state.auth.onToasted);
+    const toaste = useSelector((state) => state.toasted.onToasted);
 
-    const handleClose = (event, reason) => {
+    const handleClose = (reason) => {
         if (reason === 'clickaway') {
             return;
         }

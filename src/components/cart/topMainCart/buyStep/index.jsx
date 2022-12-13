@@ -67,7 +67,7 @@ const BuyStep = ({ setStep, step, value, username, location, list }) => {
       </div>
 
       <div className={style.buyfooter}>
-        <h5><RiErrorWarningLine /> تمامی بسته های پستی به آقا/خانم <p>{username}</p> به نشانی <p>{location}</p> تحویل داده می‌شوند</h5>
+        <h5><RiErrorWarningLine /> تمامی بسته های پستی به آقا/خانم <p>{state.sendInfo.receiver_name}</p> به نشانی <p>{state.sendInfo.address_text}</p> تحویل داده می‌شوند</h5>
         <div className={style.btn_box}><button>ویرایش</button></div>
       </div>
 
@@ -76,8 +76,3 @@ const BuyStep = ({ setStep, step, value, username, location, list }) => {
 }
 
 export default BuyStep;
-
-BuyStep.defaultProps = {
-  username: 'علی لهراسبی',
-  location: 'تهران، امیرآباد، کارگرشمالی، پلاک۶۴',
-}
