@@ -55,7 +55,7 @@ const AddProduct = () => {
     // form_data.append("image",[{ image: base64, product: 2 }]);
 
     let data = Object.fromEntries(form_data.entries());
-    form_data.append('shop', myShop.id);
+    form_data.append('shop', ""+myShop.id);
     form_data.append('feature', JSON.stringify(att));
     data = Object.fromEntries(form_data.entries());
     data.image = [{ image: base64, product: 2 }];
