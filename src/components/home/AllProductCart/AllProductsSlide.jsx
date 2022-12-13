@@ -10,6 +10,7 @@ const AllProductsSlide = ({ link }) => {
       alignItems={"center"}
       height="100%"
       textAlign={"center"}
+      className=""
     >
       <Link to={link}>
         <Typography

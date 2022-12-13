@@ -11,10 +11,15 @@ const DownMainCart = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getListProduct().then(res => {setLoading(false);setListProducts(res)}).catch(err => console.log(err));
-  }, [])
+    getListProduct()
+      .then((res) => {
+        setLoading(false);
+        setListProducts(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   if (loading) {
-     return <h1>Loading . . .</h1>;
+    return <h1>Loading . . .</h1>;
   }
   return (
     <FlexDownCart>
@@ -29,12 +34,12 @@ const DownMainCart = () => {
       </div>
       <div className="list-suggestion">
         <div className="box-list">
-          {/* {[...listProducts]
+          {[...listProducts]
             .reverse()
             .slice(0, 6)
             .map((item) => {
               return <CardProduct key={item.id + "plastapp"} item={item} />;
-            })} */}
+            })}
         </div>
       </div>
     </FlexDownCart>
