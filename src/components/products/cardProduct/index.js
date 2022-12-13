@@ -9,6 +9,7 @@ import { addItem } from "../../../toolkit/slices/cart.slice";
 import { BsPlusLg, BsCartCheck } from "react-icons/bs";
 import { AiTwotoneShop } from "react-icons/ai";
 import { FlexProductCard } from "./styledProductCard";
+import { toPersianNumber } from "../../../functions/numbers";
 
 const CardProduct = ({ item, categorys }) => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const CardProduct = ({ item, categorys }) => {
         </h4>
         <h4>
           <span>{`تعداد موجود :`}</span>
-          <span>{` ${item.inventory} `}</span>
+          <span>{` ${toPersianNumber(item.inventory)} `}</span>
         </h4>
         <h4>
           <span style={{ color: "red" }}>
