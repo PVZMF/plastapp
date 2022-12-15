@@ -197,7 +197,7 @@ export async function getListMyProduct() {
 }
 
 export async function getProductDetail(id) {
-  const res = await apiLogin.get(`product/detail/${id}`);
+  const res = await api.get(`product/detail/${id}`);
   return res.data;
 }
 
