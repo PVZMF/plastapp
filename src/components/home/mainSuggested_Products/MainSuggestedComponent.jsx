@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 // Styling
 import "swiper/css";
 import "swiper/css/navigation";
 import "./styles.css";
-
+import style from "./suggested.module.css";
 // Components
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 import { FlexMainSuggested } from "./styledMainSuggested";
@@ -61,54 +61,77 @@ const MainSuggestedComponent = ({ title }) => {
       </Typography>
       {console.log(amazingProduct)}
       <FlexMainSuggested className="rounded-1 hidden p10">
-        <Swiper
-          breakpoints={{
-            500: {
-              slidesPerView: 2,
-            },
-            768: {
-              slidesPerView: 3,
-            },
-            868: {
-              slidesPerView: 4,
-            },
+        <Box sx={{ width: "25%" }}>
+          <img
+            src={
+              data.special_suggestion_image
+                ? `${baseUrl}${data.special_suggestion_image}`
+                : bannerImg
+            }
+            alt="پیشنهاد ویژه"
+          />
+          <Typography
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              fontSize: "1.5rem",
+              color: "#fff",
+            }}
+          >
+            {data.special_suggestion_text}
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            margin: "0px",
+            padding: "0px",
+            overflow: "hidden",
           }}
-          spaceBetween={10}
-          className="custom_swiper"
-          // autoplay={{
-          //   delay: 3000,
-          //   disableOnInteraction: false,
-          // }}
-          navigation={true}
-          modules={[Navigation, Autoplay]}
         >
-          <SwiperSlide className="slide custom-slide">
-            <img
-              className="slide-banner"
-              src={
-                data.special_suggestion_image
-                  ? `${baseUrl}${data.special_suggestion_image}`
-                  : bannerImg
-              }
-              alt="پیشنهاد ویژه"
-            />
-            <Typography>{data.special_suggestion_text}</Typography>
-          </SwiperSlide>
-          {amazingProduct.map((item, index) => (
-            <SwiperSlide className="slide p10 custom-slide" key={index}>
-              <Link to={`products/${index + 1}`}>
-                <SlideSuggested
-                  image={item.thumbnails}
-                  price={title.price}
-                  title={item.title}
-                />
-              </Link>
+          <Swiper
+            breakpoints={{
+              375: {
+                slidesPerView: 2,
+              },
+              // 500: {
+              //   slidesPerView: 2,
+              // },
+              768: {
+                slidesPerView: 3,
+              },
+            }}
+            spaceBetween={10}
+            className="custom_swiper"
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            navigation={true}
+            modules={[Navigation, Autoplay]}
+          >
+            {[...amazingProduct].reverse().map((item, index) => (
+              <SwiperSlide className={style.sweeperSlide} key={index}>
+                <Link to={`products/${index + 1}`}>
+                  <SlideSuggested
+                    image={item.thumbnails}
+                    price={item.price}
+                    title={item.title}
+                    creditSale={item.credit_sale}
+                    shopName={item.shop.name}
+                    priceWithOffer={item.price_with_offer}
+                    id={item.id}
+                    inventory={item.inventory}
+                  />
+                </Link>
+              </SwiperSlide>
+            ))}
+            <SwiperSlide className="slide p10 custom-slide">
+              <AllProductsSlide link={"products/"} />
             </SwiperSlide>
-          ))}
-          <SwiperSlide className="slide p10 custom-slide">
-            <AllProductsSlide link={"products/"} />
-          </SwiperSlide>
-        </Swiper>
+          </Swiper>
+        </Box>
       </FlexMainSuggested>
     </GlobalContainer>
   );

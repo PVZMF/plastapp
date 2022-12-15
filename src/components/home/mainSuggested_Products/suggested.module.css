@@ -1,0 +1,14 @@
+.sweeperSlide {
+  background-color: white;
+  border-radius: 1.5rem;
+}
+@media screen and (max-width: 500px) {
+  .sweeperSlide {
+    width: 32%;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 800px) {
+  .sweeperSlide {
+    width: 150px;
+  }
+}

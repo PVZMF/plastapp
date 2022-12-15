@@ -9,10 +9,15 @@ import {
   Grid,
   InputLabel,
 } from "@mui/material";
-import { setModal, stepPlus } from "../../../toolkit/slices/cart.slice";
+import {
+  setModal,
+  setSendInfo,
+  stepPlus,
+} from "../../../toolkit/slices/cart.slice";
+import { containerStyles } from "../../about-us-component/aboutUsComponentStyles";
+import { bgcolor, textAlign } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { postOrder } from "../../../api/api";
-import { v4 as uuidv4 } from "uuid";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -39,15 +44,7 @@ const style = {
 export default function GetAddress({ open, setOpen }) {
   const [stateSelected, setStateSelected] = useState("");
   const [citySelected, setCitySelected] = useState("");
-  const handleChangeCities = (event) => {
-    const {
-      target: { value },
-    } = event;
-    const setPersonName = (
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+ 
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cartState);
   const handleClose = () => {
@@ -61,9 +58,10 @@ export default function GetAddress({ open, setOpen }) {
       ...data,
       state: stateSelected,
       city: citySelected,
-      cart_id: uuidv4(),
+      cart_id: state.idCart,
     };
     postOrder(fullData).then((res) => console.log(res));
+    dispatch(setSendInfo(fullData));
     handleClose();
     dispatch(stepPlus());
     dispatch(setModal(false));
@@ -98,18 +96,6 @@ export default function GetAddress({ open, setOpen }) {
           height={400}
         >
           <Box component={"form"} onSubmit={handleSubmit}>
-            {/* <InputLabel htmlFor="addr">شهر</InputLabel>
-            <Input name="city" id="addr" margin="5" />
-            <InputLabel htmlFor="addr">استان</InputLabel>
-            <Input name="state" id="addr" margin="5" />
-            <InputLabel htmlFor="addr">آدرس</InputLabel>
-            <Input name="address_text" id="addr" margin="5" />
-            <InputLabel htmlFor="codePostal">کد پستی</InputLabel>
-            <Input name="postal_code" id="codePostal" margin="5" />
-            <InputLabel htmlFor="my-input">نام گیرنذه</InputLabel>
-            <Input name="receiver_name" id="my-input" margin="5" />
-            <InputLabel htmlFor="my-input"> شماره تلفن</InputLabel>
-            <Input name="phone_number" id="my-input" margin="5" /> */}
             <Box
               sx={{ width: "90%", display: "flex", flexDirection: "column" }}
             >

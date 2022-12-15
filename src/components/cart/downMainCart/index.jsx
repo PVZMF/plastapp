@@ -11,10 +11,15 @@ const DownMainCart = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getListProduct().then(res => {setLoading(false);setListProducts(res)}).catch(err => console.log(err));
-  }, [])
+    getListProduct()
+      .then((res) => {
+        setLoading(false);
+        setListProducts(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   if (loading) {
-     return <h1>Loading . . .</h1>;
+    return <h1>Loading . . .</h1>;
   }
   return (
     <FlexDownCart>

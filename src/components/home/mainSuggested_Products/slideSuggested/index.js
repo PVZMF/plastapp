@@ -4,58 +4,47 @@ import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import product from "../../../../assets/imgs/pesteh.jpg";
 import { FlexMainSlidSuggested } from "./styledMainSlideSuggested";
 import { Link } from "react-router-dom";
+import { toPersianNumber } from "../../../../functions/numbers";
 
 const SlideSuggested = ({
-  offer,
+  id,
+  price,
+  creditSale,
+  inventory,
+  shopName,
+  priceWithOffer,
   image,
   title,
-  price,
-  number,
-  point,
-  id,
-  credit_shoping,
 }) => {
-  const off = price * (offer / 100);
+  const off = price * (priceWithOffer / 100);
+  console.log("price", price);
   return (
     <FlexMainSlidSuggested>
-      {/* {offer !== 0 && (
-        <div className="offer-notif">
-          <h5>{offer}% OFF</h5>
-          <p>فقط تا آخر خرداد</p>
-        </div>
-      )} */}
+      <img src={image} alt={title} style={{ borderRadius: "1.5rem" }} />
 
-      <img src={image} alt={title} />
-
-      <div className="stars">
-        {[...Array(5)].map((item, index) => (
-          <StarRoundedIcon
-            key={index}
-            className={point > index ? "active" : "stargray"}
-          />
-        ))}
-      </div>
+      <div className="stars"></div>
 
       <h2>
         <Link to={`/products/${id}`}>{title}</Link>
       </h2>
 
-      {number > 0 ? (
-        <p className="true">موجود در انبار پلاست اپ</p>
+      {inventory > 0 ? (
+        <p className="true">موجود در انبار {shopName}</p>
       ) : (
         <p className="noting">ناموجود</p>
       )}
 
-      {credit_shoping ? <p className="noting">امکان خرید اعتباری</p> : null}
+      {creditSale ? <p className="noting">امکان خرید اعتباری</p> : null}
 
       <div className="price-box">
-        {offer !== 0 && (
+        {priceWithOffer != null ? (
           <del>
-            {price} <span>تومان - </span>
+            {toPersianNumber(price)} <span>تومان - </span>
           </del>
-        )}
+        ) : null}
         <h5>
-          {off > 0 ? off : price} <span>تومان</span>
+          {off > 0 ? off : toPersianNumber(price)}
+          <span> تومان </span>
         </h5>
       </div>
     </FlexMainSlidSuggested>
@@ -63,14 +52,3 @@ const SlideSuggested = ({
 };
 
 export default SlideSuggested;
-
-SlideSuggested.defaultProps = {
-  id: 1,
-  title: "دستکش یکبار مصرف",
-  image: product,
-  number: 10,
-  price: 160000,
-  offer: 20,
-  point: 3,
-  credit_shoping: true,
-};
