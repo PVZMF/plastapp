@@ -19,13 +19,15 @@ import { getTwoelvBanners } from "../../api/api";
 import { HomeLan } from "../../json/language/fa";
 import ListBannerImages from "../../components/home/ListBannerImages/ListBannerImages";
 import { baseUrl } from "../../api/axios";
+import Storage from "../../service/Storage";
 // import ad1 from "../../assets/imgs/adImgs/ad1.webp";
 // import ad2 from "../../assets/imgs/adImgs/ad2.webp";
 // import ad3 from "../../assets/imgs/adImgs/ad3.webp";
 
 const Home = () => {
   const [banners, setBanners] = useState([]);
-
+const st = Storage;
+console.log("st()" , st())
   useEffect(() => {
     // setLoading(true);
     getTwoelvBanners()

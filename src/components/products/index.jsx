@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import CardProduct from "./cardProduct";
 import { getCategories, getListProduct } from "../../api/api";
-
 // Style
 import style from "./products.module.css";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Products = () => {
+  const navigate=useNavigate()
+  const {id} = useParams();
+  console.log("params = " ,id)
   const [categorys, setCategorys] = useState([]);
   const [listProducts, setListProducts] = useState([]);
+  const [filtterdlistProducts, setFiltterdlistProducts] = useState([]);
 
   useEffect(() => {
+
+    
     //Products
     getListProduct()
       .then((res) => {
@@ -23,10 +29,19 @@ const Products = () => {
         setCategorys(results);
       })
       .finally(() => {});
-  }, []);
+     
 
-  console.log("categories >>>>>", categorys);
-  console.log("products >>>>>", listProducts);
+    }, []);
+    useEffect(()=>{
+      const data=  listProducts.filter(item=>item.category.id ==parseInt(id))
+      setFiltterdlistProducts(data)
+    },[listProducts])
+    const changeCategory =  (id)=>{
+      const data=  listProducts.filter(item=>item.category.id ==parseInt(id))
+      setFiltterdlistProducts(data)
+      navigate(`/category/${id}/products`)
+    }
+ 
 
   return (
     <div className={style.products}>
@@ -34,8 +49,11 @@ const Products = () => {
         <div className={style.productsgroup}>
           <h5>دسته بندی محصولات</h5>
           <ul>
+          <li  onClick={()=>{changeCategory("all")}}>
+                <p>همه محصولات</p>
+              </li>
             {categorys.map((item, index) => (
-              <li key={index + "categorys"}>
+              <li key={index + "categorys"} onClick={()=>{changeCategory(item.id)}}>
                 <p>{item.title}</p>
               </li>
             ))}
@@ -48,10 +66,11 @@ const Products = () => {
           <input type="text" placeholder="جستجو محصول" />
         </div>
         <div className={style.group_categorys}>
-          <select>
-            <option>انتخاب دسته بندی</option>
+          <select onChange={(e)=>{changeCategory(e.target.value)}}>
+              <option >انتخاب دسته بندی</option>
+              <option value={"all"}>همه محصولات</option>
             {categorys.map((item, index) => (
-              <option key={index + "categorys"} value={item.title}>
+              <option key={index + "categorys"} value={item.id} >
                 {item.title}
               </option>
             ))}
@@ -60,7 +79,7 @@ const Products = () => {
 
         <div className={style.items}>
           {console.log(listProducts)}
-          {[...listProducts].reverse().map((item, index) => {
+          {id ==="all" ?[...listProducts].reverse().map((item, index) => {
             return (
               <CardProduct
                 item={item}
@@ -68,7 +87,18 @@ const Products = () => {
                 categorys={categorys}
               />
             );
-          })}
+          } ) : "" }
+          {id !="all"?
+            [...filtterdlistProducts].reverse().map((item, index) => {
+              return (
+                <CardProduct
+                  item={item}
+                  key={index + "products"}
+                  categorys={categorys}
+                />
+              );
+            }  ):"" 
+          }
         </div>
       </div>
     </div>
