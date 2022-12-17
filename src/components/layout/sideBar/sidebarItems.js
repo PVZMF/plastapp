@@ -32,7 +32,7 @@ function SidebarItems(auth, isLogin) {
       onClick: () => {},
       show: true,
       children: category.map((item, index) => {
-        return { label: item.title, link: `/category/${item.id}/products` };
+        return { label: item.title, link: `/category/${item.id}` };
       })
     },
     {

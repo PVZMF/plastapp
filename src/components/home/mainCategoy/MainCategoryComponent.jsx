@@ -50,7 +50,7 @@ const MainCategoryComponent = () => {
                 marginBottom={4}
                 key={index}
               >
-                <Link to={`/products/`} className="category_box--link">
+                <Link to={`/category/${item.id}`} className="category_box--link">
                   <img src={item.logo} alt="" className="category_box--img" />
                 </Link>
               </Grid>

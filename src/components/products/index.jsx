@@ -39,7 +39,7 @@ const Products = () => {
       (item) => item.category.id == parseInt(id)
     );
     setFiltterdlistProducts(data);
-    navigate(`/category/${id}/products`);
+    navigate(`/category/${id}`);
   };
 useEffect(()=>{
   console.log(searchParamas.get('filter'))
