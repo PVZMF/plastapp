@@ -51,6 +51,10 @@ export async function getRulesConditon() {
   const res = await api.get("config/rule/");
   return res.data;
 }
+export async function getAmazingList() {
+  const res = await api.get("/product/amazing_list/");
+  return res.data;
+}
 
 export async function getBlogList() {
   const res = await api.get("blog/list/");
