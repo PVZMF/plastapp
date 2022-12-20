@@ -220,6 +220,19 @@ export async function addItemToCart(item, cart_pk) {
   const res = await api.post(`carts/${cart_pk}/items/`, item);
   return res.data;
 }
+export async function discountCreate(item) {
+  const res = await apiLogin.post(`https://plastapp.iran.liara.run/product/promotion_create/`, item);
+  return res;
+}
+export async function discountUpdate(item,id) {
+  const res = await apiLogin.post(`https://plastapp.iran.liara.run/product/promotion_update/${id}/
+  `, item);
+  return res;
+}
+export async function discountDelete(id) {
+  const res = await apiLogin.delete(`https://plastapp.iran.liara.run/product/promotion_delete/${id}/`);
+  return res;
+}
 
 export async function setProfile(data) {
   const res = await apiLogin.patch("account/update_info/", data);

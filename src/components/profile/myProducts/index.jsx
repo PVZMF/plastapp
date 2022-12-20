@@ -1,96 +1,171 @@
-import React, { useEffect, useState } from 'react';
-import { RiAddFill } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
-import style from './myProducts.module.css'
+import React, { useEffect, useState } from "react";
+import { RiAddFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import style from "./myProducts.module.css";
 // import {listProduct} from "../../../api/api"
-import { getListMyProduct } from "../../../api/api"
-
+import {discountCreate, discountDelete, getListMyProduct } from "../../../api/api";
 
 const MyProducts = () => {
+  const [off, setOff] = useState(0);
+  const [listProducts, setListProducts] = useState([]);
+  // ListProduct
+  useEffect(() => {
+    // setLoading(true);
+    getListMyProduct().then((results) => {
+      setListProducts(results);
+    });
+  }, []);
 
-    const [off, setOff] = useState(0);
-    const [listProducts, setListProducts] = useState([])
-    // ListProduct
-    useEffect(() => {
-        // setLoading(true);
-        getListMyProduct().then((results) => {
-            setListProducts(results);
-        })
-    })
+  const [edit, setEdit] = useState(null);
 
-    const [edit, setEdit] = useState(null);
-    const handleEdit = (id) => {
-        if (id === edit) {
-            setEdit(null)
-        } else {
-            setEdit(id)
-        }
+  const handleEdit = (id ) => {
+    
+    if (id === edit) {
+
+      setEdit(null);
+    } else {
+
+      setEdit(id);
     }
+  };
+  const handleDelete=(id)=>{
+    console.log("id handleDelete = ",id)
+    discountDelete(id).then((res)=>{
+ console.log("ok shod hazf takhfif")
+    })
+    .catch((err)=>{
+        alert("تخفیف حذف نشد")
 
-    return (
-        <div className={style.myproducts}>
-            <div className={style.products}>
-                <div className={style.header}>
-                    <h4>محصولات من</h4>
-                    <Link to="/profile/addproduct"><button><RiAddFill /></button></Link>
-                </div>
+    })
+  }
+  const changeDiscountValue = (id) => {
+    discountCreate({product:id,discount_amount:off}).then((res)=>{
 
-                <div className={style.boxtable}>
-                    <table>
-                        <thead>
-                            <th><h4>محصول</h4></th>
-                            <th><h4>محدوده ارسال</h4></th>
-                            <th><h4>موجودی</h4></th>
-                            <th><h4>قیمت</h4></th>
-                            <th><h4>وضعیت</h4></th>
-                            <th><h4>تخفیف</h4></th>
-                        </thead>
+    })
+    .catch(()=>{
 
-                        <tbody>
-                            {listProducts?.map(item => (
-                                <tr key={item.id}>
-                                    <td>
-                                        <h3>{item.title}</h3>
-                                    </td>
-                                    <td>
-                                        <h3>{item.send_to_all_point?"سرار کشور":""}</h3>
-                                    </td>
-                                    <td>
-                                        <h3>{item.inventory}</h3>
-                                    </td>
-                                    <td>
-                                        <h3>{item.price} تومان</h3>
-                                    </td>
-                                    <td>
-                                        <h3 className={item.credit_sale? style.itis : style.noting}>
-                                            {item.credit_sale ? 'موجود در انبار' : 'ناموجود'}
-                                        </h3>
-                                    </td>
-                                    <td>
-                                        <div className={style.box_offer_edit}>
-                                            {edit === item.id ?
-                                                <input type='number' value={off} onChange={(e) => setOff(e.target.value)} />
-                                                :
-                                                <h3>{off.toLocaleString('fa-IR')} تومان</h3>
-                                            }
-                                            {edit === item.id ?
-                                                <button className={style.edit} onClick={() => handleEdit(item.id)}>تایید</button>
-                                                :
-                                                <button className={style.edit} onClick={() => handleEdit(item.id)}>ویرایش</button>
-                                            }
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))
-                            }
-                        </tbody>
+    })
+    if (id === edit) {
+      setEdit(null);
+    } else {
+      setEdit(id);
+    }
+  };
 
-                        <tfoot></tfoot>
-                    </table>
-                </div>
-            </div>
+  return (
+    <div className={style.myproducts}>
+      <div className={style.products}>
+        <div className={style.header}>
+          <h4>محصولات من</h4>
+          <Link to="/profile/addproduct">
+            <button>
+              <RiAddFill />
+            </button>
+          </Link>
         </div>
-    )
-}
+
+        <div className={style.boxtable}>
+          <table>
+            <thead>
+              <th>
+                <h4>محصول</h4>
+              </th>
+              <th>
+                <h4>محدوده ارسال</h4>
+              </th>
+              <th>
+                <h4>موجودی</h4>
+              </th>
+              <th>
+                <h4>قیمت</h4>
+              </th>
+              <th>
+                <h4>وضعیت</h4>
+              </th>
+              <th>
+                <h4>تخفیف</h4>
+              </th>
+              <th>
+                
+              </th>
+            </thead>
+
+            <tbody>
+              {listProducts?.map((item) => (
+                <tr key={item.id}>
+                  <td>
+                    <h3>{item.title}</h3>
+                  </td>
+                  <td>
+                    <h3>{item.send_to_all_point ? "سرار کشور" : ""}</h3>
+                  </td>
+                  <td>
+                    <h3>{item.inventory}</h3>
+                  </td>
+                  <td>
+                    <h3>{item.price} تومان</h3>
+                  </td>
+                  <td>
+                    <h3
+                      className={item.credit_sale ? style.itis : style.noting}
+                    >
+                      {item.credit_sale ? "موجود در انبار" : "ناموجود"}
+                    </h3>
+                  </td>
+                  <td>
+                    <div className={style.box_offer_edit}>
+                      {edit === item.id ? (
+                        <>
+                    <input
+                            type="number"
+                            value={off}
+                            onChange={(e) => setOff(e.target.value)}
+                          />
+                        </>
+                      ) : (
+                        <h3>
+                          {item.price_with_offer
+                            ? item.price_with_offer.toLocaleString("fa-IR")
+                            : 0}{" "}
+                          تومان
+                        </h3>
+                      )}
+                      {edit === item.id ? (
+                        <button
+                          className={style.edit}
+                          onClick={(e) => changeDiscountValue(item.id)}
+                        >
+                          تایید
+                        </button>
+                      ) : (
+                        <>
+                        <button
+                          className={style.edit}
+                          onClick={(e) => handleEdit(item.id)}
+                        >
+                          ویرایش
+                        </button>
+                        <button
+                          className={style.edit}
+                          onClick={(e) => handleDelete(item.id)}
+                        >
+                          حذف
+                        </button>
+                        </>
+
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default MyProducts;

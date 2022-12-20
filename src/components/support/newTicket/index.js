@@ -6,6 +6,8 @@ import Spinner from "../../Spinner/Spinner";
 import getBase64 from "../../../functions/base64";
 import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const NewTicketComponent = () => {
   const [isSending, setIsSending] = useState(false);
@@ -38,10 +40,15 @@ const NewTicketComponent = () => {
     console.log(data);
     createTicket(data)
       .then((res) => {
-        console.log(res);
-      })
+       if(res.status==="unread"){
+         toast.success("تیکت با موفقیت ثبت شد")
+       }
+        else{
+          toast.error("تیکت ثبت نشد")
+        }          
+})
       .catch((err) => {
-        if (err.data.code === "bad_authorization_header") navigate("/login");
+      if (err.data.code === "bad_authorization_header") navigate("/login");
       });
   };
 
@@ -128,6 +135,19 @@ const NewTicketComponent = () => {
         )}
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={true}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
+
     </div>
   );
 };
