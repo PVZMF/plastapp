@@ -3,7 +3,7 @@ import { RiAddFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import style from "./myProducts.module.css";
 // import {listProduct} from "../../../api/api"
-import {discountCreate, discountDelete, getListMyProduct } from "../../../api/api";
+import {discountCreate, discountDelete, discountUpdate, getListMyProduct } from "../../../api/api";
 import {toast, ToastContainer } from "react-toastify";
 import { AxiosError, AxiosResponse } from "axios";
 
@@ -56,17 +56,31 @@ const MyProducts = () => {
 
 
 //Create Or Edit Discount 
-  const changeDiscountValue = (id) => {
-    discountCreate({product:id,discount_amount:off}).then((res)=>{
-      toast.success('تخفیف با موفقیت ایجاد شد')
+  const changeDiscountValue = (idP,idD) => {
+    discountCreate({product:idP,discount_amount:off})
+    .then((res)=>{
+
+        toast.success('تخفیف با موفقیت ایجاد شد')
+      
     })
-    .catch(()=>{
-      toast.error('تخفیف ایجاد نشد')
+    .catch((err)=>{
+      if(err.status ==400){
+        toast.error("موجوده که دایی")
+        discountUpdate({product:idP,discount_amount:off},idD).then(()=>{
+                 toast.success("مقدار تخفیف با موفقیت تخفیف کرد")
+        })
+        .catch(()=>{
+ toast.error('مقدار تخفیف تغییر نکرد')
+        })
+      }
+      if(err.status ==401){
+        toast.error("صفحه را رفرش کنید و دوباره درخواست بدهید")
+      }
     })
-    if (id === edit) {
+    if (idP === edit) {
       setEdit(null);
     } else {
-      setEdit(id);
+      setEdit(idP);
     }
   };
 
@@ -151,7 +165,7 @@ const MyProducts = () => {
                       {edit === item.id ? (
                         <button
                           className={style.edit}
-                          onClick={(e) => changeDiscountValue(item.id)}
+                          onClick={(e) => changeDiscountValue(item.id,item.discount_id[0])}
                         >
                           تایید
                         </button>
@@ -198,4 +212,4 @@ theme="colored"
   );
 };
 
-export default MyProducts;
+export default React.memo(MyProducts);

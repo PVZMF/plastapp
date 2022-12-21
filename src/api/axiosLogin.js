@@ -7,6 +7,9 @@ export const baseUrl = "https://plastapp.iran.liara.run/";
 const api = axios.create({
   baseURL: baseUrl,
   timeout: "60000",
+  validateStatus:function (status) {
+    return status >= 200 && status < 400; // default
+  },
 });
 
 const st = Storage();
@@ -41,13 +44,7 @@ api.interceptors.response.use(
         })
         .catch((error) => console.log(error));
     }
-    if (error.response.status === 400) {
-      // try to get new access token with refresh token
-      // try the request again
-      // logout user and redirect to login page if error
-      // return error.response.data;
-      return error.response;
-    }
+    
     return Promise.reject(error.response);
   }
 );
