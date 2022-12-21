@@ -4,10 +4,14 @@ import { Link } from "react-router-dom";
 import style from "./myProducts.module.css";
 // import {listProduct} from "../../../api/api"
 import {discountCreate, discountDelete, getListMyProduct } from "../../../api/api";
+import {toast, ToastContainer } from "react-toastify";
+import { AxiosError, AxiosResponse } from "axios";
 
 const MyProducts = () => {
   const [off, setOff] = useState(0);
   const [listProducts, setListProducts] = useState([]);
+  
+  
   // ListProduct
   useEffect(() => {
     // setLoading(true);
@@ -18,6 +22,8 @@ const MyProducts = () => {
 
   const [edit, setEdit] = useState(null);
 
+
+   
   const handleEdit = (id ) => {
     
     if (id === edit) {
@@ -28,22 +34,34 @@ const MyProducts = () => {
       setEdit(id);
     }
   };
+
+
+  //Delete Discount
   const handleDelete=(id)=>{
     console.log("id handleDelete = ",id)
     discountDelete(id).then((res)=>{
- console.log("ok shod hazf takhfif")
+      toast.success("تخفیف با موفقیت حذف شد")
+  
     })
-    .catch((err)=>{
-        alert("تخفیف حذف نشد")
+    .catch(( )=>{
+//       if (AxiosError.response.status === 400) {
+//         console.log("AxiosError.response.status",(AxiosError.response.status))
+ toast.error("تخفیف موجود نیست")
+        
+      // }
+     
 
     })
   }
+
+
+//Create Or Edit Discount 
   const changeDiscountValue = (id) => {
     discountCreate({product:id,discount_amount:off}).then((res)=>{
-
+      toast.success('تخفیف با موفقیت ایجاد شد')
     })
     .catch(()=>{
-
+      toast.error('تخفیف ایجاد نشد')
     })
     if (id === edit) {
       setEdit(null);
@@ -146,8 +164,8 @@ const MyProducts = () => {
                           ویرایش
                         </button>
                         <button
-                          className={style.edit}
-                          onClick={(e) => handleDelete(item.id)}
+                          className={style.edit} style={{background:"#ef5350",color:"white"}}
+                          onClick={(e) => handleDelete(item.discount_id[0])}
                         >
                           حذف
                         </button>
@@ -164,6 +182,18 @@ const MyProducts = () => {
           </table>
         </div>
       </div>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
   );
 };

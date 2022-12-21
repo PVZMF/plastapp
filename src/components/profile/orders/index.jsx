@@ -12,7 +12,9 @@ const Orders = ({ listOrder }) => {
     const totalCancel = listOrder.reduce(((total, item) => item.status === 2 ? total = total + 1 : total), 0);
     const totalReturned = listOrder.reduce(((total, item) => item.status === 0 ? total = total + 1 : total), 0);
     const [infoOrder,setInfoOrder] = useState();
-    getOrders().then(res => setInfoOrder(res));
+    useEffect(()=>{
+        getOrders().then(res => setInfoOrder(res));
+    },[])
     
     return (
         <div className={style.orders}>

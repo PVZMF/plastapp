@@ -253,3 +253,7 @@ export async function getOrders() {
   const res = await apiLogin.get("order/orders/");
   return res.data;
 }
+export async function myShopOrder() {
+  const res = await apiLogin.get("order/my_shop_order/");
+  return res.data;
+}
