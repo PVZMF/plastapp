@@ -30,20 +30,7 @@ const AddProduct = () => {
   const handleFileInputChange = e => {
     let file = base64;
     file = e.target.files[0];
-    if (e.target.name = "thumbnails") {
-      getBase64(file)
-        .then(result => {
-          setThumnail({ "thumbnails": result });
-        })
-    } else {
-      getBase64(file)
-        .then(result => {
-          base64 ? setBase64([...base64, { "file": result }]) : setBase64([{ "file": result }]);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
+    setThumnail(file)
   };
 
   const [loading, setLoading] = useState(false);
@@ -58,8 +45,9 @@ const AddProduct = () => {
     form_data.append('shop', ""+myShop.id);
     form_data.append('feature', JSON.stringify(att));
     data = Object.fromEntries(form_data.entries());
-    data.image = [{ image: base64, product: 2 }];
-    data = { ...data, ...thumnail };
+    data.image = [{ image: thumnail, product: 2 }];
+    data = { ...data, thumnail };
+    console.log("data is data is =",data)
     createProduct(data).then(result => {
       setLoading(false)
     }).catch(err => console.log(err))
