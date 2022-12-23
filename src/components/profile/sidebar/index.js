@@ -121,9 +121,3 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
 
 export default Sidebar;
 
-Sidebar.defaultProps = {
-    ProfileImage: Shop,
-    userName: 'پلاست اپ',
-    shopName: 'کیان کرم پور',
-    cash: 1000000,
-}

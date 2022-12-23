@@ -6,33 +6,33 @@ import style from "./myProducts.module.css";
 import {discountCreate, discountDelete, discountUpdate, getListMyProduct } from "../../../api/api";
 import {toast, ToastContainer } from "react-toastify";
 import { AxiosError, AxiosResponse } from "axios";
-
+import { useDispatch, useSelector } from "react-redux";
 const MyProducts = () => {
   const [off, setOff] = useState(0);
   const [listProducts, setListProducts] = useState([]);
-  
-  
-  // ListProduct
+  const [update,setUpdate] = useState(false)
+  const userRole = useSelector(state=>state.auth.role)
+  console.log(userRole)
+  // ListProduct 
   useEffect(() => {
     // setLoading(true);
     getListMyProduct().then((results) => {
       setListProducts(results);
     });
-  }, []);
+  }, [update]);
 
-  const [edit, setEdit] = useState(null);
+  const [edit, setEdit] = useState("");
 
 
    
   const handleEdit = (id ) => {
-    
+    console.log("idddddddddd = = ",id)
     if (id === edit) {
-
-      setEdit(null);
-    } else {
-
-      setEdit(id);
-    }
+      setEdit(null)
+  } else {
+      setEdit(id)
+  }
+    
   };
 
 
@@ -40,6 +40,7 @@ const MyProducts = () => {
   const handleDelete=(id)=>{
     console.log("id handleDelete = ",id)
     discountDelete(id).then((res)=>{
+      setUpdate(!update)
       toast.success("تخفیف با موفقیت حذف شد")
   
     })
@@ -57,31 +58,33 @@ const MyProducts = () => {
 
 //Create Or Edit Discount 
   const changeDiscountValue = (idP,idD) => {
+    
+    
     discountCreate({product:idP,discount_amount:off})
     .then((res)=>{
-
-        toast.success('تخفیف با موفقیت ایجاد شد')
-      
-    })
+      setUpdate(!update)
+      toast.success('تخفیف با موفقیت ایجاد شد')
+        })
     .catch((err)=>{
       if(err.status ==400){
-        toast.error("موجوده که دایی")
-        discountUpdate({product:idP,discount_amount:off},idD).then(()=>{
+        discountUpdate({product:idP,discount_amount:parseInt(off)},idD).then(()=>{
+          setUpdate(!update)
                  toast.success("مقدار تخفیف با موفقیت تخفیف کرد")
-        })
+                 
+                })
+
         .catch(()=>{
  toast.error('مقدار تخفیف تغییر نکرد')
+ 
         })
       }
       if(err.status ==401){
         toast.error("صفحه را رفرش کنید و دوباره درخواست بدهید")
+       
       }
     })
-    if (idP === edit) {
-      setEdit(null);
-    } else {
-      setEdit(idP);
-    }
+    handleEdit(idP)
+
   };
 
   return (
@@ -117,9 +120,7 @@ const MyProducts = () => {
               <th>
                 <h4>تخفیف</h4>
               </th>
-              <th>
-                
-              </th>
+            
             </thead>
 
             <tbody>
@@ -157,7 +158,7 @@ const MyProducts = () => {
                       ) : (
                         <h3>
                           {item.price_with_offer
-                            ? item.price_with_offer.toLocaleString("fa-IR")
+                            ?(item.price -  item.price_with_offer).toLocaleString("fa-IR")
                             : 0}{" "}
                           تومان
                         </h3>
@@ -165,12 +166,12 @@ const MyProducts = () => {
                       {edit === item.id ? (
                         <button
                           className={style.edit}
-                          onClick={(e) => changeDiscountValue(item.id,item.discount_id[0])}
+                          onClick={() => changeDiscountValue(item.id ,item.discount_id!=null ?item.discount_id[0] :"")}
                         >
                           تایید
                         </button>
                       ) : (
-                        <>
+                        <div>
                         <button
                           className={style.edit}
                           onClick={(e) => handleEdit(item.id)}
@@ -183,14 +184,14 @@ const MyProducts = () => {
                         >
                           حذف
                         </button>
-                        </>
+                        </div>
 
                       )}
                     </div>
                   </td>
                 </tr>
               ))}
-            </tbody>
+                </tbody>
 
             <tfoot></tfoot>
           </table>

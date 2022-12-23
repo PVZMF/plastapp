@@ -211,7 +211,6 @@ export async function createCart() {
 }
 
 export async function deleteCart(cart_pk) {
-  console.log("deleteeeeeee");
   const res = await api.delete(`carts/${cart_pk}/`);
   return res.data;
 }
@@ -225,8 +224,7 @@ export async function discountCreate(item) {
   return res;
 }
 export async function discountUpdate(item,id) {
-  const res = await apiLogin.post(`https://plastapp.iran.liara.run/product/promotion_update/${id}/
-  `, item);
+  const res = await apiLogin.patch(`https://plastapp.iran.liara.run/product/promotion_update/${id}/`,item);
   return res;
 }
 export async function discountDelete(id) {
