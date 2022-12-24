@@ -102,6 +102,7 @@ const MainPopularComponent = ({}) => {
                 image={item?.thumbnails}
                 price={item?.price}
                 number={item?.inventory}
+                creditSale={item.credit_sale}
               />
             </SwiperSlide>
           ))}

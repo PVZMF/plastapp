@@ -34,13 +34,22 @@ const AddProduct = () => {
   };
   const handleFileInputChange = (e) => {
     let file = e.target.files[0];
-    setImg(file);
-    img ? setImg([...img, { file }]) : setImg([{ file }]);
+
+    getBase64(file)
+      .then((result) => {
+        base64
+          ? setBase64([...base64, { file: result }])
+          : setBase64([{ file: result }]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
     setLoading(true);
     const form_data = new FormData(e.target);
@@ -51,18 +60,20 @@ const AddProduct = () => {
     form_data.append("feature", JSON.stringify(att));
     data = Object.fromEntries(form_data.entries());
     console.log("data form", data);
-    data.image = [{ image: img, product: 2 }];
-    data = { ...data, img };
-    console.log("data is data is =", data);
-    // createProduct(data)
-    //   .then((result) => {
-    //     toast.success("محصول با موفقیت ثبت شد");
-    //     setLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     toast.error("محصول ثبت نشد");
-    //   });
+    // data.image = base64;
+    const dataW = { ...data, image: base64 };
+    console.log("data is data is =", dataW);
+    console.log("base64", base64);
+    createProduct(dataW)
+      .then((result) => {
+        toast.success("محصول با موفقیت ثبت شد");
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("محصول ثبت نشد");
+        setLoading(false);
+      });
   };
 
   const [myShop, setMyShop] = useState([]);
@@ -200,9 +211,10 @@ const AddProduct = () => {
             <div className={style.addImg}>
               <div className={style.boximage}>
                 <input
-                  name="images"
+                  name="image"
+                  accept="image/*"
                   type="file"
-                  onChange={handleFileInputChange}
+                  onChange={(e) => handleFileInputChange(e)}
                 />
                 <BsImage />
                 <p>افزودن تصویر</p>

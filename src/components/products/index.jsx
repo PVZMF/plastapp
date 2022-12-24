@@ -41,9 +41,9 @@ const Products = () => {
     setFiltterdlistProducts(data);
     navigate(`/category/${id}`);
   };
-useEffect(()=>{
-  console.log(searchParamas.get('filter'))
-},[searchParamas.get('filter')])
+  useEffect(() => {
+    console.log(searchParamas.get("filter"));
+  }, [searchParamas.get("filter")]);
   return (
     <div className={style.products}>
       <div className={style.sidebar}>
@@ -51,6 +51,11 @@ useEffect(()=>{
           <h5>دسته بندی محصولات</h5>
           <ul>
             <li
+              style={
+                id == "all"
+                  ? { background: "#69A8FF" }
+                  : { background: "white" }
+              }
               onClick={() => {
                 changeCategory("all");
               }}
@@ -59,6 +64,11 @@ useEffect(()=>{
             </li>
             {categorys.map((item, index) => (
               <li
+                style={
+                  id == item.id && item.id != "all"
+                    ? { background: "#69A8FF" }
+                    : { background: "white" }
+                }
                 key={index + "categorys"}
                 onClick={() => {
                   changeCategory(item.id);
@@ -105,7 +115,7 @@ useEffect(()=>{
 
         <div className={style.items}>
           {console.log(listProducts)}
-          {id === "all" && searchParamas.get('filter') ==null
+          {id === "all" && searchParamas.get("filter") == null
             ? [...listProducts].reverse().map((item, index) => {
                 return (
                   <CardProduct
@@ -116,7 +126,7 @@ useEffect(()=>{
                 );
               })
             : ""}
-          {id != "all" && searchParamas.get('filter') ==null
+          {id != "all" && searchParamas.get("filter") == null
             ? [...filtterdlistProducts].reverse().map((item, index) => {
                 return (
                   <CardProduct

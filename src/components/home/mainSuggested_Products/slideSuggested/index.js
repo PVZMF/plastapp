@@ -10,14 +10,14 @@ const SlideSuggested = ({
   id,
   price,
   creditSale,
-  inventory,
+  number,
   shopName,
   priceWithOffer,
   image,
   title,
 }) => {
   const off = price * (priceWithOffer / 100);
-  console.log("price", price);
+  console.log("price", number);
   return (
     <FlexMainSlidSuggested>
       <img src={image} alt={title} style={{ borderRadius: "1.5rem" }} />
@@ -28,7 +28,7 @@ const SlideSuggested = ({
         <Link to={`/products/${id}`}>{title}</Link>
       </h2>
 
-      {inventory > 0 ? (
+      {number > 0 ? (
         <p className="true">موجود در انبار {shopName}</p>
       ) : (
         <p className="noting">ناموجود</p>

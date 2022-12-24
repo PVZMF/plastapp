@@ -36,7 +36,6 @@ const MainProductsComponent = ({ title }) => {
     getListMostPopularShops()
       .then((results) => {
         setShops(results);
-        console.log(results);
       })
       .finally(() => {});
 
@@ -44,7 +43,10 @@ const MainProductsComponent = ({ title }) => {
       setProduct(data.data);
     });
 
-    getListProduct().then((res) => setProductsList(res));
+    getListProduct().then((res) => {
+      setProductsList(res);
+      console.log("res pouriya", res);
+    });
   }, []);
 
   console.log("products list >>", productsList);
@@ -93,20 +95,19 @@ const MainProductsComponent = ({ title }) => {
             />
           </SwiperSlide>
           {productsList?.map((item, index) => {
-            if (index <= 4) {
-              return (
-                <SwiperSlide className="slide p10 custom-slide">
-                  <SlideSuggested
-                    offer={0}
-                    id={item?.id}
-                    title={item?.title}
-                    image={item?.thumbnails}
-                    price={item?.price}
-                    number={item?.inventory}
-                  />
-                </SwiperSlide>
-              );
-            }
+            return (
+              <SwiperSlide className="slide p10 custom-slide">
+                <SlideSuggested
+                  offer={item.priceWithOffer}
+                  id={item.id}
+                  title={item.title}
+                  image={item.thumbnails}
+                  price={item.price}
+                  number={item.inventory}
+                  creditSale={item.credit_sale}
+                />
+              </SwiperSlide>
+            );
           })}
           {/* <SwiperSlide className="slide p10 custom-slide">
             <SlideSuggested offer={0} />
