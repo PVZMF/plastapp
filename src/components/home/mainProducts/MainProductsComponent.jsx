@@ -8,19 +8,20 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested";
 
 // import { getSomeProduct, mainProductsSlice } from "./MainProductsSlice";
 
-import bannerImg from "../../../assets/imgs/offer-banner.jpg";
+import bannerImg from "../../../assets/imgs/box2.webp";
 import AllProductsSlide from "../AllProductCart/AllProductsSlide";
 import SlideSuggested from "../mainSuggested_Products/slideSuggested";
 import { getListMostPopularShops, getListProduct } from "../../../api/api";
 import { partialData } from "../../../api/api";
 import { baseUrl } from "../../../api/axios";
+import style from "../mainSuggested_Products/suggested.module.css";
 
 // import { MAIN_SUGGESTED_PRODUCTS } from "../../../../service/homeService";
 
@@ -60,8 +61,28 @@ const MainProductsComponent = ({ title }) => {
       >
         {title}
       </Typography>
-
+      {/* {console.log(amazingProduct)} */}
       <FlexMainSuggested className="rounded-1 hidden p10 gray">
+        <Box sx={{ width: "25%", background: 'transparent' }}>
+          <img
+            src={
+              product?.product_image
+                ? `${baseUrl}${product?.product_image}`
+                : bannerImg
+            }
+            alt="پیشنهاد ویژه"
+          />
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            margin: "0px",
+            padding: "0px",
+            overflow: "hidden",
+          }}
+        >
+
         <Swiper
           breakpoints={{
             300: {
@@ -81,21 +102,10 @@ const MainProductsComponent = ({ title }) => {
           modules={[Navigation, Autoplay]}
           className="custom_swiper "
         >
-          <SwiperSlide className="slide custom-slide">
-            <img
-              className="slide-banner"
-              src={
-                product?.product_image
-                  ? `${baseUrl}${product?.product_image}`
-                  : bannerImg
-              }
-              alt=""
-            />
-          </SwiperSlide>
           {productsList?.map((item, index) => {
             if (index <= 4) {
               return (
-                <SwiperSlide className="slide p10 custom-slide">
+                <SwiperSlide className={style.sweeperSlide} key={index + 'slideProducts'}>
                   <SlideSuggested
                     offer={0}
                     id={item?.id}
@@ -108,22 +118,12 @@ const MainProductsComponent = ({ title }) => {
               );
             }
           })}
-          {/* <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested offer={0} />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested offer={0} />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested offer={0} />
-          </SwiperSlide>
-          <SwiperSlide className="slide p10 custom-slide">
-            <SlideSuggested offer={0} />
-          </SwiperSlide> */}
-          <SwiperSlide className="slide p10 custom-slide">
+          <SwiperSlide className={style.sweeperSlide}>
             <AllProductsSlide link="products" />
           </SwiperSlide>
         </Swiper>
+      
+      </Box>
       </FlexMainSuggested>
     </GlobalContainer>
   );

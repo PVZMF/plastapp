@@ -13,7 +13,7 @@ import SlideSuggested from "../mainSuggested_Products/slideSuggested";
 
 import { FlexMainSuggested } from "../mainSuggested_Products/styledMainSuggested";
 
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 // import { FlexMainPopular } from "./styledMainPopular";
 
@@ -33,6 +33,7 @@ import {
 } from "../../../api/api";
 import { baseUrl } from "../../../api/axios";
 import { PowerInput } from "@mui/icons-material";
+import style from "../mainSuggested_Products/suggested.module.css";
 
 const MainPopularComponent = ({}) => {
   // const dispatch = useDispatch();
@@ -53,17 +54,37 @@ const MainPopularComponent = ({}) => {
 
   return (
     <GlobalContainer>
-      <Typography
-        component="h2"
-        variant="h2"
-        textAlign="center"
-        marginY={4}
-        fontSize="clamp(1.5rem, 3vw, 3rem)"
+    <Typography
+      component="h2"
+      variant="h2"
+      textAlign="center"
+      marginTop={5}
+      marginBottom={1}
+      fontSize="clamp(1.5rem, 3vw, 3rem)"
+    >
+      {HomeLan.mainPopularProducts_title}
+    </Typography>
+    {/* {console.log(amazingProduct)} */}
+    <FlexMainSuggested className="rounded-1 hidden p10 blue">
+      <Box sx={{ width: "25%", background: 'transparent' }}>
+        <img
+          src={
+            data?.best_seller_image
+              ? `${baseUrl}${data?.best_seller_image}`
+              : bannerImg
+          }
+          alt="پیشنهاد ویژه"
+        />
+      </Box>
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          margin: "0px",
+          padding: "0px",
+          overflow: "hidden",
+        }}
       >
-        {HomeLan.mainPopularProducts_title}
-      </Typography>
-
-      <FlexMainSuggested className="rounded-1 hidden p10 blue">
         <Swiper
           breakpoints={{
             300: {
@@ -82,19 +103,8 @@ const MainPopularComponent = ({}) => {
           modules={[Navigation, Autoplay]}
           className="custom_swiper"
         >
-          <SwiperSlide className="slide custom-slide">
-            <img
-              className="slide-banner"
-              src={
-                data?.best_seller_image
-                  ? `${baseUrl}${data?.best_seller_image}`
-                  : bannerImg
-              }
-              alt=""
-            />
-          </SwiperSlide>
           {popularProducts.map((item, index) => (
-            <SwiperSlide className="slide p10 custom-slide" key={index}>
+            <SwiperSlide className={style.sweeperSlide} key={index + 'slidePopularProducts'}>
               <SlideSuggested
                 offer={0}
                 id={item?.id}
@@ -105,10 +115,12 @@ const MainPopularComponent = ({}) => {
               />
             </SwiperSlide>
           ))}
-          <SwiperSlide className="slide p10 custom-slide">
+          <SwiperSlide className={style.sweeperSlide}>
             <AllProductsSlide link={"products/"} />
           </SwiperSlide>
         </Swiper>
+      {/* </FlexMainSuggested> */}
+      </Box>
       </FlexMainSuggested>
     </GlobalContainer>
   );

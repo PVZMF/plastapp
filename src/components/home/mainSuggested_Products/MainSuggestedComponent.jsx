@@ -74,8 +74,9 @@ const MainSuggestedComponent = ({ title }) => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              fontSize: "1.5rem",
+              fontSize: "clamp(.8rem, 1.5vw, 1.5rem)",
               color: "#fff",
+              textAlign: 'center',
             }}
           >
             {data.special_suggestion_text}
@@ -127,7 +128,7 @@ const MainSuggestedComponent = ({ title }) => {
                 </Link>
               </SwiperSlide>
             ))}
-            <SwiperSlide className="slide p10 custom-slide">
+            <SwiperSlide className={style.sweeperSlide}>
               <AllProductsSlide link={"products/"} />
             </SwiperSlide>
           </Swiper>

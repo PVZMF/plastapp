@@ -28,6 +28,7 @@ import CreditPurches from "../pages/CreditPurches";
 import OrderPlace from "../pages/OrderPlace";
 import RoleSelectPage from "../pages/register/RoleSelectPage";
 import RulesConditon from "../pages/rule";
+import Finances from "../pages/profile/finances";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
 
@@ -104,6 +105,11 @@ const Router = createBrowserRouter([
             path: "/profile/orders",
             index: true,
             element: <OrdersPage />,
+          },
+          {
+            path: "/profile/finances",
+            index: true,
+            element: <Finances />,
           }
         ],
       },

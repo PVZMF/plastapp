@@ -92,29 +92,39 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
             </div>
 
 
-            {auth.role === "business"?<div className={style.finish}>
-                <div className={style.itemFinish}>
-                    <TbTruckDelivery />
-                    <div className={style.data}>
-                        <h3>روش و هزینه های ارسال</h3>
-                        <h4>روش،محدوده و هزینه ی ارسال</h4>
-                    </div>
+            {auth.role === "business"?
+                <div className={style.finish}>
+                    <Link to='/profile/sendprice'>
+                        <div className={style.itemFinish}>
+                            <TbTruckDelivery />
+                            <div className={style.data}>
+                                <h3>روش و هزینه های ارسال</h3>
+                                <h4>روش،محدوده و هزینه ی ارسال</h4>
+                            </div>
+                        </div>
+                    </Link>
+                    <Link to='/profile/finances'>
+                        <div className={style.itemFinish}>
+                            <IoReceiptOutline />
+                            <div className={style.data}>
+                                <h3>تسویه حساب و امورمالی</h3>
+                                <h4>شماره حساب، تسویه و تاریخچه مالی</h4>
+                            </div>
+                        </div>
+                    </Link>
+                    <Link to='/profile/customers'>
+                        <div className={style.itemFinish}>
+                            <BiUserPin />
+                            <div className={style.data}>
+                                <h3>مشتریان</h3>
+                                <h4>لیست مشتریان، لیست تجربه خریدها</h4>
+                            </div>
+                        </div>
+                    </Link>
                 </div>
-                <div className={style.itemFinish}>
-                    <IoReceiptOutline />
-                    <div className={style.data}>
-                        <h3>تسویه حساب و امورمالی</h3>
-                        <h4>شماره حساب، تسویه و تاریخچه مالی</h4>
-                    </div>
-                </div>
-                <div className={style.itemFinish}>
-                    <BiUserPin />
-                    <div className={style.data}>
-                        <h3>مشتریان</h3>
-                        <h4>لیست مشتریان، لیست تجربه خریدها</h4>
-                    </div>
-                </div>
-            </div>:null}
+                :
+                null
+            }
         </div>
     )
 }

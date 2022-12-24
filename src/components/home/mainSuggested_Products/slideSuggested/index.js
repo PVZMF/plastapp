@@ -20,7 +20,7 @@ const SlideSuggested = ({
   console.log("price", price);
   return (
     <FlexMainSlidSuggested>
-      <img src={image} alt={title} style={{ borderRadius: "1.5rem" }} />
+      <img src={image} alt={title} style={{ borderRadius: "1.5rem", objectFit: 'contain' }} />
 
       <div className="stars"></div>
 
@@ -39,11 +39,11 @@ const SlideSuggested = ({
       <div className="price-box">
         {priceWithOffer != null ? (
           <del>
-            {toPersianNumber(price)} <span>تومان - </span>
+            {price.toLocaleString('fa-IR')} <span>تومان - </span>
           </del>
         ) : null}
         <h5>
-          {off > 0 ? off : toPersianNumber(price)}
+          {off > 0 ? off : price.toLocaleString('fa-IR')}
           <span> تومان </span>
         </h5>
       </div>
