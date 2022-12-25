@@ -3,7 +3,7 @@ import apiLogin from "./axiosLogin";
 import apiForm from "./axiosForm";
 
 import Storage from "../service/Storage";
-import { async } from './api';
+import { async } from "./api";
 import { PestControlRodentSharp } from "@mui/icons-material";
 
 export async function getAllBanners() {
@@ -102,7 +102,7 @@ export async function getCities() {
 }
 
 export async function createProduct(dataProduct) {
-  const res = await apiLogin.postForm("product/create/", dataProduct);
+  const res = await apiForm.post("product/create/", dataProduct);
   return res.data;
 }
 
@@ -220,15 +220,23 @@ export async function addItemToCart(item, cart_pk) {
   return res.data;
 }
 export async function discountCreate(item) {
-  const res = await apiLogin.post(`https://plastapp.iran.liara.run/product/promotion_create/`, item);
+  const res = await apiLogin.post(
+    `https://plastapp.iran.liara.run/product/promotion_create/`,
+    item
+  );
   return res;
 }
-export async function discountUpdate(item,id) {
-  const res = await apiLogin.patch(`https://plastapp.iran.liara.run/product/promotion_update/${id}/`,item);
+export async function discountUpdate(item, id) {
+  const res = await apiLogin.patch(
+    `https://plastapp.iran.liara.run/product/promotion_update/${id}/`,
+    item
+  );
   return res;
 }
 export async function discountDelete(id) {
-  const res = await apiLogin.delete(`https://plastapp.iran.liara.run/product/promotion_delete/${id}/`);
+  const res = await apiLogin.delete(
+    `https://plastapp.iran.liara.run/product/promotion_delete/${id}/`
+  );
   return res;
 }
 
@@ -243,7 +251,7 @@ export async function infoAccount() {
 }
 
 export async function postOrder(data) {
-  const res = await apiForm.post("order/orders/",data);
+  const res = await apiForm.post("order/orders/", data);
   return res.data;
 }
 

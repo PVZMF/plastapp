@@ -34,7 +34,7 @@ const AddProduct = () => {
   };
   const handleFileInputChange = (e) => {
     let file = e.target.files[0];
-
+    img ? setImg([...img, file]) : setImg(file);
     getBase64(file)
       .then((result) => {
         base64
@@ -221,11 +221,11 @@ const AddProduct = () => {
               </div>
               <div className={style.listImage}>
                 {img.map((item, index) => (
-                  <div className={style.img}>
+                  <div classSName={style.img}>
                     <button onClick={() => handleRemoveImg(item, index)}>
                       -
                     </button>
-                    {item.file.name}
+                    {item.name}
                   </div>
                 ))}
               </div>
