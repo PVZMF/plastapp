@@ -1,7 +1,7 @@
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import SideBarListItem from "./SideBarListItem";
-import sidebarItems from "./sidebarItems";
+import SidebarItems from "./sidebarItems";
 import { ClickAwayListener } from '@mui/base';
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -35,7 +35,7 @@ const Sidebar = ({ isOpenDrawer, setOpenDrawer }) => {
     useEffect(() => {
         setOpenDrawer(false);
     }, [useLocation().pathname]);
-    const sidebarList = sidebarItems(auth, auth.isLogin );
+    const sidebarList = SidebarItems(auth, auth.isLogin );
     return (
 
         <ClickAwayListener onClickAway={(e) => handleOutSide(e, isOpenDrawer, setOpenDrawer)} >

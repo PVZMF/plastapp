@@ -37,7 +37,6 @@ const MainProductsComponent = ({ title }) => {
     getListMostPopularShops()
       .then((results) => {
         setShops(results);
-        console.log(results);
       })
       .finally(() => {});
 
@@ -45,7 +44,10 @@ const MainProductsComponent = ({ title }) => {
       setProduct(data.data);
     });
 
-    getListProduct().then((res) => setProductsList(res));
+    getListProduct().then((res) => {
+      setProductsList(res);
+      console.log("res pouriya", res);
+    });
   }, []);
 
   console.log("products list >>", productsList);
@@ -63,7 +65,7 @@ const MainProductsComponent = ({ title }) => {
       </Typography>
       {/* {console.log(amazingProduct)} */}
       <FlexMainSuggested className="rounded-1 hidden p10 gray">
-        <Box sx={{ width: "25%", background: 'transparent' }}>
+        <Box sx={{ width: "25%", background: "transparent" }}>
           <img
             src={
               product?.product_image
@@ -82,48 +84,50 @@ const MainProductsComponent = ({ title }) => {
             overflow: "hidden",
           }}
         >
-
-        <Swiper
-          breakpoints={{
-            300: {
-              slidesPerView: 2,
-            },
-            768: {
-              slidesPerView: 4,
-            },
-          }}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          slidesPerView={4}
-          spaceBetween={25}
-          navigation={true}
-          modules={[Navigation, Autoplay]}
-          className="custom_swiper "
-        >
-          {productsList?.map((item, index) => {
-            if (index <= 4) {
-              return (
-                <SwiperSlide className={style.sweeperSlide} key={index + 'slideProducts'}>
-                  <SlideSuggested
-                    offer={0}
-                    id={item?.id}
-                    title={item?.title}
-                    image={item?.thumbnails}
-                    price={item?.price}
-                    number={item?.inventory}
-                  />
-                </SwiperSlide>
-              );
-            }
-          })}
-          <SwiperSlide className={style.sweeperSlide}>
-            <AllProductsSlide link="products" />
-          </SwiperSlide>
-        </Swiper>
-      
-      </Box>
+          <Swiper
+            breakpoints={{
+              300: {
+                slidesPerView: 2,
+              },
+              768: {
+                slidesPerView: 4,
+              },
+            }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            slidesPerView={4}
+            spaceBetween={25}
+            navigation={true}
+            modules={[Navigation, Autoplay]}
+            className="custom_swiper "
+          >
+            {productsList?.map((item, index) => {
+              if (index <= 4) {
+                return (
+                  <SwiperSlide
+                    className={style.sweeperSlide}
+                    key={index + "slideProducts"}
+                  >
+                    <SlideSuggested
+                      offer={item.priceWithOffer}
+                      id={item.id}
+                      title={item.title}
+                      image={item.thumbnails}
+                      price={item.price}
+                      number={item.inventory}
+                      creditSale={item.credit_sale}
+                    />
+                  </SwiperSlide>
+                );
+              }
+            })}
+            <SwiperSlide className={style.sweeperSlide}>
+              <AllProductsSlide link="products" />
+            </SwiperSlide>
+          </Swiper>
+        </Box>
       </FlexMainSuggested>
     </GlobalContainer>
   );

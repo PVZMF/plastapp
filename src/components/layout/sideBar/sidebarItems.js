@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import CategoryIcon from "@mui/icons-material/Category";
 import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
@@ -6,87 +6,75 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import GroupsIcon from "@mui/icons-material/Groups";
 import InfoIcon from "@mui/icons-material/Info";
 import WebIcon from "@mui/icons-material/Web";
+import { getCategories } from "../../../api/api";
 
-
-function sidebarItems(auth,isLogin) {
+function SidebarItems(auth, isLogin) {
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    getCategories()
+      .then((res) => {
+        setCategory(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return [
-    { title: "صفحه اصلی", icon: <HomeIcon fontSize="large" />, link: "/", show:true},
+    {
+      title: "صفحه اصلی",
+      icon: <HomeIcon fontSize="large" />,
+      link: "/",
+      show: true
+    },
     {
       title: "دسته بندی‌ها",
       icon: <CategoryIcon fontSize="large" />,
       onClick: () => {},
-      show:true,
-      children: [
-        { label: "محصولات نایلون و نایلکس", icon: "" },
-        { label: " محصولات سلولزی", icon: "", link: "/", onClick: () => {} },
-        {
-          label: "محصولات یک بار مصرف",
-          icon: "",
-          link: "/",
-          onClick: () => {},
-        },
-        {
-          label: "محصولات خانه و آشپزخانه",
-          icon: "",
-          link: "/",
-          onClick: () => {},
-        },
-        {
-          label: "محصولات بهداشت و حمام",
-          icon: "",
-          link: "/",
-          onClick: () => {},
-        },
-        { label: "سفارشات چایی ", icon: "", link: "/", onClick: () => {} },
-        { label: "مواد اولیه ", icon: "", link: "/", onClick: () => {} },
-        {
-          label: "تجهیزات و دستگاه خط تولید  ",
-          icon: "",
-          link: "/",
-          onClick: () => {},
-        },
-      ],
+      show: true,
+      children: category.map((item, index) => {
+        return { label: item.title, link: `/category/${item.id}` };
+      })
     },
     {
       title: "پشتیبانی",
       icon: <HeadsetMicIcon fontSize="large" />,
       onClick: () => {},
-      show:true,
+      show: true,
       children: [
         {
           label: "تماس با پشتیبانی",
           icon: "",
           link: "/support",
-          onClick: () => {},
+          onClick: () => {}
         },
         {
           label: "ارسال تیکت",
           icon: "",
           link: "/support/newticket",
-          onClick: () => {},
+          onClick: () => {}
         },
         {
           label: "تیکت های من",
           icon: "",
           link: "/support/ticketsList",
-          onClick: () => {},
+          onClick: () => {}
         },
         ,
-      ],
+      ]
     },
     {
       title: "فرصت های شغلی",
       icon: <BusinessCenterIcon fontSize="large" />,
       link: "/jobs",
       onClick: () => {},
-      show:true,
+      show: true
     },
     {
       title: "ارسال چک",
       icon: <BusinessCenterIcon fontSize="large" />,
       link: "/cheque",
       onClick: () => {},
-      show: auth.role !== "business" && isLogin,
+      show: auth.role !== "business" && isLogin
     },
     {
       title: "باشگاه مشتریان ",
@@ -107,16 +95,16 @@ function sidebarItems(auth,isLogin) {
       icon: <InfoIcon fontSize="large" />,
       link: "/aboutus",
       onClick: () => {},
-      show:true
+      show: true
     },
     {
       title: " وبگاه ",
       icon: <WebIcon fontSize="large" />,
       link: "/blog",
       onClick: () => {},
-      show:true
-    },
+      show: true
+    }
   ];
 }
 
-export default sidebarItems;
+export default SidebarItems;

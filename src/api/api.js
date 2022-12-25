@@ -3,7 +3,7 @@ import apiLogin from "./axiosLogin";
 import apiForm from "./axiosForm";
 
 import Storage from "../service/Storage";
-import { async } from './api';
+import { async } from "./api";
 import { PestControlRodentSharp } from "@mui/icons-material";
 
 export async function getAllBanners() {
@@ -49,6 +49,10 @@ export async function getCreatePurches() {
 
 export async function getRulesConditon() {
   const res = await api.get("config/rule/");
+  return res.data;
+}
+export async function getAmazingList() {
+  const res = await api.get("/product/amazing_list/");
   return res.data;
 }
 
@@ -98,7 +102,7 @@ export async function getCities() {
 }
 
 export async function createProduct(dataProduct) {
-  const res = await apiLogin.postForm("product/create/", dataProduct);
+  const res = await apiForm.post("product/create/", dataProduct);
   return res.data;
 }
 
@@ -207,7 +211,6 @@ export async function createCart() {
 }
 
 export async function deleteCart(cart_pk) {
-  console.log("deleteeeeeee");
   const res = await api.delete(`carts/${cart_pk}/`);
   return res.data;
 }
@@ -215,6 +218,26 @@ export async function deleteCart(cart_pk) {
 export async function addItemToCart(item, cart_pk) {
   const res = await api.post(`carts/${cart_pk}/items/`, item);
   return res.data;
+}
+export async function discountCreate(item) {
+  const res = await apiLogin.post(
+    `https://plastapp.iran.liara.run/product/promotion_create/`,
+    item
+  );
+  return res;
+}
+export async function discountUpdate(item, id) {
+  const res = await apiLogin.patch(
+    `https://plastapp.iran.liara.run/product/promotion_update/${id}/`,
+    item
+  );
+  return res;
+}
+export async function discountDelete(id) {
+  const res = await apiLogin.delete(
+    `https://plastapp.iran.liara.run/product/promotion_delete/${id}/`
+  );
+  return res;
 }
 
 export async function setProfile(data) {
@@ -228,11 +251,15 @@ export async function infoAccount() {
 }
 
 export async function postOrder(data) {
-  const res = await apiForm.post("order/orders/",data);
+  const res = await apiForm.post("order/orders/", data);
   return res.data;
 }
 
 export async function getOrders() {
   const res = await apiLogin.get("order/orders/");
+  return res.data;
+}
+export async function myShopOrder() {
+  const res = await apiLogin.get("order/my_shop_order/");
   return res.data;
 }

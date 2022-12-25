@@ -129,7 +129,7 @@ const MainSuggestedComponent = ({ title }) => {
               </SwiperSlide>
             ))}
             <SwiperSlide className={style.sweeperSlide}>
-              <AllProductsSlide link={"products/"} />
+              <AllProductsSlide link={"/category/all/products"} />
             </SwiperSlide>
           </Swiper>
         </Box>

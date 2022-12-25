@@ -6,16 +6,18 @@ import Spinner from "../../Spinner/Spinner";
 import getBase64 from "../../../functions/base64";
 import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const NewTicketComponent = () => {
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState("");
   const [base64, setBase64] = useState();
   const navigate = useNavigate();
-
+  const [img, setImg] = useState([]);
   //base64
   const handleFileInputChange = (e) => {
     let file = e.target.files[0];
+    img ? setImg([...img, file]) : setImg(file);
     getBase64(file)
       .then((result) => {
         console.log("result");
@@ -35,14 +37,25 @@ const NewTicketComponent = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.document = base64;
-    console.log(data);
+    console.log(" is ", data);
     createTicket(data)
       .then((res) => {
-        console.log(res);
+        if (res.status === "unread") {
+          toast.success("تیکت با موفقیت ثبت شد");
+        } else {
+          toast.error("تیکت ثبت نشد");
+        }
       })
       .catch((err) => {
         if (err.data.code === "bad_authorization_header") navigate("/login");
       });
+  };
+  const handleRemoveImg = (item, i) => {
+    setImg(() => {
+      return img.filter((imgP, index) => {
+        return imgP !== item;
+      });
+    });
   };
 
   return (
@@ -100,13 +113,54 @@ const NewTicketComponent = () => {
                       marginBottom: "2rem",
                     }}
                   >
-                    <label>بارگزاری فایل</label>
-                    <AttachFileRoundedIcon />
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileInputChange}
-                    />
+                    <label>
+                      بارگزاری فایل
+                      <AttachFileRoundedIcon />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileInputChange}
+                      />
+                    </label>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        flexDirection: "row",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {img.map((item, index) => (
+                        <div
+                          style={{
+                            width: "fit-content",
+
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "flex-start",
+                            padding: " 0.3rem 1rem",
+                            border: " 1px solid #888",
+                            borderRadius: " 0.7rem",
+                            margin: " 0.5rem 0",
+                            maxWidth: "150px",
+                          }}
+                        >
+                          <button
+                            style={{
+                              background: "transparent",
+                              color: "rgb(210, 25, 25)",
+                              fontSize: "clamp(2rem, 2.5vw, 2.5rem)",
+                              margin: "0px",
+                            }}
+                            onClick={() => handleRemoveImg(item, index)}
+                          >
+                            -
+                          </button>
+                          {item.name}
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
@@ -128,6 +182,18 @@ const NewTicketComponent = () => {
         )}
         {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

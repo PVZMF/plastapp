@@ -6,25 +6,17 @@ import pro1 from "../../../assets/imgs/pro1.jpg";
 import pro2 from "../../../assets/imgs/pro2.jpg";
 import style from "./wonderFullyComponent.module.css";
 import { Link } from "react-router-dom";
-import { partialData } from "../../../api/api";
+import { getAmazingList, partialData } from "../../../api/api";
 import { baseUrl } from "../../../api/axios";
-
 const WonderFullyComponent = ({ products }) => {
-  function findMax(array) {
-    var max = 0,
-      a = array.length,
-      counter;
-    for (counter = 0; counter < a; counter++) {
-      if (array[counter].percent > max) {
-        max = array[counter].percent;
-      }
-    }
-    return max;
-  }
-  const MaxPresent = findMax(products);
-
   const [data, setData] = useState([]);
+  const [list, setList] = useState([]);
+  const maxOffer = Math.max(...list.map((o) => o.price_with_offer));
 
+  const offer = (off, price) => {
+    return (off / price) * 100;
+  };
+  console.log(offer(1000, 10000), "%");
   useEffect(() => {
     partialData()
       .then((res) => {
@@ -32,8 +24,10 @@ const WonderFullyComponent = ({ products }) => {
         setData(res.data);
       })
       .finally(() => {});
+    getAmazingList().then((res) => {
+      setList(res);
+    });
   }, []);
-
   return (
     <div className={style.wonderfully}>
       <div className={style.wonderfully_box}>
@@ -47,27 +41,39 @@ const WonderFullyComponent = ({ products }) => {
             {data.mid_banner_text}
           </div>
 
-          <h4>تا {MaxPresent.toLocaleString("fa-IR")} % تخفیف</h4>
+          <h4>تا {maxOffer.toLocaleString("fa-IR")} % تخفیف</h4>
         </div>
         <div className={style.productsList}>
-          {products.map((item, index) => {
-            if (index <= 4) {
-              return (
-                <Link key={index + "wonderfully"} to={`products/${item.id}`}>
-                  <div className={style.product_box}>
-                    <img src={item.img} alt={item.img} />
-                    <p>{item.percent.toLocaleString("fa-IR")}%</p>
-                  </div>
-                </Link>
-              );
-            }
-          })}
+          {list
+            .sort(function (a, b) {
+              return b.price_with_offer - a.price_with_offer;
+            })
+            .map((item, index) => {
+              if (index <= 4) {
+                return (
+                  <Link key={index + "wonderfully"} to={`products/${item.id}`}>
+                    <div className={style.product_box}>
+                      <img src={item.thumbnails} alt={item.thumbnails} />
+                      {item.price_with_offer != null ? (
+                        <p>
+                          {() => {
+                            offer(item.price_with_offer, item.price);
+                          }}
+                          %
+                        </p>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </Link>
+                );
+              }
+            })}
         </div>
 
         <Link to="/products">
           <button className={style.more}>
-            بیش از {products.length.toLocaleString("fa-IR")} کالا{" "}
-            <BsArrowLeft />
+            بیش از {list.length.toLocaleString("fa-IR")} کالا <BsArrowLeft />
           </button>
         </Link>
       </div>
@@ -76,51 +82,3 @@ const WonderFullyComponent = ({ products }) => {
 };
 
 export default WonderFullyComponent;
-
-WonderFullyComponent.defaultProps = {
-  off: 51,
-  products: [
-    {
-      id: 1,
-      img: pro1,
-      name: "testname",
-      percent: 30,
-    },
-    {
-      id: 2,
-      img: pro2,
-      name: "testname",
-      percent: 50,
-    },
-    {
-      id: 3,
-      img: pro1,
-      name: "testname",
-      percent: 20,
-    },
-    {
-      id: 4,
-      img: pro2,
-      name: "testname",
-      percent: 10,
-    },
-    {
-      id: 5,
-      img: pro2,
-      name: "testname",
-      percent: 15,
-    },
-    {
-      id: 6,
-      img: pro1,
-      name: "testname",
-      percent: 57,
-    },
-    {
-      id: 7,
-      img: pro2,
-      name: "testname",
-      percent: 40,
-    },
-  ],
-};

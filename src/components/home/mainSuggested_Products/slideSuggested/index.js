@@ -16,8 +16,8 @@ const SlideSuggested = ({
   image,
   title,
 }) => {
-  const off = price * (priceWithOffer / 100);
-  console.log("price", price);
+  // const off = price * (priceWithOffer / 100);
+  // console.log("off", off);
   return (
     <FlexMainSlidSuggested>
       <img src={image} alt={title} style={{ borderRadius: "1.5rem", objectFit: 'contain' }} />
@@ -43,7 +43,7 @@ const SlideSuggested = ({
           </del>
         ) : null}
         <h5>
-          {off > 0 ? off : price.toLocaleString('fa-IR')}
+          {priceWithOffer > 0 ? priceWithOffer : toPersianNumber(price)}
           <span> تومان </span>
         </h5>
       </div>
