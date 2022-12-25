@@ -103,22 +103,25 @@ const MainPopularComponent = ({}) => {
             modules={[Navigation, Autoplay]}
             className="custom_swiper"
           >
-            {popularProducts.map((item, index) => (
-              <SwiperSlide
-                className={style.sweeperSlide}
-                key={index + "slidePopularProducts"}
-              >
-                <SlideSuggested
-                  offer={item.price_with_offer}
-                  id={item?.id}
-                  title={item?.title}
-                  image={item?.thumbnails}
-                  price={item?.price}
-                  number={item?.inventory}
-                  creditSale={item.credit_sale}
-                />
-              </SwiperSlide>
-            ))}
+            {popularProducts != null
+              ? [...popularProducts].reverse().map((item, index) => (
+                  <SwiperSlide
+                    className={style.sweeperSlide}
+                    key={index + "slidePopularProducts"}
+                  >
+                    <SlideSuggested
+                      image={item.thumbnails}
+                      price={item.price}
+                      title={item.title}
+                      creditSale={item.credit_sale}
+                      shopName={item.shop.name}
+                      priceWithOffer={item.price_with_offer}
+                      id={item.id}
+                      inventory={item.inventory}
+                    />
+                  </SwiperSlide>
+                ))
+              : ""}
             <SwiperSlide className={style.sweeperSlide}>
               <AllProductsSlide link={"/category/all/products"} />
             </SwiperSlide>
