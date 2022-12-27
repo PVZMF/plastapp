@@ -18,10 +18,10 @@ const Products = () => {
   const [categorys, setCategorys] = useState([]);
   const [listProducts, setListProducts] = useState([]);
   const [filtterdlistProducts, setFiltterdlistProducts] = useState([]);
-  const [filtterdlistProductsByStore, setFiltterdlistProductsByStore] =
-    useState([]);
+  const [filtterdlistProductsByStore, setFiltterdlistProductsByStore] =useState([]);
   const [searchParamas, setSearchParams] = useSearchParams("");
-  console.log("shopid = ", listProducts);
+  const [loading, setLoading] = useState(true);
+ 
 
   useEffect(() => {
     //Products
@@ -31,6 +31,7 @@ const Products = () => {
         if (location.pathname == `/shop/${shopid}/products`) {
           const filterByStore = res.filter((item) => item.shop.id == shopid);
           setFiltterdlistProductsByStore(filterByStore);
+         
         }
       })
       .catch((err) => console.log(err));
@@ -42,17 +43,8 @@ const Products = () => {
       })
       .finally(() => {});
   }, []);
-  console.log("filtterdlistProductsByStore", filtterdlistProductsByStore);
-  useEffect(() => {
-    const data = listProducts.filter(
-      (item) => item.category.id == parseInt(id)
-    );
-    setFiltterdlistProducts(data);
-  }, [listProducts]);
-  const filteredProductsByStore = () => {
-    const akbar = listProducts.filter((item) => item.shop.id == shopid);
-    // filtterdlistProductsByStore
-  };
+
+ 
   const changeCategory = (id) => {
     const data = listProducts.filter(
       (item) => item.category.id == parseInt(id)
@@ -63,6 +55,7 @@ const Products = () => {
   useEffect(() => {
     console.log(searchParamas.get("filter"));
   }, [searchParamas.get("filter")]);
+ 
   return (
     <div className={style.products}>
       <div className={style.sidebar}>
@@ -147,18 +140,21 @@ const Products = () => {
             : ""}
           {id != "all" && searchParamas.get("filter") == null
             ? [...filtterdlistProducts].reverse().map((item, index) => {
-                return (
-                  <CardProduct
-                    item={item}
-                    key={index + "products"}
-                    categorys={categorys}
-                  />
-                );
+                // return (
+                //   <CardProduct
+                //     item={item}
+                //     key={index + "products"}
+                //     categorys={categorys}
+                //   />
+                // );
+                console.log("item filter daie" , item)
               })
             : ""}
+
+
           {location.pathname == `/shop/${shopid}/products` &&
-          filteredProductsByStore != []
-            ? filteredProductsByStore.map((item, index) => {
+          filtterdlistProductsByStore != [] 
+            ? filtterdlistProductsByStore.map((item, index) => {
                 return (
                   <CardProduct
                     item={item}
@@ -168,6 +164,7 @@ const Products = () => {
                 );
               })
             : ""}
+
           {/*Show all products filtered by user search  */}
           {listProducts
             .filter((item) => {

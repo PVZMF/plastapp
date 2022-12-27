@@ -81,7 +81,7 @@ const WonderFullyComponent = ({ products }) => {
             })}
         </div>
 
-        <Link to="/products">
+        <Link to="/category/all/products">
           <button className={style.more}>
             بیش از {list.length.toLocaleString("fa-IR")} کالا <BsArrowLeft />
           </button>
