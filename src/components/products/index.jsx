@@ -140,20 +140,20 @@ const Products = () => {
             : ""}
           {id != "all" && searchParamas.get("filter") == null
             ? [...filtterdlistProducts].reverse().map((item, index) => {
-                // return (
-                //   <CardProduct
-                //     item={item}
-                //     key={index + "products"}
-                //     categorys={categorys}
-                //   />
-                // );
+                return (
+                  <CardProduct
+                    item={item}
+                    key={index + "products"}
+                    categorys={categorys}
+                  />
+                );
                 console.log("item filter daie" , item)
               })
             : ""}
 
 
           {location.pathname == `/shop/${shopid}/products` &&
-          filtterdlistProductsByStore != [] 
+          filtterdlistProductsByStore != [] && searchParamas.get("filter") ==null
             ? filtterdlistProductsByStore.map((item, index) => {
                 return (
                   <CardProduct
