@@ -6,11 +6,12 @@ import { BiMessageDetail } from "react-icons/bi";
 import Profile from "../../../../../assets/imgs/shop_1.jpg";
 import Product from "../../../../../assets/imgs/pesteh.jpg";
 import Product2 from "../../../../../assets/imgs/shalwar.jpg";
-
 import { FlexMainReceipt } from "./styleReceipt";
 import { addItem } from "../../../../../toolkit/slices/cart.slice";
 
 import { getProductDetail } from "../../../../../api/api";
+import { toPersianNumber } from "../../../../../functions/numbers";
+import { fontSize } from "@mui/system";
 
 const Receipt = ({ ProductsList }) => {
   const { id } = useParams();
@@ -46,7 +47,10 @@ const Receipt = ({ ProductsList }) => {
 
         <div className="btns-receipt">
           <button className="dialogue">
-            <BiMessageDetail /> گفت و گو
+            <p style={{ color: "red", fontSize: "13px" }}>هزینه ارسال:</p>
+            {item && item.delivery_cost != 0
+              ? toPersianNumber(item.delivery_cost)
+              : "رایگان"}
           </button>
           <button className="more-data">اطلاعات بیشتر</button>
         </div>

@@ -69,7 +69,7 @@ const TikesListComponent = ({ list }) => {
             </div>
 
             {ticket
-              ? ticket.map((item, index) => {
+              ? [...ticket].reverse().map((item, index) => {
                   return (
                     <Link to={`/support/ticketsList/${item.id}`}>
                       <Ticket data={item} />

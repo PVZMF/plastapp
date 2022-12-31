@@ -110,7 +110,6 @@ export async function deleteProduct(id) {
   return res.data;
 }
 
-
 export async function createShop(dataShop) {
   const res = await apiForm.post("shop/create/", dataShop);
   return res.data;
