@@ -14,6 +14,7 @@ api.interceptors.request.use(
     // Do something before request is sent
     const st = Storage();
     config.headers["Authorization"] = `Bearer ${st.accessToken}`;
+    // config.headers["Authorization"] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyNTY4MTkyLCJpYXQiOjE2NzI1Njc4OTIsImp0aSI6IjYzZWRiZjA0ZjBkMTRlMzI4ODRhZmQzYjdjZDdlY2ZlIiwidXNlcl9pZCI6Mzd9.Nymyt0KYqVd_lChrLL7Z9EXxtq0D4DqXOkxeQ1yMdWY`;
     config.headers["Content-Type"] = "multipart/form-data";
     // config.paramsSerializer = (params) => {
     //   return Qs.stringify(params, {arrayFormat: 'Object'})

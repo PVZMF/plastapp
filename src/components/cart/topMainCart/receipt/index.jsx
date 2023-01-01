@@ -5,7 +5,7 @@ import { FlexMainReceipt } from "./styleReceipt";
 import { stepPlus, stepDefault, setIdCart, sendToCart, setModal } from "../../../../toolkit/slices/cart.slice";
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { addItemToCart, createCart, deleteCart } from "../../../../api/api";
+import {addItemToCart, createCart, deleteCart, gotToBank} from "../../../../api/api";
 
 
 async function sendItem(items, idCart) {
@@ -30,11 +30,14 @@ const Receipt = ({open, setOpen}) => {
   const offers = state.offers ? state.offers : 0;
 
   const handleNextStep = () => {
+    console.log('step',state.step)
+
     if (!auth.isLogin) {
       dispatch(stepDefault());
       navigate("../login")
     }
     else if (state.step > 3) {
+      gotToBank().then((res) => console.log('mRes',res))
       dispatch(stepDefault());
     }
     else if (state.selectedItems.length > 0) {

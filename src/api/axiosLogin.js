@@ -18,6 +18,7 @@ api.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     config.headers["Authorization"] = `Bearer ${st.accessToken}`;
+    // config.headers["Authorization"] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyNTY4MTkyLCJpYXQiOjE2NzI1Njc4OTIsImp0aSI6IjYzZWRiZjA0ZjBkMTRlMzI4ODRhZmQzYjdjZDdlY2ZlIiwidXNlcl9pZCI6Mzd9.Nymyt0KYqVd_lChrLL7Z9EXxtq0D4DqXOkxeQ1yMdWY`;
     return config;
   },
   function (error) {
@@ -44,7 +45,7 @@ api.interceptors.response.use(
         })
         .catch((error) => console.log(error));
     }
-    
+
     return Promise.reject(error.response);
   }
 );

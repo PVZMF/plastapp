@@ -263,3 +263,9 @@ export async function myShopOrder() {
   const res = await apiLogin.get("order/my_shop_order/");
   return res.data;
 }
+
+export const gotToBank = async() =>{
+  // const tokenStr = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjcyNTcwMjk3LCJpYXQiOjE2NzI1Njc4OTIsImp0aSI6Ijg1MTVmMTAwZmJhYzQzNDJiMWQ1MDcxNDg2NzFkNmViIiwidXNlcl9pZCI6Mzd9.GVsheOM3gyVAYXVNDZljkFGBBQj_s7IY5xXqL7uxEK8";
+  const response = await api.get('order/to_bank/25')
+  return response.data
+}
