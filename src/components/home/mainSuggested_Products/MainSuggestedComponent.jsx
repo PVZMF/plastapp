@@ -76,7 +76,7 @@ const MainSuggestedComponent = ({ title }) => {
               justifyContent: "center",
               fontSize: "clamp(.8rem, 1.5vw, 1.5rem)",
               color: "#fff",
-              textAlign: 'center',
+              textAlign: "center",
             }}
           >
             {data.special_suggestion_text}
@@ -114,22 +114,20 @@ const MainSuggestedComponent = ({ title }) => {
           >
             {[...amazingProduct].reverse().map((item, index) => (
               <SwiperSlide className={style.sweeperSlide} key={index}>
-                <Link to={`products/${index + 1}`}>
-                  <SlideSuggested
-                    image={item.thumbnails}
-                    price={item.price}
-                    title={item.title}
-                    creditSale={item.credit_sale}
-                    shopName={item.shop.name}
-                    priceWithOffer={item.price_with_offer}
-                    id={item.id}
-                    inventory={item.inventory}
-                  />
-                </Link>
+                <SlideSuggested
+                  image={item.thumbnails}
+                  price={item.price}
+                  title={item.title}
+                  creditSale={item.credit_sale}
+                  shopName={item.shop.name}
+                  priceWithOffer={item.price_with_offer}
+                  id={item.id}
+                  inventory={item.inventory}
+                />
               </SwiperSlide>
             ))}
-            <SwiperSlide className={style.sweeperSlide}>
-              <AllProductsSlide link={"/category/all/products"} />
+            <SwiperSlide className="slide p10 custom-slide">
+              <AllProductsSlide link={`/category/all/products`} />
             </SwiperSlide>
           </Swiper>
         </Box>

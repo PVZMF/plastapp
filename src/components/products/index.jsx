@@ -3,21 +3,36 @@ import CardProduct from "./cardProduct";
 import { getCategories, getListProduct } from "../../api/api";
 // Style
 import style from "./products.module.css";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  useParams,
+  useSearchParams,
+  useLocation,
+} from "react-router-dom";
 
 const Products = () => {
+  const location = useLocation();
+  console.log("location", location.pathname);
   const navigate = useNavigate();
-  const { id } = useParams();
-  console.log("params = ", id);
+  const { id, shopid } = useParams();
   const [categorys, setCategorys] = useState([]);
   const [listProducts, setListProducts] = useState([]);
   const [filtterdlistProducts, setFiltterdlistProducts] = useState([]);
+  const [filtterdlistProductsByStore, setFiltterdlistProductsByStore] =useState([]);
   const [searchParamas, setSearchParams] = useSearchParams("");
+  const [loading, setLoading] = useState(true);
+ 
+
   useEffect(() => {
     //Products
     getListProduct()
       .then((res) => {
         setListProducts(res);
+        if (location.pathname == `/shop/${shopid}/products`) {
+          const filterByStore = res.filter((item) => item.shop.id == shopid);
+          setFiltterdlistProductsByStore(filterByStore);
+         
+        }
       })
       .catch((err) => console.log(err));
 
@@ -28,22 +43,19 @@ const Products = () => {
       })
       .finally(() => {});
   }, []);
-  useEffect(() => {
-    const data = listProducts.filter(
-      (item) => item.category.id == parseInt(id)
-    );
-    setFiltterdlistProducts(data);
-  }, [listProducts]);
+
+ 
   const changeCategory = (id) => {
     const data = listProducts.filter(
       (item) => item.category.id == parseInt(id)
     );
     setFiltterdlistProducts(data);
-    navigate(`/category/${id}`);
+    navigate(`/category/${id}/products`);
   };
   useEffect(() => {
     console.log(searchParamas.get("filter"));
   }, [searchParamas.get("filter")]);
+ 
   return (
     <div className={style.products}>
       <div className={style.sidebar}>
@@ -135,8 +147,24 @@ const Products = () => {
                     categorys={categorys}
                   />
                 );
+                console.log("item filter daie" , item)
               })
             : ""}
+
+
+          {location.pathname == `/shop/${shopid}/products` &&
+          filtterdlistProductsByStore != [] && searchParamas.get("filter") ==null
+            ? filtterdlistProductsByStore.map((item, index) => {
+                return (
+                  <CardProduct
+                    item={item}
+                    key={index + "products"}
+                    categorys={categorys}
+                  />
+                );
+              })
+            : ""}
+
           {/*Show all products filtered by user search  */}
           {listProducts
             .filter((item) => {

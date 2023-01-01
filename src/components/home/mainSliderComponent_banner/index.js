@@ -10,21 +10,19 @@ import { Pagination, Autoplay } from "swiper";
 
 import { MainSliderContainer } from "./styledMainSlider";
 
-import { getSliderImage } from "../../../api/api"
+import { getSliderImage } from "../../../api/api";
 
 import img_2 from "../../../assets/imgs/mainSlider_2.webp";
-import { useState } from 'react';
+import { useState } from "react";
 
 const MainSliderComponent = () => {
-
   const [imgSlider, setImgSlider] = useState([]);
   useEffect(() => {
     Promise.all([getSliderImage()])
       .then((results) => {
         setImgSlider(results[0]);
       })
-      .finally(() => {
-      });
+      .finally(() => {});
   }, []);
 
   return (
@@ -51,11 +49,11 @@ const MainSliderComponent = () => {
               </SwiperSlide>
             );
           })
-        ) :
+        ) : (
           <SwiperSlide className="slide">
             <img src={img_2} alt="slider" />
           </SwiperSlide>
-        }
+        )}
       </Swiper>
     </MainSliderContainer>
   );

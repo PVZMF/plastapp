@@ -28,7 +28,7 @@ const DownMainCart = () => {
           <h4>شاید بپسندید !</h4>
           <h5>محصولات با ارسال رایگان</h5>
         </div>
-        <Link to="/products">
+        <Link to="/category/all/products">
           <button>همه محصولات</button>
         </Link>
       </div>

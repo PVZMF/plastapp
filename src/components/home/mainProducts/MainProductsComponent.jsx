@@ -103,28 +103,31 @@ const MainProductsComponent = ({ title }) => {
             modules={[Navigation, Autoplay]}
             className="custom_swiper "
           >
-            {productsList?.map((item, index) => {
-              if (index <= 4) {
-                return (
-                  <SwiperSlide
-                    className={style.sweeperSlide}
-                    key={index + "slideProducts"}
-                  >
-                    <SlideSuggested
-                      offer={item.priceWithOffer}
-                      id={item.id}
-                      title={item.title}
-                      image={item.thumbnails}
-                      price={item.price}
-                      number={item.inventory}
-                      creditSale={item.credit_sale}
-                    />
-                  </SwiperSlide>
-                );
-              }
-            })}
+            {productsList != null
+              ? [...productsList].reverse().map((item, index) => {
+                  if (index <= 4) {
+                    return (
+                      <SwiperSlide
+                        className={style.sweeperSlide}
+                        key={index + "slideProducts"}
+                      >
+                        <SlideSuggested
+                          priceWithOffer={item.price_with_offer}
+                          id={item.id}
+                          title={item.title}
+                          image={item.thumbnails}
+                          price={item.price}
+                          inventory={item.inventory}
+                          creditSale={item.credit_sale}
+                          shopName={item.shop.name}
+                        />
+                      </SwiperSlide>
+                    );
+                  }
+                })
+              : ""}
             <SwiperSlide className={style.sweeperSlide}>
-              <AllProductsSlide link="products" />
+              <AllProductsSlide link="/category/all/products" />
             </SwiperSlide>
           </Swiper>
         </Box>

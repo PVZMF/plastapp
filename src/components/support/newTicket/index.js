@@ -7,12 +7,11 @@ import getBase64 from "../../../functions/base64";
 import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-
 const NewTicketComponent = () => {
+  const navigate = useNavigate();
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState("");
   const [base64, setBase64] = useState();
-  const navigate = useNavigate();
   const [img, setImg] = useState([]);
   //base64
   const handleFileInputChange = (e) => {
@@ -40,13 +39,16 @@ const NewTicketComponent = () => {
     console.log(" is ", data);
     createTicket(data)
       .then((res) => {
+        navigate("/support/ticketsList");
         if (res.status === "unread") {
           toast.success("تیکت با موفقیت ثبت شد");
-        } else {
-          toast.error("تیکت ثبت نشد");
         }
       })
       .catch((err) => {
+        console.log("fdsf jksdfsdjk fsdf ", err);
+        if (err.status == 400 || err.status == 401) {
+          toast.error("تیکت ثبت نشد");
+        }
         if (err.data.code === "bad_authorization_header") navigate("/login");
       });
   };
@@ -163,7 +165,19 @@ const NewTicketComponent = () => {
                     </div>
                   </div>
 
-                  <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
+                  <p>
+                    حداکثر اندازه هر فایل 400 کیلوبایت و نهایتا سه فایل ارسال
+                    فرمایید
+                  </p>
+                  <p
+                    style={{
+                      color: "red",
+                      marginTop: "20px",
+                      fontSize: "14px",
+                    }}
+                  >
+                    ارسال فایل اجباری است{" "}
+                  </p>
                 </div>
               </div>
               <div

@@ -32,7 +32,6 @@ import Finances from "../pages/profile/finances";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
 
-
 // const auth = useSelector(state => state.auth);
 const Router = createBrowserRouter([
   {
@@ -52,7 +51,11 @@ const Router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/category/:id",
+        path: "/category/:id/products",
+        element: <ProductsPage />,
+      },
+      {
+        path: "/shop/:shopid/products",
         element: <ProductsPage />,
       },
       {
@@ -110,7 +113,7 @@ const Router = createBrowserRouter([
             path: "/profile/finances",
             index: true,
             element: <Finances />,
-          }
+          },
         ],
       },
       {
@@ -167,10 +170,9 @@ const Router = createBrowserRouter([
         path: "/profile/storregiser",
         index: true,
         element: <StoreRegisterPage />,
-      }
-    ]
-  }
-
+      },
+    ],
+  },
 ]);
 
 export default Router;

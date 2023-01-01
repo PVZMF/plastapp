@@ -66,13 +66,16 @@ const AddProduct = () => {
     console.log("base64", base64);
     createProduct(dataW)
       .then((result) => {
-        toast.success("محصول با موفقیت ثبت شد");
+        toast.success("محصول با موفقیت ثبت و پس از تایید منتشر میگردد");
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
-        toast.error("محصول ثبت نشد");
-        setLoading(false);
+        console.log("err err err", err);
+        if (err.status == 400 || err.status == 401) {
+          console.log(err);
+          toast.error("محصول ثبت نشد");
+          setLoading(false);
+        }
       });
   };
 

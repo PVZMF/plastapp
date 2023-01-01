@@ -8,15 +8,16 @@ import style from "./wonderFullyComponent.module.css";
 import { Link } from "react-router-dom";
 import { getAmazingList, partialData } from "../../../api/api";
 import { baseUrl } from "../../../api/axios";
+import { toPersianNumber } from "../../../functions/numbers";
 const WonderFullyComponent = ({ products }) => {
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
   const maxOffer = Math.max(...list.map((o) => o.price_with_offer));
+  const maxOfferPrice = Math.max(...list.map((o) => o.price));
 
   const offer = (off, price) => {
     return (off / price) * 100;
   };
-  console.log(offer(1000, 10000), "%");
   useEffect(() => {
     partialData()
       .then((res) => {
@@ -41,7 +42,13 @@ const WonderFullyComponent = ({ products }) => {
             {data.mid_banner_text}
           </div>
 
-          <h4>تا {maxOffer.toLocaleString("fa-IR")} % تخفیف</h4>
+          <h4>
+            تا %
+            {offer(maxOfferPrice - maxOffer, maxOfferPrice).toLocaleString(
+              "fa-IR"
+            )}{" "}
+            تخفیف
+          </h4>
         </div>
         <div className={style.productsList}>
           {list
@@ -56,9 +63,12 @@ const WonderFullyComponent = ({ products }) => {
                       <img src={item.thumbnails} alt={item.thumbnails} />
                       {item.price_with_offer != null ? (
                         <p>
-                          {() => {
-                            offer(item.price_with_offer, item.price);
-                          }}
+                          {toPersianNumber(
+                            offer(
+                              item.price - item.price_with_offer,
+                              item.price
+                            )
+                          )}
                           %
                         </p>
                       ) : (
@@ -71,7 +81,7 @@ const WonderFullyComponent = ({ products }) => {
             })}
         </div>
 
-        <Link to="/products">
+        <Link to="/category/all/products">
           <button className={style.more}>
             بیش از {list.length.toLocaleString("fa-IR")} کالا <BsArrowLeft />
           </button>

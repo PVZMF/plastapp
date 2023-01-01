@@ -6,6 +6,7 @@ import User from "./User";
 import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
 import { createTicketMessage, ticketDetail } from "../../../../api/api";
 import getBase64 from "../../../../functions/base64";
+import { toPersianNumber } from "../../../../functions/numbers";
 
 const TicketComponent = ({ list }) => {
   const [data, setData] = useState();
@@ -47,7 +48,9 @@ const TicketComponent = ({ list }) => {
         <div className={style.header}>
           <div className={style.message}>
             <h5>{ticketInfo?.title}</h5>
-            <h4>تیکت {ticketInfo?.ticket_number.toLocaleString("fa-IR")}</h4>
+            <h4>
+              تیکت {ticketInfo ? toPersianNumber(ticketInfo.ticket_number) : ""}
+            </h4>
           </div>
           <div className={style.status}>
             <h5>
@@ -62,7 +65,9 @@ const TicketComponent = ({ list }) => {
             </h5>
             <h5>
               زمان ایجاد{" "}
-              <span>{ticketInfo?.created.toLocaleString("fa-IR")}</span>
+              <span>
+                {ticketInfo ? toPersianNumber(ticketInfo.created) : ""}
+              </span>
             </h5>
           </div>
         </div>
@@ -103,7 +108,13 @@ const TicketComponent = ({ list }) => {
                 />
               </div>
 
-              <p>حجم فایل نباید بیشتر از 400 کیلوبایت باشد</p>
+              <p>
+                حداکثر اندازه هر فایل 400 کیلوبایت و نهایتا سه فایل ارسال
+                فرمایید
+              </p>
+              <p style={{ color: "red", marginTop: "20px", fontSize: "14px" }}>
+                ارسال فایل اجباری است{" "}
+              </p>
             </div>
 
             <button type="submit">ارسال</button>

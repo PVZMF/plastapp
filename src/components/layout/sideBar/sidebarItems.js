@@ -24,7 +24,7 @@ function SidebarItems(auth, isLogin) {
       title: "صفحه اصلی",
       icon: <HomeIcon fontSize="large" />,
       link: "/",
-      show: true
+      show: true,
     },
     {
       title: "دسته بندی‌ها",
@@ -32,8 +32,8 @@ function SidebarItems(auth, isLogin) {
       onClick: () => {},
       show: true,
       children: category.map((item, index) => {
-        return { label: item.title, link: `/category/${item.id}` };
-      })
+        return { label: item.title, link: `/category/${item.id}/products` };
+      }),
     },
     {
       title: "پشتیبانی",
@@ -45,65 +45,65 @@ function SidebarItems(auth, isLogin) {
           label: "تماس با پشتیبانی",
           icon: "",
           link: "/support",
-          onClick: () => {}
+          onClick: () => {},
         },
         {
           label: "ارسال تیکت",
           icon: "",
           link: "/support/newticket",
-          onClick: () => {}
+          onClick: () => {},
         },
         {
           label: "تیکت های من",
           icon: "",
           link: "/support/ticketsList",
-          onClick: () => {}
+          onClick: () => {},
         },
         ,
-      ]
+      ],
     },
     {
       title: "فرصت های شغلی",
       icon: <BusinessCenterIcon fontSize="large" />,
       link: "/jobs",
       onClick: () => {},
-      show: true
+      show: true,
     },
     {
       title: "ارسال چک",
       icon: <BusinessCenterIcon fontSize="large" />,
       link: "/cheque",
       onClick: () => {},
-      show: auth.role !== "business" && isLogin
+      show: auth.role !== "business" && isLogin,
     },
     {
       title: "باشگاه مشتریان ",
       icon: <GroupsIcon fontSize="large" />,
       link: "/",
       onClick: () => {},
-      show: auth.role !== "business" && isLogin
+      show: auth.role !== "business" && isLogin,
     },
     {
       title: "افزودن محصول",
       icon: <GroupsIcon fontSize="large" />,
       link: "/profile/addproduct",
       onClick: () => {},
-      show: auth.role === "business" && isLogin
+      show: auth.role === "business" && isLogin,
     },
     {
       title: "درباره ما ",
       icon: <InfoIcon fontSize="large" />,
       link: "/aboutus",
       onClick: () => {},
-      show: true
+      show: true,
     },
     {
       title: " وبگاه ",
       icon: <WebIcon fontSize="large" />,
       link: "/blog",
       onClick: () => {},
-      show: true
-    }
+      show: true,
+    },
   ];
 }
 

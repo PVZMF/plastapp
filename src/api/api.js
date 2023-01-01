@@ -105,6 +105,10 @@ export async function createProduct(dataProduct) {
   const res = await apiForm.post("product/create/", dataProduct);
   return res.data;
 }
+export async function deleteProduct(id) {
+  const res = await apiLogin.delete(`product/delete/${id}/`);
+  return res.data;
+}
 
 export async function createShop(dataShop) {
   const res = await apiForm.post("shop/create/", dataShop);
