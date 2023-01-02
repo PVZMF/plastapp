@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.1.3",
     "axios-jwt": "^2.1.1",
+    "jalali-moment": "^3.3.11",
     "lighten-darken-color": "^1.0.0",
     "qs": "^6.11.0",
     "react": "^18.2.0",

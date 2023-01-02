@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from 'react';
 // Icons
 import { BiSearch } from 'react-icons/bi';
-import { getOrders } from '../../../api/api';
+import { getOrders, myShopOrder } from '../../../api/api';
 // Style
 import style from './orders.module.css'
-
-const Orders = ({ listOrder }) => {
-
+import { useSelector } from 'react-redux';
+import { toPersianNumber } from '../../../functions/numbers';
+import moment from 'jalali-moment';
+const Orders = () => {
+ const role = useSelector(state=>state.auth.role)
     const [search, setSearch] = useState('');
-    const totalOrder = listOrder.reduce(((total, item) => item.status === 1 ? total = total + 1 : total), 0);
-    const totalCancel = listOrder.reduce(((total, item) => item.status === 2 ? total = total + 1 : total), 0);
-    const totalReturned = listOrder.reduce(((total, item) => item.status === 0 ? total = total + 1 : total), 0);
     const [infoOrder,setInfoOrder] = useState();
     useEffect(()=>{
-        getOrders().then(res => setInfoOrder(res));
+       
+        
+             getOrders().then(res => {setInfoOrder(res)})
+       
+       
     },[])
+    const totalCancel = infoOrder?infoOrder.reduce(((total, item) => item.payment_status === "C" ? total = total + 1 : total), 0):"";
+    const totalReturned = infoOrder?infoOrder.reduce(((total, item) => item.payment_status === "F" ? total = total + 1 : total), 0):"";
+    const totalCompeleted = infoOrder?infoOrder.reduce(((total, item) => item.payment_status === "P" ? total = total + 1 : total), 0):"";
     
+    const getDeliveryTime = (placedAt,deliveryTime)=>{
+            let startDate = new Date(placedAt.slice(0,10));
+            let day = (60 * 60 * 24 * 1000) * deliveryTime;
+            let endDate = new Date(startDate.getTime() + day);
+            return toPersianNumber(moment(endDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'))
+    }
+      
     return (
         <div className={style.orders}>
             <div className={style.boxOrder}>
@@ -27,19 +40,19 @@ const Orders = ({ listOrder }) => {
 
                     <div className={style.items}>
                         <div className={style.item}>
-                            <span>{totalCancel}</span>
+                            <span>{totalCancel !=null ? totalCancel:""}</span>
                             <h5>لغو شده</h5>
                         </div>
                         <div className={style.item}>
-                            <span>{totalReturned}</span>
+                            <span>{totalReturned !=null? totalReturned:""}</span>
                             <h5>مرجوع شده</h5>
                         </div>
                         <div className={style.item}>
-                            <span>{listOrder?.length}</span>
+                            <span>{totalCompeleted ?totalCompeleted:""}</span>
                             <h5>فاکتورها</h5>
                         </div>
                         <div className={style.item}>
-                            <span>{totalOrder}</span>
+                            <span>{infoOrder?infoOrder.length:""}</span>
                             <h5>سفارشات</h5>
                         </div>
                     </div>
@@ -52,49 +65,55 @@ const Orders = ({ listOrder }) => {
                             <th><h4>تاریخ ثبت سفارش</h4></th>
                             <th><h4>تاریخ ارسال</h4></th>
                             <th><h4>قیمت</h4></th>
+                            {role=="business"?<th><h4>کمیسیون</h4></th> :""}
                             <th><h4>کد سفارش</h4></th>
                             <th><h4>نام خریدار</h4></th>
                             <th><h4>وضعیت</h4></th>
                         </thead>
 
                         <tbody>
-                            {listOrder.filter(item => {
+                            {infoOrder?infoOrder.filter(item => {
                                 if (search === '') {
                                     return item;
-                                } else if (
-                                    item.name.toLowerCase().includes(search.toLowerCase())
+                                } 
+                                else if (
+                                     item.items[0].product.title.toLowerCase().includes(search.toLowerCase())||
+                                   `${item.id}`.toLowerCase().includes(search.toLowerCase())
                                 ) {
                                     return item;
                                 }
+                               
                             }).map(item => (
                                 <tr key={item.id}>
                                     <td>
-                                        <h3>{item.name}</h3>
+                                        <h3>{item.items[0].product.title}</h3>
                                     </td>
                                     <td>
-                                        <h3>{item.date}</h3>
+                                        <h3>{toPersianNumber(moment(item.placed_at.slice(0,10), 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD'))}</h3>
                                     </td>
                                     <td>
-                                        <h3>{item.date_send}</h3>
+                                        <h3>{getDeliveryTime(item.placed_at,item.items[0].product.delivery_time)}</h3>
                                     </td>
                                     <td>
-                                        <h3>{item.price.toLocaleString('fa-IR')} تومان</h3>
+                                        <h3>{toPersianNumber(item.items[0].product.price)} تومان</h3>
                                     </td>
-                                    <td><h3>{item.code_order}</h3>
+                            {role =="business"?<td><h3>{item.items.commission !=null? toPersianNumber(item.commission):toPersianNumber(0)}</h3></td>:""}
+                                    
+                                    <td><h3>{item.id}</h3>
                                     </td>
                                     <td>
-                                        <h3>{item.username}</h3>
+                                        <h3>{item.customer}</h3>
                                     </td>
                                     <td>
                                         <h3 className={item.status === 1 ? style.itis : item.status === 0 ? style.noting : ''}>
-                                            {item.status === 1 && 'پرداخت شده'}
-                                            {item.status === 2 && 'لغو شده'}
-                                            {item.status === 0 && 'مرجوع شده'}
+                                            {item.payment_status === "P" && 'پرداخت شده'}
+                                            {item.payment_status === "C" && 'لغو شده'}
+                                            {item.payment_status === "F" && 'مرجوع شده'}
                                         </h3>
                                     </td>
                                 </tr>
                             ))
-                            }
+                           :"" }
                         </tbody>
                     </table>
                 </div>
@@ -104,68 +123,3 @@ const Orders = ({ listOrder }) => {
 }
 
 export default Orders;
-
-Orders.defaultProps = {
-    listOrder: [
-        {
-            id: 1,
-            name: 'پلاستیک فریزر',
-            date: '1400/02/15',
-            date_send: '1400/02/15',
-            price: 50000,
-            code_order: 1356,
-            username: 'متین بهرامی',
-            status: 1,
-        },
-        {
-            id: 1,
-            name: 'پیراهن',
-            date: '1399/05/12',
-            date_send: '1400/02/15',
-            price: 650000,
-            code_order: 2022,
-            username: 'سعید کریمی',
-            status: 0,
-        },
-        {
-            id: 1,
-            name: 'موبایل',
-            date: '1401/12/09',
-            date_send: '1400/02/15',
-            price: 200000,
-            code_order: 1988,
-            username: 'مرضیه اسلامی',
-            status: 1,
-        },
-        {
-            id: 11,
-            name: 'پلاستیک فریزر',
-            date: '1400/02/15',
-            date_send: '1400/02/15',
-            price: 50000,
-            code_order: 1356,
-            username: 'متین بهرامی',
-            status: 2,
-        },
-        {
-            id: 12,
-            name: 'پیراهن',
-            date: '1399/05/12',
-            date_send: '1400/02/15',
-            price: 650000,
-            code_order: 2022,
-            username: 'سعید کریمی',
-            status: 0,
-        },
-        {
-            id: 13,
-            name: 'موبایل',
-            date: '1401/12/09',
-            date_send: '1400/02/15',
-            price: 200000,
-            code_order: 1988,
-            username: 'مرضیه اسلامی',
-            status: 1,
-        },
-    ]
-}
