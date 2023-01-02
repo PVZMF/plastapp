@@ -13,7 +13,9 @@ function SidebarItems(auth, isLogin) {
   useEffect(() => {
     getCategories()
       .then((res) => {
-        setCategory(res);
+        const categoryWithAll=res
+        categoryWithAll.unshift({title:"همه محصولات" , id:"all"})
+        setCategory(categoryWithAll);
       })
       .catch((err) => {
        

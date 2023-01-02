@@ -33,6 +33,14 @@ const Products = () => {
           setFiltterdlistProductsByStore(filterByStore);
          
         }
+        if (location.pathname == `/category/${id}/products`) {
+          const data = res.filter(
+            (item) => item.category.id == parseInt(id)
+          );
+          console.log("data is data is data ",data)
+          setFiltterdlistProducts(data);
+         
+        }
       })
       .catch((err) =>console.log(err))
 
@@ -43,7 +51,23 @@ const Products = () => {
       })
       .finally(() => {});
   }, []);
+ useEffect(()=>{
 
+  if (location.pathname == `/shop/${shopid}/products`) {
+    const filterByStore = listProducts.filter((item) => item.shop.id == shopid);
+    setFiltterdlistProductsByStore(filterByStore);
+   
+  }
+  if (location.pathname == `/category/${id}/products`) {
+    const data = listProducts.filter(
+      (item) => item.category.id == parseInt(id)
+    );
+    console.log("data is data is data ",data)
+    setFiltterdlistProducts(data);
+   
+  }
+
+ },[location.pathname])
  
   const changeCategory = (id) => {
     const data = listProducts.filter(
