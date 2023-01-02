@@ -42,7 +42,7 @@ const AddProduct = () => {
           : setBase64([{ file: result }]);
       })
       .catch((err) => {
-        console.log(err);
+       
       });
   };
 
@@ -59,20 +59,20 @@ const AddProduct = () => {
     form_data.append("shop", "" + myShop.id);
     form_data.append("feature", JSON.stringify(att));
     data = Object.fromEntries(form_data.entries());
-    console.log("data form", data);
+   
     // data.image = base64;
     const dataW = { ...data, image: base64 };
-    console.log("data is data is =", dataW);
-    console.log("base64", base64);
+   
+   
     createProduct(dataW)
       .then((result) => {
         toast.success("محصول با موفقیت ثبت و پس از تایید منتشر میگردد");
         setLoading(false);
       })
       .catch((err) => {
-        console.log("err err err", err);
+       
         if (err.status == 400 || err.status == 401) {
-          console.log(err);
+         
           toast.error("محصول ثبت نشد");
           setLoading(false);
         }
@@ -87,7 +87,7 @@ const AddProduct = () => {
       .then((results) => {
         setMyShop(results);
       })
-      .catch((res) => console.log(res));
+      .catch((res) =>console.log(res))
   }, []);
 
   // ListShop
@@ -108,7 +108,7 @@ const AddProduct = () => {
         setCategorys(results);
       })
       .finally(() => {
-        console.log(categorys);
+       
       });
   }, []);
 
@@ -126,7 +126,7 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    console.log("img = ", img);
+   
   }, [img]);
 
   // Send Data

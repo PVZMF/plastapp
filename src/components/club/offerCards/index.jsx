@@ -11,14 +11,14 @@ const OfferCards = ({ requestForOffer, errors, offerCodes }) => {
     getOffers()
       .then((results) => {
         setOffers(results);
-        console.log(results);
+       
       })
       .catch((error) => {
-        console.log(error);
+       
       });
   }, []);
 
-  console.log(offers);
+ 
   return (
     <div className={style.cards}>
       {offers?.map((el) => {

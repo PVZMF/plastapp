@@ -35,12 +35,12 @@ const Career_Opportunity = () => {
     setIsSending(true);
     applyJob(data)
       .then((res) => {
-        console.log("res post", res);
+       
         setIsSending(false);
       })
       .catch((error) => {
         setIsSending(false);
-        console.log(error)
+       
       });
   };
   if (loading) {

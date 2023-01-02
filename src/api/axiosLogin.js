@@ -43,7 +43,7 @@ api.interceptors.response.use(
         refreshToken({"refresh":st.refreshToken}).then(res => {
           st.setAccessToken(res.access);
         })
-        .catch((error) => console.log(error));
+        .catch((error) =>console.log(error))
     }
 
     return Promise.reject(error.response);

@@ -11,12 +11,12 @@ import {createShop} from "../../../api/api"
 const DetailBlog = () => {
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  //   console.log("params = = ", id);
+  //  
   const [data, setData] = useState("");
   useEffect(() => {
     getBlogDetails(id)
       .then((res) => {
-        console.log(res);
+       
         setData(res);
         setLoading(false);
       })

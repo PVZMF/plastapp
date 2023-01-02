@@ -18,7 +18,7 @@ const Attributes = () => {
     getProductDetail(id).then((res) => setProductDetail(res));
   }, []);
 
-  console.log("debug >>>", productDetail);
+ 
 
   return (
     <FlexMainBaskets>

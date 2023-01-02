@@ -3,7 +3,7 @@ import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
 
 const Ticket = ({ data }) => {
-  console.log("props", data);
+ 
   return (
     <div className="ticket">
       <div>

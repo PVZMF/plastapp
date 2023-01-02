@@ -16,7 +16,7 @@ function SidebarItems(auth, isLogin) {
         setCategory(res);
       })
       .catch((err) => {
-        console.log(err);
+       
       });
   }, []);
   return [

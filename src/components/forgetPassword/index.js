@@ -58,7 +58,7 @@ const ForgetPassword = ({ open, setOpen }) => {
     const data = Object.fromEntries(form_data.entries());
     if (!state.sendOtp.done) {
       (dispatch(sendOtpForgetPasswordUserAsync(data))).unwrap().then((res) => {
-        console.log(res);
+       
         if (res.message === "code send") {
           setState({ ...state, sendOtp: { done: true, error: false } });
           dispatch(onCounter(true));
@@ -88,11 +88,11 @@ const ForgetPassword = ({ open, setOpen }) => {
 
       })
         .catch(error => {
-          console.log(error);
+         
         })
     } else if (!state.verifyTel.done) {
       dispatch(registerVerifyForgetPasswordUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
-        console.log(res);
+       
         if (res.message === "account confirmed for changing password") {
           setState({ ...state, verifyTel: { done: true, error: false } });
         }
@@ -153,7 +153,7 @@ const ForgetPassword = ({ open, setOpen }) => {
         }
       })
         .catch((e) => {
-          console.log(e);
+         
           setState({ ...state, register: { done: false, error: true} });
         })
     }

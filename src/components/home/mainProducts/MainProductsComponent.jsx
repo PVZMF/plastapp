@@ -46,11 +46,11 @@ const MainProductsComponent = ({ title }) => {
 
     getListProduct().then((res) => {
       setProductsList(res);
-      console.log("res pouriya", res);
+     
     });
   }, []);
 
-  console.log("products list >>", productsList);
+ 
   return (
     <GlobalContainer>
       <Typography

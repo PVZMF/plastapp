@@ -35,14 +35,14 @@ const Cheque = () => {
       ...data,
       amount: parseInt(data.amount),
     };
-    console.log(dataToNum);
+   
     // setToast((state) => {
     //   return { ...state, success: true };
     // });
     
     addCheque(dataToNum)
     .then((res) => {
-        console.log(res)
+       
         setImage(true);
         setChequeImage(res.cheque_image);
         setNationalImage(res.national_image);
@@ -50,16 +50,16 @@ const Cheque = () => {
         if(res.submitter) dispath(toggleIsAcceptCheque());
       })
       .catch((err) => {
-        console.log(err);
+       
         setLoading(false) 
       });
     }
   };
 
   useEffect(() => {
-    console.log("isAccept = ", isAccept);
-    console.log("nationalImage ", nationalImage);
-    console.log("chequeImage ", chequeImage);
+   
+   
+   
   }, [nationalImage, chequeImage, isAccept]);
 
 

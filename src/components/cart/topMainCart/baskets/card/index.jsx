@@ -9,7 +9,7 @@ import { decrease, increase, removeItem } from '../../../../../toolkit/slices/ca
 import { CardContainer } from './styledCard'
 
 const Card = ({ data }) => {
-  console.log("dataaaaaaaaa",data)
+ 
   const dispatch = useDispatch();
   const {thumbnails, title, price, quantity, shop, price_with_offer} = data;
 

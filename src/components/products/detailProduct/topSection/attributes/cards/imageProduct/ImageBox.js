@@ -26,7 +26,7 @@ const ImageBox = ({ detail }) => {
     getProductDetail(id).then((res) => setProductDetail(res));
   }, []);
 
-  console.log("Detail >>>", detail);
+ 
 
   //temp
 

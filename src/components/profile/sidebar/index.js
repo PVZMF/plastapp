@@ -31,11 +31,11 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
         // setLoading(true);
         myShopInfo().then((results) => {
             setMyShop(results);
-        }).catch(res => console.log(res))
+        }).catch(res =>console.log(res))
 
         infoAccount().then((results) => {
             setInfo(results);
-        }).catch(res => console.log(res))
+        }).catch(res =>console.log(res))
     }, []);
 
 

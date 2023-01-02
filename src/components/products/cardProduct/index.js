@@ -17,8 +17,8 @@ const CardProduct = ({ item, categorys }) => {
   const offer = item.offer ? item.offer : 0;
   const price = item.price * (offer / 100);
   const totalprice = item.price - price;
-  console.log("categories is product component", categorys);
-  console.log(categorys.filter((element) => element.id == item.category));
+ 
+ 
   return (
     <FlexProductCard>
       <div className="image">

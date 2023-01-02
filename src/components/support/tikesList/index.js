@@ -29,7 +29,7 @@ const TikesListComponent = ({ list }) => {
   useEffect(() => {
     setNewitems([]);
   }, [search]);
-  console.log("ticket", ticket);
+ 
   return (
     <FlexMainTikesList>
       <div className="box-ticket">

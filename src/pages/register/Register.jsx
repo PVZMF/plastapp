@@ -51,7 +51,7 @@ const Register = () => {
         const data = Object.fromEntries(form_data.entries());
         if (!state.sendOtp) {
             (dispatch(sendOtpUserAsync(data))).unwrap().then((res) => {
-                console.log(res);
+               
                 if (res.message === "message sent") {
                     setState({ ...state, sendOtp: true, error: false });
                     navigate("/register");
@@ -79,7 +79,7 @@ const Register = () => {
 
             })
                 .catch(e => {
-                    console.log(e);
+                   
                     setState({ ...state, sendOtp: false, error: true });
                     setTextError("ارتباط با سرور مقدور نیست!");
                 })
@@ -107,7 +107,7 @@ const Register = () => {
                 .catch(e => {
                     setState({ ...state, verifyTel: false, error: true });
                     setTextError("ارتباط با سرور مقدور نیست!");
-                    console.log(e);
+                   
                 })
         } else if (!state.register) {
             dispatch(registerUserAsync({ ...data, phone_number: formData.phone_number })).unwrap().then((res) => {
@@ -147,7 +147,7 @@ const Register = () => {
 
             })
                 .catch((e) => {
-                    console.log(e);
+                   
                     setState({ ...state, register: false, error: true });
                     setTextError("ارتباط با سرور مقدور نیست!");
 

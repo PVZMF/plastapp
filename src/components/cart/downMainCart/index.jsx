@@ -16,7 +16,7 @@ const DownMainCart = () => {
         setLoading(false);
         setListProducts(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>console.log(err))
   }, []);
   if (loading) {
     return <h1>Loading . . .</h1>;

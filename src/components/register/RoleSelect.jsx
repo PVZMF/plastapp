@@ -24,7 +24,7 @@ const RoleSelect = ({ image }) => {
                 setTextError("خطای سرور")
             }
             
-        }).catch(e => console.log(e))
+        }).catch(e =>console.log(e))
 
     };
     return (

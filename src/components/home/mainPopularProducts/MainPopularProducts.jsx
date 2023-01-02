@@ -50,7 +50,7 @@ const MainPopularComponent = ({}) => {
     getPopularListProduct().then((res) => setPopularProducts(res));
   }, []);
 
-  console.log("popular products >>>>", popularProducts);
+ 
 
   return (
     <GlobalContainer>

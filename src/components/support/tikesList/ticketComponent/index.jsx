@@ -24,12 +24,12 @@ const TicketComponent = ({ list }) => {
     let file = e.target.files[0];
     getBase64(file)
       .then((result) => {
-        console.log("result");
-        console.log(result);
+       
+       
         setBase64({ file: result });
       })
       .catch((err) => {
-        console.log(err);
+       
       });
   };
 
@@ -38,8 +38,8 @@ const TicketComponent = ({ list }) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.document = base64;
-    console.log(data);
-    createTicketMessage(data, id).then((res) => console.log(res));
+   
+    createTicketMessage(data, id)
   }
 
   return (

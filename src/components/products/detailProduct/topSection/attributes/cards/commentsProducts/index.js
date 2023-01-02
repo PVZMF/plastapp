@@ -31,15 +31,15 @@ const CommentsProduct = ({ list }) => {
     const data = Object.fromEntries(dataform.entries());
     postProductComments(id, data)
       .then((res) => {
-        console.log("res post", res);
+       
         setLoadComments((prev) => prev + 1);
       })
       .catch((error) => {
-        console.log(error);
+       
       });
   }
 
-  console.log("comments >>>>>>>", comments);
+ 
 
   return (
     <FlexMainComments>

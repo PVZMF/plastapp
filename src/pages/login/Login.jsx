@@ -47,7 +47,7 @@ export default function SignIn() {
         checkRole(data).then(res => {
           dispatch(setRole(res.status));
         }).catch((err) => {
-          console.log(err)
+         
         });
         infoAccount().then(res => {
           dispatch(setInfo({ ...res }));
@@ -68,7 +68,7 @@ export default function SignIn() {
       }
     })
       .catch((e) => {
-        console.log(e)
+       
         setError(e);
       });
   }; 

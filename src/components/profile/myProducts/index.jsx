@@ -43,7 +43,7 @@ const MyProducts = () => {
   const [listProducts, setListProducts] = useState([]);
   const [update, setUpdate] = useState(false);
   const userRole = useSelector((state) => state.auth.role);
-  console.log(userRole);
+ 
   // ListProduct
   useEffect(() => {
     // setLoading(true);
@@ -55,7 +55,7 @@ const MyProducts = () => {
   const [edit, setEdit] = useState("");
 
   const handleEdit = (id) => {
-    console.log("idddddddddd = = ", id);
+   
     if (id === edit) {
       setEdit(null);
     } else {
@@ -65,7 +65,7 @@ const MyProducts = () => {
 
   //Delete Discount
   const handleDelete = (id) => {
-    console.log("id handleDelete = ", id);
+   
     discountDelete(id)
       .then((res) => {
         setUpdate(!update);
@@ -73,7 +73,7 @@ const MyProducts = () => {
       })
       .catch(() => {
         //       if (AxiosError.response.status === 400) {
-        //         console.log("AxiosError.response.status",(AxiosError.response.status))
+        //        
         toast.error("تخفیف موجود نیست");
 
         // }

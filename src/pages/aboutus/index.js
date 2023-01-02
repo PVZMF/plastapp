@@ -11,7 +11,7 @@ const AboutUsPage = () => {
         setAboutUs(results.data);
       })
       .catch((error) => {
-        console.log(error);
+       
       });
   }, []);
 

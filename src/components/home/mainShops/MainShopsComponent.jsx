@@ -26,7 +26,7 @@ const MainShopsComponent = ({ title, state }) => {
     getNewListShops()
       .then((results) => {
         setShops(results);
-        console.log(results);
+       
       })
       .finally(() => {});
   }, []);

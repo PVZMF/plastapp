@@ -12,7 +12,7 @@ import {
 
 const Products = () => {
   const location = useLocation();
-  console.log("location", location.pathname);
+ 
   const navigate = useNavigate();
   const { id, shopid } = useParams();
   const [categorys, setCategorys] = useState([]);
@@ -34,7 +34,7 @@ const Products = () => {
          
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>console.log(err))
 
     // Categories
     getCategories()
@@ -53,7 +53,7 @@ const Products = () => {
     navigate(`/category/${id}/products`);
   };
   useEffect(() => {
-    console.log(searchParamas.get("filter"));
+   
   }, [searchParamas.get("filter")]);
  
   return (
@@ -147,7 +147,7 @@ const Products = () => {
                     categorys={categorys}
                   />
                 );
-                console.log("item filter daie" , item)
+               
               })
             : ""}
 

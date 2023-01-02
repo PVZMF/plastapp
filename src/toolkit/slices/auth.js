@@ -8,7 +8,7 @@ export const loginUserAsync = createAsyncThunk(
   async (authData, thunkAPI) => {
     try {
       const res = await api.post("account/login/", authData)
-      console.log(res)
+     
       return res?.data;
     } catch (err) {
       return err.response.data

@@ -34,7 +34,7 @@ const StoreRegister = () => {
             });
           })
           .catch(err => {
-            console.log(err);
+           
           });
       };
 
@@ -43,11 +43,11 @@ const StoreRegister = () => {
         const form_data = new FormData(e.target);
         const data = Object.fromEntries(form_data.entries());
         createShop(data).then(result => {
-            console.log(result);
+           
             // infoAccount().then(res => {
                 navigate("../")
             // })
-        }).catch(err => console.log(err))
+        }).catch(err =>console.log(err))
     }
     return (
         <>

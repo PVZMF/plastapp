@@ -21,7 +21,7 @@ const WonderFullyComponent = ({ products }) => {
   useEffect(() => {
     partialData()
       .then((res) => {
-        console.log(res);
+       
         setData(res.data);
       })
       .finally(() => {});

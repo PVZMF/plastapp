@@ -17,7 +17,7 @@ const SlideSuggested = ({
   title,
 }) => {
   // const off = price * (priceWithOffer / 100);
-  // console.log("off", off);
+  //
   return (
     <FlexMainSlidSuggested>
       <img

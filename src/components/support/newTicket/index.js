@@ -19,14 +19,14 @@ const NewTicketComponent = () => {
     img ? setImg([...img, file]) : setImg(file);
     getBase64(file)
       .then((result) => {
-        console.log("result");
-        console.log(result);
+       
+       
         base64
           ? setBase64([...base64, { file: result }])
           : setBase64([{ file: result }]);
       })
       .catch((err) => {
-        console.log(err);
+       
       });
   };
 
@@ -36,7 +36,7 @@ const NewTicketComponent = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.document = base64;
-    console.log(" is ", data);
+   
     createTicket(data)
       .then((res) => {
         navigate("/support/ticketsList");
@@ -45,7 +45,7 @@ const NewTicketComponent = () => {
         }
       })
       .catch((err) => {
-        console.log("fdsf jksdfsdjk fsdf ", err);
+       
         if (err.status == 400 || err.status == 401) {
           toast.error("تیکت ثبت نشد");
         }
