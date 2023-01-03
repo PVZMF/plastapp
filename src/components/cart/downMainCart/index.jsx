@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CardProduct from "./cardProduct";
 import { FlexDownCart } from "./styledDownCart";
-import Product from "../../../assets/imgs/pesteh.jpg";
-import Product2 from "../../../assets/imgs/shop_1.jpg";
 import { getListProduct } from "../../../api/api";
 
 const DownMainCart = () => {
