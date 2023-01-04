@@ -8,6 +8,7 @@ import {
   discountCreate,
   discountDelete,
   discountUpdate,
+  editProduct,
   getListMyProduct,
 } from "../../../api/api";
 import { toast, ToastContainer } from "react-toastify";
@@ -23,13 +24,17 @@ import Slide from "@mui/material/Slide";
 
 import { TransitionProps } from "@mui/material/transitions";
 import { toPersianNumber } from "../../../functions/numbers";
+import { ModeEditOutline } from "@mui/icons-material";
+import { Box } from "@mui/material";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const MyProducts = () => {
-  const [open, setOpen] = React.useState(false);
-  const [deleteState, setDeleteState] = React.useState("");
+  const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [deleteState, setDeleteState] = useState("");
+  const [updateItemState, setUpdateItemState] = useState("");
 
   const handleClickOpen = (id, title) => {
     setDeleteState({ id, title });
@@ -38,6 +43,9 @@ const MyProducts = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleCloseEdit= () => {
+    setOpenEdit(false);
   };
   const [off, setOff] = useState(0);
   const [listProducts, setListProducts] = useState([]);
@@ -116,7 +124,23 @@ const MyProducts = () => {
       });
     handleEdit(idP);
   };
+const submitEditProduct=(e,id)=>{
+  e.preventDefault()
+  const form_data = new FormData(e.target);
+  const data = Object.fromEntries(form_data.entries());
+  console.log("form data os",data)
+  editProduct(id,data).then(()=>{
 
+  })
+  .catch(()=>{
+
+  })
+}
+const openDialogEdit=(item)=>{
+setOpenEdit(true)
+setUpdateItemState(item)
+console.log(item)
+}
   return (
     <div className={style.myproducts}>
       <div className={style.products}>
@@ -161,10 +185,13 @@ const MyProducts = () => {
                   <td>
                     <h3>{item.title}</h3>
                   </td>
-                  <td>
+                  <td style={{color:"blue"}}>
+                  <Box style={{display:"flex",justifyContent:"space-between",width:"100%",height:"100%",background:"green"}}
+>
+
                     <Button
                       variant="contained"
-                      sx={{ width: "100%" }}
+                      sx={{ width: "100%",height:"100%" }}
                       color="error"
                       onClick={() => {
                         handleClickOpen(item.id, item.title);
@@ -172,6 +199,9 @@ const MyProducts = () => {
                     >
                       حذف محصول
                     </Button>
+                <ModeEditOutline onClick={()=>{openDialogEdit(item)}}  sx={{width:"30px",height:"30px",color:"#ffc400"}}/>
+                </Box>
+
                   </td>
                   <td>
                     <h3>{item.send_to_all_point ? "سرار کشور" : ""}</h3>
@@ -296,6 +326,40 @@ const MyProducts = () => {
               بله
             </Button>
           </DialogActions>
+        </Dialog>
+        <Dialog
+        open={openEdit}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description">
+<DialogTitle>فرم زیر را برای ویرایش محصول پر کنید فقط قسمت هایی که میخواهید تغییر دهید پر کنید</DialogTitle>
+<DialogContent>
+<Box component="form" onSubmit={submitEditProduct}>  
+
+  <input name="shop" placeholder="فروشگاه"/>
+  <input name="title" placeholder="عنوان"/>
+  <input name="description" placeholder="توضیحات"/>
+  <input name="category" placeholder="دسته بندی"/>
+  <input name="feature" placeholder="مشخصات"/>
+  <input name="price" placeholder="قیمت"/>
+  <input name="sales_unit" placeholder="واحد فروش"/>
+  <input name="delivery_cost" placeholder="هزینه ارسال"/>
+  <input name="delivery_time" placeholder="زمان ارسال(روز)"/>
+  <input name="transition" placeholder="شرایط ارسال"/>
+  <input name="image"type="file"/>
+  <input name="inventory" placeholder="تعداد"/>
+  <input name="send_to_all_point" placeholder="ارسال به همه ی نقاط کشور"/>
+  <label htmlFor="credit_sale">خرید اعتباری</label>
+  <input type="checkbox" name="credit_sale" placeholder="فروش اعتباری"/>
+<button style={{marginBottom:"10px",marginLeft:"15px" ,width:"60px",height:"40px",background:"red"}}variant="contained" color="error" onClick={()=>{handleCloseEdit()}}>انصراف</button>
+<button style={{marginBottom:"10px",marginLeft:"15px" ,width:"60px",height:"40px",background:"red"}}variant="contained" type="submit">ثبت</button>
+  </Box>
+ 
+</DialogContent>
+
+
+
         </Dialog>
       </div>
       <ToastContainer />

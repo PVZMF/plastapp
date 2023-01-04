@@ -109,6 +109,10 @@ export async function deleteProduct(id) {
   const res = await apiLogin.delete(`product/delete/${id}/`);
   return res.data;
 }
+export async function editProduct(id) {
+  const res = await apiLogin.patch(`https://plastapp.iran.liara.run/product/update/${id}/`);
+  return res.data;
+}
 
 export async function createShop(dataShop) {
   const res = await apiForm.post("shop/create/", dataShop);
@@ -255,7 +259,7 @@ export async function infoAccount() {
 }
 
 export async function postOrder(data) {
-  const res = await apiLogin.post("order/orders/", data);
+  const res = await apiLogin.post("order/orders/" ,data);
   return res.data;
 }
 
