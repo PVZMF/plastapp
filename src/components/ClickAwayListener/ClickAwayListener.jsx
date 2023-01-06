@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { logout } from '../../toolkit/slices/auth';
 import Box from '@mui/material/Box';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
@@ -11,6 +11,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import { MdOutlineDashboard } from "react-icons/md";
 import { BiExit } from "react-icons/bi";
 import { onToasted } from '../../toolkit/slices/toasted.slice';
+import { toPersianNumber } from '../../functions/numbers';
 
 
 
@@ -24,6 +25,7 @@ export default function ClickAway() {
     const handleClickAway = () => {
         setOpen(false);
     };
+    const phoneNumber =   useSelector(state=> state.auth.phone_number)
 
     const styles = {
         position: 'absolute',
@@ -59,7 +61,7 @@ export default function ClickAway() {
                             <li>
                                 <Link to="/profile">
                                     <ul>
-                                        <ListSubheader><MdOutlineDashboard /> پروفایل</ListSubheader>
+                                        <ListSubheader><MdOutlineDashboard /><p style={{fontSize:"14px"}}>{toPersianNumber(phoneNumber)}</p></ListSubheader>
                                     </ul>
                                 </Link>
                             </li>

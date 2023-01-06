@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { BsTelegram, BsTwitter, BsInstagram, BsFacebook } from "react-icons/bs";
 import { getContactUs } from "../../api/api";
 import { baseUrl } from "../../api/axios";
-
 import Map from "../../assets/imgs/location-map.svg";
 // Style
 import style from "./support.module.css";
+import { toPersianNumber } from "../../functions/numbers";
 
 const Support = ({ numbers, email }) => {
   const [contact, setContact] = useState();
@@ -32,9 +32,9 @@ const Support = ({ numbers, email }) => {
           </div>
           <div className={style.contactus}>
             <h2>شماره های تماس</h2>
-            <h3>{contact?.phone}</h3>
-            <h3>{contact?.phone2}</h3>
-            <h3>{contact?.phone3}</h3>
+            <h3>{contact?toPersianNumber(contact.phone):""}</h3>
+            <h3>{contact?toPersianNumber(contact.phone2):""}</h3>
+            <h3>{contact?toPersianNumber(contact.phone3):""}</h3>
             <h3>ایمیل: {contact?.email}</h3>
             <div dangerouslySetInnerHTML={{ __html: contact?.address }}></div>
           </div>

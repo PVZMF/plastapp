@@ -11,6 +11,7 @@ import Spinner from "../../components/Spinner/Spinner";
 // Style
 import style from "./careerOpportunity.module.css";
 import { getJobs } from "../../api/api";
+import { ToastContainer, toast } from "react-toastify";
 const Career_Opportunity = () => {
   const [jobs, setJobs] = useState("");
   const [loading, setLoading] = useState(true);
@@ -35,10 +36,11 @@ const Career_Opportunity = () => {
     setIsSending(true);
     applyJob(data)
       .then((res) => {
-       
+       toast.success("درخواست شما با موفقیت ثبت شد")
         setIsSending(false);
       })
       .catch((error) => {
+        toast.error("درخواسث ثبت نشد")
         setIsSending(false);
        
       });
@@ -118,6 +120,18 @@ const Career_Opportunity = () => {
           </div>
         )}
       </div>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={true}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
   );
 };

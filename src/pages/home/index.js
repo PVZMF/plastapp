@@ -38,25 +38,7 @@ console.log("st()" , st())
         // setLoading(false);
       });
   }, []);
-  // const imgList1 = [{
-  //   src:ad1,link:"#"},
-  //   {src:ad2,link:"#"},
-  //   {src:ad3,link:"#"},
-  //   {src:ad3,link:"#"}
-  // ]
-  // const imgList2 = [{
-  //   src:ad1,link:"#"},
-  //   {src:ad2,link:"#"},
-  //   {src:ad3,link:"#"},
-  //   {src:ad3,link:"#"}
-  // ]
-  // const imgList3 = [{
-  //   src:ad1,link:"#"},
-  //   {src:ad2,link:"#"},
-  //   {src:ad3,link:"#"},
-  //   {src:ad3,link:"#"}
-  // ]
-
+  
   const imgList1 = [
     {
       src: baseUrl + banners.first_row_first?.image,

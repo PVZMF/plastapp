@@ -7,7 +7,8 @@ import { BiLike } from "react-icons/bi";
 import Profile from "../../../../../../../assets/imgs/shop_1.jpg";
 
 import { FlexMainCardComments } from "./styledCardComment";
-
+import { toPersionDate } from "../../../../../../../functions/convertIranTime";
+import { toPersianNumber } from "../../../../../../../functions/numbers";
 const CardComment = ({ item }) => {
   const [flagCount, setFlagCount] = useState();
 
@@ -30,7 +31,9 @@ const CardComment = ({ item }) => {
     }
     return result;
   }
-
+  function incompletePhoneNumber(char,index, replacement) {
+    return char.substring(0, index) + replacement + char.substring(index + replacement.length);
+  }
   return (
     <FlexMainCardComments>
       <div className="card-comment">
@@ -38,19 +41,18 @@ const CardComment = ({ item }) => {
           <div className="profile-comment">
             <img src={item?.user.thumbnail || Profile} />
             <div className="name-user">
-              <h5>{item?.user.name || "profile name"}</h5>
+              <h5 style={{direction:"ltr"}}>
+                {item?.user.name ||toPersianNumber(incompletePhoneNumber(item.user.phone_number,4,"****"))}
+                </h5>
               <div className="stars-user">
-                {/* <BsStarFill />
-                <BsStarFill />
-                <BsStarFill />
-                <BsStarFill /> */}
+                
                 {[...Array(flagCounter())].map((item, index) => {
                   <BsStarFill key={index} />;
                 })}
               </div>
             </div>
           </div>
-          <span>{item?.posted}</span>
+          <span>{item?toPersionDate(item.posted):""}</span>
         </div>
 
         <p className="comment">{item?.content}</p>

@@ -214,3 +214,8 @@ export const FlexMainTikesList = styled.div`
     flex-direction: column;
   }
 `;
+export const flexCenter = {
+  dispaly:"flex",
+  justifyContent:"center",
+  alignItems:"center"
+}
