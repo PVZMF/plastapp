@@ -26,7 +26,6 @@ const MainShopsComponent = ({ title, state }) => {
     getNewListShops()
       .then((results) => {
         setShops(results);
-       
       })
       .finally(() => {});
   }, []);
@@ -46,7 +45,7 @@ const MainShopsComponent = ({ title, state }) => {
         <Swiper
           slidesPerView={3}
           grid={{
-            rows: 2,
+            rows: 1,
           }}
           spaceBetween={0}
           pagination={{

@@ -1,10 +1,9 @@
 import React from "react";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
-import {toPersianNumber} from "../../../functions/numbers"
+import { toPersianNumber } from "../../../functions/numbers";
 import { flexCenter } from "./styledMainTikesList";
 const Ticket = ({ data }) => {
- 
   return (
     <div className="ticket">
       <div>
@@ -20,18 +19,19 @@ const Ticket = ({ data }) => {
         <h4>{data.title}</h4>
       </div>
       <div>
-        <h4>{toPersianNumber( data.ticket_number)}</h4>
+        <h4>{toPersianNumber(data.ticket_number)}</h4>
       </div>
       <div>
         <h4>{toPersianNumber(data.id)}</h4>
       </div>
-      <div >
-        <h4>{data.status=="unread"?"_":""}</h4>
+      <div>
+        <h4>{data.status == "unread" ? "_" : ""}</h4>
       </div>
       <div>
         <h4>
-          {data.status === "unread" && "درحال بررسی"}
+          {data.status === "unread" && "خوانده نشده"}
           {data.status === "closed" && "بسته شده"}
+          {data.status === "pending" && "در حال بررسی"}
         </h4>
       </div>
     </div>
@@ -39,4 +39,3 @@ const Ticket = ({ data }) => {
 };
 
 export default Ticket;
-

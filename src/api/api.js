@@ -110,7 +110,9 @@ export async function deleteProduct(id) {
   return res.data;
 }
 export async function editProduct(id) {
-  const res = await apiLogin.patch(`https://plastapp.iran.liara.run/product/update/${id}/`);
+  const res = await apiLogin.patch(
+    `https://plastapp.iran.liara.run/product/update/${id}/`
+  );
   return res.data;
 }
 
@@ -185,7 +187,7 @@ export async function postProductComments(id, data) {
     `api/comments/create/?app_name=product&model_name=product&model_id=${id}`,
     data
   );
-  return res.data;
+  return res;
 }
 
 export async function checkRole(token) {
@@ -259,7 +261,7 @@ export async function infoAccount() {
 }
 
 export async function postOrder(data) {
-  const res = await apiLogin.post("order/orders/" ,data);
+  const res = await apiLogin.post("order/orders/", data);
   return res.data;
 }
 
@@ -272,7 +274,7 @@ export async function myShopOrder() {
   return res.data;
 }
 
-export const gotToBank = async(id) =>{
-  const response = await apiLogin.get(`order/to_bank/${id}`)
-  return response.data
-}
+export const gotToBank = async (id) => {
+  const response = await apiLogin.get(`order/to_bank/${id}`);
+  return response.data;
+};

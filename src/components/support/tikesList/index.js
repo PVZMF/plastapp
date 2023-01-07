@@ -29,7 +29,7 @@ const TikesListComponent = ({ list }) => {
   useEffect(() => {
     setNewitems([]);
   }, [search]);
- 
+
   return (
     <FlexMainTikesList>
       <div className="box-ticket">
@@ -87,40 +87,3 @@ const TikesListComponent = ({ list }) => {
 };
 
 export default TikesListComponent;
-
-TikesListComponent.defaultProps = {
-  list: [
-    {
-      id: "1",
-      title: "درخواست فاکتور رسمی",
-      number: "۲۴",
-      date: "1400/05/12",
-      update: "1401/12/12",
-      status: 2,
-    },
-    {
-      id: "2",
-      title: "عدم انتقال تماس به داخلی ها",
-      number: "۲۴",
-      date: "1400/05/12",
-      update: "1401/12/12",
-      status: 1,
-    },
-    {
-      id: "3",
-      title: "تماس های خروجی",
-      number: "۲۴",
-      date: "1400/05/12",
-      update: "1401/12/12",
-      status: 1,
-    },
-    {
-      id: "4",
-      title: "درخواست فاکتور رسمی",
-      number: "۲۴",
-      date: "1400/05/12",
-      update: "1401/12/12",
-      status: 2,
-    },
-  ],
-};

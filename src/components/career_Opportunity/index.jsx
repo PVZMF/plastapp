@@ -36,21 +36,20 @@ const Career_Opportunity = () => {
     setIsSending(true);
     applyJob(data)
       .then((res) => {
-       toast.success("درخواست شما با موفقیت ثبت شد")
+        toast.success("درخواست شما با موفقیت ثبت شد");
         setIsSending(false);
       })
       .catch((error) => {
-        toast.error("درخواسث ثبت نشد")
+        toast.error("درخواسث ثبت نشد");
         setIsSending(false);
-       
       });
   };
   if (loading) {
     return <Spinner />;
   }
-  const handleChange = (e) =>{
-    setIndexJob(e.target.value-1);
-  }
+  const handleChange = (e) => {
+    setIndexJob(e.target.value - 1);
+  };
   return (
     <div className={style.jobs}>
       {console.log(indexJob)}
@@ -66,7 +65,9 @@ const Career_Opportunity = () => {
           <Spinner />
         ) : (
           <div className={style.formBox}>
-            <div dangerouslySetInnerHTML={{ __html: jobs[indexJob].description }}></div>
+            <div
+              dangerouslySetInnerHTML={{ __html: jobs[indexJob].description }}
+            ></div>
             <hr />
 
             <form
@@ -121,17 +122,17 @@ const Career_Opportunity = () => {
         )}
       </div>
       <ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={true}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="colored"
-/>
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={true}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

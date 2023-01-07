@@ -41,9 +41,7 @@ const AddProduct = () => {
           ? setBase64([...base64, { file: result }])
           : setBase64([{ file: result }]);
       })
-      .catch((err) => {
-       
-      });
+      .catch((err) => {});
   };
 
   const [loading, setLoading] = useState(false);
@@ -59,20 +57,17 @@ const AddProduct = () => {
     form_data.append("shop", "" + myShop.id);
     form_data.append("feature", JSON.stringify(att));
     data = Object.fromEntries(form_data.entries());
-   
+
     // data.image = base64;
     const dataW = { ...data, image: base64 };
-   
-   
+
     createProduct(dataW)
       .then((result) => {
         toast.success("محصول با موفقیت ثبت و پس از تایید منتشر میگردد");
         setLoading(false);
       })
       .catch((err) => {
-       
         if (err.status == 400 || err.status == 401) {
-         
           toast.error("محصول ثبت نشد");
           setLoading(false);
         }
@@ -87,7 +82,7 @@ const AddProduct = () => {
       .then((results) => {
         setMyShop(results);
       })
-      .catch((res) =>console.log(res))
+      .catch((res) => console.log(res));
   }, []);
 
   // ListShop
@@ -107,9 +102,7 @@ const AddProduct = () => {
       .then((results) => {
         setCategorys(results);
       })
-      .finally(() => {
-       
-      });
+      .finally(() => {});
   }, []);
 
   // Images
@@ -125,9 +118,7 @@ const AddProduct = () => {
     });
   };
 
-  useEffect(() => {
-   
-  }, [img]);
+  useEffect(() => {}, [img]);
 
   // Send Data
   const [active, setActive] = useState(false);
@@ -224,7 +215,7 @@ const AddProduct = () => {
               </div>
               <div className={style.listImage}>
                 {img.map((item, index) => (
-                  <div classSName={style.img}>
+                  <div className={style.img}>
                     <button onClick={() => handleRemoveImg(item, index)}>
                       -
                     </button>
@@ -420,7 +411,7 @@ const AddProduct = () => {
             </div>
 
             <div className={style.boxinput}>
-              <label>توضیحات محصول (اختیاری)</label>
+              <label>توضیحات محصول (اجباری)</label>
               <textarea name="description" />
             </div>
           </div>

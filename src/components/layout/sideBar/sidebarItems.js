@@ -7,19 +7,19 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import InfoIcon from "@mui/icons-material/Info";
 import WebIcon from "@mui/icons-material/Web";
 import { getCategories } from "../../../api/api";
+import { useNavigate } from "react-router-dom";
 
 function SidebarItems(auth, isLogin) {
   const [category, setCategory] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     getCategories()
       .then((res) => {
-        const categoryWithAll=res
-        categoryWithAll.unshift({title:"همه محصولات" , id:"all"})
+        const categoryWithAll = res;
+        categoryWithAll.unshift({ title: "همه محصولات", id: "all" });
         setCategory(categoryWithAll);
       })
-      .catch((err) => {
-       
-      });
+      .catch((err) => {});
   }, []);
   return [
     {
@@ -81,7 +81,7 @@ function SidebarItems(auth, isLogin) {
     {
       title: "باشگاه مشتریان ",
       icon: <GroupsIcon fontSize="large" />,
-      link: "/",
+      link: "/club",
       onClick: () => {},
       show: auth.role !== "business" && isLogin,
     },

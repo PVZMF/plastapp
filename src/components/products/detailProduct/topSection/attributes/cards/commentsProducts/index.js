@@ -9,9 +9,10 @@ import {
   getProductComments,
   postProductComments,
 } from "../../../../../../../api/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CommentsProduct = ({ list }) => {
+  const navigate = useNavigate();
   const total = 5;
   const avrage = 4.4;
   const { id } = useParams();
@@ -31,15 +32,12 @@ const CommentsProduct = ({ list }) => {
     const data = Object.fromEntries(dataform.entries());
     postProductComments(id, data)
       .then((res) => {
-       
         setLoadComments((prev) => prev + 1);
       })
       .catch((error) => {
-       
+        navigate(`/login`);
       });
   }
-
- 
 
   return (
     <FlexMainComments>
@@ -48,7 +46,6 @@ const CommentsProduct = ({ list }) => {
       </div>
 
       <div className="comments-list">
-      
         <div className="list-comments">
           {comments.map((item) => (
             <CardComment key={item.id} item={item} />
@@ -70,4 +67,3 @@ const CommentsProduct = ({ list }) => {
 };
 
 export default CommentsProduct;
-

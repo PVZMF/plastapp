@@ -32,9 +32,9 @@ const Support = ({ numbers, email }) => {
           </div>
           <div className={style.contactus}>
             <h2>شماره های تماس</h2>
-            <h3>{contact?toPersianNumber(contact.phone):""}</h3>
-            <h3>{contact?toPersianNumber(contact.phone2):""}</h3>
-            <h3>{contact?toPersianNumber(contact.phone3):""}</h3>
+            <h3>{contact ? toPersianNumber(contact.phone) : ""}</h3>
+            <h3>{contact ? toPersianNumber(contact.phone2) : ""}</h3>
+            <h3>{contact ? toPersianNumber(contact.phone3) : ""}</h3>
             <h3>ایمیل: {contact?.email}</h3>
             <div dangerouslySetInnerHTML={{ __html: contact?.address }}></div>
           </div>
@@ -62,21 +62,3 @@ const Support = ({ numbers, email }) => {
 };
 
 export default Support;
-
-Support.defaultProps = {
-  numbers: [
-    {
-      id: "1",
-      phone_number: "۰۲۱-۹۱۰۳۰۸۰۹",
-    },
-    {
-      id: "2",
-      phone_number: "۰۲۱-۴۴۱۰۱۷۱۱",
-    },
-    {
-      id: "3",
-      phone_number: "۰۲۱-۴۴۱۰۱۷۸۸",
-    },
-  ],
-  email: "info@plastapp.ir",
-};

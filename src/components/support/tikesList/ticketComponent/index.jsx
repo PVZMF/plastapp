@@ -24,13 +24,9 @@ const TicketComponent = ({ list }) => {
     let file = e.target.files[0];
     getBase64(file)
       .then((result) => {
-       
-       
         setBase64({ file: result });
       })
-      .catch((err) => {
-       
-      });
+      .catch((err) => {});
   };
 
   function handleSubmit(e) {
@@ -38,8 +34,8 @@ const TicketComponent = ({ list }) => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.document = base64;
-   
-    createTicketMessage(data, id)
+
+    createTicketMessage(data, id);
   }
 
   return (
@@ -126,123 +122,3 @@ const TicketComponent = ({ list }) => {
 };
 
 export default TicketComponent;
-
-TicketComponent.defaultProps = {
-  message: "عدم دسترسی به mailservice",
-  number: 123545,
-  date_start: "1400/12/05",
-  list: [
-    {
-      id: "1",
-      title: "درخواست فاکتور رسمی",
-      number: "۲۴۲۴۲۴۲۴",
-      date: "1400/05/12",
-      update: "1401/12/12",
-      status: 2,
-      dialog: [
-        {
-          id: "d1",
-          text: "با سلام و احترام؛ در حال حاضر پیرو بررسی صورت گرفته در DNS های دامنه علاوه بر DNS های CDN ایرانسرور - DNS های Cloudflare نیز تنظیم شده است که این مورد صحیح نمی باشد.",
-          position: "admin",
-          name: "علی راستگو",
-        },
-        {
-          id: "d2",
-          text: "سپاس مشکل حل شد.",
-          position: "user",
-          name: "مجید اکبری",
-        },
-        {
-          id: "d3",
-          text: "خواهش میکنم.",
-          position: "admin",
-          name: "علی راستگو",
-        },
-      ],
-    },
-    {
-      id: "2",
-      title: "عدم انتقال تماس به داخلی ها",
-      number: "۲۴۲۴۲۴۲۴",
-      date: "1400/05/12",
-      update: "1401/12/12",
-      status: 1,
-      dialog: [
-        {
-          id: "d1",
-          text: "با سلام و احترام؛ در حال حاضر پیرو بررسی صورت گرفته در DNS های دامنه علاوه بر DNS های CDN ایرانسرور - DNS های Cloudflare نیز تنظیم شده است که این مورد صحیح نمی باشد.",
-          position: "admin",
-          name: "علی راستگو",
-        },
-        {
-          id: "d2",
-          text: "سپاس مشکل حل شد.",
-          position: "user",
-          name: "مجید اکبری",
-        },
-        {
-          id: "d3",
-          text: "خواهش میکنم.",
-          position: "admin",
-          name: "علی راستگو",
-        },
-      ],
-    },
-    {
-      id: "3",
-      title: "تماس های خروجی",
-      number: "۲۴۲۴۲۴۲۴",
-      date: "1400/05/12",
-      update: "1401/12/12",
-      status: 1,
-      dialog: [
-        {
-          id: "d1",
-          text: "با سلام و احترام؛ در حال حاضر پیرو بررسی صورت گرفته در DNS های دامنه علاوه بر DNS های CDN ایرانسرور - DNS های Cloudflare نیز تنظیم شده است که این مورد صحیح نمی باشد.",
-          position: "admin",
-          name: "علی راستگو",
-        },
-        {
-          id: "d2",
-          text: "سپاس مشکل حل شد.",
-          position: "user",
-          name: "مجید اکبری",
-        },
-        {
-          id: "d3",
-          text: "خواهش میکنم.",
-          position: "admin",
-          name: "علی راستگو",
-        },
-      ],
-    },
-    {
-      id: "4",
-      title: "درخواست فاکتور رسمی",
-      number: "۲۴۲۴۲۴۲۴",
-      date: "1400/05/12",
-      update: "1401/12/12",
-      status: 2,
-      dialog: [
-        {
-          id: "d1",
-          text: "با سلام و احترام؛ در حال حاضر پیرو بررسی صورت گرفته در DNS های دامنه علاوه بر DNS های CDN ایرانسرور - DNS های Cloudflare نیز تنظیم شده است که این مورد صحیح نمی باشد.",
-          position: "admin",
-          name: "علی راستگو",
-        },
-        {
-          id: "d2",
-          text: "سپاس مشکل حل شد.",
-          position: "user",
-          name: "مجید اکبری",
-        },
-        {
-          id: "d3",
-          text: "خواهش میکنم.",
-          position: "admin",
-          name: "علی راستگو",
-        },
-      ],
-    },
-  ],
-};
