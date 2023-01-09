@@ -21,7 +21,6 @@ export const steperSlice = createSlice({
   },
 });
 
-
 export const {
   stepPlus,
   stepMinus

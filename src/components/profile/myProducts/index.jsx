@@ -26,16 +26,26 @@ import { TransitionProps } from "@mui/material/transitions";
 import { toPersianNumber } from "../../../functions/numbers";
 import { ModeEditOutline } from "@mui/icons-material";
 import { Box } from "@mui/material";
+import { provinces } from "../../../assets/citiesName/CitiesName";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const MyProducts = () => {
-  const [open, setOpen] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
+  const [open, setOpen] = useState(false);//open dialog delete product
+  const [openEdit, setOpenEdit] = useState(false);//open dialog edit product product
   const [deleteState, setDeleteState] = useState("");
-  const [updateItemState, setUpdateItemState] = useState("");
-
+  const [updateItemState, setUpdateItemState] = useState("");//when click set selected product
+  const [off, setOff] = useState(0);
+  const [listProducts, setListProducts] = useState([]);
+  const [update, setUpdate] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [stateSelected, setStateSelected] = useState("");
+  const [citySelected, setCitySelected] = useState("");
+  const [cities, setCities] = useState([""]);
+  const userRole = useSelector((state) => state.auth.role);
+  const categories = useSelector(state=>state.dataStored.categorys)
+  
   const handleClickOpen = (id, title) => {
     setDeleteState({ id, title });
     setOpen(true);
@@ -44,21 +54,20 @@ const MyProducts = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCloseEdit= () => {
+  const handleCloseEdit= (e) => {
     setOpenEdit(false);
+    e.stopPropagation();
   };
-  const [off, setOff] = useState(0);
-  const [listProducts, setListProducts] = useState([]);
-  const [update, setUpdate] = useState(false);
-  const userRole = useSelector((state) => state.auth.role);
  
   // ListProduct
   useEffect(() => {
     // setLoading(true);
     getListMyProduct().then((results) => {
       setListProducts(results);
+      setLoading(false)
+      console.log(listProducts)
     });
-  }, [update]);
+  }, []);
 
   const [edit, setEdit] = useState("");
 
@@ -125,6 +134,8 @@ const MyProducts = () => {
     handleEdit(idP);
   };
 const submitEditProduct=(e,id)=>{
+
+  e.stopPropagation()
   e.preventDefault()
   const form_data = new FormData(e.target);
   const data = Object.fromEntries(form_data.entries());
@@ -141,6 +152,18 @@ setOpenEdit(true)
 setUpdateItemState(item)
 console.log(item)
 }
+
+const handleCities = (e) => {
+  setCities(
+    provinces.filter((item) => item.name == e.target.value)[0].cities
+  );
+  setStateSelected(e.target.value);
+};
+console.log("categories",categories)
+if(loading){
+  return <h1>Loading</h1>
+}
+
   return (
     <div className={style.myproducts}>
       <div className={style.products}>
@@ -297,7 +320,7 @@ console.log(item)
           open={open}
           TransitionComponent={Transition}
           keepMounted
-          onClose={handleClose}
+          onClose={(e)=>{handleClose(e)}}
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle
@@ -335,26 +358,68 @@ console.log(item)
         aria-describedby="alert-dialog-slide-description">
 <DialogTitle>فرم زیر را برای ویرایش محصول پر کنید فقط قسمت هایی که میخواهید تغییر دهید پر کنید</DialogTitle>
 <DialogContent>
-<Box component="form" onSubmit={submitEditProduct}>  
+  {updateItemState!=[] ?
 
-  <input name="shop" placeholder="فروشگاه"/>
-  <input name="title" placeholder="عنوان"/>
-  <input name="description" placeholder="توضیحات"/>
-  <input name="category" placeholder="دسته بندی"/>
+<Box component="form" onSubmit={(e )=>submitEditProduct(e, updateItemState.id)}>  
+
+  <input name="shop" value={updateItemState.shop?.id} disabled placeholder="فروشگاه"/>
+  <input name="title" value={updateItemState.title} placeholder="عنوان"/>
+  <input name="description" value={updateItemState.description} placeholder="توضیحات"/>
+  {/* <input name="category" placeholder="دسته بندی"/> */}
+  <select>
+    {categories?.map((item,index)=>{
+      return (<option selected={updateItemState?.category.title==item.title} value={item.title}>{item.title}</option>)
+    })}
+  </select>
   <input name="feature" placeholder="مشخصات"/>
-  <input name="price" placeholder="قیمت"/>
-  <input name="sales_unit" placeholder="واحد فروش"/>
-  <input name="delivery_cost" placeholder="هزینه ارسال"/>
-  <input name="delivery_time" placeholder="زمان ارسال(روز)"/>
-  <input name="transition" placeholder="شرایط ارسال"/>
+  <input name="price"value={updateItemState.price} placeholder="قیمت"/>
+  <input name="sales_unit"value={updateItemState.shop?.name} disabled placeholder="واحد فروش"/>
+  <input name="delivery_cost" value={updateItemState.delivery_cost} placeholder="هزینه ارسال"/>
+  <input name="delivery_time"value={updateItemState.delivery_time} placeholder="زمان ارسال(روز)"/>
+  <input name="transition"value={updateItemState.transition} placeholder="شرایط ارسال"/>
   <input name="image"type="file"/>
-  <input name="inventory" placeholder="تعداد"/>
-  <input name="send_to_all_point" placeholder="ارسال به همه ی نقاط کشور"/>
+  <input name="inventory"value={updateItemState.inventory} placeholder="تعداد"/>
+  <label htmlFor="credit_sale">ارسال به سراسر کشور</label>
+  <input name="send_to_all_point"type="checkbox" checked={updateItemState.send_to_all_point} value={updateItemState.send_to_all_point} placeholder="ارسال به همه ی نقاط کشور"/>
   <label htmlFor="credit_sale">خرید اعتباری</label>
-  <input type="checkbox" name="credit_sale" placeholder="فروش اعتباری"/>
-<button style={{marginBottom:"10px",marginLeft:"15px" ,width:"60px",height:"40px",background:"red"}}variant="contained" color="error" onClick={()=>{handleCloseEdit()}}>انصراف</button>
-<button style={{marginBottom:"10px",marginLeft:"15px" ,width:"60px",height:"40px",background:"red"}}variant="contained" type="submit">ثبت</button>
+  <input type="checkbox" name="credit_sale" checked={updateItemState.credit_sale} placeholder="فروش اعتباری"/>
+  <select
+                  style={{ width: "48%" }}
+                  id="city1"
+                  // className={styles.input1}
+                  onChange={(e) => handleCities(e)}
+                  name="state"
+                   form="form"
+                  required
+                >
+                  <option>انتخاب استان</option>
+                  {provinces.map((item) => (
+                    <option key={item.name} value={item.name}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  style={{ width: "48%" }}
+                  // className={styles.input1}
+                  name="city"
+                  form="form"
+                  required
+                  onChange={(e) => {
+                    setCitySelected(e.target.value);
+                  }}
+                >
+                  <option>انتخاب شهر</option>
+                  {cities.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+<button style={{marginBottom:"10px",marginLeft:"15px" ,width:"60px",height:"40px",background:"red"}}variant="contained" color="error" onClick={(e)=>{handleCloseEdit(e)}}>انصراف</button>
+<button style={{marginBottom:"10px",marginLeft:"15px" ,width:"60px",height:"40px",background:"red"}}variant="contained"onClick={(e)=>{e.stopPropagation()}} type="submit">ثبت</button>
   </Box>
+  :""}
  
 </DialogContent>
 

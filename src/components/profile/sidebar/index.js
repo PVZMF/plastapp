@@ -24,8 +24,6 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
     const [myShop, setMyShop] = useState([]);
     const [info, setInfo] = useState([]);
     // const myShop2 = useSelector(state => state.myShop)
-    // const dispatch = useDispatch();
-
     // MyShopInfo
     useEffect(() => {
         // setLoading(true);
@@ -37,7 +35,6 @@ const Sidebar = ({ ProfileImage, shopName, cash }) => {
             setInfo(results);
         }).catch(res =>console.log(res))
     }, []);
-
 
     return (
         <div className={style.sidebar}>

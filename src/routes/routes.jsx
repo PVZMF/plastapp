@@ -31,7 +31,6 @@ import RulesConditon from "../pages/rule";
 import Finances from "../pages/profile/finances";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
-
 // const auth = useSelector(state => state.auth);
 const Router = createBrowserRouter([
   {

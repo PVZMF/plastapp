@@ -6,8 +6,9 @@ import { Grid, Typography } from "@mui/material";
 import { getCategories } from "../../../api/api";
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 import { HomeLan } from "../../../json/language/fa";
-
 import { FlexMainCateogry } from "./styledMainCategory";
+import { useDispatch } from "react-redux";
+import { setCategorisRedux } from "../../../toolkit/slices/storedDataApi";
 // import SkeltonLoader from "../../../components/skeletonLoader/SkeltonLoader";
 
 // images
@@ -19,12 +20,14 @@ import { FlexMainCateogry } from "./styledMainCategory";
 // import SkeltonLoader from "../../../components/skeletonLoader/SkeltonLoader";
 
 const MainCategoryComponent = () => {
-  const [categories, setCategories] = useState([]);
+    const dispatch = useDispatch()
+    const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     Promise.all([getCategories()])
       .then((results) => {
         setCategories(results[0]);
+        dispatch(setCategorisRedux(results[0]))
       })
       .finally(() => {});
   }, []);
