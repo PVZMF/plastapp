@@ -14,11 +14,7 @@ import { toPersianNumber } from "../../../functions/numbers";
 const CardProduct = ({ item, categorys }) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.cartState);
-  const offer = item.offer ? item.offer : 0;
-  const price = item.price * (offer / 100);
-  const totalprice = item.price - price;
- 
- 
+
   return (
     <FlexProductCard>
       <div className="image">
@@ -63,16 +59,18 @@ const CardProduct = ({ item, categorys }) => {
             </button>
           )}
           <div className="price-box">
-            {offer ? (
+            {item.price_with_offer ? (
               <div className="offer">
-                <span>{item.offer.toLocaleString("fa-IR")}%</span>
+                <span>
+                  {item.price_with_offer.toLocaleString("fa-IR")} تومان
+                </span>
                 <del>{item.price.toLocaleString("fa-IR")}</del>
               </div>
             ) : (
-              ""
+              <span>{item.price.toLocaleString("fa-IR")}</span>
             )}
             <h5>
-              {totalprice.toLocaleString("fa-IR")} <span>تومان</span>
+              {/* {totalprice.toLocaleString("fa-IR")} <span>تومان</span> */}
             </h5>
           </div>
         </div>

@@ -20,13 +20,13 @@ const Receipt = ({ ProductsList }) => {
   const [item, setItem] = useState();
   const Percent = (item?.offer * 100) / item?.price;
   const total = item?.price - item?.offer;
-  const Items = () => {
-    ProductsList.map((item) => {
-      if (item.id !== id) {
-        setItem(item);
-      }
-    });
-  };
+  // const Items = () => {
+  //   ProductsList.map((item) => {
+  //     if (item.id !== id) {
+  //       setItem(item);
+  //     }
+  //   });
+  // };
 
   useEffect(() => {
     getProductDetail(id).then((res) => setItem(res));
@@ -105,89 +105,3 @@ const Receipt = ({ ProductsList }) => {
 };
 
 export default Receipt;
-
-Receipt.defaultProps = {
-  ProductsList: [
-    {
-      id: 1,
-      title: "مغز  پسته مناسب مصارف قنادی و ... با ارسال رایگان(500 گرمی)",
-      price: 550000,
-      offer: 10000,
-      image: Product,
-      shop: "پسته طلایی گلشن",
-      number: 3,
-      location: "دامغان - خشکبار عمو قاسم",
-      profile: Profile,
-      name_shop: "مغازه عمو رحیم",
-      state: "اصفهان",
-    },
-
-    {
-      id: 2,
-      title: "شلوار اسلش مردانه سایز بزرگ 3و4 و 5(کد301)",
-      price: 48000,
-      offer: 0,
-      image: Product2,
-      shop: "لوازم خانگی گل سرخ",
-      number: 1,
-      location: "تهران - لوازم خانگی گل سرخ",
-      profile: Profile,
-      name_shop: "مغازه عمو رحیم",
-      state: "اصفهان",
-    },
-    {
-      id: 3,
-      title: "مغز  پسته 2",
-      price: 550000,
-      offer: 75000,
-      image: Product,
-      shop: "پسته طلایی",
-      number: 3,
-      location: "کرمان - خشکبار کرمانی",
-      profile: Profile,
-      name_shop: "مغازه عمو رحیم",
-      state: "اصفهان",
-    },
-
-    {
-      id: 4,
-      title: "شلوار پسرانه جدید",
-      price: 48000,
-      offer: 80000,
-      image: Product2,
-      shop: "شلوار فروش",
-      number: 1,
-      location: "تهران - بوتیک جاوید",
-      profile: Profile,
-      name_shop: "مغازه عمو رحیم",
-      state: "اصفهان",
-    },
-    {
-      id: 5,
-      title: "مغز  پسته مناسب مصارف قنادی",
-      price: 550000,
-      offer: 0,
-      image: Product,
-      shop: "پسته طلایی گلشن",
-      number: 3,
-      location: "تهران - مغازه هشمت",
-      profile: Profile,
-      name_shop: "مغازه عمو رحیم",
-      state: "اصفهان",
-    },
-
-    {
-      id: 6,
-      title: "لباس های راحتی",
-      price: 48000,
-      offer: 15000,
-      image: Product2,
-      shop: "پسته دامغان",
-      number: 1,
-      location: "شیراز - فلکه گاز",
-      profile: Profile,
-      name_shop: "مغازه عمو رحیم",
-      state: "اصفهان",
-    },
-  ],
-};

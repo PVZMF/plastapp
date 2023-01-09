@@ -7,27 +7,28 @@ import getBase64 from "../../../functions/base64";
 import AttachFileRoundedIcon from "@mui/icons-material/AttachFileRounded";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import Storage from "../../../service/Storage";
 const NewTicketComponent = () => {
+  const st = Storage();
+  console.log("st", Storage());
   const navigate = useNavigate();
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState("");
   const [base64, setBase64] = useState();
   const [img, setImg] = useState([]);
   //base64
+  const authToken = useSelector((state) => state.auth);
   const handleFileInputChange = (e) => {
     let file = e.target.files[0];
     img ? setImg([...img, file]) : setImg(file);
     getBase64(file)
       .then((result) => {
-       
-       
         base64
           ? setBase64([...base64, { file: result }])
           : setBase64([{ file: result }]);
       })
-      .catch((err) => {
-       
-      });
+      .catch((err) => {});
   };
 
   //submit
@@ -36,7 +37,7 @@ const NewTicketComponent = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.document = base64;
-   
+
     createTicket(data)
       .then((res) => {
         navigate("/support/ticketsList");
@@ -45,11 +46,11 @@ const NewTicketComponent = () => {
         }
       })
       .catch((err) => {
-       
         if (err.status == 400 || err.status == 401) {
           toast.error("تیکت ثبت نشد");
         }
-        if (err.data.code === "bad_authorization_header") navigate("/login");
+        if (err.status == 401)
+          if (err.data.code === "bad_authorization_header") navigate("/login");
       });
   };
   const handleRemoveImg = (item, i) => {
@@ -59,7 +60,12 @@ const NewTicketComponent = () => {
       });
     });
   };
-
+  if (authToken.isLogin == false) {
+    navigate("/login");
+  }
+  // if (st().accessToken == false) {
+  //   navigate("/login");
+  // }
   return (
     <div className={style.newticket}>
       <div className={style.box_ticket}>
@@ -187,9 +193,18 @@ const NewTicketComponent = () => {
                   justifyContent: "center",
                 }}
               >
-                <button type="sumbit" className={style.submitButton}>
-                  ثبت
-                </button>
+                {st?.accessToken != false ? (
+                  <button type="sumbit" className={style.submitButton}>
+                    ثبت
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => navigate("/login")}
+                    className={style.submitButton}
+                  >
+                    ورود
+                  </button>
+                )}
               </div>
             </div>
           </form>

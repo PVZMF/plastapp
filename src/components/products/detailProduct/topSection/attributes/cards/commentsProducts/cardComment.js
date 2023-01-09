@@ -30,8 +30,12 @@ const CardComment = ({ item }) => {
     }
     return result;
   }
-  function incompletePhoneNumber(char,index, replacement) {
-    return char.substring(0, index) + replacement + char.substring(index + replacement.length);
+  function incompletePhoneNumber(char, index, replacement) {
+    return (
+      char.substring(0, index) +
+      replacement +
+      char.substring(index + replacement.length)
+    );
   }
   return (
     <FlexMainCardComments>
@@ -40,29 +44,31 @@ const CardComment = ({ item }) => {
           <div className="profile-comment">
             <img src={item?.user.thumbnail || Profile} />
             <div className="name-user">
-              <h5 style={{direction:"ltr"}}>
-                {item?.user.name ||toPersianNumber(incompletePhoneNumber(item.user.phone_number,4,"****"))}
-                </h5>
+              <h5 style={{ direction: "ltr" }}>
+                {item?.user.name ||
+                  toPersianNumber(
+                    incompletePhoneNumber(item.user.phone_number, 4, "****")
+                  )}
+              </h5>
               <div className="stars-user">
-                
                 {[...Array(flagCounter())].map((item, index) => {
                   <BsStarFill key={index} />;
                 })}
               </div>
             </div>
           </div>
-          <span>{item?toPersionDate(item.posted):""}</span>
+          <span>{item ? toPersionDate(item.posted) : ""}</span>
         </div>
 
         <p className="comment">{item?.content}</p>
 
         <div className="btns-comment">
-          <button>
+          {/* <button>
             <BiLike /> مفید بود
           </button>
           <button>
             <TiMessages /> مشورت
-          </button>
+          </button> */}
         </div>
       </div>
     </FlexMainCardComments>

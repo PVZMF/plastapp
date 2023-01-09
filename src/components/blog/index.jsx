@@ -32,13 +32,15 @@ const Blog = () => {
       </div>
 
       <div className={style.listBlog}>
-        {blogList.map((item) => (
-          <div className={style.card} key={item.id}>
-            <Link to={`/blog/${item.id}`}>
-              <CardBlog item={item} />
-            </Link>
-          </div>
-        ))}
+        {blogList
+          .sort((a, b) => b.id - a.id)
+          .map((item) => (
+            <div className={style.card} key={item.id}>
+              <Link to={`/blog/${item.id}`}>
+                <CardBlog item={item} />
+              </Link>
+            </div>
+          ))}
       </div>
     </div>
   );

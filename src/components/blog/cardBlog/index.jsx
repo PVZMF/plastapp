@@ -12,7 +12,6 @@ const CardBlog = (props) => {
 
       <div className={style.data}>
         <h3>{title}</h3>
-        <p>{id}</p>
       </div>
     </div>
   );

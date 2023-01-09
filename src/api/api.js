@@ -103,7 +103,7 @@ export async function getCities() {
 
 export async function createProduct(dataProduct) {
   const res = await apiForm.post("product/create/", dataProduct);
-  return res.data;
+  return res;
 }
 export async function deleteProduct(id) {
   const res = await apiLogin.delete(`product/delete/${id}/`);

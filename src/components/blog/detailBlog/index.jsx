@@ -1,27 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ImgBlog from "../../../assets/imgs/shop_1.jpg";
 import style from "./detailBlog.module.css";
 import Comment from "./comment";
 import axios from "axios";
 import Spinner from "../../Spinner/Spinner";
 import { getBlogDetails } from "../../../api/api";
-import {createShop} from "../../../api/api"
-
+import {
+  createShop,
+  getProductComments,
+  postProductComments,
+} from "../../../api/api";
+import CommentsProduct from "../../products/detailProduct/topSection/attributes/cards/commentsProducts";
+import { toast, ToastContainer } from "react-toastify";
+import Storage from "../../../service/Storage";
 const DetailBlog = () => {
+  const st = Storage();
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  //  
+  const [comments, setComments] = useState([]);
+  const [loadComments, setLoadComments] = useState(0);
+  const navigate = useNavigate();
   const [data, setData] = useState("");
   useEffect(() => {
-    getBlogDetails(id)
+    getBlogDetails(id).then((res) => {
+      setData(res);
+      setLoading(false);
+    });
+    getProductComments(id)
       .then((res) => {
-       
-        setData(res);
-        setLoading(false);
+        setComments(res);
       })
       .catch(() => {});
   }, []);
+  function handleSubmit(e) {
+    e.preventDefault();
+    const dataform = new FormData(e.target);
+    const data = Object.fromEntries(dataform.entries());
+    postProductComments(id, data)
+      .then((res) => {
+        toast.success("دیدگاه با موفقیت ثبت و پس از تایید منتشر میگردد");
+        setLoadComments((prev) => prev + 1);
+      })
+      .catch((error) => {
+        toast.error("دیدگاه ثبت نشد");
+        // navigate(`/login`);
+      });
+  }
+
   if (loading) {
     return <Spinner />;
   }
@@ -45,14 +71,22 @@ const DetailBlog = () => {
         <div className={style.comments}>
           <h2 className={style.titleComments}>- نظرات کاربران</h2>
 
-          {/* {comments.map((item) => (
-                <Comment key={item.id} item={item} />
-              ))} */}
-
-          <div className={style.registerComment}>
-            <textarea></textarea>
-            <button>ثبت نظر</button>
-          </div>
+          {comments.map(
+            (item, index) => (
+              <CommentsProduct key={item.id} item={item} />
+            )
+            // console.log(`index ${index}`, item)
+          )}
+          <form onSubmit={handleSubmit}>
+            <div className={style.registerComment}>
+              <textarea name="content"></textarea>
+              {st.accessToken ? (
+                <button type="submit">ثبت نظر</button>
+              ) : (
+                <button onClick={() => navigate("/login")}>ورود</button>
+              )}
+            </div>
+          </form>
         </div>
       </div>
 
@@ -68,6 +102,18 @@ const DetailBlog = () => {
           </Link>
         ))}
       </div> */}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

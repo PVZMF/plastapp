@@ -1,19 +1,16 @@
 // Modules
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { NavLink } from "react-router-dom";
-import {getAllBanners} from "../../../api/api"
-
-import ImageEx1 from "../../../assets/imgs/shop_1.jpg"
-import ImageEx2 from "../../../assets/imgs/shop_2.jpg"
+import { getAllBanners } from "../../../api/api";
 
 import { GlobalContainer } from "../../../global/styles/globalContainer";
 import { FlexMainNoticeBanner } from "./styledNoticeBanner";
 
-
 const MainNoticeBannerComponent = ({ row }) => {
   const [images, setImages] = useState([]);
-  const [banners,setBanners] = useState([]);
+  const [banners, setBanners] = useState([]);
   useEffect(() => {
     // setLoading(true);
     Promise.all([getAllBanners()])
@@ -24,29 +21,29 @@ const MainNoticeBannerComponent = ({ row }) => {
         // setLoading(false);
       });
   }, []);
-  if (row === 'first') {
+  if (row === "first") {
     return (
       <GlobalContainer>
         <FlexMainNoticeBanner>
           {
             <React.Fragment>
               <div className="banner">
-                <NavLink to={images?.first_row_first_url}>
+                <a href={banners.first_row_first_url} target="_blank">
                   <img
                     className="banner--img"
                     src={banners?.first_row_first}
                     alt="alternate text"
                   />
-                </NavLink>
+                </a>
               </div>
               <div className="banner">
-                <NavLink to={images?.first_row_second_url}>
+                <a href={banners.first_row_second_url} target="_blank">
                   <img
                     className="banner--img"
                     src={banners?.first_row_second}
                     alt="alternate text"
                   />
-                </NavLink>
+                </a>
               </div>
             </React.Fragment>
           }
@@ -60,28 +57,28 @@ const MainNoticeBannerComponent = ({ row }) => {
         {
           <React.Fragment>
             <div className="banner">
-              <NavLink to={banners?.second_row_first_url}>
+              <a href={banners?.second_row_first_url} target="_blank">
                 <img
                   className="banner--img"
                   src={banners?.second_row_first}
                   alt="alternate text"
                 />
-              </NavLink>
+              </a>
             </div>
             <div className="banner">
-              <NavLink to={banners?.second_row_second_url}>
+              <a href={banners?.second_row_second_url} target="_blank">
                 <img
                   className="banner--img"
                   src={banners?.second_row_second}
                   alt="alternate text"
                 />
-              </NavLink>
+              </a>
             </div>
           </React.Fragment>
         }
       </FlexMainNoticeBanner>
     </GlobalContainer>
-  )
+  );
 };
 
 export default MainNoticeBannerComponent;

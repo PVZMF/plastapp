@@ -42,42 +42,27 @@ const MainShopsComponent = ({ title, state }) => {
         {title}
       </Typography>
       <FlexMainShops>
-        <Swiper
-          slidesPerView={3}
-          grid={{
-            rows: 1,
-          }}
-          spaceBetween={0}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Grid, Pagination]}
-          className="custom_swiper rounded-1"
-        >
-          {shops.map((item) => {
-            return (
-              <SwiperSlide key={item.id}>
-                <Link to={`/shop/${item.id}/products`}>
-                  <div className="shop_box">
-                    <img
-                      src={item.logo}
-                      alt={item.name}
-                      className="shop_box--img"
-                    />
-                    <div className="shop_box--title p10">{item.name}</div>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            );
-          })}
-          {/* <SwiperSlide>
+        {shops.map((item) => {
+          return (
+            <Link to={`/shop/${item.id}/products`}>
+              <div className="shop_box">
+                <img
+                  src={item.logo}
+                  alt={item.name}
+                  className="shop_box--img"
+                />
+                <div className="shop_box--title p10">{item.name}</div>
+              </div>
+            </Link>
+          );
+        })}
+        {/* <SwiperSlide>
             {" "}
             <div className="shop_box d_flex--1">
               <img src={shop1} alt="" className="shop_box--img" />
               <div className="shop_box--title p10">shop_2</div>
             </div>
           </SwiperSlide> */}
-        </Swiper>
       </FlexMainShops>
     </GlobalContainer>
   );

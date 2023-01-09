@@ -12,23 +12,47 @@ import { toPersianNumber } from "../../../functions/numbers";
 const WonderFullyComponent = ({ products }) => {
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
+  const [sorted, setSorted] = useState([]);
   const maxOffer = Math.max(...list.map((o) => o.price_with_offer));
   const maxOfferPrice = Math.max(...list.map((o) => o.price));
+  console.log("maxOffer", maxOffer);
+  let index = list.findIndex((item) => item.price_with_offer == maxOffer);
 
+  console.log("maxOfferPrice", maxOfferPrice);
+  console.log("index", index);
   const offer = (off, price) => {
-    return (off / price) * 100;
+    return ((off / price) * 100).toFixed(2);
   };
+  const maxOfferPerPrice = () => {
+    let max = 0;
+    console.log(`List =`, list);
+    sorted.map((item, index) => {
+      let off = (item.price_with_offer / item.price) * 100;
+      console.log(`index is ${index} = `, off);
+      console.log(`index is ${index} = `, item.price_with_offer);
+      if (off > max) {
+        max = off;
+      }
+    });
+    return max;
+  };
+  console.log("maxOfferPerPrice()", maxOfferPerPrice());
   useEffect(() => {
     partialData()
       .then((res) => {
-       
         setData(res.data);
       })
       .finally(() => {});
     getAmazingList().then((res) => {
       setList(res);
     });
+    let sorted = list.sort(function (a, b) {
+      return b.price_with_offer - a.price_with_offer;
+    });
+    setSorted(sorted);
   }, []);
+  console.log(`sorted =`, sorted);
+
   return (
     <div className={style.wonderfully}>
       <div className={style.wonderfully_box}>
@@ -42,13 +66,7 @@ const WonderFullyComponent = ({ products }) => {
             {data.mid_banner_text}
           </div>
 
-          <h4>
-            تا %
-            {offer(maxOfferPrice - maxOffer, maxOfferPrice).toLocaleString(
-              "fa-IR"
-            )}{" "}
-            تخفیف
-          </h4>
+          <h4>تا %{maxOfferPerPrice()} تخفیف</h4>
         </div>
         <div className={style.productsList}>
           {list

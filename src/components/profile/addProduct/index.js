@@ -20,8 +20,10 @@ import { CleanHands, ImagesearchRoller } from "@mui/icons-material";
 import getBase64 from "../../../functions/base64";
 import Spinner from "../../../assets/spinner2.gif";
 import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const navigate = useNavigate();
   const [categorys, setCategorys] = useState([]);
   const [Shops, setListShops] = useState([]);
   const [base64, setBase64] = useState([]);
@@ -64,7 +66,11 @@ const AddProduct = () => {
     createProduct(dataW)
       .then((result) => {
         toast.success("محصول با موفقیت ثبت و پس از تایید منتشر میگردد");
+
         setLoading(false);
+        setTimeout(() => {
+          navigate("/profile/myproducts");
+        }, 3000);
       })
       .catch((err) => {
         if (err.status == 400 || err.status == 401) {
